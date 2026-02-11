@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private CharacterController controller;
     private float x, y;
@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform cameraAnchor;
     
     [Header("Movement")]
+    public Vector3 InputDirection;
     [SerializeField] [Range(0, 1)] private float walkSpeed = 0.2f;
     [SerializeField] [Range(0, 1)] private float runSpeed = 0.4f;
     private const float BaseSpeed = 10f;
@@ -25,8 +26,7 @@ public class PlayerMovement : MonoBehaviour
     
     [Header("Animation")]
     [SerializeField] private Animator animator;
-    [SerializeField] [Range(0, 1)] private float walkAnimationLerpTime = 0.1f;
-    [SerializeField] [Range(0, 1)] private float jumpAnimationLerpTime = 0.1f;
+    [SerializeField] [Range(0, 1)] private float animationLerpTime = 0.1f;
 
     private void Start()
     {
@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
         float moveY = Input.GetAxis("Vertical");
         bool isMoving = Mathf.Abs(moveX) > 0.1f || Mathf.Abs(moveY) > 0.1f;
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        
+        InputDirection = new Vector3(moveX, 0f, moveY).normalized;
 
         float xTargetAnimValue = 0f;
         float currentSpeed = walkSpeed * BaseSpeed;
@@ -75,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
         }
         
         // Jump Logic
-        float yTargetAnimValue = 0f;
         if (Input.GetButtonDown("Jump") && controller.isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * Gravity);
@@ -88,8 +89,7 @@ public class PlayerMovement : MonoBehaviour
         // Apply Animations
         if (animator != null)
         {
-            animator.SetFloat("X Velocity", xTargetAnimValue, walkAnimationLerpTime, Time.deltaTime);
-            animator.SetFloat("Y Velocity", yTargetAnimValue, walkAnimationLerpTime, Time.deltaTime);
+            animator.SetFloat("X Velocity", xTargetAnimValue, animationLerpTime, Time.deltaTime);
         }
         
         // Apply Movement
