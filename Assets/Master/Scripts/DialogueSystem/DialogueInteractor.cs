@@ -3,11 +3,10 @@ using UnityEngine;
 public class DialogueInteractor : MonoBehaviour
 {
     [SerializeField] private float interactRange = 3f;
-    [SerializeField] private KeyCode interactKey = KeyCode.E;
 
     private void Update()
     {
-        if (Input.GetKeyDown(interactKey))
+        if (Input.GetButtonDown("Interact"))
         {
             TryInteract();
         }
