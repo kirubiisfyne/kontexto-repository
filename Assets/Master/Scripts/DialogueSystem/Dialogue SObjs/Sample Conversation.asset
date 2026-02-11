@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Conversation
   lines:
   - speaker: {fileID: 11400000, guid: ebadf8833755745b6b6e30d28d7c39ce, type: 2}
-    text: Hi!
+    text: Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
+      ex sapien vitae pellentesque sem.
     onLineStart:
       m_PersistentCalls:
         m_Calls: []
   - speaker: {fileID: 11400000, guid: 7dde2bf9a4f374f4787261dfd6ef9acb, type: 2}
-    text: Hello!
+    text: Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
+      ex sapien vitae pellentesque sem placerat in.
     onLineStart:
       m_PersistentCalls:
         m_Calls: []
