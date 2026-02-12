@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 567963a21426421cba16a9cdf1c53c0d, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: Assembly-CSharp::SpeakerProfile
-  characterName: Player
-  portrait: {fileID: 21300000, guid: 82d331b19528940f0bf0025b8a6b2b8f, type: 3}
+  characterName: Rabin
+  portrait: {fileID: 21300000, guid: 1f51be6c2a667471687ef03f79d26ba4, type: 3}
   nameColor: {r: 1, g: 1, b: 1, a: 1}

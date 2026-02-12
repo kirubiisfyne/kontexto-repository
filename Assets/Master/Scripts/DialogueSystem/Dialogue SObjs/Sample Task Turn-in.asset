@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
-  m_Name: Sample Conversation
+  m_Name: Sample Task Turn-in
   m_EditorClassIdentifier: Assembly-CSharp::Conversation
   lines:
   - speaker: {fileID: 11400000, guid: ebadf8833755745b6b6e30d28d7c39ce, type: 2}
-    text: Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
-      ex sapien vitae pellentesque sem.
+    text: I was asked to delivier this to you.
     onLineStart:
       m_PersistentCalls:
         m_Calls: []
-  - speaker: {fileID: 11400000, guid: 7dde2bf9a4f374f4787261dfd6ef9acb, type: 2}
-    text: Lorem ipsum dolor sit amet consectetur adipiscing elit quisque faucibus
-      ex sapien vitae pellentesque sem placerat in.
+  - speaker: {fileID: 11400000, guid: b2d4b73250818435e99cf6fe41bfe0de, type: 2}
+    text: Thank you very much!
+    onLineStart:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: {fileID: 11400000, guid: ebadf8833755745b6b6e30d28d7c39ce, type: 2}
+    text: You're very welcome!
     onLineStart:
       m_PersistentCalls:
         m_Calls: []
