@@ -1,17 +1,18 @@
 using UnityEngine;
 using System.Collections; // Needed for IEnumerator
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class DialogueInteractable : MonoBehaviour, IInteractable
 {
     [SerializeField] private Conversation conversation;
     
-    // State Logic
     private Queue<DialogueLine> linesQueue = new Queue<DialogueLine>();
     private bool isTalking = false;
 
-    // Global lock so only one NPC talks at a time
     public static bool isConversationActive = false;
+    
+    public UnityEvent onConversationEnd;
 
     public void Interact()
     {
@@ -80,9 +81,18 @@ public class DialogueInteractable : MonoBehaviour, IInteractable
     private void EndDialogue()
     {
         isTalking = false;
-        isConversationActive = false;
+        
         DialogueUI.Instance.Hide();
         
         conversation.onConversationEnd?.Invoke();
+        onConversationEnd?.Invoke();
+
+        StartCoroutine(UnlockConversation());
+    }
+
+    private IEnumerator UnlockConversation()
+    {
+        yield return null;
+        isConversationActive = false;
     }
 }
