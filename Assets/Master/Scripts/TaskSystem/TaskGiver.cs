@@ -1,42 +1,45 @@
 using UnityEngine;
 
-public class TaskGiver : MonoBehaviour
+namespace Master.Scripts.TaskSystem
 {
-    [Header("Configuration")]
-    public TaskData taskToGive; // Drag your ScriptableObject here in Inspector
-
-    [Header("Debug Settings")]
-    public bool giveOnTouch = true; // Uncheck this if you want to use a Dialogue System instead
-
-    // 1. If you want the task given simply by walking into the NPC:
-    private void OnTriggerEnter(Collider other)
+    public class TaskGiver : MonoBehaviour
     {
-        if (giveOnTouch && other.CompareTag("Player"))
-        {
-            GiveTaskTo(other.gameObject);
-        }
-    }
+        [Header("Configuration")]
+        public TaskData taskToGive; // Drag your ScriptableObject here in Inspector
 
-    public void GiveTaskTo(GameObject player)
-    {
-        Debug.Log("Player is attempting to take a task!");
-        TaskManager manager = player.GetComponent<TaskManager>();
+        [Header("Debug Settings")]
+        public bool giveOnTouch = true; // Uncheck this if you want to use a Dialogue System instead
 
-        if (manager != null)
+        private void OnTriggerEnter(Collider other)
         {
-            // Optional: Check if they already have a task?
-            if (manager.currentActiveTask != null && !manager.currentActiveTask.isCompleted)
+            if (giveOnTouch && other.CompareTag("Player"))
             {
-                Debug.Log("Player is busy with another task!");
-                return;
+                GiveTaskTo(other.gameObject);
             }
-
-            manager.AcceptTask(taskToGive);
-            Debug.Log($"NPC gave task: {taskToGive.taskName}");
         }
-        else
+
+        public void GiveTaskTo(GameObject player)
         {
-            Debug.LogError("Player object is missing the TaskManager script!");
+            Debug.Log("Player is attempting to take a task!");
+            TaskManager manager = player.GetComponent<TaskManager>();
+
+            if (manager != null)
+            {
+                Debug.Log(manager.currentActiveTask);
+                // Optional: Check if they already have a task?
+                if (manager.currentActiveTask != null)
+                {
+                    Debug.Log("Player is busy with another task!");
+                    return;
+                }
+
+                manager.AcceptTask(taskToGive);
+                Debug.Log($"NPC gave task: {taskToGive.taskName}");
+            }
+            else
+            {
+                Debug.LogError("Player object is missing the TaskManager script!");
+            }
         }
     }
 }

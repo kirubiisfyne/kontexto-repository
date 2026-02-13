@@ -1,19 +1,28 @@
+using Master.Scripts.DialogueSystem;
 using UnityEngine;
 
-public class KeyItem : MonoBehaviour
+namespace Master.Scripts.TaskSystem
 {
-    public string itemKey; // Set this to "Wood" in Inspector
-
-    void OnTriggerEnter(Collider other)
+    public class KeyItem : MonoBehaviour, IInteractable
     {
-        if (other.CompareTag("Player"))
+        public string itemKey; // Set this to "Wood" in Inspector
+
+        public void Interact(GameObject player)
         {
-            // Find the manager and report the find
-            TaskManager manager = other.GetComponent<TaskManager>();
-            if (manager != null)
+            TaskManager manager = player.GetComponent<TaskManager>();
+
+            if (manager.currentActiveTask == null)
             {
-                manager.ReportEvent(itemKey, 1);
-                Destroy(gameObject); // Poof!
+                return;
+            }
+        
+            if (manager.currentActiveTask.status == TaskStatus.Active)
+            {
+                if (manager != null && manager.currentActiveTask != null)
+                {
+                    manager.ReportEvent(itemKey, 1);
+                    Destroy(gameObject);
+                }
             }
         }
     }

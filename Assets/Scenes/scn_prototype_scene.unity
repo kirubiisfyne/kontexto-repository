@@ -1171,22 +1171,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1196063c2ef74fb4ae794b4a1e5b6dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueInteractable
-  conversation: {fileID: 11400000, guid: 24c1cf16715bc4d689dcda1f70554e8e, type: 2}
-  onConversationEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 925104002}
-        m_TargetAssemblyTypeName: TaskGiver, Assembly-CSharp
-        m_MethodName: GiveTaskTo
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2009139378}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  conversationEvents:
+  - name: Giving Conversation
+    conversation: {fileID: 11400000, guid: 24c1cf16715bc4d689dcda1f70554e8e, type: 2}
+    status: 0
+    onConversationEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 925104002}
+          m_TargetAssemblyTypeName: TaskGiver, Assembly-CSharp
+          m_MethodName: GiveTaskTo
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2009139378}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Given Conversation
+    conversation: {fileID: 11400000, guid: 3f4f8e5146be14d5db163d0f9cce9243, type: 2}
+    status: 1
+    onConversationEnd:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!114 &925104002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,22 +1559,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1196063c2ef74fb4ae794b4a1e5b6dbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueInteractable
-  conversation: {fileID: 11400000, guid: 2ea1b7bbe4274432abc45e6953f1ff31, type: 2}
-  onConversationEnd:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1588202068}
-        m_TargetAssemblyTypeName: TaskTurnIn, Assembly-CSharp
-        m_MethodName: TryCompleteQuest
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 2009139378}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  conversationEvents:
+  - name: No Item
+    conversation: {fileID: 11400000, guid: 2ea1b7bbe4274432abc45e6953f1ff31, type: 2}
+    status: 0
+    onConversationEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Receiving Item
+    conversation: {fileID: 11400000, guid: 4bb5a2aa5cf53441dad7ef05c6e726dd, type: 2}
+    status: 2
+    onConversationEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - name: Receiving Item
+    conversation: {fileID: 11400000, guid: 4bb5a2aa5cf53441dad7ef05c6e726dd, type: 2}
+    status: 0
+    onConversationEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: 
+          m_MethodName: 
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: 
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1811412013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,7 +1880,7 @@ MonoBehaviour:
   cameraAnchor: {fileID: 1356190015}
   InputDirection: {x: 0, y: 0, z: 0}
   walkSpeed: 0.2
-  runSpeed: 0.4
+  runSpeed: 0.6
   jumpHeight: 1
   sensitivity: {x: 0.4, y: 0.4}
   yAimClamp: 45
@@ -1891,7 +1939,7 @@ MonoBehaviour:
   currentActiveTask:
     data: {fileID: 0}
     currentAmounts: 
-    isCompleted: 0
+    status: 0
 --- !u!4 &39274756954241368
 Transform:
   m_ObjectHideFlags: 0
