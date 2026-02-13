@@ -1,4 +1,9 @@
-public interface IInteractable
+using UnityEngine;
+
+namespace Master.Scripts.DialogueSystem
 {
-    void Interact();
+    public interface IInteractable
+    {
+        void Interact(GameObject player);
+    }
 }

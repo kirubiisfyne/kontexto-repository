@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: NPC A (Not Started)
+  m_EditorClassIdentifier: Assembly-CSharp::Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: ebadf8833755745b6b6e30d28d7c39ce, type: 2}
+    text: H!
+    onLineStart:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: {fileID: 11400000, guid: 7dde2bf9a4f374f4787261dfd6ef9acb, type: 2}
+    text: Hello! Here's your task for today, Look for the Cube and give to NPC B.
+    onLineStart:
+      m_PersistentCalls:
+        m_Calls: []
+  - speaker: {fileID: 11400000, guid: ebadf8833755745b6b6e30d28d7c39ce, type: 2}
+    text: Will do!
+    onLineStart:
+      m_PersistentCalls:
+        m_Calls: []
+  onConversationEnd:
+    m_PersistentCalls:
+      m_Calls: []
