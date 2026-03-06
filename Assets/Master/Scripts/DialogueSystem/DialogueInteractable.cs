@@ -26,7 +26,7 @@ namespace Master.Scripts.DialogueSystem
         private readonly Queue<DialogueLine> linesQueue = new Queue<DialogueLine>();
         
         private bool isTalking;
-        private static bool isConversationActive;
+        public static bool isConversationActive;
         private TaskStatus status = TaskStatus.NotStarted;
     #endregion
 

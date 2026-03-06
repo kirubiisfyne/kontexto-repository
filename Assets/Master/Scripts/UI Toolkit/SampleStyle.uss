@@ -1,0 +1,26 @@
+.editor-block {
+    white-space: normal;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.editor-block > .unity-text-field__input {
+    background-color: transparent;
+    border-width: 0;
+    padding: 0;
+    color: black;
+}
+
+.editor-block > .unity-text-field__input:focus {
+    border-color: transparent;
+}
+
+.ribbon-btn-active {
+    background-color: rgb(130, 130, 130);
+    border-top-color: rgb(100, 100, 100);
+    border-left-color: rgb(100, 100, 100);
+    border-bottom-color: rgb(220, 220, 220);
+    border-right-color: rgb(220, 220, 220);
+}
