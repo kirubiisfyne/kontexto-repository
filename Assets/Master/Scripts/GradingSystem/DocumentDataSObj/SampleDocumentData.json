@@ -1,0 +1,16 @@
+{
+  "startingTextBlocks": [
+    "document title",
+    "Here is the introduction paragraph.",
+    "And here is the conclusion."
+  ],
+  "answerKey": [
+    {
+      "targetTextSnippet": "document title",
+      "requiredSize": 24,
+      "requireBold": true,
+      "requireItalic": false,
+      "requiredAlignment": 1
+    }
+  ]
+}

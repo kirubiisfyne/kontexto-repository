@@ -6,11 +6,13 @@ namespace Master.Scripts.TaskSystem
     public class KeyItem : MonoBehaviour, IInteractable
     {
         public string itemKey; // Set this to "Wood" in Inspector
+        
+        private TaskManager manager;
 
-        public void Interact(GameObject player)
+        public void Interact(GameObject playerGameObject)
         {
-            TaskManager manager = player.GetComponent<TaskManager>();
-
+            manager = playerGameObject.GetComponent<TaskManager>();
+            
             if (manager.currentActiveTask == null)
             {
                 return;

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: NPC B
-  m_EditorClassIdentifier: Assembly-CSharp:Master.Scripts.DialogueSystem:SpeakerProfile
-  characterName: NPC B
-  portrait: {fileID: 21300000, guid: 39a1512ea98054af1b56dd586620066a, type: 3}
-  nameColor: {r: 1, g: 1, b: 1, a: 1}
+  m_Script: {fileID: 11500000, guid: cac908a1ea1e54d81a85a7acc29e0406, type: 3}
+  m_Name: Fetch Sphere
+  m_EditorClassIdentifier: Assembly-CSharp::TaskData
+  taskName: Fetch Sphere
+  description: Fetch the sphere.
+  objectives:
+  - key: Sphere
+    requiredAmount: 1

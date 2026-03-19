@@ -1,9 +1,10 @@
 using System.Linq;
-using Master.Scripts; // Needed for the .ToList() on the buttons
+using Master.Scripts;
+using Master.Scripts.GradingSystem; // Needed for the .ToList() on the buttons
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class BlockEditorManager : MonoBehaviour
+public class TextEditorManager : MonoBehaviour
 {
     private UIDocument _doc;
     private VisualElement _documentPage;
@@ -44,10 +45,70 @@ public class BlockEditorManager : MonoBehaviour
         // Spawn the first empty block
         CreateBlock(0, "");
     }
+    
+    // Call this from your GameManager when the level starts
+    public void LoadLevel(DocumentData currentDocument)
+    {
+        // 1. Clear the page
+        _documentPage.Clear();
+        _activeBlock = null;
+
+        // 2. Spawn a block for every string in the JSON's startingTextBlocks array
+        if (currentDocument.startingTextBlocks != null && currentDocument.startingTextBlocks.Count > 0)
+        {
+            for (int i = 0; i < currentDocument.startingTextBlocks.Count; i++)
+            {
+                string rawText = currentDocument.startingTextBlocks[i];
+                
+                // CreateBlock inserts it into the UI and hooks up the Enter/Backspace logic
+                CreateBlock(i, rawText);
+            }
+        }
+        else
+        {
+            // Fallback if the JSON is empty
+            CreateBlock(0, ""); 
+        }
+
+        // 3. Force the Ribbon to update its visuals to match the first block
+        if (_documentPage.childCount > 0)
+        {
+            var firstBlock = _documentPage.ElementAt(0) as TextField;
+            firstBlock?.Focus();
+            _activeBlock = firstBlock;
+            UpdateRibbonState();
+        }
+    }
 
     private void SetupHeader(VisualElement root)
     {
-        root.Q<Button>("Exit").clicked += () => GateManager.Instance.StartWarp(GateManager.Instance.lastSceneString);
+        root.Q<Button>("Exit").clicked += () => SceneGateManager.Instance.StartWarp(SceneGateManager.Instance.lastSceneString);
+        
+        // --- CONNECT THE PRINT (SUBMIT) BUTTON ---
+        Button printButton = root.Q<Button>("Print"); 
+        if (printButton != null)
+        {
+            printButton.clicked += () => 
+            {
+                // Find the dedicated controller in the scene and trigger the grading
+                var taskController = FindObjectOfType<FormatDataLoader>();
+                if (taskController != null)
+                {
+                    taskController.EvaluatePrintJob(_documentPage);
+                }
+                else
+                {
+                    Debug.LogError("Could not find FormatDataLoader in the scene!");
+                }
+            };
+        }
+
+        // --- Stop buttons from stealing the internal UI Toolkit focus ---
+        var allButtons = root.Query<Button>().ToList();
+        foreach (var btn in allButtons)
+        {
+            btn.focusable = false;
+        }
     }
 
     private void SetupRibbon(VisualElement root)

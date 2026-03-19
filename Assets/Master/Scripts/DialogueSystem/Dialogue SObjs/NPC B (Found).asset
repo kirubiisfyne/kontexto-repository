@@ -12,16 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
   m_Name: NPC B (Found)
   m_EditorClassIdentifier: Assembly-CSharp::Conversation
-  conversationName: 
-  taskStatus: 2
   lines:
   - speaker: {fileID: 11400000, guid: b2d4b73250818435e99cf6fe41bfe0de, type: 2}
     text: You found the thing!
-    onLineStart:
-      m_PersistentCalls:
-        m_Calls: []
   - speaker: {fileID: 11400000, guid: b2d4b73250818435e99cf6fe41bfe0de, type: 2}
     text: Thank you very much!
-    onLineStart:
-      m_PersistentCalls:
-        m_Calls: []

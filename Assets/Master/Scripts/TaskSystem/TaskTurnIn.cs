@@ -1,25 +1,28 @@
+using System;
+using Master.Scripts.DialogueSystem;
 using UnityEngine;
 
 namespace Master.Scripts.TaskSystem
 {
     public class TaskTurnIn : MonoBehaviour
     {
-    
-        [Header("Debug Settings")]
-        public bool giveOnTouch = true; // Uncheck this if you want to use a Dialogue System instead
-     
-        // Simple trigger to turn in the quest
-        private void OnTriggerEnter(Collider other)
+        public TaskData taskToReceive;
+        
+        private GameObject playerGameObject;
+        private DialogueManager dialogueManager;
+        
+        private void Awake()
         {
-            if (other.CompareTag("Player") && giveOnTouch)
-            {
-                TryCompleteQuest(other.gameObject);
-            }
+            dialogueManager = gameObject.GetComponent<DialogueManager>();
         }
 
-        private void TryCompleteQuest(GameObject player)
+        public void TryCompleteTask()
         {
-            TaskManager manager = player.GetComponent<TaskManager>();
+            playerGameObject = dialogueManager.player;
+            TaskManager manager =  playerGameObject.GetComponent<TaskManager>();
+            
+            // Execute with onConversationEnd event with Found status
+            Debug.Log($"Player is turning in {manager.currentActiveTask.data.taskName}");
 
             if (manager == null) return;
 
@@ -39,6 +42,7 @@ namespace Master.Scripts.TaskSystem
             
                 // Clear the task so they can accept a new one
                 manager.currentActiveTask.status = TaskStatus.Completed; 
+                manager.currentActiveTask = null;
             }
             else
             {
