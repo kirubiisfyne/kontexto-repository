@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
-  m_Name: NPC A (Active)
-  m_EditorClassIdentifier: Assembly-CSharp::Conversation
+  m_Name: NPC D (Active)
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.DialogueClasses
   lines:
-  - speaker: {fileID: 11400000, guid: 7dde2bf9a4f374f4787261dfd6ef9acb, type: 2}
-    text: Go on, please look for the item and give to NPC B.
+  - speaker: {fileID: 11400000, guid: 5cf61348206c244b789c6e47448fac5b, type: 2}
+    text: I asked NPC C to fetch me the sphere, I wonder where it is.

@@ -1,35 +1,33 @@
+using System;
+using Master.Scripts.DialogueSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Master.Scripts.TaskSystem
 {
     public class TaskGiver : MonoBehaviour
     {
-        [Header("Configuration")]
-        public TaskData taskToGive; // Drag your ScriptableObject here in Inspector
+        public TaskData taskToGive;
+        
+        private GameObject playerGameObject;
+        private DialogueManager dialogueManager;
 
-        [Header("Debug Settings")]
-        public bool giveOnTouch = true; // Uncheck this if you want to use a Dialogue System instead
-
-        private void OnTriggerEnter(Collider other)
+        private void Awake()
         {
-            if (giveOnTouch && other.CompareTag("Player"))
-            {
-                GiveTaskTo(other.gameObject);
-            }
+            dialogueManager = gameObject.GetComponent<DialogueManager>();
         }
 
-        public void GiveTaskTo(GameObject player)
+        public void GiveTaskTo()
         {
-            Debug.Log("Player is attempting to take a task!");
-            TaskManager manager = player.GetComponent<TaskManager>();
-
+            playerGameObject =  dialogueManager.player;
+            TaskManager manager = playerGameObject.GetComponent<TaskManager>();
+            
+            // Execute with onConversationEnd event with NotActive status
             if (manager != null)
             {
-                Debug.Log(manager.currentActiveTask);
-                // Optional: Check if they already have a task?
                 if (manager.currentActiveTask != null)
                 {
-                    Debug.Log("Player is busy with another task!");
+                    Debug.Log($"Player is busy with another task! {manager.currentActiveTask.data.name}");
                     return;
                 }
 

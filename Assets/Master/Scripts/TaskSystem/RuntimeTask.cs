@@ -17,7 +17,7 @@ namespace Master.Scripts.TaskSystem
             currentAmounts = new List<int>();
 
             // Initialize counters for every objective in the data
-            foreach (var unused in taskData.objectives)
+            foreach (ObjectiveData objective in taskData.objectives)
             {
                 currentAmounts.Add(0);
             }
@@ -46,7 +46,7 @@ namespace Master.Scripts.TaskSystem
             {
                 if (currentAmounts[i] < data.objectives[i].requiredAmount)
                 {
-                    break;
+                    return;
                 }
             }
             status = TaskStatus.Found;

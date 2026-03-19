@@ -1,0 +1,68 @@
+using Master.Scripts;
+using Master.Scripts.GradingSystem;
+using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
+
+public class FormatDataLoader : MonoBehaviour
+{
+    // A simple static reference so you can pass data to it from your Main Menu scene if needed
+    public static TextAsset PendingLevelJSON; 
+
+    [Header("Dependencies")]
+    public TextEditorManager editorManager;
+    public GradingManager gradingManager;
+
+    [Header("Testing / Default Level")]
+    [Tooltip("If you play the UI scene directly, it will load this JSON.")]
+    public TextAsset fallbackLevelJSON; 
+
+    private TextAsset currentLevelJson;
+    private DocumentData convertedDocumentData;
+
+    private void Start()
+    {
+        currentLevelJson = GameManager.Instance.GetNextDocumentData(GameManager.Instance.currentLevel);
+        LoadLevelData();
+    }
+
+    private void LoadLevelData()
+    {
+        // 1. Figure out which JSON to load (from another scene, or the fallback)
+        TextAsset jsonToLoad = PendingLevelJSON != null ? currentLevelJson : fallbackLevelJSON;
+
+        if (jsonToLoad != null)
+        {
+            // 2. Parse it
+            convertedDocumentData = JsonUtility.FromJson<DocumentData>(jsonToLoad.text);
+            Debug.Log("Task Controller: Level Data Loaded.");
+
+            // 3. Send it to the UI
+            editorManager.LoadLevel(convertedDocumentData);
+        }
+        else
+        {
+            Debug.LogError("No JSON file assigned to the Document Task Controller!");
+        }
+    }
+
+    // This gets called by your TextEditorManager when the user clicks Print
+    public void EvaluatePrintJob(VisualElement documentPage)
+    {
+        Debug.Log("Task Controller: Sending document to grader...");
+
+        GradeReport result = gradingManager.GradeDocument(documentPage, convertedDocumentData);
+
+        if (result.passedPerfectly)
+        {
+            Debug.Log($"Score: {result.score}/{result.maxScore} - PERFECT PRINT!");
+            // TODO: Play success sound, show success UI, grant XP, etc.
+        }
+        else
+        {
+            Debug.Log($"Score: {result.score}/{result.maxScore} - NEEDS REVISION.");
+            Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
+            // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
+        }
+    }
+}

@@ -4,9 +4,9 @@ using UnityEngine.SceneManagement;
 
 namespace Master.Scripts
 {
-    public class GateManager : MonoBehaviour
+    public class SceneGateManager : MonoBehaviour
     {
-        public static GateManager Instance { get; private set; }
+        public static SceneGateManager Instance { get; private set; }
         
         public GameObject player;
         public string lastSceneString;
@@ -67,9 +67,9 @@ namespace Master.Scripts
 
             foreach (GameObject gate in gates)
             {
-                if (gate == enabled)
+                if (gate.activeInHierarchy)
                 {
-                    if (gate.GetComponent<SceneGate>().sceneFrom.name == lastSceneString)
+                    if (gate.GetComponent<SceneGateInstance>().sceneFrom.name == lastSceneString)
                     {
                         spawnPosition = gate.transform.position;
                         spawnRotation = gate.transform.rotation.eulerAngles;

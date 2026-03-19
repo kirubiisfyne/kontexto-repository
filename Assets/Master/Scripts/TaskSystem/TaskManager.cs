@@ -4,7 +4,6 @@ namespace Master.Scripts.TaskSystem
 {
     public class TaskManager : MonoBehaviour
     {
-        // The currently active task (The "Notepad")
         public RuntimeTask currentActiveTask;
 
         private void Awake()

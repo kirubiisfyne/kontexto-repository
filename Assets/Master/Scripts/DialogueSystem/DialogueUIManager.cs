@@ -5,9 +5,9 @@ using UnityEngine.UI;
 
 namespace Master.Scripts.DialogueSystem
 {
-    public class DialogueUI : MonoBehaviour
+    public class DialogueUIManager : MonoBehaviour
     {
-        public static DialogueUI Instance;
+        public static DialogueUIManager Instance;
 
         [Header("UI Components")]
         [SerializeField] private GameObject dialoguePanel;
@@ -58,22 +58,24 @@ namespace Master.Scripts.DialogueSystem
         {
             IsTyping = true;
             currentFullText = sentence;
-            dialogueText.text = "";
+            dialogueText.maxVisibleCharacters = 0;
 
             float waitTime = 0.02f / textSpeed;
-
+            
+            dialogueText.text = sentence;
             foreach (char letter in sentence)
             {
-                dialogueText.text += letter;
+                dialogueText.maxVisibleCharacters++;
                 yield return new WaitForSeconds(waitTime);
             }
-
+            
             IsTyping = false;
         }
 
         public void FinishTyping()
         {
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+            dialogueText.maxVisibleCharacters = currentFullText.Length;
             dialogueText.text = currentFullText;
             IsTyping = false;
         }

@@ -1,6 +1,7 @@
 using UnityEngine;
+using Master.Scripts.DialogueSystem;
 
-namespace Master.Scripts.DialogueSystem
+namespace Master.Scripts
 {
     public class UniversalInteractor : MonoBehaviour
     {
@@ -14,8 +15,8 @@ namespace Master.Scripts.DialogueSystem
         private void Update()
         {
             // Keep your global lock! Even though this is universal, 
-            // we don't want the player pulling levers while trapped in a conversation.
-            if (DialogueInteractable.isConversationActive) 
+            // we don't want the player pulling levers while trapped in a dialogueClasses.
+            if (DialogueManager.IsConversationActive) 
             {
                 return; 
             }

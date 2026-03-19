@@ -11,8 +11,6 @@ namespace Master.Scripts.TaskSystem
         [TextArea] public string description;
 
         [Header("Requirements")]
-        // This list defines what needs to be done.
-        // We use a simple class here so we can see it in the Inspector.
         public List<ObjectiveData> objectives;
     }
 
@@ -27,7 +25,7 @@ namespace Master.Scripts.TaskSystem
     [System.Serializable]
     public enum TaskStatus
     {
-        NotStarted, // Or Generic status, conversation with no relation to any tasks
+        NotStarted, // Or Generic status, dialogueClasses with no relation to any tasks
         Active,
         Found,
         Completed,

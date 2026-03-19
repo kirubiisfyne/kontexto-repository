@@ -12,16 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
   m_Name: NPC A (Completed)
   m_EditorClassIdentifier: Assembly-CSharp::Conversation
-  conversationName: 
-  taskStatus: 1
   lines:
   - speaker: {fileID: 11400000, guid: 7dde2bf9a4f374f4787261dfd6ef9acb, type: 2}
     text: You did it!
-    onLineStart:
-      m_PersistentCalls:
-        m_Calls: []
   - speaker: {fileID: 11400000, guid: 7dde2bf9a4f374f4787261dfd6ef9acb, type: 2}
     text: Thank you very much!
-    onLineStart:
-      m_PersistentCalls:
-        m_Calls: []

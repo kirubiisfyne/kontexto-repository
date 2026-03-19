@@ -29,6 +29,8 @@ namespace Master.Scripts
         [Header("Animation")]
         [SerializeField] private Animator animator;
         [SerializeField] [Range(0, 1)] private float animationLerpTime = 0.1f;
+        
+        private static readonly int XVelocityHash = Animator.StringToHash("XVelocity");
 
         private void Start()
         {
@@ -93,7 +95,7 @@ namespace Master.Scripts
             if (animator != null)
             {
                 // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
-                animator.SetFloat("X Velocity", xTargetAnimValue, animationLerpTime, Time.deltaTime);
+                animator.SetFloat(XVelocityHash, xTargetAnimValue, animationLerpTime, Time.deltaTime);
             }
         
             // Apply Movement
