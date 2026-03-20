@@ -104,8 +104,8 @@ namespace Master.Scripts
 
         private void HandleAim()
         {
-            x += Input.GetAxis("Mouse X") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements);
-            y -= Input.GetAxis("Mouse Y") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements);
+            x += Input.GetAxis("Mouse X") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements * Time.deltaTime);
+            y -= Input.GetAxis("Mouse Y") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements * Time.deltaTime);
             y = Mathf.Clamp(y, (yAimClamp * -1), yAimClamp); // Clamp Y axis rotation to avoid flipping
         
             transform.localRotation = Quaternion.Euler(0, x , 0);

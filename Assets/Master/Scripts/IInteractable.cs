@@ -1,9 +1,10 @@
+using Master.Scripts.TaskSystem;
 using UnityEngine;
 
 namespace Master.Scripts
 {
     public interface IInteractable
     {
-        void Interact(GameObject playerGameObject);
+        void Interact(ClientTaskManager clientTaskManager);
     }
 }
