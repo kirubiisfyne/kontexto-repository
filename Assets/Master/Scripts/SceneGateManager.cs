@@ -67,9 +67,10 @@ namespace Master.Scripts
 
             foreach (GameObject gate in gates)
             {
-                if (gate.activeInHierarchy)
+                SceneGateInstance gateInstance = gate.GetComponent<SceneGateInstance>();
+                if (gateInstance != null && gateInstance.enabled)
                 {
-                    if (gate.GetComponent<SceneGateInstance>().sceneFrom.name == lastSceneString)
+                    if (gateInstance.sceneToName == lastSceneString)
                     {
                         spawnPosition = gate.transform.position;
                         spawnRotation = gate.transform.rotation.eulerAngles;

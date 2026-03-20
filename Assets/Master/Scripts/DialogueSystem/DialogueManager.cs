@@ -61,11 +61,15 @@ namespace Master.Scripts.DialogueSystem
                 taskData = taskGiver.taskToGive;
                 Debug.Log(taskGiver.taskToGive.name);
             }
-            else
+            else if (GetComponent<TaskTurnIn>() != null)
             {
                 taskTurnIn = GetComponent<TaskTurnIn>();
                 taskData = taskTurnIn.taskToReceive;
                 Debug.Log(taskTurnIn.taskToReceive.name);
+            }
+            else
+            {
+                Debug.Log("No NpcTaskManager found!");
             }
         }
     #endregion
@@ -73,6 +77,7 @@ namespace Master.Scripts.DialogueSystem
         public void Interact(GameObject playerGameObject)
         {
             if (IsConversationActive) return;
+            
             GetPlayer(playerGameObject);
             StartCoroutine(StartDialogueRoutine());
         }

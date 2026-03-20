@@ -21,10 +21,10 @@ namespace Master.Scripts.TaskSystem
             playerGameObject = dialogueManager.player;
             TaskManager manager =  playerGameObject.GetComponent<TaskManager>();
             
-            // Execute with onConversationEnd event with Found status
-            Debug.Log($"Player is turning in {manager.currentActiveTask.data.taskName}");
-
             if (manager == null) return;
+            
+            // Execute with onConversationEnd event with Found status
+            Debug.Log($"Player is turning in");
 
             // Check 1: Do they have a task?
             if (manager.currentActiveTask == null)
