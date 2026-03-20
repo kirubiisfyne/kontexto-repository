@@ -6,9 +6,8 @@ using UnityEngine.Events;
 
 namespace Master.Scripts.DialogueSystem
 {
-    public class DialogueManager : MonoBehaviour, IInteractable
+    public class DialogueManager : MonoBehaviour
     {
-        
     #region Dialogue Data Setup
         // Conversation Data setup
         [System.Serializable]
@@ -31,107 +30,52 @@ namespace Master.Scripts.DialogueSystem
         public static bool IsConversationActive;
     #endregion
     
-    #region Dialogue and Task Systems Connection
         // Task and Dialogue Systems connections
-        private TaskGiver taskGiver;
-        private TaskTurnIn taskTurnIn;
+        private HostTaskManager hostTaskManager;
         private TaskData taskData;
         
-        // NPC Status
-        private TaskStatus status = TaskStatus.NotStarted;
         
-        // Player Reference
-        [Header("Dialogue Configuration")]
-        public GameObject player;
-        private TaskManager manager;
-        #endregion
-    
-    #region Dialogue Setup
-
-    private void Awake()
+        private void Awake()
         {
-            GetNpcTaskManager();
-        }
-        private void GetNpcTaskManager()
-        {
-            // Get necessary data from the respective manager
-            if (GetComponent<TaskGiver>() != null)
-            {
-                taskGiver = GetComponent<TaskGiver>();
-                taskData = taskGiver.taskToGive;
-                Debug.Log(taskGiver.taskToGive.name);
-            }
-            else if (GetComponent<TaskTurnIn>() != null)
-            {
-                taskTurnIn = GetComponent<TaskTurnIn>();
-                taskData = taskTurnIn.taskToReceive;
-                Debug.Log(taskTurnIn.taskToReceive.name);
-            }
-            else
-            {
-                Debug.Log("No NpcTaskManager found!");
-            }
-        }
-    #endregion
-    
-        public void Interact(GameObject playerGameObject)
-        {
-            if (IsConversationActive) return;
-            
-            GetPlayer(playerGameObject);
-            StartCoroutine(StartDialogueRoutine());
+            hostTaskManager = GetComponent<HostTaskManager>();
         }
         
-        private IEnumerator StartDialogueRoutine()
+        public IEnumerator StartDialogueRoutine(ClientTaskManager clientTaskManager)
         {
-            // Wait until manager is assigned
-            yield return new WaitUntil(() => manager != null);
+            yield return new WaitUntil(() => !clientTaskManager.Equals(null));
 
-            // Check which conversation to use based on NPC status
             foreach (ConversationEvent conversation in conversations)
-            {
-                if (conversation.status == status)
-                {
-                    activeConversation = conversation;
-                    Debug.Log($"Current Conversation Title: {activeConversation.name}");
-                }
-            }
+                if (conversation.status == hostTaskManager.hostTaskStatus)
+                    activeConversation = conversation; // Pick Dialogues based on HostTaskManager's status
+            
             IsConversationActive = true;
             
-            // End coroutine at the last frame
             yield return null; 
 
             isTalking = true;
             linesQueue.Clear();
             
-            // Reload dialogue lines queue
             foreach (DialogueLine line in activeConversation.dialogueClasses.lines)
-            {
                 linesQueue.Enqueue(line);
-            }
-
+            
             DisplayNextLine();
         }
 
         public void DisplayNextLine()
         {
-            // Handle fast-forward
             if (DialogueUIManager.Instance.IsTyping)
             {
                 DialogueUIManager.Instance.FinishTyping();
                 return;
             }
 
-            // Check if there are lines in queue.
             if (linesQueue.Count == 0)
             {
                 EndDialogue();
                 return;
             }
 
-            // Update UI
             DialogueLine currentLine = linesQueue.Dequeue();
-
             DialogueUIManager.Instance.UpdateDialogueView(currentLine);
         }
 
@@ -142,21 +86,7 @@ namespace Master.Scripts.DialogueSystem
             DialogueUIManager.Instance.Hide();
             
             activeConversation.onConversationEnd?.Invoke();
-            UpdateNpcStatus();
             StartCoroutine(UnlockConversation());
-        }
-
-        private void UpdateNpcStatus()
-        {
-            // Change NPC status
-            if (manager.currentActiveTask != null)
-            {
-                // Only change status when Player active Task is the same as the NPCs
-                if (manager.currentActiveTask.data == taskData)
-                {
-                    status = manager.currentActiveTask.status;
-                }
-            }
         }
 
         private IEnumerator UnlockConversation()
@@ -167,20 +97,7 @@ namespace Master.Scripts.DialogueSystem
         
         private void Update()
         {
-            // Checking if player pressed "Interact" to display next line
-            if (isTalking)
-            {
-                if (Input.GetButtonDown("Interact"))
-                {
-                    DisplayNextLine();
-                }
-            }
-        }
-
-        private void GetPlayer(GameObject _playerGameObject)
-        {
-            player = _playerGameObject;
-            manager = player.GetComponent<TaskManager>();
+            if (isTalking && Input.GetButtonDown("Interact")) DisplayNextLine();
         }
     }
 }

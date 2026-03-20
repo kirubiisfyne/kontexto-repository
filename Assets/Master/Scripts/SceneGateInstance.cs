@@ -1,3 +1,4 @@
+using Master.Scripts.TaskSystem;
 using UnityEngine;
 
 namespace Master.Scripts
@@ -27,7 +28,7 @@ namespace Master.Scripts
             }
         }
 
-        public void Interact(GameObject playerGameObject)
+        public void Interact(ClientTaskManager clientTaskManager)
         {
             if (isPlayerInRange && canPlayerWarp)
             {

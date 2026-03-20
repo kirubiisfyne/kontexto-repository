@@ -1,29 +1,45 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Master.Scripts.TaskSystem
 {
-    [System.Serializable] // Makes it visible in the Inspector for debugging!
+    [CreateAssetMenu(fileName = "New Task", menuName = "Tasks/Task")]
+    public class TaskData : ScriptableObject
+    {
+        [Header("Info")]
+        public string taskName;
+        [TextArea] public string description;
+
+        [Header("Requirements")]
+        public List<ObjectiveData> objectives;
+    }
+
+    [System.Serializable]
+    public class ObjectiveData
+    {
+        public string key; 
+        public int requiredAmount;
+    }
+    
+    [System.Serializable]
     public class RuntimeTask
     {
-        public TaskData data; // Reference to the static info
-        public List<int> currentAmounts; // Tracks progress for each objective
+        public TaskData data;
+        public List<int> currentAmounts;
         public TaskStatus status;
 
-        // Constructor: When we start a task, we set everything to 0
         public RuntimeTask(TaskData taskData)
         {
             data = taskData;
             status = TaskStatus.Active;
             currentAmounts = new List<int>();
 
-            // Initialize counters for every objective in the data
             foreach (ObjectiveData objective in taskData.objectives)
             {
                 currentAmounts.Add(0);
             }
         }
 
-        // Helper function to check if specific objective is done
         public void IncrementProgress(string key, int amount)
         {
             for (int i = 0; i < data.objectives.Count; i++)
@@ -32,7 +48,6 @@ namespace Master.Scripts.TaskSystem
                 {
                     currentAmounts[i] += amount;
                 
-                    // Cap the amount so it doesn't go over (optional)
                     if (currentAmounts[i] > data.objectives[i].requiredAmount)
                         currentAmounts[i] = data.objectives[i].requiredAmount;
                 }
@@ -52,4 +67,20 @@ namespace Master.Scripts.TaskSystem
             status = TaskStatus.Found;
         }
     }
+#region TaskSystem States
+    [System.Serializable]
+    public enum TaskStatus
+    {
+        NotStarted,
+        Active,
+        Found,
+        Completed,
+    }
+    [System.Serializable]
+    public enum HostType
+    {
+        Giver,
+        Closer
+    }
+#endregion
 }
