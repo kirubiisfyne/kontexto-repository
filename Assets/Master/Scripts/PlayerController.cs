@@ -21,7 +21,7 @@ namespace Master.Scripts
         private const float Gravity = -9.81f;
     
         [Header("Aim")]
-        [SerializeField] private Vector2 sensitivity = new Vector2(0.2f, 0.2f);
+        [SerializeField] [Range(0, 1)] private float sensitivity = 0.2f;
         [SerializeField] [Tooltip("To avoid camera flipping. Default: 45")] private float yAimClamp = 45f;
         private const float AimSensitivityMultiplier = 10f;
         private const float AimAngleIncrements = 180f;
@@ -30,7 +30,8 @@ namespace Master.Scripts
         [SerializeField] private Animator animator;
         [SerializeField] [Range(0, 1)] private float animationLerpTime = 0.1f;
         
-        private static readonly int XVelocityHash = Animator.StringToHash("XVelocity");
+        private static readonly int XVelocityHash = Animator.StringToHash("X Velocity");
+        private static readonly int JumpHash = Animator.StringToHash("Jump");
 
         private void Start()
         {
@@ -85,7 +86,7 @@ namespace Master.Scripts
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * Gravity);
                 // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
-                animator.SetTrigger("Jump");
+                animator.SetTrigger(JumpHash);
             }
         
             // Apply Gravity
@@ -94,7 +95,6 @@ namespace Master.Scripts
             // Apply Animations
             if (animator != null)
             {
-                // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
                 animator.SetFloat(XVelocityHash, xTargetAnimValue, animationLerpTime, Time.deltaTime);
             }
         
@@ -104,8 +104,8 @@ namespace Master.Scripts
 
         private void HandleAim()
         {
-            x += Input.GetAxis("Mouse X") * (sensitivity.x * AimSensitivityMultiplier * AimAngleIncrements * Time.deltaTime);
-            y -= Input.GetAxis("Mouse Y") * (sensitivity.y * AimSensitivityMultiplier * AimAngleIncrements * Time.deltaTime);
+            x += Input.GetAxis("Mouse X") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements);
+            y -= Input.GetAxis("Mouse Y") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements);
             y = Mathf.Clamp(y, (yAimClamp * -1), yAimClamp); // Clamp Y axis rotation to avoid flipping
         
             transform.localRotation = Quaternion.Euler(0, x , 0);

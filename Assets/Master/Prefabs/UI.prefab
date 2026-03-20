@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4878167673865531349}
   - component: {fileID: 2716886186935793846}
   - component: {fileID: 8484993892117838679}
+  - component: {fileID: 1554034543547544380}
+  - component: {fileID: 5568447058136019464}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -29,7 +31,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.28189, y: 1.31789, z: -0.28379}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -53,7 +55,7 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
-  m_PivotReferenceSize: 0
+  m_PivotReferenceSize: 1
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
 --- !u!114 &8484993892117838679
@@ -68,3 +70,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61372c48282e44b57af488ee52b7f626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlockEditorManager
+--- !u!114 &1554034543547544380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151721442624843441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82799406a7574928af72322bba52235a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DocumentGrader
+--- !u!114 &5568447058136019464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2151721442624843441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e03dcec18674ac1b07c8e5dce3585f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DocumentTaskController
+  editorManager: {fileID: 8484993892117838679}
+  gradingManager: {fileID: 1554034543547544380}
+  fallbackLevelJSON: {fileID: 4900000, guid: 403a27bcb0804d3c83788cec2605a45e, type: 3}

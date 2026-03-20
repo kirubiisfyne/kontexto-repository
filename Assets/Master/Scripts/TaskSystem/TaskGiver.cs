@@ -23,21 +23,16 @@ namespace Master.Scripts.TaskSystem
             TaskManager manager = playerGameObject.GetComponent<TaskManager>();
             
             // Execute with onConversationEnd event with NotActive status
-            if (manager != null)
+            if (manager == null) return;
+            
+            if (manager.currentActiveTask != null)
             {
-                if (manager.currentActiveTask != null)
-                {
-                    Debug.Log($"Player is busy with another task! {manager.currentActiveTask.data.name}");
-                    return;
-                }
+                Debug.Log($"Player is busy with another task!");
+                return;
+            }
 
-                manager.AcceptTask(taskToGive);
-                Debug.Log($"NPC gave task: {taskToGive.taskName}");
-            }
-            else
-            {
-                Debug.LogError("Player object is missing the TaskManager script!");
-            }
+            manager.AcceptTask(taskToGive);
+            Debug.Log($"NPC gave task: {taskToGive.taskName}");
         }
     }
 }

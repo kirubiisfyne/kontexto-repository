@@ -13,6 +13,8 @@ namespace Master.Scripts.TaskSystem
         {
             manager = playerGameObject.GetComponent<TaskManager>();
             
+            if (manager == null) return;
+            
             if (manager.currentActiveTask == null)
             {
                 return;

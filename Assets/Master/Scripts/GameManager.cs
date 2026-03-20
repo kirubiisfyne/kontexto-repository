@@ -42,6 +42,7 @@ namespace Master.Scripts
 
         public TextAsset GetNextDocumentData(int index)
         {
+            if (documentData == null || index >= documentData.Count) return null;
             return documentData[index];
         }
     }
