@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using UnityEngine.Events;
 
 namespace Master.Scripts.DialogueSystem
 {
-    public class DialogueManager : MonoBehaviour
+    public class DialogueManager : MonoBehaviour, IInteractable
     {
     #region Dialogue Data Setup
         // Conversation Data setup
@@ -14,7 +15,7 @@ namespace Master.Scripts.DialogueSystem
         public struct ConversationEvent
         {
             public string name;
-            public DialogueClasses dialogueClasses;
+            public Conversation conversation;
             public TaskStatus status;
             [Space(15)]
             public UnityEvent onConversationEnd;
@@ -30,17 +31,22 @@ namespace Master.Scripts.DialogueSystem
         public static bool IsConversationActive;
     #endregion
     
-        // Task and Dialogue Systems connections
-        private HostTaskManager hostTaskManager;
+        [HideInInspector] public HostTaskManager hostTaskManager;
+        [HideInInspector] public ClientTaskManager clientTaskManager;
         private TaskData taskData;
-        
-        
+
         private void Awake()
         {
-            hostTaskManager = GetComponent<HostTaskManager>();
+            hostTaskManager = GetComponentInChildren<HostTaskManager>();
+        }
+
+        public void Interact(ClientTaskManager clientTaskManager)
+        {
+            this.clientTaskManager = clientTaskManager; 
+            StartCoroutine(StartDialogueRoutine());
         }
         
-        public IEnumerator StartDialogueRoutine(ClientTaskManager clientTaskManager)
+        public IEnumerator StartDialogueRoutine()
         {
             yield return new WaitUntil(() => !clientTaskManager.Equals(null));
 
@@ -55,7 +61,7 @@ namespace Master.Scripts.DialogueSystem
             isTalking = true;
             linesQueue.Clear();
             
-            foreach (DialogueLine line in activeConversation.dialogueClasses.lines)
+            foreach (DialogueLine line in activeConversation.conversation.lines)
                 linesQueue.Enqueue(line);
             
             DisplayNextLine();

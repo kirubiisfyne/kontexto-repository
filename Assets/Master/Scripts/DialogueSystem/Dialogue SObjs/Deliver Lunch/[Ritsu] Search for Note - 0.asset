@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: '[Ritsu] Search for Note - 0'
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: 0f3d5344370414927bfd06128770b263, type: 2}
+    text: "Psst! Hey, over here. I\u2019m in a massive hole. I 'borrowed' Reigen's
+      chemistry notebook to study, and if she finds out I still have it, she\u2019ll
+      actually end me."
+  - speaker: {fileID: 11400000, guid: c0b6716d4b3ae41488323461179cf4a7, type: 2}
+    text: Let me guess; you lost it?
+  - speaker: {fileID: 11400000, guid: 0f3d5344370414927bfd06128770b263, type: 2}
+    text: "No! I just... left it in the gym locker room. And I have practice starting
+      in five minutes. If you grab it and get it to her in the Art Room, I\u2019ll
+      give you my lunch credits for a week."
+  - speaker: {fileID: 11400000, guid: c0b6716d4b3ae41488323461179cf4a7, type: 2}
+    text: "A week of free pizza? Fine, I\u2019m in."

@@ -42,6 +42,17 @@ namespace Master.Scripts.TaskSystem
 
         public void IncrementProgress(string key, int amount)
         {
+            if (data == null || data.objectives == null) return;
+            
+            if (currentAmounts == null || currentAmounts.Count != data.objectives.Count)
+            {
+                currentAmounts = new List<int>();
+                foreach (var objective in data.objectives)
+                {
+                    currentAmounts.Add(0);
+                }
+            }
+
             for (int i = 0; i < data.objectives.Count; i++)
             {
                 if (data.objectives[i].key == key)
