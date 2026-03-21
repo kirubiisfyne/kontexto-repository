@@ -5,49 +5,40 @@ using UnityEngine;
 
 namespace Master.Scripts.TaskSystem
 {
-    public class HostTaskManager : MonoBehaviour, IInteractable
+    public class HostTaskManager : MonoBehaviour
     {
-        [Header("Host Type")]
+        [Header("Type")]
         public HostType hostType;
         
-        // TODO Instead assigned by KeyItemInstance
-        public TaskData heldTask;
-        public TaskStatus hostTaskStatus;
+        [HideInInspector] public TaskData heldTask;
+        [HideInInspector] public TaskStatus hostTaskStatus;
         
-        public DialogueManager dialogueManager;
-        
-        public TaskCycleManager taskCycleManager;
-        public ClientTaskManager clientTaskManager;
+        [HideInInspector] public DialogueManager dialogueManager;
+        [HideInInspector] public TaskCycleManager taskCycleManager;
 
         private void Awake()
         {
-            dialogueManager = gameObject.GetComponent<DialogueManager>();
-        }
-
-        public void Interact(ClientTaskManager clientTaskManager)
-        {
-            this.clientTaskManager = clientTaskManager;
-            StartCoroutine(dialogueManager.StartDialogueRoutine(clientTaskManager));
+            dialogueManager = gameObject.GetComponentInParent<DialogueManager>();
         }
 
         public void GiveTaskTo() => StartCoroutine(TryGiveTaskTo());
         private IEnumerator TryGiveTaskTo()
         {
-            yield return new WaitUntil(() => !clientTaskManager.Equals(null));
+            yield return new WaitUntil(() => !dialogueManager.clientTaskManager.Equals(null));
             
-            clientTaskManager.AcceptTask(heldTask);
-            taskCycleManager.UpdateTaskStatus(clientTaskManager.currentActiveTask.status);
+            dialogueManager.clientTaskManager.AcceptTask(heldTask);
+            taskCycleManager.UpdateTaskStatus(dialogueManager.clientTaskManager.currentActiveTask.status);
         }
         
         public void CompleteTask() => StartCoroutine(TryCompleteTask());
-        public IEnumerator TryCompleteTask()
+        private IEnumerator TryCompleteTask()
         {
-            yield return new WaitUntil(() => !clientTaskManager.Equals(null));
+            yield return new WaitUntil(() => !dialogueManager.clientTaskManager.Equals(null));
 
-            if (clientTaskManager.currentActiveTask.status == TaskStatus.Found)
+            if (dialogueManager.clientTaskManager.currentActiveTask.status.Equals(TaskStatus.Found))
             {
                 taskCycleManager.UpdateTaskStatus(TaskStatus.Completed);            // If KeyItem found set Client RuntimeTask to TaskStatus.Completed
-                clientTaskManager.currentActiveTask = null;                         // Clear Client RuntimeTask to allow accepting next task
+                dialogueManager.clientTaskManager.currentActiveTask = null;                         // Clear Client RuntimeTask to allow accepting next task
             }
         }
     }

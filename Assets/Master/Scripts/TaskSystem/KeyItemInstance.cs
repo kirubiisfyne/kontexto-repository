@@ -5,10 +5,11 @@ namespace Master.Scripts.TaskSystem
 {
     public class KeyItemInstance : MonoBehaviour, IInteractable
     {
+        [Header("Key")]
         public string itemKey;
         
-        public TaskCycleManager taskCycleManager;
-        public ClientTaskManager clientTaskManager;
+        [HideInInspector] public TaskCycleManager taskCycleManager;
+        [HideInInspector] public ClientTaskManager clientTaskManager;
 
         public void Interact(ClientTaskManager clientTaskManager)
         {

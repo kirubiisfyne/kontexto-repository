@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: 'Fetch Cube - 3 [Kurata]'
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: f891cd9fb3f1940a3bed4d31127c76a8, type: 2}
+    text: You found it! This is going to look so dramatic when I drop it on stage
+      and the chalk dust flies everywhere!
+  - speaker: {fileID: 11400000, guid: c0b6716d4b3ae41488323461179cf4a7, type: 2}
+    text: I'll stick to the textbook, but thanks.

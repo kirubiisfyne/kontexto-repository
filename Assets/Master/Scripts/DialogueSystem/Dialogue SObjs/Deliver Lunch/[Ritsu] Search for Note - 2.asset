@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: '[Ritsu] Search for Note - 2'
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: 0f3d5344370414927bfd06128770b263, type: 2}
+    text: Is that it? Is that the notebook? Why are you showing it to me?! Hide it!
+  - speaker: {fileID: 11400000, guid: c0b6716d4b3ae41488323461179cf4a7, type: 2}
+    text: I found it under a pile of sweaty jerseys. You owe me big time for the
+      smell alone.
+  - speaker: {fileID: 11400000, guid: 0f3d5344370414927bfd06128770b263, type: 2}
+    text: Just get it to the Art Room. Go, go, go!

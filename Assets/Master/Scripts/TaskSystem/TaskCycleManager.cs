@@ -11,11 +11,13 @@ namespace Master.Scripts.TaskSystem
             public TaskData taskData;
             public HostTaskManager taskGiver;
             public HostTaskManager taskCloser;
+            [Space(10)]
             public List<GameObject> objectiveKeyItems;
         }
         
-        [Tooltip("Fill all fields.")]
+        [Tooltip("Assign a reference on all fields.")]
         public TaskStakeholders stakeholders;
+        [Space(10)]
         public TaskStatus taskStatus = TaskStatus.NotStarted;
         
         private GameObject clientGameObject;
@@ -25,7 +27,6 @@ namespace Master.Scripts.TaskSystem
         {
             SetupTaskSCycle();
         }
-
         private void SetupTaskSCycle()
         {
             stakeholders.taskGiver.heldTask = stakeholders.taskData;
@@ -33,7 +34,7 @@ namespace Master.Scripts.TaskSystem
             
             stakeholders.taskCloser.heldTask = stakeholders.taskData;
             stakeholders.taskCloser.taskCycleManager = this;
-
+            
             foreach (GameObject objectiveKeyItem in stakeholders.objectiveKeyItems)
             {
                 objectiveKeyItem.GetComponent<KeyItemInstance>().taskCycleManager = this;
