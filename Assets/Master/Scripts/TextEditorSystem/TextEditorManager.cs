@@ -10,7 +10,6 @@ public class TextEditorManager : MonoBehaviour
     private VisualElement _documentPage;
     private TextField _activeBlock;
 
-    // --- CACHED UI REFERENCES ---
     private Button _boldBtn;
     private Button _italicBtn;
     private Button _leftBtn;
@@ -53,7 +52,6 @@ public class TextEditorManager : MonoBehaviour
 
     private void Start()
     {
-        // Cache the controller once to avoid scene-wide searches later
         _taskController = FindObjectOfType<FormatDataLoader>();
     }
 
@@ -66,7 +64,6 @@ public class TextEditorManager : MonoBehaviour
         _rightBtn = root.Q<Button>("Right");
         _sizeDropdown = root.Q<DropdownField>("Size");
 
-        // Prevent ribbon buttons from stealing focus
         var ribbonButtons = root.Query<Button>().ToList();
         foreach (var btn in ribbonButtons)
         {
@@ -121,7 +118,6 @@ public class TextEditorManager : MonoBehaviour
             };
         }
     }
-
     private void SetupRibbon()
     {
         if (_leftBtn != null) _leftBtn.clicked += () => ApplyAlignment(TextAnchor.UpperLeft);
@@ -218,7 +214,6 @@ public class TextEditorManager : MonoBehaviour
             
             TextField newBlock = CreateBlock(currentIndex + 1, currentText.Substring(cursorPos));
             
-            // --- NEW: Inherit styles from the block we just split ---
             CopyBlockStyles(currentBlock, newBlock);
         }
         else if (evt.keyCode == KeyCode.Backspace && currentBlock.cursorIndex == 0)

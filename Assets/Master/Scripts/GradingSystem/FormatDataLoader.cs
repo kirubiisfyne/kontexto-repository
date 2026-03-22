@@ -2,6 +2,7 @@ using Master.Scripts;
 using Master.Scripts.GradingSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class FormatDataLoader : MonoBehaviour
@@ -11,8 +12,19 @@ public class FormatDataLoader : MonoBehaviour
 
     [Header("Dependencies")]
     public TextEditorManager editorManager;
+
     public GradingManager gradingManager;
 
+    [Header("UI Components")] 
+    public GameObject emailPannel;
+    public TMPro.TextMeshProUGUI emailText;
+    [Space(10)]
+    public GameObject feedbackPanel;
+    public GameObject feedbackPrefab;
+    public VerticalLayoutGroup feedbackContainer;
+    public TMPro.TextMeshProUGUI scoreText;
+    public TMPro.TextMeshProUGUI documentTitleText;
+    
     [Header("Testing / Default Level")]
     [Tooltip("If you play the UI scene directly, it will load this JSON.")]
     public TextAsset fallbackLevelJSON; 
@@ -24,6 +36,7 @@ public class FormatDataLoader : MonoBehaviour
     {
         currentLevelJson = GameManager.Instance.GetNextDocumentData(GameManager.Instance.currentLevel);
         LoadLevelData();
+        HandleInstructionEmail(true);
     }
 
     private void LoadLevelData()
@@ -57,6 +70,8 @@ public class FormatDataLoader : MonoBehaviour
         {
             Debug.Log($"Score: {result.score}/{result.maxScore} - PERFECT PRINT!");
             // TODO: Play success sound, show success UI, grant XP, etc.
+            
+            HandleFeedbackUI(true, result);
         }
         else
         {
@@ -65,4 +80,25 @@ public class FormatDataLoader : MonoBehaviour
             // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
         }
     }
+
+#region UI Callbacks
+    public void HandleFeedbackUI(bool isActive, GradeReport report)
+    {
+        foreach (string feedback in report.adviserFeedback)
+        {
+            GameObject feedbackField = Instantiate(feedbackPrefab, feedbackContainer.transform, true);
+            feedbackField.GetComponent<TMPro.TextMeshProUGUI>().text = feedback;
+        }
+        
+        scoreText.text = $"{report.score}/{report.maxScore}";
+        documentTitleText.text = convertedDocumentData.startingTextBlocks[0];
+        feedbackPanel.SetActive(isActive);
+    }
+
+    public void HandleInstructionEmail(bool isActive)
+    {
+        emailText.text = convertedDocumentData.instructionString;
+        emailPannel.SetActive(isActive);
+    }
+#endregion
 }

@@ -4,7 +4,6 @@ using Master.Scripts.GradingSystem;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-// A clean data container to send the results back to your UI/GameManager
 public class GradeReport
 {
     public int score;
@@ -97,7 +96,18 @@ public class GradingManager : MonoBehaviour
             // Optional: Positive reinforcement!
             if (blockPerfect)
             {
-                Debug.Log($"Great job on the '{requirement.targetTextSnippet}' section!");
+                switch (Random.Range(0, 2))
+                {
+                    case 0:
+                        report.adviserFeedback.Add($"The {requirement.targetTextSnippet} section was exceptionally well-executed.");
+                        break;
+                    case 1:
+                        report.adviserFeedback.Add($"You delivered a high level of quality in the {requirement.targetTextSnippet} portion.");
+                        break;
+                    case 2:
+                        report.adviserFeedback.Add($"You exceeded the expectations for the {requirement.targetTextSnippet} segment.");
+                        break;
+                }
             }
         }
 
