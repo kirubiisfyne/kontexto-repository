@@ -31,7 +31,7 @@ namespace Master.Scripts
         [SerializeField] [Range(0, 1)] private float animationLerpTime = 0.1f;
         
         private static readonly int XVelocityHash = Animator.StringToHash("X Velocity");
-        private static readonly int JumpHash = Animator.StringToHash("Jump");
+        private static readonly int YVelocityHash = Animator.StringToHash("Y Velocity");
 
         private void Start()
         {
@@ -85,8 +85,6 @@ namespace Master.Scripts
             if (Input.GetButtonDown("Jump") && controller.isGrounded)
             {
                 velocity.y = Mathf.Sqrt(jumpHeight * -2f * Gravity);
-                // ReSharper disable once Unity.PreferAddressByIdToGraphicsParams
-                animator.SetTrigger(JumpHash);
             }
         
             // Apply Gravity

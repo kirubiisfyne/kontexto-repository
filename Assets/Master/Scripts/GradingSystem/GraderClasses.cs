@@ -7,7 +7,8 @@ namespace Master.Scripts.GradingSystem
     public class DocumentData
     {
         public List<string> startingTextBlocks; 
-        public List<BlockRequirement> answerKey; 
+        public List<BlockRequirement> answerKey;
+        public string instructionString;
     }
 
     [System.Serializable]

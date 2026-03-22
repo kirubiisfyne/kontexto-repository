@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using Master.Scripts.TaskSystem;
+using Unity.VisualScripting;
 using UnityEngine.Events;
 
 namespace Master.Scripts.DialogueSystem
@@ -42,7 +43,9 @@ namespace Master.Scripts.DialogueSystem
 
         public void Interact(ClientTaskManager clientTaskManager)
         {
-            this.clientTaskManager = clientTaskManager; 
+            this.clientTaskManager = clientTaskManager;
+            
+            // TODO Fix to avoid taking another task
             StartCoroutine(StartDialogueRoutine());
         }
         

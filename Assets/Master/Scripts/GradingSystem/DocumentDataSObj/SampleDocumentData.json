@@ -12,5 +12,7 @@
       "requireItalic": false,
       "requiredAlignment": 1
     }
-  ]
+  ],
+  "instructionString" : 
+    "Modify the document title to look like a title. Bold, Center, and enlarge to Font Size 24."
 }
