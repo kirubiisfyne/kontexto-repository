@@ -1,18 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-3920873218304805969
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Editor::UnityEditor.Rendering.Universal.AssetVersion
-  version: 10
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -20,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_KuribBase
-  m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
+  m_Name: mat_baseMale
+  m_Shader: {fileID: 4800000, guid: 1b2c0d85dbf294f4eb3398e6857520a5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -72,7 +59,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 6464af82fcfef49c0a1aa0eaf03b4ccb, type: 3}
+        m_Texture: {fileID: 2800000, guid: 08ff2578d1a8d463b97a6b6886eecc1c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -139,7 +126,11 @@ Material:
     - _MinLight: 0.75
     - _OcclusionStrength: 1
     - _Offset: 0
-    - _OtlWidth: 2
+    - _OtlJitter: 280
+    - _OtlVariance: 0.3
+    - _OtlWidth: 5
+    - _OtlWobbleFreq: 10
+    - _OtlWobbleSpeed: 1.5
     - _OutlineDarkness: 2
     - _Outline_Weight: 0.6
     - _Outline_Weight_1: 0.75

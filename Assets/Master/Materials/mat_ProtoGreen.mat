@@ -34,7 +34,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_ProtoGreen
-  m_Shader: {fileID: 4800000, guid: 128c5f1edaefa4c4fb3f9f7a4615edb2, type: 3}
+  m_Shader: {fileID: 4800000, guid: 1b2c0d85dbf294f4eb3398e6857520a5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -42,7 +42,7 @@ Material:
   - _CLIPPED_ON
   - _SEGMENTED_ON
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -152,7 +152,11 @@ Material:
     - _MinLight: 0.75
     - _OcclusionStrength: 1
     - _Offset: 0
-    - _OtlWidth: 2
+    - _OtlJitter: 280
+    - _OtlVariance: 0.3
+    - _OtlWidth: 5
+    - _OtlWobbleFreq: 10
+    - _OtlWobbleSpeed: 1.5
     - _OutlineDarkness: 2
     - _Outline_Weight: 0.6
     - _Outline_Weight_1: 0.75
