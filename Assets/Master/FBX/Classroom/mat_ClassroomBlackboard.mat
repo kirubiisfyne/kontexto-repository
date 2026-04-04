@@ -128,7 +128,7 @@ Material:
     - _Offset: 0
     - _OtlJitter: 296
     - _OtlVariance: 0.3
-    - _OtlWidth: 4.64
+    - _OtlWidth: 1.18
     - _OtlWobbleFreq: 10
     - _OtlWobbleSpeed: 1.5
     - _OutlineDarkness: 2
