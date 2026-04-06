@@ -34,7 +34,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_ProtoYellow
-  m_Shader: {fileID: 4800000, guid: 1b2c0d85dbf294f4eb3398e6857520a5, type: 3}
+  m_Shader: {fileID: 4800000, guid: 7cd5de0b884b14f88ab763ef465e1799, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -136,6 +136,7 @@ Material:
     - _ColIntense: 1
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DepthThreshold: 0.01
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -150,6 +151,7 @@ Material:
     - _MaxLight: 1
     - _Metallic: 0
     - _MinLight: 0.75
+    - _NormalThreshold: 0.5
     - _OcclusionStrength: 1
     - _Offset: 0
     - _OtlJitter: 280
@@ -158,6 +160,7 @@ Material:
     - _OtlWobbleFreq: 10
     - _OtlWobbleSpeed: 1.5
     - _OutlineDarkness: 2
+    - _OutlineWidth: 0.03
     - _Outline_Weight: 0.6
     - _Outline_Weight_1: 0.75
     - _Parallax: 0.005
@@ -179,6 +182,7 @@ Material:
     - _Steps: 3
     - _StpSmooth: 0
     - _Surface: 0
+    - _UseSmoothNormals: 0
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
@@ -188,6 +192,7 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Fill_Color: {r: 1, g: 0, b: 0, a: 1}
     - _OtlColor: {r: 0, g: 0, b: 0, a: 1}
+    - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _Outline_Color: {r: 0.5, g: 0.030660393, b: 0.030660393, a: 1}
     - _ShnColor: {r: 1, g: 1, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
