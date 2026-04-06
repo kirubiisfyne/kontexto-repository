@@ -24,9 +24,8 @@ Shader "Simple Toon/SToon Outline Jitter"
 
         [Header(Outline)][Space(5)]
         _OtlColor ("Color", COLOR) = (0,0,0,1)
-        _OtlWidth ("Width", Range(0,5)) = 1
+        _OtlWidth ("Width", Range(0,20)) = 5
         
-        // --- OUTLINE JITTER & WOBBLE ---
         _OtlJitter ("Jitter Crunchiness", Range(1, 512)) = 100
         _OtlVariance ("Thickness Variance", Range(0, 1)) = 0.5
         _OtlWobbleSpeed ("Wobble Speed", Range(0, 50)) = 15
@@ -38,14 +37,10 @@ Shader "Simple Toon/SToon Outline Jitter"
         _ShnIntense ("Intensity", Range(0,1)) = 0
         _ShnRange ("Range", Range(0,1)) = 0.15
         _ShnSmooth ("Smoothness", Range(0,1)) = 0
-
     }
 
     SubShader
     {
-        // ==========================================
-        // PASS 1: DIRECT LIGHT (Your Original Code)
-        // ==========================================
         Tags { "RenderType" = "Opaque" "LightMode" = "ForwardBase" }
         Pass
         {
@@ -126,9 +121,6 @@ Shader "Simple Toon/SToon Outline Jitter"
             ENDCG
         }
 
-        // ==========================================
-        // PASS 2: SPOT LIGHT (Your Original Code)
-        // ==========================================
         Tags { "RenderType" = "Opaque" "LightMode" = "ForwardAdd" }
         Pass
         {
@@ -212,14 +204,8 @@ Shader "Simple Toon/SToon Outline Jitter"
             ENDCG
         }
 
-        // ==========================================
-        // PASS 3: SHADOWS (Your Original Code)
-        // ==========================================
         UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
-
-        // ==========================================
-        // PASS 4: OUTLINE SINE WOBBLE + PSX JITTER
-        // ==========================================
+        
         Pass
         {
             Tags { "RenderType" = "Opaque" "LightMode" = "ForwardBase" }
@@ -229,6 +215,7 @@ Shader "Simple Toon/SToon Outline Jitter"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma shader_feature _SMOOTH_NORMALS // Enables our toggle
 
             #include "UnityCG.cginc"
             #include "STCore.cginc"
@@ -244,6 +231,7 @@ Shader "Simple Toon/SToon Outline Jitter"
             {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
+                float4 color : COLOR; // Added to read Vertex Colors
             };
 
             struct v2f
@@ -255,32 +243,32 @@ Shader "Simple Toon/SToon Outline Jitter"
             {
                 v2f o;
                 
-                // 1. Smooth Sine Wobble (Boiling Line)
-                // We sum the X, Y, and Z of the vertex to get a unique offset per area of the mesh.
-                // We multiply by Frequency to determine how tightly clustered the thick/thin waves are.
+                // 1. Determine which normal to use
+                float3 workingNormal = v.normal;
+
+                // 2. Smooth Sine Wobble (Boiling Line)
                 float spatialOffset = (v.vertex.x + v.vertex.y + v.vertex.z) * _OtlWobbleFreq;
-                
-                // Add _Time.y (time in seconds) multiplied by Speed to animate it
                 float timeOffset = _Time.y * _OtlWobbleSpeed;
-                
-                // sin() returns a value between -1.0 and 1.0. 
                 float wobble = sin(spatialOffset + timeOffset);
-                
-                // Map it to our width multiplier. 
-                // If variance is 0.5, multiplier waves smoothly between 0.5 and 1.5.
                 float widthMult = 1.0 + (wobble * _OtlVariance);
                 
-                // 2. Extrude the hull
-                float4 vPos = v.vertex;
-                vPos.xyz += normalize(v.normal.xyz) * _OtlWidth * widthMult * 0.008;
-                o.pos = UnityObjectToClipPos(vPos);
+                // 3. Pixel-Perfect Clip Space Extrusion
+                float4 clipPosition = UnityObjectToClipPos(v.vertex);
                 
+                // Transform our chosen normal to clip space
+                float3 clipNormal = mul((float3x3) UNITY_MATRIX_VP, mul((float3x3) unity_ObjectToWorld, workingNormal));
+                
+                // Calculate the 2D offset (Foreshortening and Grazing Angles handled here!)
+                float2 offset = normalize(clipNormal.xy) / _ScreenParams.xy * (_OtlWidth * widthMult) * clipPosition.w * 2.0;
+                
+                clipPosition.xy += offset;
+                
+                o.pos = clipPosition;
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-                clip(-negz(_OtlWidth));
                 return _OtlColor;
             }
             ENDCG
