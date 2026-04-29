@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4976704487304789399}
   - component: {fileID: 1364061289141651616}
   - component: {fileID: 6231927010879593060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Backpack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4583930571130142703}
   serializedVersion: 2
-  m_LocalRotation: {x: 1, y: -1.1102236e-16, z: -1.110223e-16, w: -0.0000000754979}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
   m_LocalPosition: {x: -1, y: 0, z: 0}
   m_LocalScale: {x: -100, y: -100, z: -100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!33 &4976704487304789399
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -67,7 +67,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 3415cf0e7473a4294804313ba761d603, type: 2}
+  - {fileID: 2100000, guid: 0cd62df37376f438bac0ad862ac67aed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

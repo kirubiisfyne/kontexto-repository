@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1796422607942770756}
   - component: {fileID: 3472947718328240718}
   - component: {fileID: 8024381412216677390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tumbler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,8 +67,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 55941935e6679446a8df6689f84515e1, type: 2}
+  - {fileID: 2100000, guid: e4a246d1d8aa54f48b8c27f5424bb52d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

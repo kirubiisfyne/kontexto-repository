@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3757101224986402780}
   - component: {fileID: 7109143623656608150}
   - component: {fileID: -797079398038203114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClassroomBlackboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

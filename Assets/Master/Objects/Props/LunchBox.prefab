@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 619626006654270910}
   - component: {fileID: 8756595923955102479}
   - component: {fileID: 1790030610546325432}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LunchBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3468616850169476453}
   - component: {fileID: 3435745103218934327}
   - component: {fileID: -7191920031691501197}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClassroomArmchair
   m_TagString: Untagged
   m_Icon: {fileID: 0}

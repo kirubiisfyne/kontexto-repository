@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7122486163385980468}
   - component: {fileID: 5627491615064510902}
   - component: {fileID: -2412947029953673212}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FluorescentLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
