@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4396868453755957725}
   - component: {fileID: 2263552343011042089}
   - component: {fileID: -4635140907310119051}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NotebookClosed
   m_TagString: Untagged
   m_Icon: {fileID: 0}

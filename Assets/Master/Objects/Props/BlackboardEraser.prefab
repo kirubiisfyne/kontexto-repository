@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1006273451037192783}
   - component: {fileID: 3341469225291237559}
   - component: {fileID: -7247834091915052150}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlackboardEraser
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7633629782987861557}
   - component: {fileID: 4011964494607940201}
   - component: {fileID: 895417075795259388}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GradeBook
   m_TagString: Untagged
   m_Icon: {fileID: 0}

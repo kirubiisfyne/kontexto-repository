@@ -167,11 +167,11 @@ public class TextEditorManager : MonoBehaviour
         SetButtonActiveState(_rightBtn, align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight);
     }
 
-    private void SetButtonActiveState(Button btn, bool isActive)
-    {
-        if (btn == null) return;
-        btn.EnableInClassList("ribbon-btn-active", isActive);
-    }
+        private void SetButtonActiveState(Button btn, bool isActive)
+        {
+            if (btn == null) return;
+            btn.EnableInClassList("editor-btn--tool--active", isActive);
+        }
 
     private TextField CreateBlock(int index, string initialText)
     {

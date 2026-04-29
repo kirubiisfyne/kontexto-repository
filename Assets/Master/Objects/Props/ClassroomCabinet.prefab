@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3615058835496666013}
   - component: {fileID: 4085811588153273025}
   - component: {fileID: 1472436430254855759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ClassroomCabinet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

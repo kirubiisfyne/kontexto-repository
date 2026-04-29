@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6534432913327301332}
   - component: {fileID: 2502024260669396281}
   - component: {fileID: -5023231262681706457}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FoldingTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2030884780995252576}
   - component: {fileID: 655062268640626236}
   - component: {fileID: -995651940782483653}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MugFilled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
