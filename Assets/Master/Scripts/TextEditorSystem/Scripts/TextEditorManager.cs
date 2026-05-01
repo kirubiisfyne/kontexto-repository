@@ -10,8 +10,8 @@ public class TextEditorManager : MonoBehaviour
     private VisualElement _documentPage;
     private TextField _activeBlock;
 
-    private Button _boldBtn;
-    private Button _italicBtn;
+    private Toggle _boldToggle;
+    private Toggle _italicToggle;
     private Button _leftBtn;
     private Button _centerBtn;
     private Button _rightBtn;
@@ -28,7 +28,7 @@ public class TextEditorManager : MonoBehaviour
 
         CacheUIReferences(root);
         SetupRibbon();
-        SetupHeader();
+        SetupTabs();
 
         _documentPage.RegisterCallback<MouseDownEvent>(evt => 
         {
@@ -57,8 +57,8 @@ public class TextEditorManager : MonoBehaviour
 
     private void CacheUIReferences(VisualElement root)
     {
-        _boldBtn = root.Q<Button>("Bold");
-        _italicBtn = root.Q<Button>("Italic");
+        _boldToggle = root.Q<Toggle>("Bold");
+        _italicToggle = root.Q<Toggle>("Italic");
         _leftBtn = root.Q<Button>("Left");
         _centerBtn = root.Q<Button>("Center");
         _rightBtn = root.Q<Button>("Right");
@@ -97,7 +97,7 @@ public class TextEditorManager : MonoBehaviour
         }
     }
 
-    private void SetupHeader()
+    private void SetupTabs()
     {
         var root = _doc.rootVisualElement;
         root.Q<Button>("Exit").clicked += () => SceneGateManager.Instance.StartWarp(SceneGateManager.Instance.lastSceneString);
@@ -118,14 +118,19 @@ public class TextEditorManager : MonoBehaviour
             };
         }
     }
+
     private void SetupRibbon()
     {
         if (_leftBtn != null) _leftBtn.clicked += () => ApplyAlignment(TextAnchor.UpperLeft);
         if (_centerBtn != null) _centerBtn.clicked += () => ApplyAlignment(TextAnchor.UpperCenter);
         if (_rightBtn != null) _rightBtn.clicked += () => ApplyAlignment(TextAnchor.UpperRight);
         
-        if (_boldBtn != null) _boldBtn.clicked += ToggleBold;
-        if (_italicBtn != null) _italicBtn.clicked += ToggleItalic;
+        // Toggles use ValueChanged callbacks in UI Toolkit
+        if (_boldToggle != null) 
+            _boldToggle.RegisterValueChangedCallback(evt => ToggleBold(evt.newValue));
+            
+        if (_italicToggle != null) 
+            _italicToggle.RegisterValueChangedCallback(evt => ToggleItalic(evt.newValue));
 
         if (_sizeDropdown != null)
         {
@@ -158,8 +163,12 @@ public class TextEditorManager : MonoBehaviour
         bool isBold = currentStyle.unityFontStyleAndWeight == FontStyle.Bold || currentStyle.unityFontStyleAndWeight == FontStyle.BoldAndItalic;
         bool isItalic = currentStyle.unityFontStyleAndWeight == FontStyle.Italic || currentStyle.unityFontStyleAndWeight == FontStyle.BoldAndItalic;
 
-        SetButtonActiveState(_boldBtn, isBold);
-        SetButtonActiveState(_italicBtn, isItalic);
+        // Update the actual toggle values without firing their change events
+        if (_boldToggle != null) _boldToggle.SetValueWithoutNotify(isBold);
+        if (_italicToggle != null) _italicToggle.SetValueWithoutNotify(isItalic);
+
+        SetButtonActiveState(_boldToggle, isBold);
+        SetButtonActiveState(_italicToggle, isItalic);
 
         TextAnchor align = currentStyle.unityTextAlign;
         SetButtonActiveState(_leftBtn, align == TextAnchor.UpperLeft || align == TextAnchor.MiddleLeft || align == TextAnchor.LowerLeft);
@@ -167,11 +176,12 @@ public class TextEditorManager : MonoBehaviour
         SetButtonActiveState(_rightBtn, align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight);
     }
 
-        private void SetButtonActiveState(Button btn, bool isActive)
-        {
-            if (btn == null) return;
-            btn.EnableInClassList("editor-btn--tool--active", isActive);
-        }
+    // Changed from Toggle to VisualElement so Buttons and Toggles can both use this
+    private void SetButtonActiveState(VisualElement btn, bool isActive)
+    {
+        if (btn == null) return;
+        btn.EnableInClassList("editor-btn--tool--active", isActive);
+    }
 
     private TextField CreateBlock(int index, string initialText)
     {
@@ -251,7 +261,6 @@ public class TextEditorManager : MonoBehaviour
             destInput.style.unityTextAlign = sourceStyle.unityTextAlign;
             destInput.style.unityFontStyleAndWeight = sourceStyle.unityFontStyleAndWeight;
             
-            // Apply font size directly to the outer TextField style to match our dropdown logic
             destination.style.fontSize = sourceStyle.fontSize;
         }
     }
@@ -286,25 +295,8 @@ public class TextEditorManager : MonoBehaviour
         }
     }
 
-    private void ToggleBold()
-    {
-        var input = GetInnerInput(_activeBlock);
-        if (input != null)
-        {
-            var current = input.style.unityFontStyleAndWeight.value;
-            bool isBold = current == FontStyle.Bold || current == FontStyle.BoldAndItalic;
-
-            if (isBold)
-                input.style.unityFontStyleAndWeight = (current == FontStyle.BoldAndItalic) ? FontStyle.Italic : FontStyle.Normal;
-            else
-                input.style.unityFontStyleAndWeight = (current == FontStyle.Italic) ? FontStyle.BoldAndItalic : FontStyle.Bold;
-            
-            UpdateRibbonState();
-            RestoreFocusAndCursor();
-        }
-    }
-
-    private void ToggleItalic()
+    // Now accepts a bool from the Toggle's ValueChanged event
+    private void ToggleBold(bool applyBold)
     {
         var input = GetInnerInput(_activeBlock);
         if (input != null)
@@ -312,10 +304,29 @@ public class TextEditorManager : MonoBehaviour
             var current = input.style.unityFontStyleAndWeight.value;
             bool isItalic = current == FontStyle.Italic || current == FontStyle.BoldAndItalic;
 
-            if (isItalic)
-                input.style.unityFontStyleAndWeight = (current == FontStyle.BoldAndItalic) ? FontStyle.Bold : FontStyle.Normal;
+            if (applyBold)
+                input.style.unityFontStyleAndWeight = isItalic ? FontStyle.BoldAndItalic : FontStyle.Bold;
             else
-                input.style.unityFontStyleAndWeight = (current == FontStyle.Bold) ? FontStyle.BoldAndItalic : FontStyle.Italic;
+                input.style.unityFontStyleAndWeight = isItalic ? FontStyle.Italic : FontStyle.Normal;
+            
+            UpdateRibbonState();
+            RestoreFocusAndCursor();
+        }
+    }
+
+    // Now accepts a bool from the Toggle's ValueChanged event
+    private void ToggleItalic(bool applyItalic)
+    {
+        var input = GetInnerInput(_activeBlock);
+        if (input != null)
+        {
+            var current = input.style.unityFontStyleAndWeight.value;
+            bool isBold = current == FontStyle.Bold || current == FontStyle.BoldAndItalic;
+
+            if (applyItalic)
+                input.style.unityFontStyleAndWeight = isBold ? FontStyle.BoldAndItalic : FontStyle.Italic;
+            else
+                input.style.unityFontStyleAndWeight = isBold ? FontStyle.Bold : FontStyle.Normal;
             
             UpdateRibbonState();
             RestoreFocusAndCursor();

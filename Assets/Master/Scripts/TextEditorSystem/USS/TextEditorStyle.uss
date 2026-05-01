@@ -1,0 +1,115 @@
+.editor-header__tool-button {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    background-color: rgba(188, 188, 188, 0);
+    height: 16px;
+}
+
+.editor-button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    margin: 2px;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    border-left-width: 2px;
+    border-right-width: 2px;
+}
+
+.editor-button:checked {
+    background-color: rgb(120, 120, 120);
+}
+
+.editor-toolbar {
+    align-items: center;
+    flex-direction: row;
+    align-self: auto;
+    justify-content: space-between;
+    align-content: auto;
+    border-width: 0 2px 0 2px;
+    border-color: rgb(44, 62, 80);
+    padding: 2px;
+    border-bottom-width: 1px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 1px;
+    background-color: rgb(185, 185, 185);
+}
+
+.editor-ribbon__section {
+    flex-direction: row;
+    align-items: center;
+    width: auto;
+    flex-wrap: wrap;
+    height: 64px;
+    align-content: stretch;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.editor-ribbon__label {
+    width: 100%;
+    -unity-text-align: middle-center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+}
+
+.editor-dropdown {
+    width: auto;
+    height: 32px;
+}
+
+.editor-dropdown > .unity-base-field__input {
+    padding: 2px;
+    margin: 0;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.editor-dropdown .unity-base-popup-field__text {
+    min-width: 4px;
+    margin-right: 12px;
+    margin-left: 6px;
+}
+
+.editor-dropdown .unity-base-popup-field__arrow {
+    width: 6px;
+    height: 3px;
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/Icons/DropdownIcon.svg?fileID=7388822144124034973&guid=602ba9dc3c89444899102aa1bdc42941&type=3#DropdownIcon");
+}
+
+.unity-base-dropdown__checkmark {
+    width: 4px;
+    height: 3px;
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/Icons/CheckmarkIcon.svg?fileID=7388822144124034973&guid=f49fcca8ec3bf47f38676b1941fdea87&type=3#CheckmarkIcon");
+}
+
+.editor-toggle {
+    width: 32px;
+    height: 32px;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    background-color: rgb(188, 188, 188);
+}
+
+.editor-toggle:checked {
+    background-color: rgb(120, 120, 120);
+}
+
+.editor-toggle .unity-toggle__input {
+    display: none;
+}
+
+.editor-toggle__icon {
+    width: auto;
+    height: auto;
+}
+
+.editor-toggle-group {
+}
