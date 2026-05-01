@@ -1,4 +1,3 @@
-/* --- INPUT FIELDS ---  */
 .editor-block {
     white-space: normal;
     margin-top: 4px;
@@ -18,17 +17,17 @@
     border-color: transparent;
 }
 
-.unity-button {
-    width: 32px;
-    height: 32px;
-    padding: 0px;
-    border-width: 1px;
+.format-normal {
+    font-size: 14px;
+    -unity-font-style: normal;
 }
 
-.unity-toggle {
-    width: 32px;
-    height: 32px;
-    padding: 0px;
-    border-width: 1px;
-    background-color: transparent;
+.format-title {
+    font-size: 28px;
+    -unity-font-style: bold;
+}
+
+.format-heading1 {
+    font-size: 22px;
+    -unity-font-style: bold;
 }

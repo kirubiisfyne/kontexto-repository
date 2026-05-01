@@ -1,0 +1,68 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/TextEditorStyle.uss?fileID=7433441132597879392&amp;guid=dab8fefc2ae48434d981cd9b73428717&amp;type=3#TextEditorStyle"/>
+    <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3#DocumentStyle"/>
+    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; width: 70%; height: 70%; align-self: center; top: 0;">
+        <ui:VisualElement name="Header" class="editor-toolbar" style="flex-grow: 0; padding-top: 8px; padding-left: 8px; padding-right: 2px; padding-bottom: 8px; border-top-width: 2px; background-color: rgb(40, 133, 180); height: 96px;">
+            <ui:VisualElement name="WindowName" style="flex-grow: 1; flex-direction: row;">
+                <ui:Image name="Logo" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;); height: 16px; width: 15px; -unity-background-image-tint-color: rgb(255, 255, 255);"/>
+                <ui:Label text="TEXT_EDITOR" name="Name" style="margin-top: 0; margin-right: 4px; margin-bottom: 0; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 10px; -unity-text-align: middle-left;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="NavigationKeys" class="editor-header__nav">
+                <ui:Button text="X" name="Exit" class="editor-btn editor-btn--exit editor-button" style="width: 24px; height: 24px;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Tabs" class="editor-toolbar" style="flex-direction: row; justify-content: space-between; padding-top: 8px; padding-right: 4px; padding-bottom: 8px; padding-left: 4px; height: 96px;">
+            <ui:VisualElement name="Tools" class="editor-header__tools" style="flex-direction: row; height: auto; padding-top: 0; padding-right: 8px; padding-bottom: 0; padding-left: 8px; justify-content: space-evenly;">
+                <ui:Button text="File" name="File" class="editor-btn editor-btn--print editor-header__tool-button"/>
+                <ui:Button text="Print" name="Print" class="editor-btn editor-btn--print editor-header__tool-button"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="Ribbon" class="editor-ribbon editor-toolbar" style="flex-direction: row; border-bottom-width: 2px; justify-content: flex-start; height: 256px; padding-left: 8px; padding-right: 8px; width: 100%;">
+            <ui:VisualElement name="ClipboardSection" class="editor-ribbon__section" style="flex-grow: 0; flex-direction: row; width: 212px; height: 64px;">
+                <ui:VisualElement name="Clipboard" style="flex-grow: 0; flex-direction: row; padding-left: 0; padding-right: 0; margin-right: 4px; margin-left: 4px;">
+                    <ui:Button text="" name="Paste" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/PasteIcon.svg?fileID=7388822144124034973&amp;guid=fba86977068324789a7e5d6b1b3eb769&amp;type=3#PasteIcon&quot;); background-size: 14px 14px;"/>
+                    <ui:Button text="" name="Cut" class="editor-button" style="background-size: 14px 14px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/CutIcon.svg?fileID=7388822144124034973&amp;guid=8693bf324a36e407bb5a7070e70b43b0&amp;type=3#CutIcon&quot;);"/>
+                    <ui:Button text="" name="Copy" class="editor-button" style="background-size: 14px 14px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/CopyIcon.svg?fileID=7388822144124034973&amp;guid=6dd83f44fbc594cbbaec585ce31056e8&amp;type=3#CopyIcon&quot;);"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="History" style="flex-grow: 0; flex-direction: row; padding-left: 0; padding-right: 0; margin-left: 4px; margin-right: 4px;">
+                    <ui:Button text="" name="Undo" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/UndoIcon.svg?fileID=7388822144124034973&amp;guid=34145df129b7f4d07bcd7315bbfe5099&amp;type=3#UndoIcon&quot;); background-size: 14px 14px;"/>
+                    <ui:Button text="" name="Redo" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/RedoIcon.svg?fileID=7388822144124034973&amp;guid=e09865ef9254c45a390f32825beb8007&amp;type=3#RedoIcon&quot;); background-size: 14px 14px;"/>
+                </ui:VisualElement>
+                <ui:Label text="Clipboard" name="ClipboardLable" class="editor-ribbon__label" style="flex-shrink: 1;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="FontsSection" class="editor-ribbon__section editor-ribbon__section--fonts" style="height: 64px; width: 281px;">
+                <ui:DropdownField label="" choices="Calibri,Sans Serif,Arial" index="0" name="Fonts" enabled="true" tooltip="Fonts" class="editor-dropdown editor-dropdown--font" style="width: 128px; margin-left: 2px; margin-right: 2px;"/>
+                <ui:DropdownField label="" choices="10,12,14,18,24" index="1" name="Size" enabled="true" tooltip="Font Size" class="editor-dropdown editor-dropdown--size" style="margin-left: 2px; margin-right: 2px;"/>
+                <ui:Toggle name="Bold" class="editor-btn editor-btn--tool editor-toggle editor-button" style="align-content: center;">
+                    <ui:Image name="Toggle-Icon" tooltip="Bold" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/BoldIcon.svg?fileID=7388822144124034973&amp;guid=fb686b05f58a146d4944c3ad629d0b8f&amp;type=3#BoldIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
+                </ui:Toggle>
+                <ui:Toggle name="Italic" class="editor-btn editor-btn--tool editor-toggle editor-button" style="align-content: center;">
+                    <ui:Image name="Toggle-Icon" tooltip="Italic" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/ItalicIcon.svg?fileID=7388822144124034973&amp;guid=56968f394a5894258a45339cb4022942&amp;type=3#ItalicIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
+                </ui:Toggle>
+                <ui:Label text="Font" name="FontLabel" class="editor-ribbon__label" style="flex-shrink: 1;"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="ParagraphSection" class="editor-ribbon__section editor-ribbon__section--styles" style="flex-direction: row; align-items: center; width: 212px; height: 64px;">
+                <ui:ToggleButtonGroup label="" name="Alignment">
+                    <ui:Button text="" name="Left" double-click-selects-word="false" tooltip="Left-Align" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/LeftAlignIcon.svg?fileID=7388822144124034973&amp;guid=f60d60ba10ff14a5da68911d6982f0f8&amp;type=3#LeftAlignIcon&quot;); background-size: 12px 12px;"/>
+                    <ui:Button text="" name="Center" tooltip="Center" class="editor-button" style="background-size: 12px 12px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/CenterIcon.svg?fileID=7388822144124034973&amp;guid=41c8e3b01b28849b49b90a3509e0b7a5&amp;type=3#CenterIcon&quot;);"/>
+                    <ui:Button text="" name="Right" tooltip="Right-Align" class="editor-button" style="background-size: 12px 12px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/Right%20AlignIcon.svg?fileID=7388822144124034973&amp;guid=048523fb86fea4d7ebdac9102f2546e5&amp;type=3#Right AlignIcon&quot;);"/>
+                </ui:ToggleButtonGroup>
+                <ui:ToggleButtonGroup label="" name="BulletNumbering" allow-empty-selection="true" value="00" class="editor-toggle-group">
+                    <ui:Button text="" name="Bullet" tooltip="Bullet-Point" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/BulletIcon-2.svg?fileID=7388822144124034973&amp;guid=275c0abe2b70647ccbf5848b5f04baf8&amp;type=3#BulletIcon-2&quot;); background-size: 12px 12px;"/>
+                    <ui:Button text="" name="Numbering" tooltip="Numbering" class="editor-toggle editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Icons/NumberingIcon-2.svg?fileID=7388822144124034973&amp;guid=2edd390d493cf4a2cafede25ca81ae6e&amp;type=3#NumberingIcon-2&quot;); background-size: 12px 14px;"/>
+                </ui:ToggleButtonGroup>
+                <ui:Label text="Paragraph" name="ParagraphLabel" class="editor-ribbon__label"/>
+            </ui:VisualElement>
+            <ui:VisualElement name="StylesSection" class="editor-ribbon__section" style="flex-grow: 0; width: 276px; height: 64px;">
+                <ui:DropdownField label="" name="Styles" choices="Normal Text,Title,Subtitle,Heading 1,Heading 2,Heading 3,Heading 4,Heading 5" index="0" class="editor-button editor-dropdown" style="border-top-width: 0; border-right-width: 0; border-bottom-width: 0; border-left-width: 0; width: 256px; overflow: hidden;"/>
+                <ui:Label text="Styles" name="StylesLabel" class="editor-ribbon__label" style="flex-shrink: 1;"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:ScrollView name="Content" class="editor-viewport" style="background-color: rgb(128, 128, 128); flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80);">
+            <ui:VisualElement name="Document" style="flex-grow: 1; width: 1080px; flex-shrink: 0; align-self: center; height: 1337px; background-color: rgb(212, 212, 212); margin-top: 128px; margin-bottom: 128px; padding-top: 96px; padding-left: 96px; padding-right: 96px; padding-bottom: 96px;"/>
+        </ui:ScrollView>
+        <ui:VisualElement name="Footer" class="editor-footer editor-toolbar" style="border-top-width: 2px; border-bottom-width: 2px; height: 96px; padding-left: 8px; padding-right: 8px;">
+            <ui:Label text="Page 1 of 1" name="Page" class="editor-footer__text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
