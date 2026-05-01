@@ -81,13 +81,13 @@
 .editor-dropdown .unity-base-popup-field__arrow {
     width: 6px;
     height: 3px;
-    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/Icons/DropdownIcon.svg?fileID=7388822144124034973&guid=602ba9dc3c89444899102aa1bdc42941&type=3#DropdownIcon");
+    background-image: url("Icons/DropdownIcon.svg");
 }
 
 .unity-base-dropdown__checkmark {
     width: 4px;
     height: 3px;
-    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/Icons/CheckmarkIcon.svg?fileID=7388822144124034973&guid=f49fcca8ec3bf47f38676b1941fdea87&type=3#CheckmarkIcon");
+    background-image: url("Icons/CheckmarkIcon.svg");
 }
 
 .editor-toggle {
@@ -113,3 +113,9 @@
 
 .editor-toggle-group {
 }
+
+#SpaceBefore { background-image: url("Icons/AddBeforeIcon.svg"); }
+#SpaceAfter { background-image: url("Icons/AddAfterIcon.svg"); }
+
+.space-active#SpaceBefore { background-image: url("Icons/RemoveBeforeIcon.svg"); }
+.space-active#SpaceAfter { background-image: url("Icons/RemoveAfterIcon.svg"); }

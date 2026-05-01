@@ -27,7 +27,14 @@
     -unity-font-style: bold;
 }
 
-.format-heading1 {
-    font-size: 22px;
-    -unity-font-style: bold;
+.format-subtitle { 
+    font-size: 18px; 
+    -unity-font-style: italic; 
+    color: #555555; 
 }
+
+.format-h1 { font-size: 22px; -unity-font-style: bold; }
+.format-h2 { font-size: 20px; -unity-font-style: bold; }
+.format-h3 { font-size: 18px; -unity-font-style: bold; }
+.format-h4 { font-size: 16px; -unity-font-style: bold; }
+.format-h5 { font-size: 14px; -unity-font-style: bold; }

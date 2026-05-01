@@ -15,7 +15,14 @@ public class TextEditorManager : MonoBehaviour
     private Button _leftBtn;
     private Button _centerBtn;
     private Button _rightBtn;
+
+    private Toggle _spaceAfterToggle;
+    private Toggle _spaceBeforeToggle;
+    private DropdownField _fontDropdown; // For future font family selection
     private DropdownField _sizeDropdown;
+    private DropdownField _styleDropdown;
+    private Button _bulletBtn;
+    private Button _numberBtn;
     private FormatDataLoader _taskController;
 
     private void OnEnable()
@@ -62,8 +69,13 @@ public class TextEditorManager : MonoBehaviour
         _leftBtn = root.Q<Button>("Left");
         _centerBtn = root.Q<Button>("Center");
         _rightBtn = root.Q<Button>("Right");
+        _fontDropdown = root.Q<DropdownField>("Font");
         _sizeDropdown = root.Q<DropdownField>("Size");
-
+        _styleDropdown = root.Q<DropdownField>("Styles");
+        _bulletBtn = root.Q<Button>("Bullet");
+        _numberBtn = root.Q<Button>("Numbering");
+        _spaceBeforeToggle = root.Q<Toggle>("SpaceBefore");
+        _spaceAfterToggle = root.Q<Toggle>("SpaceAfter");
         var ribbonButtons = root.Query<Button>().ToList();
         foreach (var btn in ribbonButtons)
         {
@@ -121,9 +133,15 @@ public class TextEditorManager : MonoBehaviour
 
     private void SetupRibbon()
     {
+        if (_bulletBtn != null) _bulletBtn.clicked += ToggleBullet;
+        if (_numberBtn != null) _numberBtn.clicked += ToggleNumber;
+
         if (_leftBtn != null) _leftBtn.clicked += () => ApplyAlignment(TextAnchor.UpperLeft);
         if (_centerBtn != null) _centerBtn.clicked += () => ApplyAlignment(TextAnchor.UpperCenter);
         if (_rightBtn != null) _rightBtn.clicked += () => ApplyAlignment(TextAnchor.UpperRight);
+
+        _spaceBeforeToggle.RegisterValueChangedCallback(evt => ApplySpacing(evt.newValue, true));
+        _spaceAfterToggle.RegisterValueChangedCallback(evt => ApplySpacing(evt.newValue, false));
         
         // Toggles use ValueChanged callbacks in UI Toolkit
         if (_boldToggle != null) 
@@ -142,6 +160,11 @@ public class TextEditorManager : MonoBehaviour
                     RestoreFocusAndCursor();
                 }
             });
+        }
+
+        if (_styleDropdown != null)
+        {
+            _styleDropdown.RegisterValueChangedCallback(evt => ApplyStyle(evt.newValue));
         }
     }
     
@@ -174,6 +197,24 @@ public class TextEditorManager : MonoBehaviour
         SetButtonActiveState(_leftBtn, align == TextAnchor.UpperLeft || align == TextAnchor.MiddleLeft || align == TextAnchor.LowerLeft);
         SetButtonActiveState(_centerBtn, align == TextAnchor.UpperCenter || align == TextAnchor.MiddleCenter || align == TextAnchor.LowerCenter);
         SetButtonActiveState(_rightBtn, align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight);
+
+        if (_styleDropdown != null)
+        {
+            if (_activeBlock.ClassListContains("format-title")) _styleDropdown.SetValueWithoutNotify("Title");
+            else if (_activeBlock.ClassListContains("format-subtitle")) _styleDropdown.SetValueWithoutNotify("Subtitle");
+            else if (_activeBlock.ClassListContains("format-h1")) _styleDropdown.SetValueWithoutNotify("Heading 1");
+            else if (_activeBlock.ClassListContains("format-h2")) _styleDropdown.SetValueWithoutNotify("Heading 2");
+            else if (_activeBlock.ClassListContains("format-h3")) _styleDropdown.SetValueWithoutNotify("Heading 3");
+            else if (_activeBlock.ClassListContains("format-h4")) _styleDropdown.SetValueWithoutNotify("Heading 4");
+            else if (_activeBlock.ClassListContains("format-h5")) _styleDropdown.SetValueWithoutNotify("Heading 5");
+            else _styleDropdown.SetValueWithoutNotify("Normal Text");
+        }
+
+        if (_activeBlock.style.marginTop == 12) _spaceBeforeToggle.AddToClassList("space-active");
+        else _spaceBeforeToggle.RemoveFromClassList("space-active");
+
+        if (_activeBlock.style.marginBottom == 12) _spaceAfterToggle.AddToClassList("space-active");
+        else _spaceAfterToggle.RemoveFromClassList("space-active");
     }
 
     // Changed from Toggle to VisualElement so Buttons and Toggles can both use this
@@ -218,34 +259,30 @@ public class TextEditorManager : MonoBehaviour
 
             int currentIndex = _documentPage.IndexOf(currentBlock);
             int cursorPos = Mathf.Max(0, currentBlock.cursorIndex);
-
             string currentText = currentBlock.value;
+            
+            // --- NEW LIST LOGIC ---
+            string nextPrefix = "";
+            if (currentText.StartsWith("• ")) 
+            {
+                nextPrefix = "• ";
+            }
+            else if (System.Text.RegularExpressions.Regex.IsMatch(currentText, @"^\d+\.\s")) 
+            {
+                var match = System.Text.RegularExpressions.Regex.Match(currentText, @"^(\d+)\.\s");
+                int nextNum = int.Parse(match.Groups[1].Value) + 1;
+                nextPrefix = $"{nextNum}. ";
+            }
+            // ----------------------
+
             currentBlock.value = currentText.Substring(0, cursorPos);
             
-            TextField newBlock = CreateBlock(currentIndex + 1, currentText.Substring(cursorPos));
-            
+            // Inject the prefix into the new block
+            TextField newBlock = CreateBlock(currentIndex + 1, nextPrefix + currentText.Substring(cursorPos));
             CopyBlockStyles(currentBlock, newBlock);
-        }
-        else if (evt.keyCode == KeyCode.Backspace && currentBlock.cursorIndex == 0)
-        {
-            int currentIndex = _documentPage.IndexOf(currentBlock);
             
-            if (currentIndex > 0)
-            {
-                evt.StopPropagation();
-                evt.PreventDefault();
-
-                var prevBlock = _documentPage.ElementAt(currentIndex - 1) as TextField;
-                int prevTextLength = prevBlock.value.Length;
-                prevBlock.value += currentBlock.value;
-                _documentPage.Remove(currentBlock);
-                
-                prevBlock.schedule.Execute(() =>
-                {
-                    prevBlock.Focus();
-                    prevBlock.SelectRange(prevTextLength, prevTextLength);
-                });
-            }
+            // Keep the indent if it's a list
+            if (nextPrefix != "") newBlock.style.paddingLeft = 20;
         }
     }
 
@@ -331,5 +368,89 @@ public class TextEditorManager : MonoBehaviour
             UpdateRibbonState();
             RestoreFocusAndCursor();
         }
+    }
+
+    private void ToggleBullet()
+    {
+        if (_activeBlock == null) return;
+        bool isAlreadyBullet = _activeBlock.value.StartsWith("• ");
+        ApplyListFormat(!isAlreadyBullet, false);
+    }
+
+    private void ToggleNumber()
+    {
+        if (_activeBlock == null) return;
+        bool isAlreadyNumber = System.Text.RegularExpressions.Regex.IsMatch(_activeBlock.value, @"^\d+\.\s");
+        ApplyListFormat(!isAlreadyNumber, true);
+    }
+
+    private void ApplyListFormat(bool apply, bool isNumbered)
+    {
+        if (_activeBlock == null) return;
+
+        if (apply)
+        {
+            _activeBlock.style.paddingLeft = 20; // Add indent
+
+            string cleanText = System.Text.RegularExpressions.Regex.Replace(_activeBlock.value, @"^(• |\d+\.\s)", "");
+            
+            string prefix = isNumbered ? "1. " : "• ";
+            _activeBlock.value = prefix + cleanText;
+            
+            // If it's not already formatted, inject the prefix
+            if (!_activeBlock.value.StartsWith("•") && !System.Text.RegularExpressions.Regex.IsMatch(_activeBlock.value, @"^\d+\.\s"))
+            {
+                _activeBlock.value = prefix + _activeBlock.value;
+            }
+        }
+        else
+        {
+            // Turn it off: Remove indent and strip the prefix
+            _activeBlock.style.paddingLeft = 0; 
+            _activeBlock.value = System.Text.RegularExpressions.Regex.Replace(_activeBlock.value, @"^(• |\d+\.\s)", "");
+        }
+        
+        UpdateRibbonState();
+        RestoreFocusAndCursor();
+    }
+
+    private void ApplyStyle(string styleName)
+    {
+        if (_activeBlock == null) return;
+
+        // 1. Scrub ALL possible style classes first
+        string[] allStyles = { "format-normal", "format-title", "format-subtitle", 
+                               "format-h1", "format-h2", "format-h3", "format-h4", "format-h5" };
+        
+        foreach (var style in allStyles) 
+            _activeBlock.RemoveFromClassList(style);
+
+        // 2. Apply the specific class based on selection
+        switch (styleName)
+        {
+            case "Title": _activeBlock.AddToClassList("format-title"); break;
+            case "Subtitle": _activeBlock.AddToClassList("format-subtitle"); break;
+            case "Heading 1": _activeBlock.AddToClassList("format-h1"); break;
+            case "Heading 2": _activeBlock.AddToClassList("format-h2"); break;
+            case "Heading 3": _activeBlock.AddToClassList("format-h3"); break;
+            case "Heading 4": _activeBlock.AddToClassList("format-h4"); break;
+            case "Heading 5": _activeBlock.AddToClassList("format-h5"); break;
+            default: _activeBlock.AddToClassList("format-normal"); break;
+        }
+
+        UpdateRibbonState();
+        RestoreFocusAndCursor();
+    }
+
+    private void ApplySpacing(bool addSpace, bool isTop)
+    {
+        if (_activeBlock == null) return;
+
+        float amount = addSpace ? 12 : 0;
+
+        if (isTop) _activeBlock.style.marginTop = amount;
+        else _activeBlock.style.marginBottom = amount;
+
+        RestoreFocusAndCursor();
     }
 }
