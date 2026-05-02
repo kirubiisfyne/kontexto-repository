@@ -20,9 +20,9 @@
         <ui:VisualElement name="Ribbon" class="editor-ribbon editor-toolbar" style="flex-direction: row; border-bottom-width: 2px; justify-content: flex-start; height: 256px; padding-left: 8px; padding-right: 8px; width: 100%;">
             <ui:VisualElement name="ClipboardSection" class="editor-ribbon__section" style="flex-grow: 0; flex-direction: row; width: 212px; height: 64px;">
                 <ui:VisualElement name="Clipboard" style="flex-grow: 0; flex-direction: row; padding-left: 0; padding-right: 0; margin-right: 4px; margin-left: 4px;">
-                    <ui:Button text="" name="Paste" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/PasteIcon.svg?fileID=7388822144124034973&amp;guid=fba86977068324789a7e5d6b1b3eb769&amp;type=3#PasteIcon&quot;); background-size: 14px 14px;"/>
-                    <ui:Button text="" name="Cut" class="editor-button" style="background-size: 14px 14px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CutIcon.svg?fileID=7388822144124034973&amp;guid=8693bf324a36e407bb5a7070e70b43b0&amp;type=3#CutIcon&quot;);"/>
-                    <ui:Button text="" name="Copy" class="editor-button" style="background-size: 14px 14px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CopyIcon.svg?fileID=7388822144124034973&amp;guid=6dd83f44fbc594cbbaec585ce31056e8&amp;type=3#CopyIcon&quot;);"/>
+                    <ui:Button text="" name="Paste" tooltip="Paste (Ctrl + V)" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/PasteIcon.svg?fileID=7388822144124034973&amp;guid=fba86977068324789a7e5d6b1b3eb769&amp;type=3#PasteIcon&quot;); background-size: 14px 14px;"/>
+                    <ui:Button text="" name="Cut" tooltip="Cut (Ctrl + V)" class="editor-button" style="background-size: 14px 14px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CutIcon.svg?fileID=7388822144124034973&amp;guid=8693bf324a36e407bb5a7070e70b43b0&amp;type=3#CutIcon&quot;);"/>
+                    <ui:Button text="" name="Copy" tooltip="Copy (Ctrl + C)" class="editor-button" style="background-size: 14px 14px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CopyIcon.svg?fileID=7388822144124034973&amp;guid=6dd83f44fbc594cbbaec585ce31056e8&amp;type=3#CopyIcon&quot;);"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="History" style="flex-grow: 0; flex-direction: row; padding-left: 0; padding-right: 0; margin-left: 4px; margin-right: 4px;">
                     <ui:Button text="" name="Undo" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/UndoIcon.svg?fileID=7388822144124034973&amp;guid=34145df129b7f4d07bcd7315bbfe5099&amp;type=3#UndoIcon&quot;); background-size: 14px 14px;"/>
@@ -64,7 +64,7 @@
         </ui:VisualElement>
         <ui:ScrollView name="Content" class="editor-viewport" style="background-color: rgb(128, 128, 128); flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80);">
             <ui:VisualElement name="Document" style="flex-grow: 1; width: 1080px; flex-shrink: 0; align-self: center; height: 1337px; background-color: rgb(212, 212, 212); margin-top: 128px; margin-bottom: 128px; padding-top: 96px; padding-left: 96px; padding-right: 96px; padding-bottom: 96px;">
-                <ui:VisualElement name="MarqueeBox" id="marquee-box" />
+                <ui:VisualElement name="MarqueeBox" id="marquee-box"/>
             </ui:VisualElement>
         </ui:ScrollView>
         <ui:VisualElement name="Footer" class="editor-footer editor-toolbar" style="border-top-width: 2px; border-bottom-width: 2px; height: 96px; padding-left: 8px; padding-right: 8px;">

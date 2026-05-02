@@ -24,6 +24,9 @@ public class TextEditorManager : MonoBehaviour
     private DropdownField _styleDropdown;
     private Button _bulletBtn;
     private Button _numberBtn;
+    private Button _cutBtn;
+    private Button _copyBtn;
+    private Button _pasteBtn;
     private FormatDataLoader _taskController;
 
     private System.Collections.Generic.List<TextField> _selectedBlocks = new System.Collections.Generic.List<TextField>();
@@ -43,6 +46,7 @@ public class TextEditorManager : MonoBehaviour
         CacheUIReferences(root);
         SetupRibbon();
         SetupTabs();
+        SetupClipboard();
 
         _documentPage.RegisterCallback<PointerDownEvent>(OnPointerDown, TrickleDown.TrickleDown);
         _documentPage.RegisterCallback<PointerMoveEvent>(OnPointerMove, TrickleDown.TrickleDown);
@@ -224,6 +228,9 @@ public class TextEditorManager : MonoBehaviour
         _styleDropdown = root.Q<DropdownField>("Styles");
         _bulletBtn = root.Q<Button>("Bullet");
         _numberBtn = root.Q<Button>("Numbering");
+        _cutBtn = root.Q<Button>("Cut");
+        _copyBtn = root.Q<Button>("Copy");
+        _pasteBtn = root.Q<Button>("Paste");
         _spaceBeforeToggle = root.Q<Toggle>("SpaceBefore");
         _spaceAfterToggle = root.Q<Toggle>("SpaceAfter");
         var ribbonButtons = root.Query<Button>().ToList();
@@ -415,6 +422,44 @@ public class TextEditorManager : MonoBehaviour
 
     private void OnKeyDown(KeyDownEvent evt, TextField currentBlock)
     {
+        // --- NEW MULTI-BLOCK DELETION ---
+        if (_selectedBlocks.Count > 0 && (evt.keyCode == KeyCode.Backspace || evt.keyCode == KeyCode.Delete))
+        {
+            evt.StopPropagation();
+            evt.PreventDefault();
+
+            var blocksToDelete = _selectedBlocks.OrderBy(b => _documentPage.IndexOf(b)).ToList();
+            int firstIndex = _documentPage.IndexOf(blocksToDelete[0]);
+
+            foreach (var block in blocksToDelete)
+            {
+                _documentPage.Remove(block);
+            }
+
+            ClearSelection();
+
+            if (_documentPage.childCount == 0)
+            {
+                _activeBlock = CreateBlock(0, "");
+            }
+            else
+            {
+                // Focus the block that shifted into the first deleted index, or the last remaining block
+                int focusIndex = Mathf.Clamp(firstIndex, 0, _documentPage.childCount - 1);
+                _activeBlock = _documentPage[focusIndex] as TextField;
+                
+                if (_activeBlock != null)
+                {
+                    _activeBlock.Focus();
+                    // Place cursor at the start of the block that took the selection's place
+                    _activeBlock.SelectRange(0, 0);
+                }
+            }
+
+            UpdateRibbonState();
+            return;
+        }
+
         if (evt.keyCode == KeyCode.Return || evt.keyCode == KeyCode.KeypadEnter)
         {
             evt.StopPropagation(); 
@@ -731,4 +776,87 @@ public class TextEditorManager : MonoBehaviour
 
         RestoreFocusAndCursor();
     }
+
+    private void SetupClipboard()
+    {
+        if (_copyBtn != null) _copyBtn.clicked += PerformCopy;
+        if (_cutBtn != null) _cutBtn.clicked += PerformCut;
+        if (_pasteBtn != null) _pasteBtn.clicked += PerformPaste;
     }
+
+    private void PerformCopy()
+    {
+        var blocks = GetAffectedBlocks().ToList();
+        if (blocks.Count == 0) return;
+
+        string combinedText = string.Join("\n", blocks.Select(b => b.value));
+        GUIUtility.systemCopyBuffer = combinedText;
+    }
+
+    private void PerformCut()
+    {
+        var blocks = GetAffectedBlocks().ToList();
+        if (blocks.Count == 0) return;
+
+        PerformCopy();
+
+        int firstIndex = _documentPage.IndexOf(blocks[0]);
+        
+        // If multiple blocks are selected, remove all but the first one and clear it
+        if (blocks.Count > 1)
+        {
+            for (int i = 1; i < blocks.Count; i++)
+            {
+                _documentPage.Remove(blocks[i]);
+            }
+        }
+        
+        blocks[0].value = "";
+        blocks[0].Focus();
+        _activeBlock = blocks[0];
+        ClearSelection();
+        UpdateRibbonState();
+    }
+
+    private void PerformPaste()
+    {
+        string clipboardText = GUIUtility.systemCopyBuffer;
+        if (string.IsNullOrEmpty(clipboardText) || _activeBlock == null) return;
+
+        string[] lines = clipboardText.Split(new[] { "\r\n", "\r", "\n" }, System.StringSplitOptions.None);
+        if (lines.Length == 0) return;
+
+        int currentIndex = _documentPage.IndexOf(_activeBlock);
+        int cursorLoc = _activeBlock.cursorIndex;
+        string currentVal = _activeBlock.value ?? "";
+
+        string prefix = currentVal.Substring(0, Mathf.Clamp(cursorLoc, 0, currentVal.Length));
+        string suffix = currentVal.Substring(Mathf.Clamp(cursorLoc, 0, currentVal.Length));
+
+        // Line 1: Merges into the active block
+        _activeBlock.value = prefix + lines[0];
+        
+        TextField lastTarget = _activeBlock;
+
+        // Subsequent lines: Create new blocks
+        if (lines.Length > 1)
+        {
+            for (int i = 1; i < lines.Length; i++)
+            {
+                lastTarget = CreateBlock(currentIndex + i, lines[i]);
+                CopyBlockStyles(_activeBlock, lastTarget);
+            }
+        }
+
+        // Append the original suffix to the very last block affected by the paste
+        lastTarget.value += suffix;
+        
+        // Focus the last block at the end of the pasted content
+        lastTarget.Focus();
+        int finalCursorPos = lastTarget.value.Length - suffix.Length;
+        lastTarget.SelectRange(finalCursorPos, finalCursorPos);
+        _activeBlock = lastTarget;
+
+        UpdateRibbonState();
+    }
+}
