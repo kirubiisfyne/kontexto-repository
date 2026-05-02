@@ -63,7 +63,9 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:ScrollView name="Content" class="editor-viewport" style="background-color: rgb(128, 128, 128); flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80);">
-            <ui:VisualElement name="Document" style="flex-grow: 1; width: 1080px; flex-shrink: 0; align-self: center; height: 1337px; background-color: rgb(212, 212, 212); margin-top: 128px; margin-bottom: 128px; padding-top: 96px; padding-left: 96px; padding-right: 96px; padding-bottom: 96px;"/>
+            <ui:VisualElement name="Document" style="flex-grow: 1; width: 1080px; flex-shrink: 0; align-self: center; height: 1337px; background-color: rgb(212, 212, 212); margin-top: 128px; margin-bottom: 128px; padding-top: 96px; padding-left: 96px; padding-right: 96px; padding-bottom: 96px;">
+                <ui:VisualElement name="MarqueeBox" id="marquee-box" />
+            </ui:VisualElement>
         </ui:ScrollView>
         <ui:VisualElement name="Footer" class="editor-footer editor-toolbar" style="border-top-width: 2px; border-bottom-width: 2px; height: 96px; padding-left: 8px; padding-right: 8px;">
             <ui:Label text="Page 1 of 1" name="Page" class="editor-footer__text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
