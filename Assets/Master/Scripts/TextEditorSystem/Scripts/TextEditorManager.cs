@@ -229,14 +229,15 @@ public class TextEditorManager : MonoBehaviour
         TextField newBlock = new TextField();
         newBlock.multiline = true;
         newBlock.value = initialText;
+        newBlock.selectAllOnFocus = false;
+        newBlock.selectAllOnMouseUp = false;
         newBlock.AddToClassList("editor-block");
 
-        newBlock.RegisterCallback<FocusInEvent>(evt => 
+        newBlock.RegisterCallback<FocusInEvent>(evt =>
         {
             _activeBlock = newBlock;
             newBlock.schedule.Execute(UpdateRibbonState);
         });
-
         newBlock.RegisterCallback<KeyDownEvent, TextField>(OnKeyDown, newBlock, TrickleDown.TrickleDown);
 
         _documentPage.Insert(index, newBlock);
@@ -283,6 +284,38 @@ public class TextEditorManager : MonoBehaviour
             
             // Keep the indent if it's a list
             if (nextPrefix != "") newBlock.style.paddingLeft = 20;
+
+            // Remove the newline character that Unity's internal text field logic might append
+            currentBlock.schedule.Execute(() => {
+                currentBlock.value = currentBlock.value.TrimEnd('\n', '\r');
+            });
+        }
+        else if (evt.keyCode == KeyCode.Backspace)
+        {
+            int cursorPos = Mathf.Max(0, currentBlock.cursorIndex);
+            int selectPos = Mathf.Max(0, currentBlock.selectIndex);
+
+            if (cursorPos == 0 && selectPos == 0 && _documentPage.IndexOf(currentBlock) > 0)
+            {
+                evt.StopPropagation();
+                evt.PreventDefault();
+
+                int currentIndex = _documentPage.IndexOf(currentBlock);
+                TextField prevBlock = _documentPage[currentIndex - 1] as TextField;
+
+                if (prevBlock != null)
+                {
+                    int prevLength = prevBlock.text.Length;
+                    prevBlock.value += currentBlock.value;
+                    _documentPage.Remove(currentBlock);
+
+                    prevBlock.schedule.Execute(() =>
+                    {
+                        prevBlock.Focus();
+                        prevBlock.SelectRange(prevLength, prevLength);
+                    });
+                }
+            }
         }
     }
 
@@ -394,14 +427,28 @@ public class TextEditorManager : MonoBehaviour
 
             string cleanText = System.Text.RegularExpressions.Regex.Replace(_activeBlock.value, @"^(• |\d+\.\s)", "");
             
-            string prefix = isNumbered ? "1. " : "• ";
-            _activeBlock.value = prefix + cleanText;
-            
-            // If it's not already formatted, inject the prefix
-            if (!_activeBlock.value.StartsWith("•") && !System.Text.RegularExpressions.Regex.IsMatch(_activeBlock.value, @"^\d+\.\s"))
+            string prefix = "• ";
+            if (isNumbered)
             {
-                _activeBlock.value = prefix + _activeBlock.value;
+                int currentIndex = _documentPage.IndexOf(_activeBlock);
+                int listNumber = 1;
+
+                if (currentIndex > 0)
+                {
+                    TextField prevBlock = _documentPage[currentIndex - 1] as TextField;
+                    if (prevBlock != null)
+                    {
+                        var match = System.Text.RegularExpressions.Regex.Match(prevBlock.text, @"^(\d+)\.\s");
+                        if (match.Success)
+                        {
+                            listNumber = int.Parse(match.Groups[1].Value) + 1;
+                        }
+                    }
+                }
+                prefix = $"{listNumber}. ";
             }
+            
+            _activeBlock.value = prefix + cleanText;
         }
         else
         {

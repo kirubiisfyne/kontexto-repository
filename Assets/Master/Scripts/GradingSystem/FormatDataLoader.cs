@@ -85,8 +85,11 @@ public class FormatDataLoader : MonoBehaviour
         else
         {
             Debug.Log($"Score: {result.score}/{result.maxScore} - NEEDS REVISION.");
-            Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
-            // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
+            if (result.adviserFeedback != null && result.adviserFeedback.Count > 0)
+            {
+                Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
+                // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
+            }
         }
     }
 
