@@ -9,6 +9,7 @@ public class TextEditorManager : MonoBehaviour
     private UIDocument _doc;
     private VisualElement _documentPage;
     private TextField _activeBlock;
+    private TextField _lastHighlightedBlock;
 
     private Toggle _boldToggle;
     private Toggle _italicToggle;
@@ -93,7 +94,7 @@ public class TextEditorManager : MonoBehaviour
         if (_isSelecting)
         {
             Rect selectionRect = UpdateMarqueeBox(currentLocalPos);
-            CalculateBlockIntersections(selectionRect);
+            CalculateBlockIntersections(selectionRect, currentLocalPos);
         }
     }
 
@@ -106,6 +107,19 @@ public class TextEditorManager : MonoBehaviour
             _marqueeBox.style.display = DisplayStyle.None;
             _documentPage.ReleasePointer(evt.pointerId);
             _isSelecting = false;
+
+            // QOL: Focus the last block that was under the cursor
+            if (_lastHighlightedBlock != null)
+            {
+                _lastHighlightedBlock.Focus();
+                _activeBlock = _lastHighlightedBlock;
+                
+                // Position cursor at the end of the text for convenience
+                int endPos = _lastHighlightedBlock.value?.Length ?? 0;
+                _lastHighlightedBlock.SelectRange(endPos, endPos);
+                
+                UpdateRibbonState();
+            }
         }
     }
 
@@ -124,18 +138,32 @@ public class TextEditorManager : MonoBehaviour
         return new Rect(x, y, width, height);
     }
 
-    private void CalculateBlockIntersections(Rect marqueeRect)
+    private void CalculateBlockIntersections(Rect marqueeRect, Vector2 mousePos)
     {
+        TextField closestBlock = null;
+        float minDistance = float.MaxValue;
+
         foreach (var child in _documentPage.Children())
         {
             if (child is TextField block && block != _marqueeBox)
             {
-                if (marqueeRect.Overlaps(block.layout))
+                bool isOverlapping = marqueeRect.Overlaps(block.layout);
+
+                if (isOverlapping)
                 {
                     if (!_selectedBlocks.Contains(block))
                     {
                         _selectedBlocks.Add(block);
                         block.AddToClassList("editor-block--selected");
+                    }
+
+                    // Track the block closest to the mouse cursor (more robust for fast drags/margins)
+                    float centerY = block.layout.yMin + (block.layout.height / 2f);
+                    float dist = Mathf.Abs(mousePos.y - centerY);
+                    if (dist < minDistance)
+                    {
+                        minDistance = dist;
+                        closestBlock = block;
                     }
                 }
                 else
@@ -147,6 +175,16 @@ public class TextEditorManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        // Update the focus target to the one the user is currently "pointing" at
+        if (closestBlock != null)
+        {
+            _lastHighlightedBlock = closestBlock;
+        }
+        else if (_selectedBlocks.Count == 0)
+        {
+            _lastHighlightedBlock = null;
         }
     }
 

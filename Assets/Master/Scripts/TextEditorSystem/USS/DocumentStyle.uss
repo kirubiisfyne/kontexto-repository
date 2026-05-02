@@ -5,13 +5,13 @@
     font-size: 14px;
     align-self: flex-start;
     min-width: 20px;
-    border-left-width: 4px;
-    border-left-color: transparent;
+    padding-left: 4px;
+    border-left-width: 0;
+    --unity-selection-color: rgba(0, 0, 0, 0);
 }
 
 .editor-block--selected {
     background-color: rgba(44, 130, 201, 0.2);
-    border-left-color: #2c82c9;
 }
 
 #marquee-box {
