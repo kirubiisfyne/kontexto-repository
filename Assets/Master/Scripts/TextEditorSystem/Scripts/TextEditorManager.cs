@@ -77,18 +77,14 @@ public class TextEditorManager : MonoBehaviour
             target = target.parent;
         }
 
-        // If clicking background, manage focus
+        // If clicking background, unfocus everything
         if (evt.target == _documentPage)
         {
-            if (_activeBlock != null) RestoreFocusAndCursor();
-            else if (_documentPage.childCount > 0)
-            {
-                var lastBlock = _documentPage.ElementAt(_documentPage.childCount - 1) as TextField;
-                lastBlock?.Focus();
-            }
+            _activeBlock?.Blur();
+            _activeBlock = null;
+            ClearSelection();
+            UpdateRibbonState();
         }
-
-        ClearSelection();
     }
 
     private void OnPointerMove(PointerMoveEvent evt)
@@ -644,13 +640,6 @@ public class TextEditorManager : MonoBehaviour
             if (input != null)
             {
                 input.style.unityTextAlign = align;
-                
-                if (align == TextAnchor.UpperLeft || align == TextAnchor.MiddleLeft || align == TextAnchor.LowerLeft)
-                    block.style.alignSelf = Align.FlexStart;
-                else if (align == TextAnchor.UpperCenter || align == TextAnchor.MiddleCenter || align == TextAnchor.LowerCenter)
-                    block.style.alignSelf = Align.Center;
-                else if (align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight)
-                    block.style.alignSelf = Align.FlexEnd;
             }
         }
         UpdateRibbonState();
