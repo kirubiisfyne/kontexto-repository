@@ -395,6 +395,12 @@ public class TextEditorManager : MonoBehaviour
         SetButtonActiveState(_centerBtn, align == TextAnchor.UpperCenter || align == TextAnchor.MiddleCenter || align == TextAnchor.LowerCenter);
         SetButtonActiveState(_rightBtn, align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight);
 
+        // List Sync
+        bool isBullet = _activeBlock.value.StartsWith("• ");
+        bool isNumbered = System.Text.RegularExpressions.Regex.IsMatch(_activeBlock.value, @"^\s*\d+\.\s*");
+        SetButtonActiveState(_bulletBtn, isBullet);
+        SetButtonActiveState(_numberBtn, isNumbered);
+
         if (_styleDropdown != null)
         {
             if (_activeBlock.ClassListContains("format-title")) _styleDropdown.SetValueWithoutNotify("Title");
@@ -407,18 +413,28 @@ public class TextEditorManager : MonoBehaviour
             else _styleDropdown.SetValueWithoutNotify("Normal Text");
         }
 
-        if (_activeBlock.style.marginTop == 12) _spaceBeforeToggle.AddToClassList("space-active");
-        else _spaceBeforeToggle.RemoveFromClassList("space-active");
+        // Spacing Sync
+        bool hasSpaceBefore = _activeBlock.style.marginTop == 12;
+        bool hasSpaceAfter = _activeBlock.style.marginBottom == 12;
 
-        if (_activeBlock.style.marginBottom == 12) _spaceAfterToggle.AddToClassList("space-active");
-        else _spaceAfterToggle.RemoveFromClassList("space-active");
+        if (_spaceBeforeToggle != null)
+        {
+            _spaceBeforeToggle.SetValueWithoutNotify(hasSpaceBefore);
+            _spaceBeforeToggle.EnableInClassList("space-active", hasSpaceBefore);
+        }
+
+        if (_spaceAfterToggle != null)
+        {
+            _spaceAfterToggle.SetValueWithoutNotify(hasSpaceAfter);
+            _spaceAfterToggle.EnableInClassList("space-active", hasSpaceAfter);
+        }
     }
 
     // Changed from Toggle to VisualElement so Buttons and Toggles can both use this
     private void SetButtonActiveState(VisualElement btn, bool isActive)
     {
         if (btn == null) return;
-        btn.EnableInClassList("editor-btn--tool--active", isActive);
+        btn.EnableInClassList("editor-button--active", isActive);
     }
 
     private TextField CreateBlock(int index, string initialText)
