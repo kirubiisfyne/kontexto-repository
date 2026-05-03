@@ -32,6 +32,7 @@ public class TextEditorManager : MonoBehaviour
     private System.Collections.Generic.List<TextField> _selectedBlocks = new System.Collections.Generic.List<TextField>();
     private Vector2 _startMousePos;
     private bool _isSelecting;
+    private TextField _initialDragBlock;
     private VisualElement _marqueeBox;
     private const float DragThreshold = 8f;
 
@@ -62,6 +63,19 @@ public class TextEditorManager : MonoBehaviour
         _startMousePos = _documentPage.WorldToLocal(evt.position);
         _isSelecting = false;
 
+        // Identify the block we started on
+        _initialDragBlock = null;
+        VisualElement target = evt.target as VisualElement;
+        while (target != null && target != _documentPage)
+        {
+            if (target is TextField tf)
+            {
+                _initialDragBlock = tf;
+                break;
+            }
+            target = target.parent;
+        }
+
         // If clicking background, manage focus
         if (evt.target == _documentPage)
         {
@@ -81,18 +95,32 @@ public class TextEditorManager : MonoBehaviour
         if ((evt.pressedButtons & 1) == 0) return;
 
         Vector2 currentLocalPos = _documentPage.WorldToLocal(evt.position);
+        float dist = Vector2.Distance(_startMousePos, currentLocalPos);
+        float deltaY = Mathf.Abs(currentLocalPos.y - _startMousePos.y);
 
-        if (!_isSelecting && Vector2.Distance(_startMousePos, currentLocalPos) > DragThreshold)
+        if (!_isSelecting && dist > DragThreshold)
         {
-            if (_marqueeBox == null) return;
-            
-            _isSelecting = true;
-            
-            // UNFOCUS EVERYTHING: Stops native text selection
-            if (evt.target is VisualElement ve) ve.Blur();
-            
-            _marqueeBox.style.display = DisplayStyle.Flex;
-            _documentPage.CapturePointer(evt.pointerId);
+            bool triggerMarquee = false;
+
+            if (_initialDragBlock == null)
+            {
+                // Dragging from background always starts marquee
+                triggerMarquee = true;
+            }
+            else if (deltaY > 20f) // Threshold to distinguish text select from block select
+            {
+                // Dragging vertically starting from a block starts marquee
+                triggerMarquee = true;
+                _initialDragBlock.Blur();
+            }
+
+            if (triggerMarquee)
+            {
+                if (_marqueeBox == null) return;
+                _isSelecting = true;
+                _marqueeBox.style.display = DisplayStyle.Flex;
+                _documentPage.CapturePointer(evt.pointerId);
+            }
         }
 
         if (_isSelecting)

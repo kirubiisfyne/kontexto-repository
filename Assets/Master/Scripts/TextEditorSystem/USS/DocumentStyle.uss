@@ -7,7 +7,7 @@
     min-width: 20px;
     padding-left: 4px;
     border-left-width: 0;
-    --unity-selection-color: rgba(0, 0, 0, 0);
+    --unity-selection-color: rgba(44, 130, 201, 0.4);
 }
 
 .editor-block--selected {
