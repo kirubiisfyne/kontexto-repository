@@ -344,9 +344,13 @@ public class TextEditorManager : MonoBehaviour
         {
             _sizeDropdown.RegisterValueChangedCallback(evt => 
             {
-                if (_activeBlock != null && int.TryParse(evt.newValue, out int newSize))
+                if (int.TryParse(evt.newValue, out int newSize))
                 {
-                    _activeBlock.style.fontSize = newSize;
+                    foreach (var block in GetAffectedBlocks())
+                    {
+                        block.style.fontSize = newSize;
+                    }
+                    UpdateRibbonState();
                     RestoreFocusAndCursor();
                 }
             });
