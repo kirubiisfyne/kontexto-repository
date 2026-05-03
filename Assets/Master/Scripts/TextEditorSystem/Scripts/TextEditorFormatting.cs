@@ -169,21 +169,29 @@ namespace Master.Scripts.TextEditorSystem
 
             foreach (var block in _getAffectedBlocks())
             {
-                foreach (var style in allStyles) 
-                    block.RemoveFromClassList(style);
-
-                switch (styleName)
+                // Clear manual overrides when switching presets
+                block.style.fontSize = new StyleLength(StyleKeyword.Null);
+                var input = GetInnerInput(block);
+                if (input != null)
                 {
-                    case "Title": block.AddToClassList("format-title"); break;
-                    case "Subtitle": block.AddToClassList("format-subtitle"); break;
-                    case "Heading 1": block.AddToClassList("format-h1"); break;
-                    case "Heading 2": block.AddToClassList("format-h2"); break;
-                    case "Heading 3": block.AddToClassList("format-h3"); break;
-                    case "Heading 4": block.AddToClassList("format-h4"); break;
-                    case "Heading 5": block.AddToClassList("format-h5"); break;
-                    default: block.AddToClassList("format-normal"); break;
+                    input.style.unityFontStyleAndWeight = new StyleEnum<FontStyle>(StyleKeyword.Null);
                 }
-            }
+foreach (var style in allStyles) 
+    block.RemoveFromClassList(style);
+
+switch (styleName)
+{
+    case "Title": block.AddToClassList("format-title"); break;
+    case "Subtitle": block.AddToClassList("format-subtitle"); break;
+    case "Heading 1": block.AddToClassList("format-h1"); break;
+    case "Heading 2": block.AddToClassList("format-h2"); break;
+    case "Heading 3": block.AddToClassList("format-h3"); break;
+    case "Heading 4": block.AddToClassList("format-h4"); break;
+    case "Heading 5": block.AddToClassList("format-h5"); break;
+    default: block.AddToClassList("format-normal"); break;
+}
+}
+
 
             _updateRibbonState?.Invoke();
             _restoreFocus?.Invoke();

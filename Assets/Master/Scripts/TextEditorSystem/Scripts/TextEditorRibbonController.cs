@@ -133,10 +133,8 @@ namespace Master.Scripts.TextEditorSystem
             SetButtonActiveState(_rightBtn, align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight);
 
             string val = targetBlock.value ?? "";
-            bool isBullet = val.StartsWith("• ");
-            bool isNumbered = System.Text.RegularExpressions.Regex.IsMatch(val, @"^\s*\d+\.\s*");
-            SetButtonActiveState(_bulletBtn, isBullet);
-            SetButtonActiveState(_numberBtn, isNumbered);
+            SetButtonActiveState(_bulletBtn, val.StartsWith("• "));
+            SetButtonActiveState(_numberBtn, System.Text.RegularExpressions.Regex.IsMatch(val, @"^\s*\d+\.\s*"));
 
             if (_styleDropdown != null)
             {
@@ -152,18 +150,8 @@ namespace Master.Scripts.TextEditorSystem
 
             bool hasSpaceBefore = targetBlock.style.marginTop == 12;
             bool hasSpaceAfter = targetBlock.style.marginBottom == 12;
-
-            if (_spaceBeforeToggle != null)
-            {
-                _spaceBeforeToggle.SetValueWithoutNotify(hasSpaceBefore);
-                _spaceBeforeToggle.EnableInClassList("space-active", hasSpaceBefore);
-            }
-
-            if (_spaceAfterToggle != null)
-            {
-                _spaceAfterToggle.SetValueWithoutNotify(hasSpaceAfter);
-                _spaceAfterToggle.EnableInClassList("space-active", hasSpaceAfter);
-            }
+            if (_spaceBeforeToggle != null) _spaceBeforeToggle.SetValueWithoutNotify(hasSpaceBefore);
+            if (_spaceAfterToggle != null) _spaceAfterToggle.SetValueWithoutNotify(hasSpaceAfter);
         }
 
         private void SetButtonActiveState(VisualElement btn, bool isActive)

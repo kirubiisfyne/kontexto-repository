@@ -85,24 +85,26 @@ namespace Master.Scripts.TextEditorSystem
         }
 
         public void LoadLevel(DocumentData currentDocument) => _blockManager.LoadLevel(currentDocument);
-
-        private void SetupRibbon()
-        {
-            _ribbonController.SetupRibbon(
-                _formatting.ToggleBullet,
-                _formatting.ToggleNumber,
-                _formatting.ApplyAlignment,
-                _formatting.ApplySpacing,
-                _formatting.ToggleBold,
-                _formatting.ToggleItalic,
-                (newSize) => {
-                    foreach (var block in GetAffectedBlocks()) block.style.fontSize = newSize;
-                    UpdateRibbonState();
-                    RestoreFocusAndCursor();
-                },
-                _formatting.ApplyStyle
-            );
-        }
+private void SetupRibbon()
+{
+    _ribbonController.SetupRibbon(
+        _formatting.ToggleBullet,
+        _formatting.ToggleNumber,
+        _formatting.ApplyAlignment,
+        _formatting.ApplySpacing,
+        _formatting.ToggleBold,
+        _formatting.ToggleItalic,
+        (newSize) => {
+            foreach (var block in GetAffectedBlocks())
+            {
+                block.style.fontSize = newSize;
+            }
+            // Removed UpdateRibbonState to prevent engine-lag overwrite
+            RestoreFocusAndCursor();
+        },
+        _formatting.ApplyStyle
+    );
+}
 
         private void SetupClipboard()
         {
@@ -128,11 +130,7 @@ namespace Master.Scripts.TextEditorSystem
         private void UpdateRibbonState()
         {
             var targetBlock = GetAffectedBlocks().FirstOrDefault();
-            if (targetBlock != null)
-            {
-                // Defer to next frame so resolvedStyle has time to update
-                targetBlock.schedule.Execute(() => _ribbonController.UpdateRibbonState(targetBlock));
-            }
+            _ribbonController.UpdateRibbonState(targetBlock);
         }
 
         private void RestoreFocusAndCursor()
