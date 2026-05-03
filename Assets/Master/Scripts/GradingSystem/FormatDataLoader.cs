@@ -1,5 +1,6 @@
 using Master.Scripts;
 using Master.Scripts.GradingSystem;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -56,7 +57,7 @@ public class FormatDataLoader : MonoBehaviour
         if (jsonToLoad != null)
         {
             // 2. Parse it
-            convertedDocumentData = JsonUtility.FromJson<DocumentData>(jsonToLoad.text);
+            convertedDocumentData = JsonConvert.DeserializeObject<DocumentData>(jsonToLoad.text);
             Debug.Log("Task Controller: Level Data Loaded.");
 
             // 3. Send it to the UI

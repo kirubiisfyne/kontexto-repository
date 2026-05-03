@@ -1,7 +1,7 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/TextEditorStyle.uss?fileID=7433441132597879392&amp;guid=dab8fefc2ae48434d981cd9b73428717&amp;type=3#TextEditorStyle"/>
     <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3#DocumentStyle"/>
-    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; width: 70%; height: 70%; align-self: center; top: 0;">
+    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; width: 60%; height: 60%; align-self: center; top: 256px;">
         <ui:VisualElement name="Header" class="editor-toolbar" style="flex-grow: 0; padding-top: 8px; padding-left: 8px; padding-right: 2px; padding-bottom: 8px; border-top-width: 2px; background-color: rgb(40, 133, 180); height: 96px;">
             <ui:VisualElement name="WindowName" style="flex-grow: 1; flex-direction: row;">
                 <ui:Image name="Logo" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;); height: 16px; width: 15px; -unity-background-image-tint-color: rgb(255, 255, 255);"/>
@@ -63,7 +63,7 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:ScrollView name="Content" class="editor-viewport" style="background-color: rgb(128, 128, 128); flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80);">
-            <ui:VisualElement name="Document" style="flex-grow: 1; width: 1080px; flex-shrink: 0; align-self: center; height: 1337px; background-color: rgb(212, 212, 212); margin-top: 128px; margin-bottom: 128px; padding-top: 96px; padding-left: 96px; padding-right: 96px; padding-bottom: 96px;">
+            <ui:VisualElement name="Document" style="flex-grow: 1; width: 720px; flex-shrink: 0; align-self: center; height: 1080px; background-color: rgb(212, 212, 212); margin-top: 64px; margin-bottom: 128px; padding-top: 96px; padding-left: 96px; padding-right: 96px; padding-bottom: 96px;">
                 <ui:VisualElement name="MarqueeBox" id="marquee-box"/>
             </ui:VisualElement>
         </ui:ScrollView>
