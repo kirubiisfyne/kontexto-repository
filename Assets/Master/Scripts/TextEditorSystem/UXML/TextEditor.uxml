@@ -41,17 +41,17 @@
                 </ui:Toggle>
                 <ui:Label text="Font" name="FontLabel" class="editor-ribbon__label" style="flex-shrink: 1;"/>
             </ui:VisualElement>
-            <ui:VisualElement name="ParagraphSection" class="editor-ribbon__section editor-ribbon__section--styles" style="flex-direction: row; align-items: center; width: 292px; height: 64px;">
-                <ui:ToggleButtonGroup label="" name="Alignment">
+            <ui:VisualElement name="ParagraphSection" class="editor-ribbon__section editor-ribbon__section--styles" style="flex-direction: row; align-items: center; width: 300px; height: 64px;">
+                <ui:VisualElement name="Alignment" style="flex-grow: 0; flex-direction: row; margin-left: 4px; margin-right: 4px; margin-top: 2px; margin-bottom: 2px;">
                     <ui:Button text="" name="Left" double-click-selects-word="false" tooltip="Left-Align" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/LeftAlignIcon.svg?fileID=7388822144124034973&amp;guid=f60d60ba10ff14a5da68911d6982f0f8&amp;type=3#LeftAlignIcon&quot;); background-size: 12px 12px;"/>
                     <ui:Button text="" name="Center" tooltip="Center" class="editor-button" style="background-size: 12px 12px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CenterIcon.svg?fileID=7388822144124034973&amp;guid=41c8e3b01b28849b49b90a3509e0b7a5&amp;type=3#CenterIcon&quot;);"/>
                     <ui:Button text="" name="Right" tooltip="Right-Align" class="editor-button" style="background-size: 12px 12px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/Right%20AlignIcon.svg?fileID=7388822144124034973&amp;guid=048523fb86fea4d7ebdac9102f2546e5&amp;type=3#Right AlignIcon&quot;);"/>
-                </ui:ToggleButtonGroup>
-                <ui:ToggleButtonGroup label="" name="BulletNumbering" allow-empty-selection="true" value="00" class="editor-toggle-group">
+                </ui:VisualElement>
+                <ui:VisualElement name="List" style="flex-grow: 0; flex-direction: row; margin-top: 2px; margin-bottom: 2px; margin-left: 4px; margin-right: 4px;">
                     <ui:Button text="" name="Bullet" tooltip="Bullet-Point" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/BulletIcon-2.svg?fileID=7388822144124034973&amp;guid=275c0abe2b70647ccbf5848b5f04baf8&amp;type=3#BulletIcon-2&quot;); background-size: 12px 12px;"/>
-                    <ui:Button text="" name="Numbering" tooltip="Numbering" class="editor-toggle editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/NumberingIcon-2.svg?fileID=7388822144124034973&amp;guid=2edd390d493cf4a2cafede25ca81ae6e&amp;type=3#NumberingIcon-2&quot;); background-size: 12px 14px;"/>
-                </ui:ToggleButtonGroup>
-                <ui:VisualElement name="Spacing" style="flex-grow: 0; flex-direction: row;">
+                    <ui:Button text="" name="Numbering" tooltip="Numbering" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/NumberingIcon-2.svg?fileID=7388822144124034973&amp;guid=2edd390d493cf4a2cafede25ca81ae6e&amp;type=3#NumberingIcon-2&quot;); background-size: 12px 14px;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="Spacing" style="flex-grow: 0; flex-direction: row; margin-left: 4px; margin-top: 2px; margin-bottom: 2px; margin-right: 4px;">
                     <ui:Toggle label="" name="SpaceBefore" class="editor-toggle" style="background-size: 16px 12px;"/>
                     <ui:Toggle label="" name="SpaceAfter" class="editor-toggle" style="background-size: 16px 12px;"/>
                 </ui:VisualElement>

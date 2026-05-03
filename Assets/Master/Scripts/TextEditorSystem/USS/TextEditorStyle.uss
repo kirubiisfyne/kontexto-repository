@@ -18,6 +18,10 @@
     border-right-width: 2px;
 }
 
+.editor-button--active {
+    background-color: rgb(120, 120, 120);
+}
+
 .editor-button:checked {
     background-color: rgb(120, 120, 120);
 }
@@ -81,13 +85,13 @@
 .editor-dropdown .unity-base-popup-field__arrow {
     width: 6px;
     height: 3px;
-    background-image: url("Icons/DropdownIcon.svg");
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/DropdownIcon.svg?fileID=7388822144124034973&guid=602ba9dc3c89444899102aa1bdc42941&type=3#DropdownIcon");
 }
 
 .unity-base-dropdown__checkmark {
     width: 4px;
     height: 3px;
-    background-image: url("Icons/CheckmarkIcon.svg");
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CheckmarkIcon.svg?fileID=7388822144124034973&guid=f49fcca8ec3bf47f38676b1941fdea87&type=3#CheckmarkIcon");
 }
 
 .editor-toggle {
@@ -96,6 +100,10 @@
     border-width: 2px;
     border-color: rgb(0, 0, 0);
     background-color: rgb(188, 188, 188);
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .editor-toggle:checked {
@@ -114,8 +122,18 @@
 .editor-toggle-group {
 }
 
-#SpaceBefore { background-image: url("Icons/AddBeforeIcon.svg"); }
-#SpaceAfter { background-image: url("Icons/AddAfterIcon.svg"); }
+#SpaceBefore {
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/AddBeforeIcon.svg?fileID=7388822144124034973&guid=447c6e6d33e2d469e8b1fe978e92c12d&type=3#AddBeforeIcon");
+}
 
-.space-active#SpaceBefore { background-image: url("Icons/RemoveBeforeIcon.svg"); }
-.space-active#SpaceAfter { background-image: url("Icons/RemoveAfterIcon.svg"); }
+#SpaceAfter {
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/AddAfterIcon.svg?fileID=7388822144124034973&guid=cc7d8d7e162a748ddbbc92a4ecfbb601&type=3#AddAfterIcon");
+}
+
+.space-active#SpaceBefore {
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/RemoveBeforeIcon.svg?fileID=7388822144124034973&guid=914fcad0b8d4b4ee9ac821b35c761c0a&type=3#RemoveBeforeIcon");
+}
+
+.space-active#SpaceAfter {
+    background-image: url("project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/RemoveAfterIcon.svg?fileID=7388822144124034973&guid=83f61c97917514d26b551c39cb11fa44&type=3#RemoveAfterIcon");
+}
