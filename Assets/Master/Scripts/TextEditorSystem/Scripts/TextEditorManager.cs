@@ -49,9 +49,10 @@ public class TextEditorManager : MonoBehaviour
         SetupTabs();
         SetupClipboard();
 
-        _documentPage.RegisterCallback<PointerDownEvent>(OnPointerDown, TrickleDown.TrickleDown);
-        _documentPage.RegisterCallback<PointerMoveEvent>(OnPointerMove, TrickleDown.TrickleDown);
-        _documentPage.RegisterCallback<PointerUpEvent>(OnPointerUp, TrickleDown.TrickleDown);
+        // Removed TrickleDown to let TextFields handle focus naturally first
+        _documentPage.RegisterCallback<PointerDownEvent>(OnPointerDown);
+        _documentPage.RegisterCallback<PointerMoveEvent>(OnPointerMove);
+        _documentPage.RegisterCallback<PointerUpEvent>(OnPointerUp);
 
         CreateBlock(0, "");
     }
@@ -140,17 +141,12 @@ public class TextEditorManager : MonoBehaviour
             _documentPage.ReleasePointer(evt.pointerId);
             _isSelecting = false;
 
-            // QOL: Focus the last block that was under the cursor
-            if (_lastHighlightedBlock != null)
+            // If we have a selection, we typically want to clear the active single-block focus 
+            // so the user can see the group selection clearly.
+            if (_selectedBlocks.Count > 0)
             {
-                _lastHighlightedBlock.Focus();
-                _activeBlock = _lastHighlightedBlock;
-                
-                // Position cursor at the end of the text for convenience
-                int endPos = _lastHighlightedBlock.value?.Length ?? 0;
-                _lastHighlightedBlock.SelectRange(endPos, endPos);
-                
-                UpdateRibbonState();
+                _activeBlock?.Blur();
+                _activeBlock = null;
             }
         }
     }
@@ -289,7 +285,8 @@ public class TextEditorManager : MonoBehaviour
         {
             for (int i = 0; i < currentDocument.startingTextBlocks.Count; i++)
             {
-                CreateBlock(i, currentDocument.startingTextBlocks[i]);
+                // Don't focus during bulk creation to avoid "Focus Bombing"
+                CreateBlock(i, currentDocument.startingTextBlocks[i], false);
             }
         }
         else
@@ -367,9 +364,11 @@ public class TextEditorManager : MonoBehaviour
     
     private void UpdateRibbonState()
     {
-        if (_activeBlock == null) return;
+        // Use the first selected block or the active block to drive the ribbon UI
+        var targetBlock = GetAffectedBlocks().FirstOrDefault();
+        if (targetBlock == null) return;
         
-        var input = GetInnerInput(_activeBlock);
+        var input = GetInnerInput(targetBlock);
         if (input == null) return;
 
         var currentStyle = input.resolvedStyle;
@@ -396,26 +395,27 @@ public class TextEditorManager : MonoBehaviour
         SetButtonActiveState(_rightBtn, align == TextAnchor.UpperRight || align == TextAnchor.MiddleRight || align == TextAnchor.LowerRight);
 
         // List Sync
-        bool isBullet = _activeBlock.value.StartsWith("• ");
-        bool isNumbered = System.Text.RegularExpressions.Regex.IsMatch(_activeBlock.value, @"^\s*\d+\.\s*");
+        string val = targetBlock.value ?? "";
+        bool isBullet = val.StartsWith("• ");
+        bool isNumbered = System.Text.RegularExpressions.Regex.IsMatch(val, @"^\s*\d+\.\s*");
         SetButtonActiveState(_bulletBtn, isBullet);
         SetButtonActiveState(_numberBtn, isNumbered);
 
         if (_styleDropdown != null)
         {
-            if (_activeBlock.ClassListContains("format-title")) _styleDropdown.SetValueWithoutNotify("Title");
-            else if (_activeBlock.ClassListContains("format-subtitle")) _styleDropdown.SetValueWithoutNotify("Subtitle");
-            else if (_activeBlock.ClassListContains("format-h1")) _styleDropdown.SetValueWithoutNotify("Heading 1");
-            else if (_activeBlock.ClassListContains("format-h2")) _styleDropdown.SetValueWithoutNotify("Heading 2");
-            else if (_activeBlock.ClassListContains("format-h3")) _styleDropdown.SetValueWithoutNotify("Heading 3");
-            else if (_activeBlock.ClassListContains("format-h4")) _styleDropdown.SetValueWithoutNotify("Heading 4");
-            else if (_activeBlock.ClassListContains("format-h5")) _styleDropdown.SetValueWithoutNotify("Heading 5");
+            if (targetBlock.ClassListContains("format-title")) _styleDropdown.SetValueWithoutNotify("Title");
+            else if (targetBlock.ClassListContains("format-subtitle")) _styleDropdown.SetValueWithoutNotify("Subtitle");
+            else if (targetBlock.ClassListContains("format-h1")) _styleDropdown.SetValueWithoutNotify("Heading 1");
+            else if (targetBlock.ClassListContains("format-h2")) _styleDropdown.SetValueWithoutNotify("Heading 2");
+            else if (targetBlock.ClassListContains("format-h3")) _styleDropdown.SetValueWithoutNotify("Heading 3");
+            else if (targetBlock.ClassListContains("format-h4")) _styleDropdown.SetValueWithoutNotify("Heading 4");
+            else if (targetBlock.ClassListContains("format-h5")) _styleDropdown.SetValueWithoutNotify("Heading 5");
             else _styleDropdown.SetValueWithoutNotify("Normal Text");
         }
 
         // Spacing Sync
-        bool hasSpaceBefore = _activeBlock.style.marginTop == 12;
-        bool hasSpaceAfter = _activeBlock.style.marginBottom == 12;
+        bool hasSpaceBefore = targetBlock.style.marginTop == 12;
+        bool hasSpaceAfter = targetBlock.style.marginBottom == 12;
 
         if (_spaceBeforeToggle != null)
         {
@@ -437,7 +437,7 @@ public class TextEditorManager : MonoBehaviour
         btn.EnableInClassList("editor-button--active", isActive);
     }
 
-    private TextField CreateBlock(int index, string initialText)
+    private TextField CreateBlock(int index, string initialText, bool shouldFocus = true)
     {
         TextField newBlock = new TextField();
         newBlock.multiline = true;
@@ -449,17 +449,21 @@ public class TextEditorManager : MonoBehaviour
         newBlock.RegisterCallback<FocusInEvent>(evt =>
         {
             _activeBlock = newBlock;
+            ClearSelection();
             newBlock.schedule.Execute(UpdateRibbonState);
         });
         newBlock.RegisterCallback<KeyDownEvent, TextField>(OnKeyDown, newBlock, TrickleDown.TrickleDown);
 
         _documentPage.Insert(index, newBlock);
 
-        newBlock.schedule.Execute(() =>
+        if (shouldFocus)
         {
-            newBlock.Focus();
-            newBlock.SelectRange(0, 0); 
-        });
+            newBlock.schedule.Execute(() =>
+            {
+                newBlock.Focus();
+                newBlock.SelectRange(0, 0); 
+            });
+        }
 
         return newBlock;
     }
@@ -887,7 +891,8 @@ public class TextEditorManager : MonoBehaviour
         {
             for (int i = 1; i < lines.Length; i++)
             {
-                lastTarget = CreateBlock(currentIndex + i, lines[i]);
+                // Pass false to CreateBlock to avoid multiple focus requests during multi-line paste
+                lastTarget = CreateBlock(currentIndex + i, lines[i], false);
                 CopyBlockStyles(_activeBlock, lastTarget);
             }
         }
