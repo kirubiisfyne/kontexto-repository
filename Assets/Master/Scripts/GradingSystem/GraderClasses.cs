@@ -7,17 +7,24 @@ namespace Master.Scripts.GradingSystem
     public class DocumentData
     {
         public List<string> startingTextBlocks; 
-        public List<BlockRequirement> answerKey;
+        public List<Requirement> answerKey;
         public string instructionString;
     }
 
     [System.Serializable]
-    public class BlockRequirement
+    public class Requirement
     {
         public string targetTextSnippet; 
-        public int requiredSize;
-        public bool requireBold;
-        public bool requireItalic;
-        public TextAnchor requiredAlignment;
+        public string requiredStyle; 
+
+        public int? requiredSize;
+        public int? requiredListType;
+        
+        public bool? requireBold;
+        public bool? requireItalic;
+        public bool? requireSpaceBefore;
+        public bool? requireSpaceAfter;
+
+        public TextAnchor? requiredAlignment;
     }
 }

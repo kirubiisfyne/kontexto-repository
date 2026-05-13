@@ -2,16 +2,40 @@
   "startingTextBlocks": [
     "document title",
     "Here is the introduction paragraph.",
-    "And here is the conclusion."
+    "And here is the conclusion.",
+    "Add this to a bullet point list.",
+    "With this.",
+    "And this.",
+    "Number this one.",
+    "And this one."
   ],
   "answerKey": [
     {
       "targetTextSnippet": "document title",
       "requiredSize": 24,
       "requireBold": true,
-      "requireItalic": false,
       "requiredAlignment": 1
-    }
+    },
+    {
+      "targetTextSnippet": "Add this to a bullet point list.",
+      "requiredListType": 1
+    },
+    {
+      "targetTextSnippet": "With this.",
+      "requiredListType": 1
+    },
+    {
+      "targetTextSnippet": "And this.",
+      "requiredListType": 1
+    },
+    {
+      "targetTextSnippet": "Number this one.",
+      "requiredListType": 2
+    },
+    {
+      "targetTextSnippet": "And this one.",
+      "requiredListType": 2
+    } 
   ],
   "instructionString" : 
     "Modify the document title to look like a title. Bold, Center, and enlarge to Font Size 24."

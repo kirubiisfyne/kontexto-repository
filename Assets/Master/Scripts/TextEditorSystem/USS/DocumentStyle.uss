@@ -1,0 +1,57 @@
+.editor-block {
+    white-space: normal;
+    font-size: 14px;
+    width: 100%;
+    min-width: 20px;
+    margin: 0;
+    padding: 0;
+    padding-left: 4px;
+    border-width: 0;
+    --unity-selection-color: rgba(44, 130, 201, 0.4);
+}
+
+.editor-block--selected {
+    background-color: rgba(44, 130, 201, 0.2);
+}
+
+#marquee-box {
+    position: absolute;
+    background-color: rgba(44, 130, 201, 0.1);
+    border-width: 1px;
+    border-color: rgba(44, 130, 201, 0.5);
+    display: none;
+}
+
+.editor-block > .unity-text-field__input {
+    background-color: transparent;
+    border-width: 0;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+.editor-block > .unity-text-field__input:focus {
+    border-color: transparent;
+}
+
+.format-normal {
+    font-size: 14px;
+    -unity-font-style: normal;
+}
+
+.format-title {
+    font-size: 28px;
+    -unity-font-style: bold;
+}
+
+.format-subtitle { 
+    font-size: 18px; 
+    -unity-font-style: italic; 
+    color: #555555; 
+}
+
+.format-h1 { font-size: 22px; -unity-font-style: bold; }
+.format-h2 { font-size: 20px; -unity-font-style: bold; }
+.format-h3 { font-size: 18px; -unity-font-style: bold; }
+.format-h4 { font-size: 16px; -unity-font-style: bold; }
+.format-h5 { font-size: 14px; -unity-font-style: bold; }

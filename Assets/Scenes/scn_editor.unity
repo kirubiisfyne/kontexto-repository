@@ -675,6 +675,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TextEditor
       objectReference: {fileID: 0}
+    - target: {fileID: 2716886186935793846, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
+      propertyPath: sourceAsset
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: 276eae1ebbc0e4dd8b47324b18cfd487, type: 3}
     - target: {fileID: 4878167673865531349, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
