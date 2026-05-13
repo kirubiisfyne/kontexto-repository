@@ -1,5 +1,7 @@
 using Master.Scripts;
 using Master.Scripts.GradingSystem;
+using Master.Scripts.TextEditorSystem;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -56,7 +58,7 @@ public class FormatDataLoader : MonoBehaviour
         if (jsonToLoad != null)
         {
             // 2. Parse it
-            convertedDocumentData = JsonUtility.FromJson<DocumentData>(jsonToLoad.text);
+            convertedDocumentData = JsonConvert.DeserializeObject<DocumentData>(jsonToLoad.text);
             Debug.Log("Task Controller: Level Data Loaded.");
 
             // 3. Send it to the UI
@@ -85,8 +87,11 @@ public class FormatDataLoader : MonoBehaviour
         else
         {
             Debug.Log($"Score: {result.score}/{result.maxScore} - NEEDS REVISION.");
-            Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
-            // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
+            if (result.adviserFeedback != null && result.adviserFeedback.Count > 0)
+            {
+                Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
+                // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
+            }
         }
     }
 
