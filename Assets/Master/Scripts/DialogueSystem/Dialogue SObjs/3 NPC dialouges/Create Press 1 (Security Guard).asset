@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: Create Press 1 (Security Guard)
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: 8ca8ba4a6a0a148ea9c9b9d79ade1919, type: 2}
+    text: "Hold it. You\u2019re from the publication club? "
+  - speaker: {fileID: 11400000, guid: 8ca8ba4a6a0a148ea9c9b9d79ade1919, type: 2}
+    text: ' This ID looks like a piece of a messy scrap paper.'
+  - speaker: {fileID: 11400000, guid: 8ca8ba4a6a0a148ea9c9b9d79ade1919, type: 2}
+    text: Use a proper font, make the important details stand out, and center everything
+      neatly.
+  - speaker: {fileID: 11400000, guid: 8ca8ba4a6a0a148ea9c9b9d79ade1919, type: 2}
+    text: ' Come back when it actually looks like a press pass.'

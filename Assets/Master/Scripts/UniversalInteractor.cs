@@ -23,7 +23,7 @@ namespace Master.Scripts
                 return; 
             }
 
-            if (Input.GetButtonDown(interactButton))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 TryInteract();
             }
