@@ -109,8 +109,7 @@ namespace Master.Scripts.TextEditorSystem
 
             if (selectedBlocks.Count > 0 && (evt.keyCode == KeyCode.Backspace || evt.keyCode == KeyCode.Delete))
             {
-                evt.StopPropagation();
-                evt.PreventDefault();
+                evt.StopImmediatePropagation();
 
                 var blocksToDelete = selectedBlocks.OrderBy(b => _documentPage.IndexOf(b)).ToList();
                 int firstIndex = _documentPage.IndexOf(blocksToDelete[0]);
@@ -144,8 +143,7 @@ namespace Master.Scripts.TextEditorSystem
 
             if (evt.keyCode == KeyCode.Return || evt.keyCode == KeyCode.KeypadEnter)
             {
-                evt.StopPropagation(); 
-                evt.PreventDefault();  
+                evt.StopImmediatePropagation();  
 
                 int currentIndex = _documentPage.IndexOf(currentBlock);
                 int cursorPos = Mathf.Max(0, currentBlock.cursorIndex);
@@ -193,8 +191,7 @@ namespace Master.Scripts.TextEditorSystem
 
                 if (cursorPos == 0 && selectPos == 0 && _documentPage.IndexOf(currentBlock) > 0)
                 {
-                    evt.StopPropagation();
-                    evt.PreventDefault();
+                    evt.StopImmediatePropagation();
 
                     int currentIndex = _documentPage.IndexOf(currentBlock);
                     TextField prevBlock = _documentPage[currentIndex - 1] as TextField;

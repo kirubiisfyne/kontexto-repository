@@ -22,7 +22,6 @@ namespace Master.Scripts
     
         [Header("Aim")]
         [SerializeField] [Range(0, 1)] private float sensitivity = 0.2f;
-        [SerializeField] [Tooltip("To avoid camera flipping. Default: 45")] private float yAimClamp = 45f;
         private const float AimSensitivityMultiplier = 10f;
         private const float AimAngleIncrements = 180f;
     
@@ -33,9 +32,17 @@ namespace Master.Scripts
         private static readonly int XVelocityHash = Animator.StringToHash("X Velocity");
         private static readonly int YVelocityHash = Animator.StringToHash("Y Velocity");
 
-        private void Start()
+        private void Awake()
         {
             controller = GetComponent<CharacterController>();
+        }
+
+        private void Start()
+        {
+            // Initialize rotation variables to match the current scene placement
+            // to prevent the camera from "snapping" on the first mouse movement.
+            x = transform.localEulerAngles.y;
+            y = cameraAnchor.localEulerAngles.x;
         }
 
         public void SetInputActive(bool active)
@@ -115,12 +122,10 @@ namespace Master.Scripts
 
         private void HandleAim()
         {
+            // Only handle horizontal rotation for the player body.
+            // Vertical rotation (pitch) should be handled by Cinemachine's Input Axis Controller.
             x += Input.GetAxis("Mouse X") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements * Time.deltaTime);
-            y -= Input.GetAxis("Mouse Y") * (sensitivity * AimSensitivityMultiplier * AimAngleIncrements * Time.deltaTime);
-            y = Mathf.Clamp(y, (yAimClamp * -1), yAimClamp); // Clamp Y axis rotation to avoid flipping
-        
             transform.localRotation = Quaternion.Euler(0, x , 0);
-            cameraAnchor.localRotation = Quaternion.Euler(y, 0 , 0);
         }
     }
 }
