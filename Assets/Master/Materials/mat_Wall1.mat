@@ -118,6 +118,8 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
+    - _Noise_Contrast: 0.05
+    - _Noise_Scale: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -138,6 +140,7 @@ Material:
     - _Base_Color: {r: 0.7411765, g: 0.7176471, b: 0.4196079, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Detail_Color: {r: 0.397, g: 0.38439685, b: 0.22475661, a: 1}
+    - _Emission: {r: 0, g: 0, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Highlight_Color: {r: 0.29799998, g: 0.28853965, b: 0.16870898, a: 1}
     - _Offset: {r: 1, g: 1, b: 0, a: 0}

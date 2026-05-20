@@ -121,9 +121,9 @@ Material:
     - _SunSize: 0.04
     - _SunSizeConvergence: 5
     - _Surface: 0
-    - _Wind_Direction: 0.5
-    - _Wind_Speed: 2
-    - _Wind_Strenght: 0.5
+    - _Wind_Direction: 1
+    - _Wind_Speed: 0.7
+    - _Wind_Strenght: 1.2
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
