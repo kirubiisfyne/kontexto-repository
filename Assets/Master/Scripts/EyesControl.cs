@@ -30,7 +30,7 @@ public class EyesControl : MonoBehaviour
         {
             Vector3 mouseWorldCoord = ray.GetPoint(distance);
             Vector3 originToMouse = mouseWorldCoord - transform.position;
-            originToMouse = Vector3.ClampMagnitude(originToMouse, intensitys);
+            originToMouse = Vector3.ClampMagnitude(originToMouse, intensity);
 
             eyes.transform.position = Vector3.Lerp(eyes.transform.position, transform.position + originToMouse, 25 * Time.deltaTime); 
         }

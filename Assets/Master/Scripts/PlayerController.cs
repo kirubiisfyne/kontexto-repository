@@ -36,9 +36,22 @@ namespace Master.Scripts
         private void Start()
         {
             controller = GetComponent<CharacterController>();
-        
-            //Cursor.lockState = CursorLockMode.Locked;
-            //Cursor.visible = false;
+        }
+
+        public void SetInputActive(bool active)
+        {
+            this.enabled = active;
+
+            if (active)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
         }
 
         void Update()
