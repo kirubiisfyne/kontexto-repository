@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI; 
 using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
@@ -9,6 +10,19 @@ public class MainMenuController : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject menuButtonsPanel;
     [SerializeField] private GameObject optionsPanel;
+
+    [Header("Options Functionality")]
+    [SerializeField] private Toggle fullscreenToggle; // <-- Reference to your UI Toggle object
+
+    private void Start()
+    {
+        // When the game boots up, automatically make the checkbox match 
+        // whatever display state the computer is currently running in.
+        if (fullscreenToggle != null)
+        {
+            fullscreenToggle.isOn = Screen.fullScreen;
+        }
+    }
 
     public void PlayGame()
     {
@@ -28,6 +42,15 @@ public class MainMenuController : MonoBehaviour
     {
         optionsPanel.SetActive(false);      // Hide options panel
         menuButtonsPanel.SetActive(true);   // Show main buttons
+    }
+
+    /// <summary>
+    /// Swaps between Fullscreen and Windowed display modes.
+    /// </summary>
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+        Debug.Log("Fullscreen display toggled to: " + isFullscreen);
     }
 
     public void QuitGame()
