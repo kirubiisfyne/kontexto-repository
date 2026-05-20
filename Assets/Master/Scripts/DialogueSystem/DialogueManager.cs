@@ -106,7 +106,7 @@ namespace Master.Scripts.DialogueSystem
         
         private void Update()
         {
-            if (isTalking && Input.GetButtonDown("Interact")) DisplayNextLine();
+            if (isTalking && Input.GetKeyDown(KeyCode.E)) DisplayNextLine();
         }
     }
 }

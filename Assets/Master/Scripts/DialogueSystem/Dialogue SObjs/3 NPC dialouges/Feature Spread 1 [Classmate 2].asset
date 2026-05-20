@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: 'Feature Spread 1 [Classmate 2]'
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: 48b25f3593b974ddea0ee92ea5a02af2, type: 2}
+    text: 'You inserted the receipt image wrong. '
+  - speaker: {fileID: 11400000, guid: 48b25f3593b974ddea0ee92ea5a02af2, type: 2}
+    text: Look, the text is getting pushed everywhere.
+  - speaker: {fileID: 11400000, guid: 48b25f3593b974ddea0ee92ea5a02af2, type: 2}
+    text: The images need proper wrapping.
+  - speaker: {fileID: 11400000, guid: 48b25f3593b974ddea0ee92ea5a02af2, type: 2}
+    text: "Change it from \u2018In Line with Text,\u2019 resize it to fit the column,
+      then add a caption underneath."
+  - speaker: {fileID: 11400000, guid: 48b25f3593b974ddea0ee92ea5a02af2, type: 2}
+    text: A real feature article has to look organized, not chaotic.

@@ -7,6 +7,7 @@ namespace Master.Scripts.DialogueSystem
     {
         public string characterName;
         public Sprite portrait;
+        public Sprite characterImage;
         public Color nameColor = Color.white;
     }
 }
