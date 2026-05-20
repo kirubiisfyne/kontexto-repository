@@ -56,6 +56,13 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
+        // Safety Check: Ensure the background scene is actually loaded
+        if (loadOp == null || !loadOp.isDone)
+        {
+            Debug.LogWarning("PlayGame: Background scene is still loading...");
+            return; 
+        }
+
         // Find the player in the additively loaded scene and activate them
         PlayerController player = Object.FindAnyObjectByType<PlayerController>();
         if (player != null)

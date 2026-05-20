@@ -36,9 +36,9 @@ public class FormatDataLoader : MonoBehaviour
 
     private void Start()
     {
-        if (GameManager.Instance == null || GameManager.Instance.currentLevel == null)
+        if (GameManager.Instance == null)
         {
-            Debug.LogWarning("No pending level JSON found. Falling back to default.");
+            Debug.LogWarning("No GameManager instance found. Falling back to default.");
             currentLevelJson = fallbackLevelJSON;
         }
         else

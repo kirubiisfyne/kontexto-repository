@@ -62,7 +62,7 @@ namespace Master.Scripts.TextEditorSystem
 
         private void Start()
         {
-            _taskController = FindObjectOfType<FormatDataLoader>();
+            _taskController = Object.FindFirstObjectByType<FormatDataLoader>();
         }
 
         private void OnPointerDown(PointerDownEvent evt)
