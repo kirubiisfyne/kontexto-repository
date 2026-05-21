@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f8968ff7bf14a74b702a9c01b62d8b, type: 3}
+  m_Name: 'Clean Interview Log 1 [ CM 0 ]'
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.Conversation
+  lines:
+  - speaker: {fileID: 11400000, guid: 1679e79b68779416d8c176779218f1c9, type: 2}
+    text: "Whoa\u2026 "
+  - speaker: {fileID: 11400000, guid: 1679e79b68779416d8c176779218f1c9, type: 2}
+    text: "This interview file is painful to read. It\u2019s just one giant wall
+      of text."
+  - speaker: {fileID: 11400000, guid: c0a1f26ec3ac148f894240a213092493, type: 2}
+    text: Yeah...
+  - speaker: {fileID: 11400000, guid: 1679e79b68779416d8c176779218f1c9, type: 2}
+    text: Try fixing the spacing first. Separate the paragraphs, adjust the indents.
+  - speaker: {fileID: 11400000, guid: 1679e79b68779416d8c176779218f1c9, type: 2}
+    text: If the questions and answers are easier to spot, the clues might show up
+      too.
+  - speaker: {fileID: 11400000, guid: c0a1f26ec3ac148f894240a213092493, type: 2}
+    text: Sure Thing! I'll do my best!
