@@ -30,6 +30,7 @@ namespace Master.Scripts.DialogueSystem
         
         private bool isTalking;
         public static bool IsConversationActive;
+        public Animator animator;
     #endregion
     
         [HideInInspector] public HostTaskManager hostTaskManager;
@@ -78,12 +79,15 @@ namespace Master.Scripts.DialogueSystem
                 return;
             }
 
+            if (DialogueUIManager.Instance.IsAnimating) return;
+
             if (linesQueue.Count == 0)
             {
                 EndDialogue();
                 return;
             }
 
+            animator.SetTrigger("Talk");
             DialogueLine currentLine = linesQueue.Dequeue();
             DialogueUIManager.Instance.UpdateDialogueView(currentLine);
         }
@@ -106,7 +110,7 @@ namespace Master.Scripts.DialogueSystem
         
         private void Update()
         {
-            if (isTalking && Input.GetButtonDown("Interact")) DisplayNextLine();
+            if (isTalking && Input.GetKeyDown(KeyCode.E)) DisplayNextLine();
         }
     }
 }

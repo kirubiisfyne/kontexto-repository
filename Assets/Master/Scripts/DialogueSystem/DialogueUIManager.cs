@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace Master.Scripts.DialogueSystem
@@ -15,23 +16,72 @@ namespace Master.Scripts.DialogueSystem
         [SerializeField] private TMP_Text speakerNameText;
         [SerializeField] private TMP_Text dialogueText;
 
+        [FormerlySerializedAs("dialogueAnimaton")]
+        [Header("Animations")]
+        [SerializeField] private Animation dialogueAnimation;
+        [SerializeField] private float fadeDuration = 0.5f;
+
         [Header("Settings")]
         [Range(0.1f, 1.0f)] [SerializeField] private float textSpeed = 0.5f; 
 
         public bool IsTyping { get; private set; }
+        public bool IsAnimating => (dialogueAnimation != null && dialogueAnimation.isPlaying) || hideCoroutine != null;
+        
         private string currentFullText;
         private Coroutine typingCoroutine;
+        private Coroutine hideCoroutine;
 
         private void Awake()
         {
             if (Instance == null) Instance = this;
             else Destroy(gameObject);
             
-            Hide();
+            // Hide immediately without animation on start
+            dialoguePanel.SetActive(false);
         }
 
-        private void Show() => dialoguePanel.SetActive(true);
-        public void Hide() => dialoguePanel.SetActive(false);
+        private void Show()
+        {
+            if (hideCoroutine != null)
+            {
+                StopCoroutine(hideCoroutine);
+                hideCoroutine = null;
+            }
+
+            if (!dialoguePanel.activeSelf)
+            {
+                dialoguePanel.SetActive(true);
+                if (dialogueAnimation != null)
+                {
+                    dialogueAnimation.Play("anim_DialogueBoxFadeIn");
+                }
+            }
+        }
+
+        public void Hide()
+        {
+            if (gameObject.activeInHierarchy && dialoguePanel.activeSelf)
+            {
+                if (hideCoroutine != null) StopCoroutine(hideCoroutine);
+                hideCoroutine = StartCoroutine(FadeOutAndHide());
+            }
+            else
+            {
+                dialoguePanel.SetActive(false);
+            }
+        }
+
+        private IEnumerator FadeOutAndHide()
+        {
+            if (dialogueAnimation != null)
+            {
+                dialogueAnimation.Play("anim_DialogueBoxFadeOut");
+            }
+            
+            yield return new WaitForSeconds(fadeDuration);
+            dialoguePanel.SetActive(false);
+            hideCoroutine = null;
+        }
 
         public void UpdateDialogueView(DialogueLine line)
         {
@@ -43,6 +93,12 @@ namespace Master.Scripts.DialogueSystem
                 speakerNameText.color = line.speaker.nameColor;
                 speakerPortrait.sprite = line.speaker.portrait;
                 speakerPortrait.gameObject.SetActive(line.speaker.portrait != null);
+
+                // Trigger portrait jump animation
+                if (dialogueAnimation != null)
+                {
+                    dialogueAnimation.Play("anim_DialogueBoxCharacterJump");
+                }
             }
             else
             {
