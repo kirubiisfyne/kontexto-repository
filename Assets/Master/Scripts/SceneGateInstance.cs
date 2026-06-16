@@ -1,4 +1,3 @@
-using Master.Scripts.TaskSystem;
 using UnityEngine;
 
 namespace Master.Scripts
@@ -11,7 +10,7 @@ namespace Master.Scripts
 
         public bool canPlayerWarp = true;
         private bool isPlayerInRange = false;
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -28,7 +27,7 @@ namespace Master.Scripts
             }
         }
 
-        public void Interact(ClientTaskManager clientTaskManager)
+        public void Interact()
         {
             if (isPlayerInRange && canPlayerWarp)
             {

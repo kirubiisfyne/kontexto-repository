@@ -1,0 +1,39 @@
+{
+  "conversationMap": [
+    {
+      "name": "Giver_Start",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Hello there! You look like you're looking for something to do."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I need to get a message to Sekyu over at the campus gate, but I'm stuck here."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Could you please go find them and let them know I'm ready for the meeting?"
+        }
+      ]
+    },
+    {
+      "name": "Giver_Waiting",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Have you found Sekyu yet? They should be near the main entrance."
+        }
+      ]
+    },
+    {
+      "name": "Giver_Completed",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "I heard from Sekyu! Thanks for delivering that message for me."
+        }
+      ]
+    }
+  ]
+}
