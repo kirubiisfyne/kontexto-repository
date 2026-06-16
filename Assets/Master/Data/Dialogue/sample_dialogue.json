@@ -1,0 +1,30 @@
+{
+  "conversationMap": [
+    {
+      "name": "Main Feature (Inactive)",
+      "lines": [
+        {
+          "speaker": "Protagonist",
+          "text": "Is everything ready for the publication?"
+        },
+        {
+          "speaker": "Editor",
+          "text": "Almost. We just need to finalize the layout for the main feature."
+        }
+      ]
+    },
+    {
+      "name": "Main Feature (Active)",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Hi!"
+        },
+        {
+          "speaker": "Teacher",
+          "text": "Hello!"
+        }
+      ]
+    }
+  ]
+}
