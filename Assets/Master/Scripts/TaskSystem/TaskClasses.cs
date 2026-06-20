@@ -47,6 +47,7 @@ namespace Master.Scripts.TaskSystem
     public enum HostType
     {
         Giver,
-        Closer
+        Closer,
+        Both
     }
 }

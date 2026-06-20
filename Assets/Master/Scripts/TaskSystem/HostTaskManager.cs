@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -43,7 +44,7 @@ namespace Master.Scripts.TaskSystem
         public List<int> currentProgress;
 
         [Header("Events")]
-        [Tooltip("Per-status events. Expand to assign callbacks for Inactive, Active, and Completed states.")]
+        [Tooltip("Per-status events. Expand to assign callbacks for Inactive, Active, ReadyToComplete, and Completed states.")]
         public TaskEvents events;
 
         private void Awake()
@@ -65,9 +66,26 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
+            // Both: defers the state change by one frame so DialogueManager.Interact()
+            // can snapshot the correct conversation index before status (and index) changes.
+            if (hostType == HostType.Both)
+            {
+                StartCoroutine(DeferredBothInteract());
+                return;
+            }
+
             // Givers only start the task.
             if (status == TaskStatus.Inactive)
                 StartTask();
+        }
+
+        private IEnumerator DeferredBothInteract()
+        {
+            // Wait one frame so DialogueManager.Interact() snapshots the correct
+            // conversation index before StartTask() / CompleteTask() change the status.
+            yield return null;
+            if (status == TaskStatus.Inactive)             StartTask();
+            else if (status == TaskStatus.ReadyToComplete) CompleteTask();
         }
 
         private void StartTask()
@@ -112,6 +130,8 @@ namespace Master.Scripts.TaskSystem
         /// </summary>
         public bool ReportProgress(string key, int amount)
         {
+            // Closers and Both defer progress reporting to the Giver.
+            // Both is its own Giver, so it handles reports directly — no delegation needed.
             if (hostType == HostType.Closer)
             {
                 var giver = FindGiver();
@@ -192,6 +212,8 @@ namespace Master.Scripts.TaskSystem
         /// </summary>
         public void CompleteTask()
         {
+            // Closers delegate to their Giver.
+            // Both is its own Giver, so it completes itself directly — no delegation needed.
             if (hostType == HostType.Closer)
             {
                 var giver = FindGiver();
@@ -233,8 +255,8 @@ namespace Master.Scripts.TaskSystem
             }
             Debug.Log($"{gameObject.name}: Task status changed to {newStatus}.");
 
-            // If we are a giver, push this status to all our closers
-            if (hostType == HostType.Giver)
+            // Givers and Both push status to all linked Closers (if any).
+            if (hostType == HostType.Giver || hostType == HostType.Both)
             {
                 foreach (var closer in linkedClosers)
                 {
