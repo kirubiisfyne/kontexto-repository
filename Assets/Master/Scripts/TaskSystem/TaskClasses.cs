@@ -13,6 +13,10 @@ namespace Master.Scripts.TaskSystem
         public string taskName;
         [TextArea] public string description;
 
+        [Header("Settings")]
+        [Tooltip("If true, objectives must be completed in the exact order they appear in the list below.")]
+        public bool needsSequentialOrder = true;
+
         [Header("Requirements")]
         public List<ObjectiveData> objectives;
     }
@@ -35,6 +39,7 @@ namespace Master.Scripts.TaskSystem
     {
         Inactive,
         Active,
+        ReadyToComplete,
         Completed
     }
 
