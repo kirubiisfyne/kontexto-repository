@@ -95,7 +95,18 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 12. Summary of Technical Rationale (Revised)
+## 12. Milestone: `HostType.Both` — Dialogue Snapshot Race Condition Fix
+**Actions**: Fixed a timing bug where `Both` NPCs caused `DialogueManager` to snapshot the wrong conversation index on first interaction.
+*   **The Bug**: `UniversalInteractor` calls `Interact()` on all `IInteractable` components in `GetComponents` order. If `HostTaskManager` was listed before `DialogueManager`, `StartTask()` fired first — changing the dialogue index via `onActive` — before `DialogueManager.Interact()` had a chance to snapshot the current index. Result: the NPC's intro dialogue was skipped and it jumped straight to the Active line.
+*   **Attempted Fix (Rejected)**: Delegating `StartTask()` / `CompleteTask()` entirely to `DialogueEventExtension.onEnd` wiring in the Inspector.
+    *   *Why Rejected*: Required re-wiring all existing Giver/Closer task templates to use the extension, creating unnecessary setup overhead and breaking established workflows.
+*   **Decision Made**: **Deferred Coroutine** (`DeferredBothInteract()`).
+    *   *Why*: `Interact()` on a `Both` host now launches a coroutine and returns immediately. The coroutine waits one frame (`yield return null`), then calls `StartTask()` or `CompleteTask()`. By the time the coroutine resumes, `DialogueManager.Interact()` has already executed its synchronous snapshot in the same frame — guaranteeing the correct index is captured. Zero changes to existing Giver/Closer templates.
+*   **Concurrent Task Safety**: Verified that running multiple tasks simultaneously works correctly. Each `HostTaskManager` is a fully self-contained state machine with isolated `currentProgress` and `TaskData`. `KeyItemInstance` targets a specific `HostTaskManager` by reference, so there is no cross-task contamination.
+
+---
+
+## 13. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.

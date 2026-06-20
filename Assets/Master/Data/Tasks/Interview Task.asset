@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
   taskName: Interview Witnesess
   description: Interview witnesess about an incident.
-  needsSequentialOrder: 1
+  needsSequentialOrder: 0
   objectives:
   - key: Student
     requiredAmount: 1
   - key: Skater
-    requiredAmount: 0
+    requiredAmount: 1
