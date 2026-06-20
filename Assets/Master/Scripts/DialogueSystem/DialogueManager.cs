@@ -13,6 +13,16 @@ namespace Master.Scripts.DialogueSystem
         public static DialogueManager LastInteracted;
         public static bool IsConversationActive;
 
+        /// <summary>
+        /// Fired when a dialogue session begins. Passes the index of the conversation being played.
+        /// </summary>
+        public event Action<int> OnConversationStarted;
+
+        /// <summary>
+        /// Fired when a dialogue session ends. Passes the index of the conversation that was played.
+        /// </summary>
+        public event Action<int> OnConversationEnded;
+
         private const string FALLBACK_JSON = "{\"conversationMap\": [{\"name\": \"Fallback\",\"lines\": [{\"speaker\": \"System\",\"text\": \"Dialogue missing. Check JSON configuration.\"}]}]}";
 
         [Header("Dialogue Content")]
@@ -23,7 +33,12 @@ namespace Master.Scripts.DialogueSystem
         [Header("Data Assets")]
         public TextAsset dialogueJson;
 
+        [Header("Playback Settings")]
+        [Tooltip("If true, updating past the last conversation loops back to the first. If false, it stays on the last conversation.")]
+        public bool loopConversations = false;
+
         private Conversation activeConversation;
+        private int lastPlayedIndex;
         private readonly Queue<DialogueLine> linesQueue = new Queue<DialogueLine>();
         private bool isTalking;
 
@@ -43,10 +58,12 @@ namespace Master.Scripts.DialogueSystem
             LastInteracted = this;
 
             // SNAPSHOT: Grab the conversation branch IMMEDIATELY.
-            // This ensures we capture the state BEFORE any other IInteractable (like Task System) changes the index.
+            // This ensures we capture the state AT THE MOMENT of interaction,
+            // preventing other scripts from skipping the story sequence.
             if (currentConversationIndex >= 0 && currentConversationIndex < conversations.Count)
             {
                 activeConversation = conversations[currentConversationIndex];
+                lastPlayedIndex = currentConversationIndex;
             }
 
             StartCoroutine(StartDialogueRoutine());
@@ -58,7 +75,19 @@ namespace Master.Scripts.DialogueSystem
         public void UpdateIndex()
         {
             if (conversations.Count > 0)
-                currentConversationIndex = (currentConversationIndex + 1) % conversations.Count;
+            {
+                if (currentConversationIndex < conversations.Count - 1)
+                {
+                    // Move to the next index safely
+                    currentConversationIndex++;
+                }
+                else if (loopConversations)
+                {
+                    // We are at the end, and looping is enabled
+                    currentConversationIndex = 0;
+                }
+                // If we are at the end and looping is FALSE, do nothing (stops at the last index)
+            }
         }
 
         public static void GlobalUpdateIndex()
@@ -77,11 +106,17 @@ namespace Master.Scripts.DialogueSystem
 
         private IEnumerator StartDialogueRoutine()
         {
-            // Fallback check: if the snapshot is invalid, use hardcoded fallback
+            // 1. Broadcast the START event. 
+            // Note: Since we snapped the index in Interact(), extensions firing here 
+            // will update the index for NEXT time, but won't affect this talk session.
+            OnConversationStarted?.Invoke(lastPlayedIndex);
+
+            // 2. Fallback check: if the snapshot taken in Interact() is invalid, use hardcoded fallback
             if (IsConversationEmpty(activeConversation))
             {
                 var map = JsonUtility.FromJson<ConversationMap>(FALLBACK_JSON);
                 activeConversation = map.conversationMap[0];
+                lastPlayedIndex = -1; // Fallback doesn't count for indexed events
             }
 
             IsConversationActive = true;
@@ -90,7 +125,6 @@ namespace Master.Scripts.DialogueSystem
             foreach (var line in activeConversation.lines)
                 linesQueue.Enqueue(line);
 
-            // Wait one frame to avoid capturing the same 'E' press for line skipping
             yield return null; 
             
             isTalking = true;
@@ -118,8 +152,18 @@ namespace Master.Scripts.DialogueSystem
         private void EndDialogue()
         {
             isTalking = false;
-            IsConversationActive = false;
             DialogueUIManager.Instance.Hide();
+            
+            // Broadcast the end of this conversation session
+            OnConversationEnded?.Invoke(lastPlayedIndex);
+            
+            StartCoroutine(ResetInteractionFlag());
+        }
+
+        private IEnumerator ResetInteractionFlag()
+        {
+            yield return new WaitForEndOfFrame();
+            IsConversationActive = false;
         }
 
         #endregion
@@ -135,7 +179,6 @@ namespace Master.Scripts.DialogueSystem
                 var map = JsonUtility.FromJson<ConversationMap>(jsonContent);
                 if (map?.conversationMap == null) return;
 
-                // Overwrite list with JSON content
                 conversations = new List<Conversation>(map.conversationMap);
                 
                 if (conversations.Count > 0)
