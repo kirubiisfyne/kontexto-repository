@@ -1,29 +1,23 @@
-using System;
 using UnityEngine;
 using Master.Scripts.DialogueSystem;
-using Master.Scripts.TaskSystem;
 
 namespace Master.Scripts
 {
+    /// <summary>
+    /// Simple interactor that finds the nearest GameObject with IInteractable components and triggers all of them.
+    /// </summary>
     public class UniversalInteractor : MonoBehaviour
     {
-        [Header("Interaction Settings")]
+        [Header("Settings")]
         public float interactRange = 3f;
-        public string interactButton = "Interact";
-        
-        [Tooltip("Optional: Only interact with specific layers to save performance.")]
         public LayerMask interactableLayer = ~0;
-        
-        public ClientTaskManager clientTaskManager;
-        
+
         private void Update()
         {
-            if (DialogueManager.IsConversationActive) 
-            {
-                return; 
-            }
+            // Prevent interaction if a dialogue is currently active
+            if (DialogueManager.IsConversationActive) return;
 
-            if (Input.GetButtonDown(interactButton))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 TryInteract();
             }
@@ -31,35 +25,32 @@ namespace Master.Scripts
 
         private void TryInteract()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(
-                transform.position, 
-                interactRange, 
-                interactableLayer, 
-                QueryTriggerInteraction.Collide 
-            );
-
-            IInteractable closestInteractable = null;
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactRange, interactableLayer);
+            GameObject closestObject = null;
             float closestDistance = float.MaxValue;
 
+            // Find the closest GameObject that has at least one IInteractable component
             foreach (var hit in hitColliders)
             {
-                IInteractable interactable = hit.GetComponent<IInteractable>();
-                
-                if (interactable != null)
+                if (hit.GetComponent<IInteractable>() != null)
                 {
                     float distance = Vector3.Distance(transform.position, hit.transform.position);
-                    
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestInteractable = interactable;
+                        closestObject = hit.gameObject;
                     }
                 }
             }
 
-            if (closestInteractable != null)
+            // Trigger all IInteractable components on the closest object
+            if (closestObject != null)
             {
-                closestInteractable.Interact(clientTaskManager);
+                IInteractable[] interactables = closestObject.GetComponents<IInteractable>();
+                foreach (var interactable in interactables)
+                {
+                    interactable.Interact();
+                }
             }
         }
 

@@ -1,17 +1,18 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Master.Scripts.DialogueSystem
 {
+    /// <summary>
+    /// Handles the visual representation of the dialogue on the UI.
+    /// </summary>
     public class DialogueUIManager : MonoBehaviour
     {
         public static DialogueUIManager Instance;
 
         [Header("UI Components")]
         [SerializeField] private GameObject dialoguePanel;
-        [SerializeField] private Image speakerPortrait;
         [SerializeField] private TMP_Text speakerNameText;
         [SerializeField] private TMP_Text dialogueText;
 
@@ -19,6 +20,7 @@ namespace Master.Scripts.DialogueSystem
         [Range(0.1f, 1.0f)] [SerializeField] private float textSpeed = 0.5f; 
 
         public bool IsTyping { get; private set; }
+        
         private string currentFullText;
         private Coroutine typingCoroutine;
 
@@ -27,42 +29,34 @@ namespace Master.Scripts.DialogueSystem
             if (Instance == null) Instance = this;
             else Destroy(gameObject);
             
-            Hide();
+            dialoguePanel.SetActive(false);
         }
 
-        private void Show() => dialoguePanel.SetActive(true);
+        public void Show() => dialoguePanel.SetActive(true);
         public void Hide() => dialoguePanel.SetActive(false);
 
+        /// <summary>
+        /// Updates the UI with new dialogue content.
+        /// </summary>
         public void UpdateDialogueView(DialogueLine line)
         {
             Show(); 
 
-            if (line.speaker != null)
-            {
-                speakerNameText.text = line.speaker.characterName;
-                speakerNameText.color = line.speaker.nameColor;
-                speakerPortrait.sprite = line.speaker.portrait;
-                speakerPortrait.gameObject.SetActive(line.speaker.portrait != null);
-            }
-            else
-            {
-                speakerNameText.text = "";
-                speakerPortrait.gameObject.SetActive(false);
-            }
+            speakerNameText.text = !string.IsNullOrEmpty(line.speaker) ? line.speaker : "";
 
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
             typingCoroutine = StartCoroutine(TypeSentence(line.text));
         }
 
-        IEnumerator TypeSentence(string sentence)
+        private IEnumerator TypeSentence(string sentence)
         {
             IsTyping = true;
             currentFullText = sentence;
             dialogueText.maxVisibleCharacters = 0;
+            dialogueText.text = sentence;
 
             float waitTime = 0.02f / textSpeed;
             
-            dialogueText.text = sentence;
             foreach (char letter in sentence)
             {
                 dialogueText.maxVisibleCharacters++;
@@ -72,11 +66,13 @@ namespace Master.Scripts.DialogueSystem
             IsTyping = false;
         }
 
+        /// <summary>
+        /// Immediately shows the full text if currently typing.
+        /// </summary>
         public void FinishTyping()
         {
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
             dialogueText.maxVisibleCharacters = currentFullText.Length;
-            dialogueText.text = currentFullText;
             IsTyping = false;
         }
     }
