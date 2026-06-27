@@ -106,7 +106,28 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 14. Milestone: Level Loader & Save System
+## 14. Milestone: Dialogue Event Extension — Global Events
+**Actions**: Added index-agnostic `onAnyStart` and `onAnyEnd` events to `DialogueEventExtension.cs`.
+*   **Decision**: Wrap global events in a `[Serializable] GlobalEvents` class.
+    *   *Why*: Mirrors the existing `IndexEvent` struct pattern. Keeps the Inspector clean with a dedicated collapsible **Global Events** foldout, clearly separated from the **Index Events** list. Designers can now wire up events that fire on *every* conversation (e.g., a universal sound effect or a UI overlay) without needing a matching index entry.
+
+---
+
+## 15. Milestone: `CameraReframer` — Inspector Polish & Bug Fixes
+**Actions**: Refactored `CameraReframer.cs` for Inspector clarity, fixed `GetBlendDuration`, and added player movement locking.
+*   **Decision**: `[Header]` and `[Tooltip]` grouping.
+    *   *Why*: Fields were flat and undocumented. Grouping into **References**, **Camera**, and **Player** sections gives designers immediate context without reading the script.
+*   **Decision**: Make `fadeCoroutine` private.
+    *   *Why*: It is a runtime handle with no meaningful Inspector value. Exposing it created noise and invited accidental null assignments.
+*   **Bug Fix**: `GetBlendDuration` always returned `2f`.
+    *   *The Bug*: `blendDef` was computed from the `CinemachineBrain` but never read — `duration` was unconditionally returned as `2f`.
+    *   *Fix*: Assign `blendDef.Time` to `duration` so the player material fade always syncs with the actual Cinemachine blend time.
+*   **Decision**: Player movement lock via `SetInputActive`.
+    *   *Why*: When `StartNPCFocus()` is called, the player should not be able to move or aim. `PlayerController.SetInputActive(false)` already handles movement, aim, and cursor state — `CameraReframer` now calls it directly, with `playerController` auto-resolved in `Awake` via the `PlayerBody` tag. `EndNPCFocus` restores input.
+
+---
+
+## 16. Milestone: Level Loader & Save System
 **Actions**: Created a scene-local `LevelLoader`, `LevelData` ScriptableObject, `SaveManager` utility, and fleshed out `PlayerData`.
 *   **Decision**: **Scene-local `LevelLoader`** instead of a Singleton.
     *   *Why*: A scene-local script auto-fires in `Awake()` during async scene load — prefabs are instantiated before `SceneGateManager` resumes its coroutine, giving correct ordering for free. Zero changes to existing managers. Matches the "dumb systems" philosophy: the loader doesn't know about warping or transitions.
@@ -125,7 +146,7 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 15. Summary of Technical Rationale (Revised)
+## 17. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.
