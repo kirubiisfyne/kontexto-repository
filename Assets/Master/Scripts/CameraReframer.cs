@@ -45,7 +45,7 @@ namespace Master.Scripts
             float blendDuration = GetBlendDuration(NPCCamera);
 
             if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
-            fadeCoroutine = StartCoroutine(FadePlayerMaterial(0.2f, blendDuration));
+            fadeCoroutine = StartCoroutine(FadePlayerMaterial(0.1f, blendDuration));
 
             if (rotateCoroutine != null) StopCoroutine(rotateCoroutine);
             if (playerController != null  && NPCLookAt)

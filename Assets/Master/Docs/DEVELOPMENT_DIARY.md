@@ -143,6 +143,8 @@ This diary documents the architectural evolution of the project, the major decis
     *   *Why*: Prefabs can't hold Inspector references to scene objects. `LevelLoader` adds the save listener after instantiation — invisible to designers, zero manual wiring needed.
 *   **Decision**: **Two-condition level completion** (`AreAllTasksCompleted()` + explicit `CompleteLevel()` call).
     *   *Why*: Level is only marked complete when all tasks are done AND `CompleteLevel()` is explicitly called (after the outro cutscene). Prevents premature completion.
+*   **Decision**: **Explicit `Retire()` for Key Items on restore**.
+    *   *Why*: When `LevelLoader` restores a completed task, bypassing `Interact()` prevents false progress reports to the `HostTaskManager`. Instead, the loader explicitly calls a new `Retire()` method on all associated `KeyItemInstance` scripts. This ensures Interview NPCs update their dialogue and physical items are destroyed properly on scene load.
 
 ---
 
