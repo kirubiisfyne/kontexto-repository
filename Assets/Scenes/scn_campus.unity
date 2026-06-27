@@ -48270,7 +48270,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 0}
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
-  NPCCamera: {fileID: 0}
+  NPCCamera: {fileID: 363929966}
   playerController: {fileID: 0}
 --- !u!1001 &426226751
 PrefabInstance:
@@ -105271,7 +105271,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 0}
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
-  NPCCamera: {fileID: 0}
+  NPCCamera: {fileID: 799670656}
   playerController: {fileID: 0}
 --- !u!4 &905208599 stripped
 Transform:
@@ -142030,7 +142030,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 0}
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
-  NPCCamera: {fileID: 0}
+  NPCCamera: {fileID: 1073153916}
   playerController: {fileID: 0}
 --- !u!1001 &1238288593
 PrefabInstance:
@@ -156591,7 +156591,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 0}
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
-  NPCCamera: {fileID: 0}
+  NPCCamera: {fileID: 1076449266}
   playerController: {fileID: 0}
 --- !u!4 &1364885942 stripped
 Transform:
@@ -201983,7 +201983,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 0}
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
-  NPCCamera: {fileID: 0}
+  NPCCamera: {fileID: 676298432}
   playerController: {fileID: 0}
 --- !u!4 &1744274868 stripped
 Transform:
@@ -224669,34 +224669,10 @@ MonoBehaviour:
   globalEvents:
     onAnyStart:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1944251298}
-          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
-          m_MethodName: StartNPCFocus
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
     onAnyEnd:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1944251298}
-          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
-          m_MethodName: EndNPCFocus
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
   indexEvents:
   - name: Give Parcel
     index: 0
@@ -231203,7 +231179,7 @@ MonoBehaviour:
   playerMaterial: {fileID: 0}
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
-  NPCCamera: {fileID: 0}
+  NPCCamera: {fileID: 1813914806}
   playerController: {fileID: 0}
 --- !u!1001 &2000503359
 PrefabInstance:
