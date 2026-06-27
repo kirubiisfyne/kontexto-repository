@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_baseMale
-  m_Shader: {fileID: -6465566751694194690, guid: d69eeefd478a243879171c1a19fccd88, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 1b258520fd5764ccebb21be24139d4c9, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -46,6 +46,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha_Clip_Threshold: 0
+    - _Opacity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _USE_CUSTOM_BASE: 1

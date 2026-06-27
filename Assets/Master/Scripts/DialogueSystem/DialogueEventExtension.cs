@@ -20,7 +20,23 @@ namespace Master.Scripts.DialogueSystem
             public UnityEvent onEnd;
         }
 
-        [Header("Event Configuration")]
+        /// <summary>
+        /// Events that fire on every conversation, regardless of index.
+        /// </summary>
+        [System.Serializable]
+        public class GlobalEvents
+        {
+            [Tooltip("Fires every time any conversation starts.")]
+            public UnityEvent onAnyStart;
+            [Tooltip("Fires every time any conversation ends.")]
+            public UnityEvent onAnyEnd;
+        }
+
+        [Header("Global Events")]
+        [Tooltip("These events fire on every conversation start/end, regardless of dialogue index.")]
+        public GlobalEvents globalEvents = new GlobalEvents();
+
+        [Header("Index Events")]
         [Tooltip("Assign UnityEvents to fire when a specific dialogue index starts or finishes.")]
         public List<IndexEvent> indexEvents = new List<IndexEvent>();
 
@@ -46,6 +62,9 @@ namespace Master.Scripts.DialogueSystem
 
         private void HandleConversationStarted(int playedIndex)
         {
+            // Fire global start event for any index
+            globalEvents.onAnyStart?.Invoke();
+
             // Find any events mapped to the index that just started
             foreach (var item in indexEvents)
             {
@@ -59,6 +78,9 @@ namespace Master.Scripts.DialogueSystem
 
         private void HandleConversationEnded(int playedIndex)
         {
+            // Fire global end event for any index
+            globalEvents.onAnyEnd?.Invoke();
+
             // Find any events mapped to the index that just finished
             foreach (var item in indexEvents)
             {
