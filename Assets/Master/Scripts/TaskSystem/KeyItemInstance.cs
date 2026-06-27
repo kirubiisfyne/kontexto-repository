@@ -43,23 +43,32 @@ namespace Master.Scripts.TaskSystem
 
             if (wasAccepted)
             {
-                // Fire custom events (SFX, Index updates, etc.)
-                onAcceptedReport?.Invoke();
+                Retire();
+            }
+        }
 
-                // Sync local dialogue if it is an NPC acting as an item
-                if (updateLocalIndex)
-                {
-                    GetComponent<DialogueManager>()?.UpdateIndex();
-                }
+        /// <summary>
+        /// Forcibly retires the item (fires events, updates dialogue, destroys object).
+        /// Used by LevelLoader to clean up the scene when restoring completed tasks.
+        /// </summary>
+        public void Retire()
+        {
+            // Fire custom events (SFX, Index updates, etc.)
+            onAcceptedReport?.Invoke();
 
-                if (destroyOnInteract)
-                {
-                    gameObject.SetActive(false); 
-                }
-                else
-                {
-                    this.enabled = false;
-                }
+            // Sync local dialogue if it is an NPC acting as an item
+            if (updateLocalIndex)
+            {
+                GetComponent<DialogueManager>()?.UpdateIndex();
+            }
+
+            if (destroyOnInteract)
+            {
+                gameObject.SetActive(false); 
+            }
+            else
+            {
+                this.enabled = false;
             }
         }
     }

@@ -58,6 +58,14 @@ namespace Master.Scripts
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+
+                // Reset animation state so the player doesn't stay frozen
+                // in a run/walk pose after input is locked out.
+                if (animator != null)
+                {
+                    animator.SetFloat(XVelocityHash, 0f);
+                    animator.SetFloat(YVelocityHash, 0f);
+                }
             }
         }
 

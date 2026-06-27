@@ -10,6 +10,8 @@ namespace Master.Scripts.TaskSystem
     public class TaskData : ScriptableObject
     {
         [Header("Information")]
+        [Tooltip("Unique, stable identifier for save/load. Set once, never rename.")]
+        public string taskId;
         public string taskName;
         [TextArea] public string description;
 
