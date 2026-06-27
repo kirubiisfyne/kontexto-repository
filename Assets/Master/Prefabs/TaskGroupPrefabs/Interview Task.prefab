@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5967041463963319312}
   - component: {fileID: 6447644275216563059}
   - component: {fileID: 990111117209110155}
+  - component: {fileID: 6306981361202879148}
   m_Layer: 7
   m_Name: Skater
   m_TagString: Untagged
@@ -34,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 841438071642437886}
+  - {fileID: 1781546758567795159}
   m_Father: {fileID: 1320827616552623144}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!136 &478394789114055256
@@ -87,6 +89,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59083b2d1287b43478b951012dbde39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.DialogueEventExtension
+  globalEvents:
+    onAnyStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6306981361202879148}
+          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
+          m_MethodName: StartNPCFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onAnyEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6306981361202879148}
+          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
+          m_MethodName: EndNPCFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   indexEvents:
   - name: 
     index: 1
@@ -140,6 +173,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &6306981361202879148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904314541687205645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774acb87bdcd433691215f9c4dbe462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.CameraReframer
+  playerMaterial: {fileID: 0}
+  cinemachineBrain: {fileID: 0}
+  NPCLookAt: 1
+  NPCCamera: {fileID: 1410992372409816795}
+  playerController: {fileID: 0}
 --- !u!1 &2925067419594883752
 GameObject:
   m_ObjectHideFlags: 0
@@ -153,6 +203,7 @@ GameObject:
   - component: {fileID: 6790838242907443892}
   - component: {fileID: 2138975770907925544}
   - component: {fileID: 3572926343026824800}
+  - component: {fileID: 8015017508933103878}
   m_Layer: 7
   m_Name: Student
   m_TagString: Untagged
@@ -174,6 +225,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3787336050356592352}
+  - {fileID: 2304144312163341569}
   m_Father: {fileID: 1320827616552623144}
   m_LocalEulerAnglesHint: {x: 0, y: 165, z: 0}
 --- !u!136 &3244689061011698760
@@ -227,6 +279,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59083b2d1287b43478b951012dbde39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.DialogueEventExtension
+  globalEvents:
+    onAnyStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8015017508933103878}
+          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
+          m_MethodName: StartNPCFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onAnyEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8015017508933103878}
+          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
+          m_MethodName: EndNPCFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   indexEvents:
   - name: 
     index: 1
@@ -280,6 +363,23 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8015017508933103878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2925067419594883752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774acb87bdcd433691215f9c4dbe462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.CameraReframer
+  playerMaterial: {fileID: 0}
+  cinemachineBrain: {fileID: 0}
+  NPCLookAt: 1
+  NPCCamera: {fileID: 8765063659084861061}
+  playerController: {fileID: 0}
 --- !u!1 &3979524350758013489
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +414,231 @@ Transform:
   - {fileID: 6135454251241945046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4206156390405538327
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6908475680371959540}
+  - component: {fileID: 1388877407938784481}
+  m_Layer: 7
+  m_Name: CinemachineCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6908475680371959540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206156390405538327}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6693920011797862176}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1388877407938784481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4206156390405538327}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 120
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!1 &5983008184035776161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1781546758567795159}
+  - component: {fileID: 1410992372409816795}
+  m_Layer: 7
+  m_Name: CinemachineCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1781546758567795159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983008184035776161}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6135454251241945046}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &1410992372409816795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5983008184035776161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 120
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!1 &8464862638961553556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2304144312163341569}
+  - component: {fileID: 8765063659084861061}
+  m_Layer: 7
+  m_Name: CinemachineCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2304144312163341569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464862638961553556}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8539963653513671904}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &8765063659084861061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464862638961553556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 60.000004
+    OrthographicSize: 5
+    NearClipPlane: 0.3
+    FarClipPlane: 120
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!1 &8762416221936858464
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,6 +652,7 @@ GameObject:
   - component: {fileID: 1076965211385011918}
   - component: {fileID: 7338651378838748402}
   - component: {fileID: 667063846037480448}
+  - component: {fileID: 750879034053349836}
   m_Layer: 7
   m_Name: Reporter
   m_TagString: Untagged
@@ -348,6 +674,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6788358862765109088}
+  - {fileID: 6908475680371959540}
   m_Father: {fileID: 1320827616552623144}
   m_LocalEulerAnglesHint: {x: 0, y: -150, z: 0}
 --- !u!136 &4755539634375732979
@@ -470,6 +797,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59083b2d1287b43478b951012dbde39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.DialogueEventExtension
+  globalEvents:
+    onAnyStart:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 750879034053349836}
+          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
+          m_MethodName: StartNPCFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onAnyEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 750879034053349836}
+          m_TargetAssemblyTypeName: Master.Scripts.CameraReframer, Assembly-CSharp
+          m_MethodName: EndNPCFocus
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   indexEvents:
   - name: 
     index: 0
@@ -524,6 +882,23 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &750879034053349836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8762416221936858464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3774acb87bdcd433691215f9c4dbe462, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.CameraReframer
+  playerMaterial: {fileID: 0}
+  cinemachineBrain: {fileID: 0}
+  NPCLookAt: 1
+  NPCCamera: {fileID: 1388877407938784481}
+  playerController: {fileID: 0}
 --- !u!1001 &875908391950737173
 PrefabInstance:
   m_ObjectHideFlags: 0

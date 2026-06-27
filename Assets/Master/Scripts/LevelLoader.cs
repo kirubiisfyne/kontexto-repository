@@ -73,8 +73,9 @@ namespace Master.Scripts
                     );
                 }
 
-                // 3. Gather all Giver/Both managers in this prefab tree
+                // 3. Gather all Giver/Both managers and key items in this prefab tree
                 var managers = instance.GetComponentsInChildren<HostTaskManager>();
+                var keyItems = instance.GetComponentsInChildren<KeyItemInstance>();
 
                 foreach (var mgr in managers)
                 {
@@ -98,6 +99,15 @@ namespace Master.Scripts
                         if (playerData.IsTaskCompleted(sceneId, mgr.task.taskId))
                         {
                             RestoreCompletedTask(mgr);
+
+                            // Retire all key items that belong to this completed task
+                            foreach (var item in keyItems)
+                            {
+                                if (item.targetGiver == mgr)
+                                {
+                                    item.Retire();
+                                }
+                            }
                         }
                         else
                         {
