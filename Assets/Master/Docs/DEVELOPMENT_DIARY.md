@@ -106,7 +106,26 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 13. Summary of Technical Rationale (Revised)
+## 14. Milestone: Level Loader & Save System
+**Actions**: Created a scene-local `LevelLoader`, `LevelData` ScriptableObject, `SaveManager` utility, and fleshed out `PlayerData`.
+*   **Decision**: **Scene-local `LevelLoader`** instead of a Singleton.
+    *   *Why*: A scene-local script auto-fires in `Awake()` during async scene load — prefabs are instantiated before `SceneGateManager` resumes its coroutine, giving correct ordering for free. Zero changes to existing managers. Matches the "dumb systems" philosophy: the loader doesn't know about warping or transitions.
+*   **Decision**: **`LevelData` ScriptableObject** per scene.
+    *   *Why*: Designers create one asset per gameplay scene, populate it with task-group prefab entries (prefab + position + optional `usePrefabTransform` toggle). Visual, inspectable, and self-documenting.
+*   **Decision**: **Full status chain replay** on restore (`Active → ReadyToComplete → Completed`).
+    *   *Why*: Completed tasks are still spawned (not skipped), then driven through every status transition. This fires all intermediate Inspector-wired events in order (e.g., `onActive` sets dialogue index to 1, `onCompleted` sets it to 2), ensuring NPCs land on the correct post-completion dialogue.
+*   **Decision**: **`taskId` on `TaskData`** as the save key.
+    *   *Why*: Separate from the display `taskName`, which designers may rename. A stable identifier prevents save-file mismatches.
+*   **Decision**: **Static `SaveManager`** for JSON I/O.
+    *   *Why*: Pure functions, no MonoBehaviour lifecycle. Writes immediately on every task completion to `Application.persistentDataPath`.
+*   **Decision**: **Code-subscribed `onCompleted` listener** for auto-saving.
+    *   *Why*: Prefabs can't hold Inspector references to scene objects. `LevelLoader` adds the save listener after instantiation — invisible to designers, zero manual wiring needed.
+*   **Decision**: **Two-condition level completion** (`AreAllTasksCompleted()` + explicit `CompleteLevel()` call).
+    *   *Why*: Level is only marked complete when all tasks are done AND `CompleteLevel()` is explicitly called (after the outro cutscene). Prevents premature completion.
+
+---
+
+## 15. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.
@@ -114,3 +133,5 @@ By moving to a "Dumb" system model, we've ensured that a bug in the Task System 
 ### Designer-Centric Workflow
 The connection between tasks and narrative is now visible and configurable in the Unity Inspector. This empowers non-technical team members to "program" game flow through event linking and playback toggles, reducing the bottleneck on engineering.
 
+### Persistence & Level Loading
+Task and level completion is tracked via local JSON at `Application.persistentDataPath`. On scene load, `LevelLoader` spawns all task prefabs and fast-forwards completed ones through the full status chain, restoring NPC dialogue to its correct post-completion state automatically.

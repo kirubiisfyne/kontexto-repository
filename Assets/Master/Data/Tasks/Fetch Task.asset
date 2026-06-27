@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cac908a1ea1e54d81a85a7acc29e0406, type: 3}
   m_Name: Fetch Task
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
+  taskId: d0_fetchKeys
   taskName: Fetch the Porfessor's Keys
   description: Seach the Proffesor's keys and fetch them to the Assistant.
   needsSequentialOrder: 1
