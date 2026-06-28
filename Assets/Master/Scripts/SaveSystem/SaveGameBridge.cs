@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Master.Scripts
+namespace Master.Scripts.SaveSystem
 {
     /// <summary>
     /// Lightweight bridge for prefab-based UI (pause menu, HUD, etc.).

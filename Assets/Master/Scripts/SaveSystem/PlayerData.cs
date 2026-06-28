@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Master.Scripts
+namespace Master.Scripts.SaveSystem
 {
     /// <summary>
     /// Tracks per-level progress: which tasks were completed and whether the level itself is done.
