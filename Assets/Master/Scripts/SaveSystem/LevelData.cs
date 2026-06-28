@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Master.Scripts
+namespace Master.Scripts.SaveSystem
 {
     /// <summary>
     /// Defines what to spawn when entering a gameplay scene.

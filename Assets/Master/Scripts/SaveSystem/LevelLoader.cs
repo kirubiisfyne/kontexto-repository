@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Master.Scripts.TaskSystem;
 using UnityEngine;
 
-namespace Master.Scripts
+namespace Master.Scripts.SaveSystem
 {
     /// <summary>
     /// Scene-local loader. Reads a LevelData asset, instantiates task prefabs,

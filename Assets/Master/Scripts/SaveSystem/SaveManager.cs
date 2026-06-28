@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.IO;
 
-namespace Master.Scripts
+namespace Master.Scripts.SaveSystem
 {
     /// <summary>
     /// Static utility for reading/writing PlayerData to a local JSON file.
