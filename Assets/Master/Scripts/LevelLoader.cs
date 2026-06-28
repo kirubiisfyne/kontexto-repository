@@ -126,6 +126,9 @@ namespace Master.Scripts
             {
                 Debug.Log($"LevelLoader: All tasks in '{sceneId}' are already COMPLETED (restored from save). Ready for level completion.");
             }
+
+            // Restore player position if save belongs to this scene
+            RestorePlayerPosition();
         }
 
         /// <summary>
@@ -165,7 +168,7 @@ namespace Master.Scripts
             if (!level.completedTaskIds.Contains(taskId))
             {
                 level.completedTaskIds.Add(taskId);
-                SaveManager.Save(playerData);
+                SaveGame();
 
                 Debug.Log($"LevelLoader: Task '{taskId}' saved as completed.");
 
@@ -203,9 +206,78 @@ namespace Master.Scripts
 
             var level = playerData.GetOrCreateLevel(sceneId);
             level.isCompleted = true;
-            SaveManager.Save(playerData);
+            SaveGame();
 
             Debug.Log($"LevelLoader: Level '{sceneId}' marked as COMPLETE.");
+        }
+
+        // ── Public Save / Load ──
+
+        /// <summary>
+        /// Public save entry point. Wire to any UnityEvent (button, trigger, etc.).
+        /// Captures the player's current position and saves all data to disk.
+        /// </summary>
+        public void SaveGame()
+        {
+            CapturePlayerTransform();
+            playerData.currentScene = sceneId;
+            SaveManager.Save(playerData);
+
+            Debug.Log($"LevelLoader: Game saved in '{sceneId}'.");
+        }
+
+        /// <summary>
+        /// Public load entry point. Re-reads the save file and restores the player's position.
+        /// Does NOT re-spawn task prefabs (that only happens in Awake on scene load).
+        /// </summary>
+        public void LoadGame()
+        {
+            playerData = SaveManager.Load();
+
+            if (GameManager.Instance != null)
+                GameManager.Instance.currentPlayerData = playerData;
+
+            RestorePlayerPosition();
+
+            Debug.Log($"LevelLoader: Game loaded in '{sceneId}'.");
+        }
+
+        // ── Player Transform Persistence ──
+
+        /// <summary>
+        /// Snapshots the player's current world position and rotation into playerData.
+        /// </summary>
+        private void CapturePlayerTransform()
+        {
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerData.SetPlayerTransform(player.transform.position, player.transform.eulerAngles);
+            }
+        }
+
+        /// <summary>
+        /// Teleports the player to the saved position if the save belongs to this scene.
+        /// CharacterController is disabled/re-enabled to prevent physics fighting the teleport.
+        /// </summary>
+        private void RestorePlayerPosition()
+        {
+            if (playerData.currentScene != sceneId || !playerData.HasSavedPosition())
+                return;
+
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player == null) return;
+
+            var cc = player.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
+
+            var (pos, rot) = playerData.GetPlayerTransform();
+            player.transform.position = pos;
+            player.transform.eulerAngles = rot;
+
+            if (cc != null) cc.enabled = true;
+
+            Debug.Log($"LevelLoader: Restored player position to {pos} in '{sceneId}'.");
         }
 
         private void OnDestroy()

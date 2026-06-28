@@ -148,13 +148,44 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 17. Summary of Technical Rationale (Revised)
+## 18. Milestone: Player Position Persistence
+**Actions**: Extended `PlayerData` with position/rotation fields and wired `LevelLoader` to save and restore the player's transform.
+*   **Decision**: `float[]` instead of `Vector3` for serialized fields.
+    *   *Why*: `JsonUtility` serializes `Vector3` as `{"x":0,"y":0,"z":0}`, which works but is verbose. Flat `float[3]` arrays produce cleaner, more inspectable JSON (`[12.5, 0.0, -3.2]`). Conversion helpers (`SetPlayerTransform` / `GetPlayerTransform`) on `PlayerData` encapsulate the `Vector3 ↔ float[]` logic so no other script touches raw arrays.
+*   **Decision**: Save position on every **task completion** and **level completion**.
+    *   *Why*: These are the two moments `SaveManager.Save()` is already called. Piggy-backing on existing save triggers means zero new save points, zero new timing concerns. The player's position is always captured alongside the event that matters most.
+*   **Decision**: Restore position in `LevelLoader.Awake()` **after** all task prefabs are spawned.
+    *   *Why*: Task restoration fires Inspector-wired events that may move or configure the player (e.g., dialogue index changes). Restoring position last ensures the teleport is the final word on where the player stands.
+*   **Decision**: Disable `CharacterController` during teleport.
+    *   *Why*: Unity's `CharacterController` overrides `transform.position` writes if the controller is active. Briefly disabling it (`cc.enabled = false` → set position → `cc.enabled = true`) is the standard workaround and avoids physics fighting the restore.
+*   **Decision**: Guard restore on `currentScene == sceneId`.
+    *   *Why*: Prevents stale position data from a different scene being applied. If the player warps to a new scene with no save data for it, they spawn at the scene's default position (gate or placement).
+*   **Decision**: Revived the dead `currentScene` field.
+    *   *Why*: `PlayerData.currentScene` was declared but never written to. Now set on every save, it serves as the scene-position binding key and will support a future "Continue" flow from the main menu.
+
+---
+
+## 19. Milestone: Public Save/Load API & SaveGameBridge
+**Actions**: Added `SaveGame()` and `LoadGame()` public methods to `LevelLoader`, created `SaveGameBridge.cs` for prefab-based UI.
+*   **Decision**: Parameterless public methods on `LevelLoader`.
+    *   *Why*: Unity's `UnityEvent` system (buttons, triggers, dialogue events) works best with zero-parameter methods. `SaveGame()` captures position + writes to disk; `LoadGame()` re-reads from disk + restores position. Both are directly wirable from the Inspector on any scene-local reference.
+*   **Decision**: Refactor `OnTaskCompleted()` and `CompleteLevel()` to route through `SaveGame()`.
+    *   *Why*: Both methods previously duplicated the same 3-line pattern (capture transform, set `currentScene`, call `SaveManager.Save`). Routing through `SaveGame()` eliminates duplication and ensures all save paths behave identically.
+*   **Decision**: Separate `SaveGameBridge` MonoBehaviour for prefab-based UI.
+    *   *Why*: Prefabs (e.g., a pause menu prefab) cannot hold references to scene objects. `SaveGameBridge` lives on the prefab itself and routes calls through the static `LevelLoader.Current` accessor. Null-guarded with a warning log if no `LevelLoader` exists in the current scene.
+*   **Decision**: `LoadGame()` does NOT reload the scene or re-spawn task prefabs.
+    *   *Why*: Task prefab spawning is `Awake()`'s responsibility during scene load. `LoadGame()` is a lightweight mid-scene refresh — it re-reads the JSON and restores the player's position only. Full scene restoration happens naturally on the next scene load.
+
+---
+
+## 20. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.
 
 ### Designer-Centric Workflow
-The connection between tasks and narrative is now visible and configurable in the Unity Inspector. This empowers non-technical team members to "program" game flow through event linking and playback toggles, reducing the bottleneck on engineering.
+The connection between tasks and narrative is now visible and configurable in the Unity Inspector. This empowers non-technical team members to "program" game flow through event linking and playback toggles, reducing the bottleneck on engineering. Public `SaveGame()` and `LoadGame()` methods can be wired to any UnityEvent with zero code.
 
 ### Persistence & Level Loading
-Task and level completion is tracked via local JSON at `Application.persistentDataPath`. On scene load, `LevelLoader` spawns all task prefabs and fast-forwards completed ones through the full status chain, restoring NPC dialogue to its correct post-completion state automatically.
+Task completion, level completion, and player position are all tracked via local JSON at `Application.persistentDataPath`. On scene load, `LevelLoader` spawns all task prefabs, fast-forwards completed ones through the full status chain, and restores the player's last saved position — ensuring both NPC dialogue state and player placement are correct on every load.
+
