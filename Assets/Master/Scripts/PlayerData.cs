@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Master.Scripts
 {
@@ -21,16 +22,53 @@ namespace Master.Scripts
     {
         /// <summary>
         /// The scene the player should load into on "Continue".
-        /// Updated when a level is completed (set to the NEXT level).
+        /// Updated on every save so we know which scene a saved position belongs to.
         /// </summary>
         public string currentScene;
+
+        /// <summary>
+        /// Player world position (x, y, z). Stored as float[] for clean JSON output.
+        /// </summary>
+        public float[] playerPosition = new float[3];
+
+        /// <summary>
+        /// Player rotation as euler angles (x, y, z). Stored as float[] for clean JSON output.
+        /// </summary>
+        public float[] playerRotation = new float[3];
 
         /// <summary>
         /// Per-level completion records.
         /// </summary>
         public List<LevelProgress> levels = new List<LevelProgress>();
 
-        // ── Helpers (not serialized) ──
+        // ── Transform Helpers (not serialized) ──
+
+        /// <summary>
+        /// Stores the player's current position and rotation into the save data.
+        /// </summary>
+        public void SetPlayerTransform(Vector3 position, Vector3 eulerAngles)
+        {
+            playerPosition = new float[] { position.x, position.y, position.z };
+            playerRotation = new float[] { eulerAngles.x, eulerAngles.y, eulerAngles.z };
+        }
+
+        /// <summary>
+        /// Reads the saved position and rotation back as Vector3s.
+        /// </summary>
+        public (Vector3 position, Vector3 rotation) GetPlayerTransform()
+        {
+            return (
+                new Vector3(playerPosition[0], playerPosition[1], playerPosition[2]),
+                new Vector3(playerRotation[0], playerRotation[1], playerRotation[2])
+            );
+        }
+
+        /// <summary>
+        /// Returns true if a valid player position has been saved.
+        /// </summary>
+        public bool HasSavedPosition() => playerPosition != null && playerPosition.Length == 3;
+
+        // ── Level Helpers (not serialized) ──
 
         /// <summary>
         /// Finds or creates the LevelProgress entry for a given scene.
