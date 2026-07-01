@@ -66,7 +66,6 @@ GameObject:
   - component: {fileID: 8333583239881714959}
   - component: {fileID: 7229804897660789965}
   - component: {fileID: 1566913693677451294}
-  - component: {fileID: 1595763689149628827}
   - component: {fileID: 4484365717201957645}
   m_Layer: 0
   m_Name: Player
@@ -84,12 +83,11 @@ Transform:
   m_GameObject: {fileID: 4534763766120316799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3500667756377316340}
-  - {fileID: 464749654747230452}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &7229804897660789965
@@ -129,31 +127,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 759e2eee4482f409db4d0cd24a83fdce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  cameraAnchor: {fileID: 464749654747230452}
+  cameraAnchor: {fileID: 8333583239881714959}
   inputDirection: {x: 0, y: 0, z: 0}
-  walkSpeed: 0.2
+  walkSpeed: 0.4
   runSpeed: 0.8
   jumpHeight: 1
-  sensitivity: 0.7
-  yAimClamp: 45
+  sensitivity: 0.4
   animator: {fileID: 7082575390880084125}
   animationLerpTime: 0.1
---- !u!114 &1595763689149628827
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4534763766120316799}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 989ed34c10ea42deb121997dd2924ce1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TaskManager
-  currentActiveTask:
-    data: {fileID: 0}
-    currentAmounts: 
-    status: 0
 --- !u!114 &4484365717201957645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,11 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.UniversalInteractor
   interactRange: 3
-  interactButton: Interact
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
-  clientTaskManager: {fileID: 1595763689149628827}
 --- !u!1 &7683179721028027044
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +163,7 @@ GameObject:
   - component: {fileID: 4835488695596431612}
   m_Layer: 0
   m_Name: Body Male
-  m_TagString: Untagged
+  m_TagString: PlayerBody
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,34 +243,3 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.103277266, y: -0.53633714, z: 0.034781933}
     m_Extent: {x: 1.9365466, y: 4.7497196, z: 4.7099833}
   m_DirtyAABB: 0
---- !u!1 &9063864379212202428
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 464749654747230452}
-  m_Layer: 0
-  m_Name: Camera Anchor
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &464749654747230452
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9063864379212202428}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8333583239881714959}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
