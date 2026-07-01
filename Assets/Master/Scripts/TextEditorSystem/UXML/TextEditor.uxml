@@ -26,7 +26,7 @@
         </ui:VisualElement>
         <ui:VisualElement name="Ribbon" class="editor-ribbon editor-toolbar" style="flex-direction: row; border-bottom-width: 2px; justify-content: center; align-items: center; min-height: 80px; flex-wrap: wrap; padding-left: 8px; padding-right: 8px; width: 100%;">
             <ui:VisualElement name="FontsSection" class="editor-ribbon__section editor-ribbon__section--fonts" style="height: 64px; width: 253px;">
-                <ui:DropdownField label="" choices="Calibri,Sans Serif,Arial" index="0" name="Fonts" enabled="true" tooltip="Fonts" class="editor-dropdown editor-dropdown--font" style="width: 98px; margin-left: 2px; margin-right: 2px;"/>
+                <ui:DropdownField label="" choices="Calibri,Sans Serif,Arial" index="0" name="Fonts" enabled="true" tooltip="Fonts" class="editor-dropdown editor-dropdown--font" style="width: 108px; margin-left: 2px; margin-right: 2px;"/>
                 <ui:DropdownField label="" choices="10,12,14,18,24" index="1" name="Size" enabled="true" tooltip="Font Size" class="editor-dropdown editor-dropdown--size" style="margin-left: 2px; margin-right: 2px;"/>
                 <ui:Toggle name="Bold" class="editor-btn editor-btn--tool editor-toggle editor-button" style="align-content: center;">
                     <ui:Image name="Toggle-Icon" tooltip="Bold" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/BoldIcon.svg?fileID=7388822144124034973&amp;guid=fb686b05f58a146d4944c3ad629d0b8f&amp;type=3#BoldIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
