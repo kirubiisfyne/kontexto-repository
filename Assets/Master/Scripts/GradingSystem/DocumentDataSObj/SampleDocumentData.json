@@ -1,13 +1,37 @@
 {
+  "sender": "Adviser",
+  "subject": "Fix Document",
+  "instructionString" : "Dear Student,\n\nModify the document title to look like a title. Bold, Center, and enlarge to Font Size 24.\n\nRegards,\nAdviser",
+  
   "startingTextBlocks": [
-    "document title",
-    "Here is the introduction paragraph.",
-    "And here is the conclusion.",
-    "Add this to a bullet point list.",
-    "With this.",
-    "And this.",
-    "Number this one.",
-    "And this one."
+    {
+      "text": "document title",
+      "styleClass": "Title",
+      "isBold": true
+    },
+    {
+      "text": "Here is the introduction paragraph.",
+      "fontSize": 14
+    },
+    {
+      "text": "And here is the conclusion.",
+      "isItalic": true
+    },
+    {
+      "text": "Add this to a bullet point list."
+    },
+    {
+      "text": "With this."
+    },
+    {
+      "text": "And this."
+    },
+    {
+      "text": "Number this one."
+    },
+    {
+      "text": "And this one."
+    }
   ],
   "answerKey": [
     {
@@ -36,7 +60,5 @@
       "targetTextSnippet": "And this one.",
       "requiredListType": 2
     } 
-  ],
-  "instructionString" : 
-    "Modify the document title to look like a title. Bold, Center, and enlarge to Font Size 24."
+  ]
 }

@@ -18,8 +18,6 @@ public class FormatDataLoader : MonoBehaviour
     public GradingManager gradingManager;
 
     [Header("UI Components")] 
-    public GameObject emailPannel;
-    public TMPro.TextMeshProUGUI emailText;
     [Space(10)]
     public GameObject feedbackPanel;
     public GameObject feedbackPrefab;
@@ -33,9 +31,29 @@ public class FormatDataLoader : MonoBehaviour
 
     private TextAsset currentLevelJson;
     private DocumentData convertedDocumentData;
+    private VisualElement _emailRoot;
+    private Label _emailTextBox;
+    
+    private Label _senderLabel;
+    private Label _subjectLabel;
 
     private void Start()
     {
+        // Initialize UI Toolkit Elements for Email Panel
+        var root = editorManager.GetComponent<UIDocument>().rootVisualElement;
+        _emailRoot = root.Q<VisualElement>("EmailRoot");
+        _emailTextBox = root.Q<Label>("EmailTextBox");
+        
+        _senderLabel = root.Q<Label>("SenderLabel");
+        _subjectLabel = root.Q<Label>("SubjectLabel");
+
+        // Hook up the close button
+        var closeButton = _emailRoot?.Q<UnityEngine.UIElements.Button>("Exit");
+        if (closeButton != null)
+        {
+            closeButton.clicked += () => HandleInstructionEmail(false);
+        }
+
         if (GameManager.Instance == null)
         {
             Debug.LogWarning("No GameManager instance found. Falling back to default.");
@@ -105,14 +123,23 @@ public class FormatDataLoader : MonoBehaviour
         }
         
         scoreText.text = $"{report.score}/{report.maxScore}";
-        documentTitleText.text = convertedDocumentData.startingTextBlocks[0];
+        documentTitleText.text = convertedDocumentData.startingTextBlocks[0].text;
         feedbackPanel.SetActive(isActive);
     }
 
     public void HandleInstructionEmail(bool isActive)
     {
-        emailText.text = convertedDocumentData.instructionString;
-        emailPannel.SetActive(isActive);
+        if (_emailRoot != null && _emailTextBox != null)
+        {
+            _emailTextBox.text = convertedDocumentData.instructionString;
+            
+            if (_senderLabel != null)
+                _senderLabel.text = string.IsNullOrEmpty(convertedDocumentData.sender) ? "Unknown" : convertedDocumentData.sender;
+            if (_subjectLabel != null)
+                _subjectLabel.text = string.IsNullOrEmpty(convertedDocumentData.subject) ? "Unknown" : convertedDocumentData.subject;
+            
+            _emailRoot.style.display = isActive ? DisplayStyle.Flex : DisplayStyle.None;
+        }
     }
 #endregion
 }
