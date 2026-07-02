@@ -86,7 +86,51 @@ namespace Master.Scripts.TextEditorSystem
             {
                 for (int i = 0; i < currentDocument.startingTextBlocks.Count; i++)
                 {
-                    CreateBlock(i, currentDocument.startingTextBlocks[i], false);
+                    var blockData = currentDocument.startingTextBlocks[i];
+                    TextField newBlock = CreateBlock(i, blockData.text ?? "", false);
+                    
+                    // Apply Style Class
+                    if (!string.IsNullOrEmpty(blockData.styleClass))
+                    {
+                        string[] allStyles = { "format-normal", "format-title", "format-subtitle", 
+                                               "format-h1", "format-h2", "format-h3", "format-h4", "format-h5" };
+                        foreach (var style in allStyles) newBlock.RemoveFromClassList(style);
+                        
+                        switch (blockData.styleClass)
+                        {
+                            case "Title": newBlock.AddToClassList("format-title"); break;
+                            case "Subtitle": newBlock.AddToClassList("format-subtitle"); break;
+                            case "Heading 1": newBlock.AddToClassList("format-h1"); break;
+                            case "Heading 2": newBlock.AddToClassList("format-h2"); break;
+                            case "Heading 3": newBlock.AddToClassList("format-h3"); break;
+                            case "Heading 4": newBlock.AddToClassList("format-h4"); break;
+                            case "Heading 5": newBlock.AddToClassList("format-h5"); break;
+                            default: newBlock.AddToClassList("format-normal"); break;
+                        }
+                    }
+
+                    // Apply explicit font size
+                    if (blockData.fontSize.HasValue)
+                        newBlock.style.fontSize = blockData.fontSize.Value;
+                    
+                    // Apply inner input styles (alignment, bold, italic)
+                    var input = GetInnerInput(newBlock);
+                    if (input != null)
+                    {
+                        if (blockData.alignment.HasValue)
+                            input.style.unityTextAlign = blockData.alignment.Value;
+
+                        if (blockData.isBold.HasValue || blockData.isItalic.HasValue)
+                        {
+                            bool bold = blockData.isBold ?? false;
+                            bool italic = blockData.isItalic ?? false;
+                            
+                            if (bold && italic) input.style.unityFontStyleAndWeight = FontStyle.BoldAndItalic;
+                            else if (bold) input.style.unityFontStyleAndWeight = FontStyle.Bold;
+                            else if (italic) input.style.unityFontStyleAndWeight = FontStyle.Italic;
+                            else input.style.unityFontStyleAndWeight = FontStyle.Normal;
+                        }
+                    }
                 }
             }
             else
