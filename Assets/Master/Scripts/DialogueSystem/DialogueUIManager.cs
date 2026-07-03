@@ -52,14 +52,22 @@ namespace Master.Scripts.DialogueSystem
             }
 
             dialoguePanel.SetActive(true);
-            if (animator != null) animator.SetFloat("Speed", -1);
+            if (animator != null) 
+            {
+                animator.ResetTrigger("Out");
+                animator.SetTrigger("In");
+            }
         }
 
         public void Hide()
         {
             if (gameObject.activeInHierarchy)
             {
-                if (animator != null) animator.SetFloat("Speed", 1);
+                if (animator != null) 
+                {
+                    animator.ResetTrigger("In");
+                    animator.SetTrigger("Out");
+                }
                 hideCoroutine = StartCoroutine(HideRoutine());
             }
             else

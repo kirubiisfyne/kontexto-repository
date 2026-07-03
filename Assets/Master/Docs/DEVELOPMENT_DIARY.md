@@ -178,7 +178,18 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 20. Summary of Technical Rationale (Revised)
+## 20. Milestone: UI System Robustness & Speaker Profiles
+**Actions**: Created `SpeakerDatabase.cs`, refactored `PauseMenuController.cs` and `DialogueUIManager.cs`.
+*   **Decision**: Implement `SpeakerDatabase` as a ScriptableObject.
+    *   *Why*: Decouples character metadata (names, portraits) from the UI code. A single asset now holds all character profiles, allowing designers to easily add or update portraits without touching the UI prefabs or scene instances.
+*   **Decision**: Transition from `SetFloat("Speed")` to `SetTrigger("In"/"Out")` for UI animations.
+    *   *Why*: Disabling UI GameObjects (`SetActive(false)`) resets the internal Animator state back to frame 0. Attempting to play an animation backwards from frame 0 using a negative speed float causes it to freeze. Standardized triggers ("In", "Out") combined with `ResetTrigger` explicitly flush stale triggers from memory and ensure reliable forward transitions, eliminating the "bouncing" animation bug.
+*   **Decision**: Instant Pause with Realtime Coroutines.
+    *   *Why*: Improved UX and player safety. Instead of waiting for the pause menu to fade in before freezing the game (leaving the player vulnerable), or freezing the game instantly but stalling standard coroutines, we instantly set `Time.timeScale = 0` and use `WaitForSecondsRealtime`. The UI Animators are set to Unscaled Time, allowing crisp menu transitions while the game world is safely frozen.
+
+---
+
+## 21. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.
