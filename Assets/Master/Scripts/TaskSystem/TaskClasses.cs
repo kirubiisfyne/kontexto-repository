@@ -3,27 +3,22 @@ using UnityEngine;
 
 namespace Master.Scripts.TaskSystem
 {
-    /// <summary>
-    /// Defines a task's information and its requirements.
-    /// </summary>
-    [CreateAssetMenu(fileName = "New Task", menuName = "Tasks/Task")]
-    public class TaskData : ScriptableObject
+    [System.Serializable]
+    public class TaskPrerequisite
     {
-        [Header("Information")]
-        [Tooltip("Unique, stable identifier for save/load. Set once, never rename.")]
-        public string taskId;
-        public string taskName;
-        [TextArea] public string description;
+        [Tooltip("Optional. The task required before this one can be started.")]
+        public TaskData task;
 
-        [Header("Prerequisites")]
-        [Tooltip("Optional. This task cannot be started until the prerequisite task is completed.")]
-        public TaskData prerequisiteTask;
+        [Tooltip("The minimum status the prerequisite task must reach to unlock this one. (e.g. Active allows starting as soon as the other task starts).")]
+        public TaskStatus requiredStatus = TaskStatus.Completed;
+    }
 
-        [Header("Settings")]
+    [System.Serializable]
+    public class TaskRequirements
+    {
         [Tooltip("If true, objectives must be completed in the exact order they appear in the list below.")]
         public bool needsSequentialOrder = true;
 
-        [Header("Requirements")]
         public List<ObjectiveData> objectives;
     }
 
