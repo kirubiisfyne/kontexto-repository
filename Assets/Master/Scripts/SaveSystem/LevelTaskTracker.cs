@@ -110,10 +110,10 @@ namespace Master.Scripts.SaveSystem
 
         private void RestoreCompletedTask(HostTaskManager mgr)
         {
-            if (mgr.task != null && mgr.task.objectives != null)
+            if (mgr.task != null && mgr.task.requirements != null && mgr.task.requirements.objectives != null)
             {
                 mgr.currentProgress = new List<int>();
-                foreach (var obj in mgr.task.objectives)
+                foreach (var obj in mgr.task.requirements.objectives)
                 {
                     mgr.currentProgress.Add(obj.requiredAmount);
                 }

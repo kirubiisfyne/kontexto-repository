@@ -13,7 +13,7 @@ namespace Master.Scripts.TaskSystem
         [Tooltip("The ID key matching an objective in the Giver's TaskData.")]
         public string itemKey;
 
-        [Tooltip("The NPC/Manager that should receive this progress report.")]
+        [Tooltip("The NPC/Manager that should receive this progress report. If left empty, it will auto-populate by finding the task that needs this itemKey.")]
         public HostTaskManager targetGiver;
 
         [Header("Interaction Settings")]
@@ -26,15 +26,36 @@ namespace Master.Scripts.TaskSystem
         public UnityEvent onAcceptedReport;
 
         /// <summary>
-        /// Reports progress and optionally disables the item or this script based on a \"receipt\" from the Giver.
+        /// Reports progress and optionally disables the item or this script based on a "receipt" from the Giver.
         /// </summary>
         public void Interact()
         {
             if (!enabled) return;
 
+            // Auto-populate targetGiver based on the itemKey
+            if (targetGiver == null && !string.IsNullOrEmpty(itemKey))
+            {
+                var allManagers = FindObjectsByType<HostTaskManager>(FindObjectsSortMode.None);
+                foreach (var manager in allManagers)
+                {
+                    if ((manager.hostType == HostType.Giver || manager.hostType == HostType.Both) && manager.task != null && manager.task.requirements != null && manager.task.requirements.objectives != null)
+                    {
+                        foreach (var objective in manager.task.requirements.objectives)
+                        {
+                            if (objective.key == itemKey)
+                            {
+                                targetGiver = manager;
+                                break;
+                            }
+                        }
+                    }
+                    if (targetGiver != null) break;
+                }
+            }
+
             if (targetGiver == null)
             {
-                Debug.LogWarning($"KeyItemInstance on {gameObject.name}: No targetGiver assigned!");
+                Debug.LogWarning($"KeyItemInstance on {gameObject.name}: Could not find any active task requiring the item key '{itemKey}'!");
                 return;
             }
 

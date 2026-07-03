@@ -39,7 +39,7 @@ namespace Master.Scripts.TaskSystem
         public TaskStatus status = TaskStatus.Inactive;
         
         [Header("Sync Settings")]
-        [Tooltip("If this is a Giver, add all Closer NPCs for this task here to keep them in sync.")]
+        [Tooltip("Legacy. You no longer need to link Closers manually. The system auto-links them if they share the same TaskData.")]
         public List<HostTaskManager> linkedClosers = new List<HostTaskManager>();
 
         [Header("Progress")]
@@ -82,7 +82,7 @@ namespace Master.Scripts.TaskSystem
             {
                 if (HasUnmetPrerequisite())
                 {
-                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisiteTask.taskName}' not met. Cannot start task.");
+                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
                     events.onPrerequisiteNotMet?.Invoke();
                     return;
                 }
@@ -99,7 +99,7 @@ namespace Master.Scripts.TaskSystem
             {
                 if (HasUnmetPrerequisite())
                 {
-                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisiteTask.taskName}' not met. Cannot start task.");
+                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
                     events.onPrerequisiteNotMet?.Invoke();
                 }
                 else
@@ -115,21 +115,46 @@ namespace Master.Scripts.TaskSystem
 
         private bool HasUnmetPrerequisite()
         {
-            if (task == null || task.prerequisiteTask == null) return false;
-            if (string.IsNullOrEmpty(task.prerequisiteTask.taskId)) return false;
+            if (task == null || task.prerequisite == null || task.prerequisite.task == null) return false;
+            if (string.IsNullOrEmpty(task.prerequisite.task.taskId)) return false;
 
-            var pData = Master.Scripts.GameManager.Instance != null 
-                ? Master.Scripts.GameManager.Instance.currentPlayerData 
-                : Master.Scripts.SaveSystem.SaveManager.Load();
+            // 1. If the requirement is Completed, check the global save data first.
+            // This ensures prerequisites can span across levels.
+            if (task.prerequisite.requiredStatus == TaskStatus.Completed)
+            {
+                var pData = Master.Scripts.GameManager.Instance != null 
+                    ? Master.Scripts.GameManager.Instance.currentPlayerData 
+                    : Master.Scripts.SaveSystem.SaveManager.Load();
 
-            if (pData == null) return true; // No save data = prerequisite not met
+                if (pData != null && pData.IsTaskCompletedGlobally(task.prerequisite.task.taskId))
+                {
+                    return false; // Prerequisite IS met globally
+                }
+            }
 
-            return !pData.IsTaskCompletedGlobally(task.prerequisiteTask.taskId);
+            // 2. Check the current scene's active task managers.
+            // This supports unlocking if the prerequisite is in the same scene and meets the minimum status.
+            var allManagers = FindObjectsByType<HostTaskManager>(FindObjectsSortMode.None);
+            foreach (var manager in allManagers)
+            {
+                // Find the manager handling the prerequisite task
+                if (manager.task != null && manager.task.taskId == task.prerequisite.task.taskId)
+                {
+                    // In TaskStatus enum: Inactive=0, Active=1, ReadyToComplete=2, Completed=3.
+                    // If its status is >= the required status, the prerequisite is met.
+                    if (manager.status >= task.prerequisite.requiredStatus)
+                    {
+                        return false; // Prerequisite IS met in this scene
+                    }
+                }
+            }
+
+            return true; // Prerequisite is UNMET
         }
 
         private void StartTask()
         {
-            if (task == null || task.objectives == null)
+            if (task == null || task.requirements == null || task.requirements.objectives == null)
             {
                 Debug.LogError($"HostTaskManager on {gameObject.name}: Cannot start task. TaskData or Objectives are missing!");
                 return;
@@ -139,7 +164,7 @@ namespace Master.Scripts.TaskSystem
             
             // Initialize progress list based on task objectives
             currentProgress = new List<int>();
-            foreach (var objective in task.objectives)
+            foreach (var objective in task.requirements.objectives)
             {
                 currentProgress.Add(0);
             }
@@ -148,14 +173,14 @@ namespace Master.Scripts.TaskSystem
         }
 
         /// <summary>
-        /// Locates the Giver task manager that lists this Closer in its linkedClosers.
+        /// Locates the Giver task manager dynamically based on the TaskData.
         /// </summary>
         private HostTaskManager FindGiver()
         {
             var allManagers = FindObjectsByType<HostTaskManager>(FindObjectsSortMode.None);
             foreach (var manager in allManagers)
             {
-                if (manager.hostType == HostType.Giver && manager.linkedClosers.Contains(this))
+                if (manager.task == this.task && (manager.hostType == HostType.Giver || manager.hostType == HostType.Both))
                 {
                     return manager;
                 }
@@ -189,31 +214,31 @@ namespace Master.Scripts.TaskSystem
             }
 
             if (status != TaskStatus.Active || task == null) return false;
-            if (currentProgress == null || currentProgress.Count < task.objectives.Count)
+            if (currentProgress == null || task.requirements == null || task.requirements.objectives == null || currentProgress.Count < task.requirements.objectives.Count)
             {
                 Debug.LogWarning($"HostTaskManager on {gameObject.name}: Progress reported but currentProgress is not initialized/ready.");
                 return false;
             }
 
-            for (int i = 0; i < task.objectives.Count; i++)
+            for (int i = 0; i < task.requirements.objectives.Count; i++)
             {
-                if (task.objectives[i].key == key)
+                if (task.requirements.objectives[i].key == key)
                 {
                     // SEQUENCE CHECK: Only enforce if the task settings require it
-                    if (task.needsSequentialOrder)
+                    if (task.requirements.needsSequentialOrder)
                     {
                         for (int prev = 0; prev < i; prev++)
                         {
-                            if (currentProgress[prev] < task.objectives[prev].requiredAmount)
+                            if (currentProgress[prev] < task.requirements.objectives[prev].requiredAmount)
                             {
-                                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Interaction for '{key}' ignored. Complete '{task.objectives[prev].key}' first.");
+                                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Interaction for '{key}' ignored. Complete '{task.requirements.objectives[prev].key}' first.");
                                 return false;
                             }
                         }
                     }
 
-                    currentProgress[i] = Mathf.Clamp(currentProgress[i] + amount, 0, task.objectives[i].requiredAmount);
-                    Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.objectives[i].requiredAmount}");
+                    currentProgress[i] = Mathf.Clamp(currentProgress[i] + amount, 0, task.requirements.objectives[i].requiredAmount);
+                    Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
                     
                     CheckCompletion();
                     return true;
@@ -229,10 +254,10 @@ namespace Master.Scripts.TaskSystem
         public bool AreObjectivesMet()
         {
             if (task == null) return false;
-            if (currentProgress == null || currentProgress.Count < task.objectives.Count) return false;
-            for (int i = 0; i < task.objectives.Count; i++)
+            if (currentProgress == null || task.requirements == null || task.requirements.objectives == null || currentProgress.Count < task.requirements.objectives.Count) return false;
+            for (int i = 0; i < task.requirements.objectives.Count; i++)
             {
-                if (currentProgress[i] < task.objectives[i].requiredAmount) return false;
+                if (currentProgress[i] < task.requirements.objectives[i].requiredAmount) return false;
             }
             return true;
         }
@@ -294,12 +319,16 @@ namespace Master.Scripts.TaskSystem
             }
             Debug.Log($"{gameObject.name}: Task status changed to {newStatus}.");
 
-            // Givers and Both push status to all linked Closers (if any).
+            // Givers and Both push status to all corresponding Closers in the scene.
             if (hostType == HostType.Giver || hostType == HostType.Both)
             {
-                foreach (var closer in linkedClosers)
+                var allManagers = FindObjectsByType<HostTaskManager>(FindObjectsSortMode.None);
+                foreach (var manager in allManagers)
                 {
-                    if (closer != null) closer.UpdateStatus(newStatus);
+                    if (manager != this && manager.task == this.task && manager.hostType == HostType.Closer)
+                    {
+                        manager.UpdateStatus(newStatus);
+                    }
                 }
             }
         }
