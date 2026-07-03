@@ -97,5 +97,19 @@ namespace Master.Scripts.SaveSystem
             }
             return false;
         }
+
+        /// <summary>
+        /// Returns true if the given taskId is marked completed in any scene.
+        /// Useful for checking global prerequisites.
+        /// </summary>
+        public bool IsTaskCompletedGlobally(string taskId)
+        {
+            foreach (var lp in levels)
+            {
+                if (lp.completedTaskIds.Contains(taskId))
+                    return true;
+            }
+            return false;
+        }
     }
 }
