@@ -42,6 +42,9 @@ namespace Master.Scripts.DialogueSystem
         private readonly Queue<DialogueLine> linesQueue = new Queue<DialogueLine>();
         private bool isTalking;
 
+        public Conversation idleConversation;
+        private int overrideFrame = -1;
+
         private void Awake()
         {
             if (dialogueJson != null)
@@ -53,8 +56,28 @@ namespace Master.Scripts.DialogueSystem
 
         #region Public API
 
+        public void UseIdleDialogue()
+        {
+            overrideFrame = Time.frameCount;
+            LastInteracted = this;
+
+            if (idleConversation == null || IsConversationEmpty(idleConversation))
+            {
+                Debug.LogWarning($"DialogueManager on {gameObject.name}: No idle dialogue configured.");
+                return;
+            }
+
+            activeConversation = idleConversation;
+            lastPlayedIndex = -1;
+
+            StopAllCoroutines();
+            StartCoroutine(StartDialogueRoutine());
+        }
+
         public void Interact()
         {
+            if (overrideFrame == Time.frameCount) return;
+
             LastInteracted = this;
 
             // SNAPSHOT: Grab the conversation branch IMMEDIATELY.
@@ -180,6 +203,7 @@ namespace Master.Scripts.DialogueSystem
                 if (map?.conversationMap == null) return;
 
                 conversations = new List<Conversation>(map.conversationMap);
+                idleConversation = map.idleDialogue;
                 
                 if (conversations.Count > 0)
                 {

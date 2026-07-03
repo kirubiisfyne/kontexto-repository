@@ -22,6 +22,9 @@ namespace Master.Scripts.TaskSystem
 
         [Tooltip("Fired when the task becomes Completed.")]
         public UnityEvent onCompleted;
+
+        [Tooltip("Fired when the player tries to start the task, but the prerequisite is not met.")]
+        public UnityEvent onPrerequisiteNotMet;
     }
 
     /// <summary>
@@ -76,7 +79,15 @@ namespace Master.Scripts.TaskSystem
 
             // Givers only start the task.
             if (status == TaskStatus.Inactive)
+            {
+                if (HasUnmetPrerequisite())
+                {
+                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisiteTask.taskName}' not met. Cannot start task.");
+                    events.onPrerequisiteNotMet?.Invoke();
+                    return;
+                }
                 StartTask();
+            }
         }
 
         private IEnumerator DeferredBothInteract()
@@ -84,8 +95,36 @@ namespace Master.Scripts.TaskSystem
             // Wait one frame so DialogueManager.Interact() snapshots the correct
             // conversation index before StartTask() / CompleteTask() change the status.
             yield return null;
-            if (status == TaskStatus.Inactive)             StartTask();
-            else if (status == TaskStatus.ReadyToComplete) CompleteTask();
+            if (status == TaskStatus.Inactive)
+            {
+                if (HasUnmetPrerequisite())
+                {
+                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisiteTask.taskName}' not met. Cannot start task.");
+                    events.onPrerequisiteNotMet?.Invoke();
+                }
+                else
+                {
+                    StartTask();
+                }
+            }
+            else if (status == TaskStatus.ReadyToComplete)
+            {
+                CompleteTask();
+            }
+        }
+
+        private bool HasUnmetPrerequisite()
+        {
+            if (task == null || task.prerequisiteTask == null) return false;
+            if (string.IsNullOrEmpty(task.prerequisiteTask.taskId)) return false;
+
+            var pData = Master.Scripts.GameManager.Instance != null 
+                ? Master.Scripts.GameManager.Instance.currentPlayerData 
+                : Master.Scripts.SaveSystem.SaveManager.Load();
+
+            if (pData == null) return true; // No save data = prerequisite not met
+
+            return !pData.IsTaskCompletedGlobally(task.prerequisiteTask.taskId);
         }
 
         private void StartTask()

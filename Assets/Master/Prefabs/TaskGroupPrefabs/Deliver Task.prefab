@@ -77,6 +77,9 @@ MonoBehaviour:
   currentConversationIndex: 0
   dialogueJson: {fileID: 4900000, guid: dc002f64d44f44eb6920eadd65e0215a, type: 3}
   loopConversations: 1
+  idleConversation:
+    name: 
+    lines: []
 --- !u!114 &5154050099801968221
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +109,9 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     onCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+    onPrerequisiteNotMet:
       m_PersistentCalls:
         m_Calls: []
 --- !u!114 &3571259986161871105
@@ -244,6 +250,9 @@ MonoBehaviour:
   currentConversationIndex: 0
   dialogueJson: {fileID: 4900000, guid: d51e0d456340a489e84bfdbf43187c6d, type: 3}
   loopConversations: 0
+  idleConversation:
+    name: 
+    lines: []
 --- !u!136 &3093936762754701893
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -346,6 +355,22 @@ MonoBehaviour:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 2
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    onPrerequisiteNotMet:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 4958749323416882733}
+          m_TargetAssemblyTypeName: Master.Scripts.DialogueSystem.DialogueManager,
+            Assembly-CSharp
+          m_MethodName: UseIdleDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0

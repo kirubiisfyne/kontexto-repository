@@ -10,6 +10,7 @@ namespace Master.Scripts.DialogueSystem
     public class ConversationMap 
     {
         public List<Conversation> conversationMap;
+        public Conversation idleDialogue;
     }
     
     /// <summary>
