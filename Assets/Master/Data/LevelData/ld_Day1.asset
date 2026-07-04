@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd4b11d94d5f415d8980c0482801cce, type: 3}
+  m_Name: ld_Day1
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.SaveSystem.LevelData
+  sceneId: scn_Day1
+  taskEntries:
+  - prefab: {fileID: 2648521508393234826, guid: c672bda6fd47744eab2f0b51e9c98da0, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 0}
+    spawnRotation: {x: 0, y: 0, z: 0}
+    usePrefabTransform: 1
+  - prefab: {fileID: 3274221651110446442, guid: 99b43f14f7c464da5bcfddea73e6d2a6, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 0}
+    spawnRotation: {x: 0, y: 0, z: 0}
+    usePrefabTransform: 1
