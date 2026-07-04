@@ -99,6 +99,6 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 *.json
 
-# MeshBaker plugin
-/Assets/MeshBaker/
-/Assets/MeshBaker.meta
+# nTools plugin
+Assets/nTools/
+Assets/nTools.meta
