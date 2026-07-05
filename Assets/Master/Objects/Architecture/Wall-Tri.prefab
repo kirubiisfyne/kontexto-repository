@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7429361902801468717}
   - component: {fileID: 1190063077172422735}
   - component: {fileID: 842088253823013571}
-  - component: {fileID: 2993206497040776669}
+  - component: {fileID: 1479680226846309536}
   m_Layer: 6
   m_Name: Wall-Tri
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2993206497040776669
+--- !u!64 &1479680226846309536
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

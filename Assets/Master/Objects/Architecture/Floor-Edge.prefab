@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3855582960732436509}
   - component: {fileID: 4140067843440648592}
   - component: {fileID: -1483775826944022100}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor-Edge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8358713291321252945}
   - component: {fileID: 6218041060096928386}
   - component: {fileID: 4449993278624196146}
-  - component: {fileID: 678611793309575938}
+  - component: {fileID: 9165863765687048662}
   m_Layer: 6
   m_Name: Wall-Corner
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &678611793309575938
+--- !u!64 &9165863765687048662
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2604230861088215509}
   - component: {fileID: 570927230035948344}
   - component: {fileID: 8570954827726293619}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor-loorFillQuarter
   m_TagString: Untagged
   m_Icon: {fileID: 0}

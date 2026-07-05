@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4833417137289307476}
   - component: {fileID: 6696308042689030898}
   - component: {fileID: 8153012655279020581}
-  - component: {fileID: -1737232569963594022}
-  m_Layer: 6
+  - component: {fileID: 1635230060697037034}
+  m_Layer: 0
   m_Name: Wall-Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-1737232569963594022
+--- !u!64 &1635230060697037034
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

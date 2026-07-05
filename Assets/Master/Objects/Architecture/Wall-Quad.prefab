@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 182870010036963758}
   - component: {fileID: 647320132626101753}
   - component: {fileID: 7971122081217591048}
-  - component: {fileID: 423410186444878058}
+  - component: {fileID: 9113580879460432229}
   m_Layer: 6
   m_Name: Wall-Quad
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &423410186444878058
+--- !u!64 &9113580879460432229
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 8424013832675439942}
   - component: {fileID: 6488800975796108629}
   - component: {fileID: 615681146007842927}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Railing-Pillar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5511068223796434641
 Transform:
