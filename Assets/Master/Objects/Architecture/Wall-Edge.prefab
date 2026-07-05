@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4156918621974807204}
   - component: {fileID: 1572077176848442537}
   - component: {fileID: 5673434410660920088}
+  - component: {fileID: 5220185025881289476}
   m_Layer: 6
   m_Name: Wall-Edge
   m_TagString: Untagged
@@ -91,3 +92,25 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5220185025881289476
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3715226606671282359}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -170451305928409585, guid: c2edfc813dd094a15acba391f6fb6287, type: 3}

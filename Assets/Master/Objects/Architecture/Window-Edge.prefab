@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2978708248011913769}
   - component: {fileID: 1653303938586252064}
   - component: {fileID: 3964915170362279532}
-  - component: {fileID: 1101660929382968598}
+  - component: {fileID: 6050426536052616079}
   m_Layer: 6
   m_Name: Window-Edge
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1101660929382968598
+--- !u!64 &6050426536052616079
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

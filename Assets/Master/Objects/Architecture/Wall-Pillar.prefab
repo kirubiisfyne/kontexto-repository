@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6020011266517969754}
   - component: {fileID: 1796465730638725058}
   - component: {fileID: 6152785222264625538}
-  - component: {fileID: -5747171293665453284}
+  - component: {fileID: 3721155693664394387}
   m_Layer: 6
   m_Name: Wall-Pillar
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-5747171293665453284
+--- !u!64 &3721155693664394387
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

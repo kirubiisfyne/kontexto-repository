@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2399144078927324092}
   - component: {fileID: 5637712243600365366}
   - component: {fileID: 1431246444947485387}
-  - component: {fileID: -6152975409630514870}
+  - component: {fileID: 7783756893414607314}
   m_Layer: 6
   m_Name: Window-Half
   m_TagString: Untagged
@@ -95,7 +95,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &-6152975409630514870
+--- !u!64 &7783756893414607314
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

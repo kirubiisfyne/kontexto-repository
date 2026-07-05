@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5650390474354428025}
   - component: {fileID: 4466517867782821214}
   - component: {fileID: 1411138826290952962}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor-EdgeQuarter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
