@@ -5,6 +5,8 @@
     border-left-width: 0;
     background-color: rgba(188, 188, 188, 0);
     height: 16px;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 .editor-button {
@@ -164,4 +166,65 @@
 
 .unity-base-dropdown__item:checked {
     background-color: rgb(150, 150, 150);
+}
+
+/* --- Cleanup Classes and IDs --- */
+.text-reset {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
+
+.email-panel {
+    border-color: rgb(44, 62, 80);
+    border-width: 2px;
+}
+
+.email-label {
+    -unity-text-align: middle-left;
+    align-self: center;
+    -unity-font-definition: url("project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&guid=d1b87e1ab6bfe4900a28613db31ad1ac&type=3#PixeloidSans");
+}
+
+.ribbon-icon {
+    background-size: 12px 12px;
+}
+
+#Root {
+    width: 740px; 
+    height: 660px; 
+    position: relative; 
+    top: 38px; 
+    left: auto; 
+    flex-direction: column;
+}
+
+#Document {
+    width: 640px; 
+    min-height: 800px; 
+    background-color: rgb(212, 212, 212); 
+    margin-top: 32px; 
+    margin-bottom: 64px; 
+    padding: 48px;
+    -unity-font-definition: url("project://database/Assets/Master/Scripts/TextEditorSystem/Resources/EditorFonts/Carlito-Regular.ttf?fileID=12800000&guid=1e14649b7b62e4523869578f79dbe5da&type=3#Carlito-Regular");
+}
+
+#EmailRoot {
+    width: 480px; 
+    height: 360px; 
+    top: 32px; 
+    right: 32px; 
+    left: auto;
+    background-color: rgb(128, 128, 128); 
+}
+
+#EmailDocument {
+    background-color: rgb(212, 212, 212); 
+    padding: 16px;
+    -unity-font-definition: url("project://database/Assets/Master/Scripts/TextEditorSystem/Resources/EditorFonts/Carlito-Regular.ttf?fileID=12800000&guid=1e14649b7b62e4523869578f79dbe5da&type=3#Carlito-Regular");
 }
