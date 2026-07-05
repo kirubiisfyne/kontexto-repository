@@ -7,6 +7,19 @@ using UnityEngine.UIElements;
 
 namespace Master.Scripts.TextEditorSystem
 {
+    [System.Serializable]
+    public class FontMapping
+    {
+        public string displayName;
+        public string regular;
+    }
+
+    [System.Serializable]
+    public class FontMappingsData
+    {
+        public FontMapping[] mappings;
+    }
+
     public class TextEditorManager : MonoBehaviour
     {
         private UIDocument _doc;
@@ -17,6 +30,9 @@ namespace Master.Scripts.TextEditorSystem
         private TextEditorRibbonController _ribbonController;
         private TextEditorFormatting _formatting;
         private TextEditorBlockManager _blockManager;
+
+        private Dictionary<string, Font> _loadedFonts = new Dictionary<string, Font>();
+        private List<string> _fontNames = new List<string>();
 
         private void OnEnable()
         {
@@ -49,6 +65,7 @@ namespace Master.Scripts.TextEditorSystem
 
             // 2. Setup UI & Events
             _blockManager.ClearBlocks();
+            LoadFonts();
             SetupRibbon();
             SetupTabs();
             SetupClipboard();
@@ -63,6 +80,24 @@ namespace Master.Scripts.TextEditorSystem
         private void Start()
         {
             _taskController = Object.FindFirstObjectByType<FormatDataLoader>();
+        }
+
+        private void LoadFonts()
+        {
+            TextAsset json = Resources.Load<TextAsset>("FontMappings");
+            if (json != null)
+            {
+                FontMappingsData data = JsonUtility.FromJson<FontMappingsData>(json.text);
+                foreach (var mapping in data.mappings)
+                {
+                    Font fontAsset = Resources.Load<Font>($"EditorFonts/{mapping.regular}");
+                    if (fontAsset != null)
+                    {
+                        _loadedFonts[mapping.displayName] = fontAsset;
+                        _fontNames.Add(mapping.displayName);
+                    }
+                }
+            }
         }
 
         private void OnPointerDown(PointerDownEvent evt)
@@ -85,26 +120,34 @@ namespace Master.Scripts.TextEditorSystem
         }
 
         public void LoadLevel(DocumentData currentDocument) => _blockManager.LoadLevel(currentDocument);
-private void SetupRibbon()
-{
-    _ribbonController.SetupRibbon(
-        _formatting.ToggleBullet,
-        _formatting.ToggleNumber,
-        _formatting.ApplyAlignment,
-        _formatting.ApplySpacing,
-        _formatting.ToggleBold,
-        _formatting.ToggleItalic,
-        (newSize) => {
-            foreach (var block in GetAffectedBlocks())
-            {
-                block.style.fontSize = newSize;
-            }
-            // Removed UpdateRibbonState to prevent engine-lag overwrite
-            RestoreFocusAndCursor();
-        },
-        _formatting.ApplyStyle
-    );
-}
+        private void SetupRibbon()
+        {
+            _ribbonController.SetupRibbon(
+                _formatting.ToggleBullet,
+                _formatting.ToggleNumber,
+                _formatting.ApplyAlignment,
+                _formatting.ApplySpacing,
+                _formatting.ToggleBold,
+                _formatting.ToggleItalic,
+                (newSize) => {
+                    foreach (var block in GetAffectedBlocks())
+                    {
+                        block.style.fontSize = newSize;
+                    }
+                    // Removed UpdateRibbonState to prevent engine-lag overwrite
+                    RestoreFocusAndCursor();
+                },
+                _formatting.ApplyStyle,
+                _fontNames,
+                (fontName) => {
+                    if (_loadedFonts.TryGetValue(fontName, out Font fontAsset))
+                    {
+                        _formatting.ApplyFont(fontAsset);
+                    }
+                },
+                _loadedFonts
+            );
+        }
 
         private void SetupClipboard()
         {

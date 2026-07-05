@@ -8,6 +8,7 @@ namespace Master.Scripts.TextEditorSystem
     {
         private readonly VisualElement _root;
         
+        private DropdownField _fontDropdown;
         private Toggle _boldToggle;
         private Toggle _italicToggle;
         private Button _leftBtn;
@@ -31,6 +32,7 @@ namespace Master.Scripts.TextEditorSystem
 
         private void CacheUIReferences()
         {
+            _fontDropdown = _root.Q<DropdownField>("Fonts");
             _boldToggle = _root.Q<Toggle>("Bold");
             _italicToggle = _root.Q<Toggle>("Italic");
             _leftBtn = _root.Q<Button>("Left");
@@ -53,6 +55,8 @@ namespace Master.Scripts.TextEditorSystem
             }
         }
 
+        private System.Collections.Generic.Dictionary<string, Font> _loadedFonts;
+
         public void SetupRibbon(
             System.Action toggleBullet, 
             System.Action toggleNumber, 
@@ -61,8 +65,12 @@ namespace Master.Scripts.TextEditorSystem
             System.Action<bool> toggleBold,
             System.Action<bool> toggleItalic,
             System.Action<int> applySize,
-            System.Action<string> applyStyle)
+            System.Action<string> applyStyle,
+            System.Collections.Generic.List<string> fontNames,
+            System.Action<string> applyFont,
+            System.Collections.Generic.Dictionary<string, Font> loadedFonts)
         {
+            _loadedFonts = loadedFonts;
             if (_bulletBtn != null) _bulletBtn.clicked += toggleBullet;
             if (_numberBtn != null) _numberBtn.clicked += toggleNumber;
 
@@ -94,6 +102,16 @@ namespace Master.Scripts.TextEditorSystem
             {
                 _styleDropdown.RegisterValueChangedCallback(evt => applyStyle(evt.newValue));
             }
+
+            if (_fontDropdown != null)
+            {
+                _fontDropdown.choices = fontNames;
+                if (fontNames.Count > 0)
+                {
+                    _fontDropdown.SetValueWithoutNotify(fontNames[0]);
+                }
+                _fontDropdown.RegisterValueChangedCallback(evt => applyFont(evt.newValue));
+            }
         }
 
         public void SetupClipboard(System.Action copy, System.Action cut, System.Action paste)
@@ -116,6 +134,24 @@ namespace Master.Scripts.TextEditorSystem
             {
                 int currentSize = Mathf.RoundToInt(currentStyle.fontSize);
                 _sizeDropdown.SetValueWithoutNotify(currentSize.ToString());
+            }
+
+            if (_fontDropdown != null && _loadedFonts != null)
+            {
+                Font currentFont = currentStyle.unityFontDefinition.font;
+                if (currentFont == null && currentStyle.unityFont != null)
+                {
+                    currentFont = currentStyle.unityFont;
+                }
+                
+                if (currentFont != null)
+                {
+                    var match = _loadedFonts.FirstOrDefault(x => x.Value == currentFont).Key;
+                    if (!string.IsNullOrEmpty(match))
+                    {
+                        _fontDropdown.SetValueWithoutNotify(match);
+                    }
+                }
             }
 
             bool isBold = currentStyle.unityFontStyleAndWeight == FontStyle.Bold || currentStyle.unityFontStyleAndWeight == FontStyle.BoldAndItalic;

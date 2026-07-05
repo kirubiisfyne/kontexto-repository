@@ -44,6 +44,21 @@ namespace Master.Scripts.TextEditorSystem
             _restoreFocus?.Invoke();
         }
 
+        public void ApplyFont(Font fontAsset)
+        {
+            foreach (var block in _getAffectedBlocks())
+            {
+                block.style.unityFontDefinition = new StyleFontDefinition(fontAsset);
+                var input = GetInnerInput(block);
+                if (input != null)
+                {
+                    input.style.unityFontDefinition = new StyleFontDefinition(fontAsset);
+                }
+            }
+            _updateRibbonState?.Invoke();
+            _restoreFocus?.Invoke();
+        }
+
         public void ToggleBold(bool applyBold)
         {
             foreach (var block in _getAffectedBlocks())
