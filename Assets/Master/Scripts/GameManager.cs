@@ -18,8 +18,8 @@ namespace Master.Scripts
         public static GameManager Instance;
 
         #region Setup Data
-            // Loading Documents
-            public List<TextAsset> documentData;
+            // Current Level Data
+            public LevelData currentLevelData;
             
             // Save and Load
             public PlayerData currentPlayerData;
@@ -41,10 +41,6 @@ namespace Master.Scripts
             DontDestroyOnLoad(gameObject);
         }
 
-        public TextAsset GetNextDocumentData(int index)
-        {
-            if (documentData == null || index >= documentData.Count) return null;
-            return documentData[index];
-        }
+
     }
 }

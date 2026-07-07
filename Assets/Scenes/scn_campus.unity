@@ -1790,7 +1790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3439537052774779562, guid: ab21155242db0423a82ca31da85300c8, type: 3}
       propertyPath: canPlayerWarp
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3680876193377430078, guid: ab21155242db0423a82ca31da85300c8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3580,8 +3580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6901aaf267047f49fc582a0e4f4a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.GameManager
-  documentData:
-  - {fileID: 4900000, guid: 403a27bcb0804d3c83788cec2605a45e, type: 3}
+  currentLevelData: {fileID: 0}
   currentPlayerData:
     currentScene: 
     playerPosition:

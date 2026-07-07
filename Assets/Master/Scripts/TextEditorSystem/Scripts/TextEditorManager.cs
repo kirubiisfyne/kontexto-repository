@@ -166,7 +166,20 @@ namespace Master.Scripts.TextEditorSystem
             Button printButton = root.Q<Button>("Print"); 
             if (printButton != null)
             {
-                printButton.clicked += () => _taskController?.EvaluatePrintJob(_documentPage);
+                printButton.clicked += () => 
+                {
+                    Debug.Log("Print button clicked!");
+                    if (_taskController == null)
+                    {
+                        Debug.LogError("Task Controller is null! Attempting to find it again...");
+                        _taskController = Object.FindFirstObjectByType<FormatDataLoader>();
+                    }
+                    _taskController?.EvaluatePrintJob(_documentPage);
+                };
+            }
+            else
+            {
+                Debug.LogError("Could not find Print button in UI!");
             }
         }
 

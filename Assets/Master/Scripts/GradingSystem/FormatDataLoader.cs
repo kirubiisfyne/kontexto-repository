@@ -61,7 +61,7 @@ public class FormatDataLoader : MonoBehaviour
         }
         else
         {
-            currentLevelJson = GameManager.Instance.GetNextDocumentData(GameManager.Instance.currentLevel);
+            currentLevelJson = GameManager.Instance.currentLevelData != null ? GameManager.Instance.currentLevelData.documentData : null;
         }
 
         LoadLevelData();
@@ -71,7 +71,7 @@ public class FormatDataLoader : MonoBehaviour
     private void LoadLevelData()
     {
         // 1. Figure out which JSON to load (from another scene, or the fallback)
-        TextAsset jsonToLoad = PendingLevelJSON != null ? currentLevelJson : fallbackLevelJSON;
+        TextAsset jsonToLoad = PendingLevelJSON != null ? PendingLevelJSON : (currentLevelJson != null ? currentLevelJson : fallbackLevelJSON);
 
         if (jsonToLoad != null)
         {

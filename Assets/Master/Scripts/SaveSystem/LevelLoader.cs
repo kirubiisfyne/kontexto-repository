@@ -39,6 +39,7 @@ namespace Master.Scripts.SaveSystem
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.currentPlayerData = playerData;
+                GameManager.Instance.currentLevelData = levelData;
             }
 
             // 2. Initialize Task Tracker
