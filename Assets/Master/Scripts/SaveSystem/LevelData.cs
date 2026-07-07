@@ -14,6 +14,10 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("Must match the scene name exactly (e.g., 'scn_day1').")]
         public string sceneId;
 
+        [Header("Document Data")]
+        [Tooltip("The document data JSON required for this level (if any).")]
+        public TextAsset documentData;
+
         [Header("Task Prefabs")]
         public List<TaskSpawnEntry> taskEntries = new List<TaskSpawnEntry>();
     }
