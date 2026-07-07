@@ -1,11 +1,11 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/TextEditorStyle.uss?fileID=7433441132597879392&amp;guid=dab8fefc2ae48434d981cd9b73428717&amp;type=3#TextEditorStyle"/>
     <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3#DocumentStyle"/>
-    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; width: 740px; height: 660px; align-self: center; position: relative; top: 38px; left: initial; flex-direction: column;">
+    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; align-self: center;">
         <ui:VisualElement name="Header" class="editor-toolbar" style="flex-grow: 0; padding-top: 4px; padding-left: 8px; padding-right: 4px; padding-bottom: 4px; border-top-width: 2px; background-color: rgb(40, 133, 180); height: 64px;">
             <ui:VisualElement name="WindowName" style="flex-grow: 1; flex-direction: row;">
                 <ui:Image name="Logo" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;); height: 23px; width: 22px; -unity-background-image-tint-color: rgb(255, 255, 255);"/>
-                <ui:Label text="TEXT_EDITOR" name="Name" style="margin-top: 0; margin-right: 4px; margin-bottom: 0; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
+                <ui:Label text="TEXT_EDITOR" name="Name" class="text-reset" style="margin-right: 4px; margin-left: 4px; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
             </ui:VisualElement>
             <ui:VisualElement name="NavigationKeys" class="editor-header__nav">
                 <ui:Button text="X" name="Exit" class="editor-btn editor-btn--exit editor-button" style="width: 24px; height: 24px;"/>
@@ -13,15 +13,15 @@
         </ui:VisualElement>
         <ui:VisualElement name="Tabs" class="editor-toolbar" style="flex-direction: row; justify-content: space-between; padding-top: 4px; padding-right: 4px; padding-bottom: 4px; padding-left: 4px; height: 48px;">
             <ui:VisualElement name="Tools" class="editor-header__tools" style="flex-direction: row; height: auto; padding-top: 0; padding-right: 8px; padding-bottom: 0; padding-left: 8px; justify-content: flex-start; align-items: center;">
-                <ui:Button text="File" name="File" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-left: 6px; padding-right: 6px;"/>
-                <ui:Button text="Print" name="Print" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-right: 6px; padding-left: 6px;"/>
+                <ui:Button text="File" name="File" class="editor-btn editor-btn--print editor-header__tool-button"/>
+                <ui:Button text="Print" name="Print" class="editor-btn editor-btn--print editor-header__tool-button"/>
                 <ui:VisualElement name="ToolDivider" style="width: 2px; height: 16px; background-color: rgb(150, 150, 150); margin-left: 6px; margin-right: 6px;"/>
-                <ui:Button text="Undo" name="Undo" tooltip="Undo (Ctrl + Z)" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-right: 6px; padding-left: 6px;"/>
-                <ui:Button text="Redo" name="Redo" tooltip="Redo (Ctrl + Y)" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-right: 6px; padding-left: 6px;"/>
+                <ui:Button text="Undo" name="Undo" tooltip="Undo (Ctrl + Z)" class="editor-btn editor-btn--print editor-header__tool-button"/>
+                <ui:Button text="Redo" name="Redo" tooltip="Redo (Ctrl + Y)" class="editor-btn editor-btn--print editor-header__tool-button"/>
                 <ui:VisualElement name="ToolDivider" style="width: 2px; height: 16px; background-color: rgb(150, 150, 150); margin-left: 6px; margin-right: 6px;"/>
-                <ui:Button text="Cut" name="Cut" tooltip="Cut (Ctrl + X)" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-right: 6px; padding-left: 6px;"/>
-                <ui:Button text="Copy" name="Copy" tooltip="Copy (Ctrl + C)" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-right: 6px; padding-left: 6px;"/>
-                <ui:Button text="Paste" name="Paste" tooltip="Paste (Ctrl + V)" class="editor-btn editor-btn--print editor-header__tool-button" style="padding-right: 6px; padding-left: 6px;"/>
+                <ui:Button text="Cut" name="Cut" tooltip="Cut (Ctrl + X)" class="editor-btn editor-btn--print editor-header__tool-button"/>
+                <ui:Button text="Copy" name="Copy" tooltip="Copy (Ctrl + C)" class="editor-btn editor-btn--print editor-header__tool-button"/>
+                <ui:Button text="Paste" name="Paste" tooltip="Paste (Ctrl + V)" class="editor-btn editor-btn--print editor-header__tool-button"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="Ribbon" enabled="true" class="editor-ribbon editor-toolbar" style="flex-direction: row; border-bottom-width: 2px; justify-content: flex-start; align-items: center; min-height: 80px; flex-wrap: wrap; padding-left: 8px; padding-right: 8px; width: 100%;">
@@ -38,12 +38,12 @@
             </ui:VisualElement>
             <ui:VisualElement name="ParagraphSection" class="editor-ribbon__section editor-ribbon__section--styles" style="flex-direction: row; align-items: center; width: 272px; height: 64px;">
                 <ui:VisualElement name="Alignment" style="flex-grow: 0; flex-direction: row; margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; align-self: flex-start;">
-                    <ui:Button text="" name="Left" double-click-selects-word="false" tooltip="Left-Align" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/LeftAlignIcon.svg?fileID=7388822144124034973&amp;guid=f60d60ba10ff14a5da68911d6982f0f8&amp;type=3#LeftAlignIcon&quot;); background-size: 12px 12px;"/>
-                    <ui:Button text="" name="Center" tooltip="Center" class="editor-button" style="background-size: 12px 12px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CenterIcon.svg?fileID=7388822144124034973&amp;guid=41c8e3b01b28849b49b90a3509e0b7a5&amp;type=3#CenterIcon&quot;);"/>
-                    <ui:Button text="" name="Right" tooltip="Right-Align" class="editor-button" style="background-size: 12px 12px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/Right%20AlignIcon.svg?fileID=7388822144124034973&amp;guid=048523fb86fea4d7ebdac9102f2546e5&amp;type=3#Right AlignIcon&quot;);"/>
+                    <ui:Button text="" name="Left" double-click-selects-word="false" tooltip="Left-Align" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/LeftAlignIcon.svg?fileID=7388822144124034973&amp;guid=f60d60ba10ff14a5da68911d6982f0f8&amp;type=3#LeftAlignIcon&quot;);"/>
+                    <ui:Button text="" name="Center" tooltip="Center" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CenterIcon.svg?fileID=7388822144124034973&amp;guid=41c8e3b01b28849b49b90a3509e0b7a5&amp;type=3#CenterIcon&quot;);"/>
+                    <ui:Button text="" name="Right" tooltip="Right-Align" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/Right%20AlignIcon.svg?fileID=7388822144124034973&amp;guid=048523fb86fea4d7ebdac9102f2546e5&amp;type=3#Right AlignIcon&quot;);"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="List" style="flex-grow: 0; flex-direction: row; margin-top: 2px; margin-bottom: 2px; margin-left: 2px; margin-right: 2px; align-self: flex-start;">
-                    <ui:Button text="" name="Bullet" tooltip="Bullet-Point" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/BulletIcon-2.svg?fileID=7388822144124034973&amp;guid=275c0abe2b70647ccbf5848b5f04baf8&amp;type=3#BulletIcon-2&quot;); background-size: 12px 12px;"/>
+                    <ui:Button text="" name="Bullet" tooltip="Bullet-Point" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/BulletIcon-2.svg?fileID=7388822144124034973&amp;guid=275c0abe2b70647ccbf5848b5f04baf8&amp;type=3#BulletIcon-2&quot;);"/>
                     <ui:Button text="" name="Numbering" tooltip="Numbering" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/NumberingIcon-2.svg?fileID=7388822144124034973&amp;guid=2edd390d493cf4a2cafede25ca81ae6e&amp;type=3#NumberingIcon-2&quot;); background-size: 12px 14px;"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="Spacing" style="flex-grow: 0; flex-direction: row; margin-left: 2px; margin-top: 2px; margin-bottom: 2px; margin-right: 2px; align-self: flex-start;">
@@ -58,33 +58,33 @@
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:ScrollView name="Content" class="editor-viewport" style="background-color: rgb(128, 128, 128); flex-grow: 1; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80);">
-            <ui:VisualElement name="Document" style="flex-grow: 1; width: 640px; flex-shrink: 0; align-self: center; min-height: 800px; background-color: rgb(212, 212, 212); margin-top: 32px; margin-bottom: 64px; padding-top: 48px; padding-left: 48px; padding-right: 48px; padding-bottom: 48px; -unity-font-definition: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Resources/EditorFonts/Carlito-Regular.ttf?fileID=12800000&amp;guid=1e14649b7b62e4523869578f79dbe5da&amp;type=3#Carlito-Regular&quot;);">
+            <ui:VisualElement name="Document" style="flex-grow: 1; flex-shrink: 0; align-self: center;">
                 <ui:VisualElement name="MarqueeBox" id="marquee-box"/>
             </ui:VisualElement>
         </ui:ScrollView>
         <ui:VisualElement name="Footer" class="editor-footer editor-toolbar" style="border-top-width: 2px; border-bottom-width: 2px; height: 48px; padding-left: 8px; padding-right: 8px; justify-content: center;">
-            <ui:Label text="Page 1 of 1" name="Page" class="editor-footer__text" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;"/>
+            <ui:Label text="Page 1 of 1" name="Page" class="editor-footer__text text-reset"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="EmailRoot" style="flex-grow: 1; position: absolute; width: 480px; height: 360px; top: 32px; left: auto; right: 32px; background-color: rgb(128, 128, 128); border-left-width: 2px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80); border-top-color: rgb(44, 62, 80); border-bottom-color: rgb(44, 62, 80); -unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); display: none;">
+    <ui:VisualElement name="EmailRoot" class="email-panel" style="flex-grow: 1; position: absolute; display: none;">
         <ui:VisualElement name="EmailHeader" style="flex-grow: 0; height: 32px; border-bottom-width: 2px; border-left-width: 0; border-top-width: 0; border-right-width: 0; background-color: rgb(40, 133, 180); border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80); border-top-color: rgb(44, 62, 80); border-bottom-color: rgb(44, 62, 80); justify-content: space-between; padding-left: 4px; padding-right: 2px; flex-direction: row; align-items: center;">
-            <ui:Label text="ELECTRONIC_MAIL_(E-MAIL)" name="EmailName" style="margin-top: 0; margin-right: 4px; margin-bottom: 0; margin-left: 4px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
+            <ui:Label text="ELECTRONIC_MAIL_(E-MAIL)" name="EmailName" class="text-reset" style="margin-right: 4px; margin-left: 4px; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
             <ui:VisualElement name="NavigationKeys" class="editor-header__nav">
                 <ui:Button text="X" name="Exit" class="editor-btn editor-btn--exit editor-button" style="width: 24px; height: 24px; border-right-width: 2px; -unity-text-align: middle-center;"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="EmailInfo" style="flex-grow: 0; height: 28px; border-bottom-width: 2px; border-left-width: 0; border-top-width: 0; border-right-width: 0; background-color: rgb(185, 185, 185); border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80); border-top-color: rgb(44, 62, 80); border-bottom-color: rgb(44, 62, 80); flex-direction: row; justify-content: flex-start; align-items: center; padding-left: 4px; padding-right: 4px;">
             <ui:VisualElement name="SenderInfo" style="flex-grow: 1; flex-direction: row; flex-shrink: 0; width: 236px; overflow: hidden;">
-                <ui:Label text="From:" name="From" class="editor-header__tool-button" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: middle-left; align-self: center;"/>
-                <ui:Label text="Unknown" name="SenderLabel" class="editor-header__tool-button" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: middle-left; align-self: center;"/>
+                <ui:Label text="From:" name="From" class="editor-header__tool-button email-label"/>
+                <ui:Label text="Unknown" name="SenderLabel" class="editor-header__tool-button email-label"/>
             </ui:VisualElement>
             <ui:VisualElement name="SubejctInfo" style="flex-grow: 0; flex-direction: row; flex-shrink: 1; width: 236px; overflow: hidden;">
-                <ui:Label text="Subject:" name="Subject" class="editor-header__tool-button" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: middle-left; align-self: center; width: 28%;"/>
-                <ui:Label text="No Subject" name="SubjectLabel" class="editor-header__tool-button" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: middle-left; align-self: center; text-overflow: ellipsis; overflow: hidden; width: 67%; flex-grow: 0;"/>
+                <ui:Label text="Subject:" name="Subject" class="editor-header__tool-button email-label" style="width: 28%;"/>
+                <ui:Label text="No Subject" name="SubjectLabel" class="editor-header__tool-button email-label" style="text-overflow: ellipsis; overflow: hidden; width: 67%; flex-grow: 0;"/>
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="EmailContent" style="flex-grow: 1; padding-left: 32px; padding-right: 32px; padding-top: 32px; padding-bottom: 32px;">
-            <ui:VisualElement name="EmailDocument" style="flex-grow: 1; background-color: rgb(212, 212, 212); border-left-width: 2px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-color: rgb(185, 185, 185); border-right-color: rgb(185, 185, 185); border-top-color: rgb(185, 185, 185); border-bottom-color: rgb(185, 185, 185); padding-left: 16px; padding-right: 16px; padding-top: 16px; padding-bottom: 16px; -unity-font-definition: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/Resources/EditorFonts/Carlito-Regular.ttf?fileID=12800000&amp;guid=1e14649b7b62e4523869578f79dbe5da&amp;type=3#Carlito-Regular&quot;);">
+            <ui:VisualElement name="EmailDocument" class="email-panel" style="flex-grow: 1; border-left-color: rgb(185, 185, 185); border-right-color: rgb(185, 185, 185); border-top-color: rgb(185, 185, 185); border-bottom-color: rgb(185, 185, 185);">
                 <ui:Label text="" name="EmailTextBox" style="flex-grow: 1; font-size: 14px; -unity-text-align: upper-left; -unity-font-style: normal; white-space: normal;"/>
             </ui:VisualElement>
         </ui:VisualElement>
