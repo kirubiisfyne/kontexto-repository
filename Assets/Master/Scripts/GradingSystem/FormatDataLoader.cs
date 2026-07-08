@@ -17,6 +17,11 @@ public class FormatDataLoader : MonoBehaviour
 
     public GradingManager gradingManager;
 
+    [Header("Penny Assistant")]
+    [FormerlySerializedAs("clippyAssistant")]
+    public PennyAssistantController pennyAssistant;
+
+
     [Header("UI Components")] 
     [Space(10)]
     public GameObject feedbackPanel;
@@ -37,6 +42,7 @@ public class FormatDataLoader : MonoBehaviour
     private Label _senderLabel;
     private Label _subjectLabel;
 
+
     private void Start()
     {
         // Initialize UI Toolkit Elements for Email Panel
@@ -46,6 +52,7 @@ public class FormatDataLoader : MonoBehaviour
         
         _senderLabel = root.Q<Label>("SenderLabel");
         _subjectLabel = root.Q<Label>("SubjectLabel");
+
 
         // Hook up the close button
         var closeButton = _emailRoot?.Q<UnityEngine.UIElements.Button>("Exit");
@@ -98,7 +105,11 @@ public class FormatDataLoader : MonoBehaviour
         if (result.passedPerfectly)
         {
             Debug.Log($"Score: {result.score}/{result.maxScore} - PERFECT PRINT!");
-            // TODO: Play success sound, show success UI, grant XP, etc.
+            
+            if (pennyAssistant != null) 
+            {
+                pennyAssistant.ShowFeedback("Wow! The formatting is absolutely perfect. Great job!");
+            }
             
             HandleFeedbackUI(true, result);
         }
@@ -108,7 +119,7 @@ public class FormatDataLoader : MonoBehaviour
             if (result.adviserFeedback != null && result.adviserFeedback.Count > 0)
             {
                 Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
-                // TODO: Display result.adviserFeedback[0] in your Adviser dialogue box
+                if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.adviserFeedback[0]);
             }
         }
     }
@@ -141,5 +152,7 @@ public class FormatDataLoader : MonoBehaviour
             _emailRoot.style.display = isActive ? DisplayStyle.Flex : DisplayStyle.None;
         }
     }
+
+
 #endregion
 }
