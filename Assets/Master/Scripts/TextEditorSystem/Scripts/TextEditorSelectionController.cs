@@ -28,6 +28,15 @@ namespace Master.Scripts.TextEditorSystem
         {
             if (evt.button != 0) return;
 
+            // FAILSAFE: If a drag was interrupted (e.g. mouse released outside window), 
+            // the document page might permanently hold pointer capture, blocking all clicks!
+            if (_documentPage.HasPointerCapture(evt.pointerId))
+            {
+                _documentPage.ReleasePointer(evt.pointerId);
+                _isSelecting = false;
+                if (_marqueeBox != null) _marqueeBox.style.display = DisplayStyle.None;
+            }
+
             _startMousePos = _documentPage.WorldToLocal(evt.position);
             _isSelecting = false;
 
@@ -44,8 +53,24 @@ namespace Master.Scripts.TextEditorSystem
                 target = target.parent;
             }
 
+            if (_initialDragBlock != null)
+            {
+                _initialDragBlock.schedule.Execute(() => {
+                    // Check if native UI Toolkit already successfully focused the block (or its inner input)
+                    var focused = _initialDragBlock.focusController?.focusedElement as VisualElement;
+                    bool alreadyFocused = focused == _initialDragBlock || focused?.parent == _initialDragBlock;
+
+                    if (!alreadyFocused)
+                    {
+                        _initialDragBlock.Focus();
+                        // Force the caret to be visible at the end of the text
+                        _initialDragBlock.SelectRange(_initialDragBlock.text.Length, _initialDragBlock.text.Length);
+                    }
+                });
+                ClearSelection();
+            }
             // If clicking background, notify manager to handle focus/UI sync
-            if (evt.target == _documentPage)
+            else if (evt.target == _documentPage)
             {
                 onBackgroundClicked?.Invoke(activeBlock);
                 ClearSelection();

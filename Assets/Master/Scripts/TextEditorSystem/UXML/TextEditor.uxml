@@ -66,7 +66,7 @@
             <ui:Label text="Page 1 of 1" name="Page" class="editor-footer__text text-reset"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="EmailRoot" class="email-panel" style="flex-grow: 1; position: absolute; display: none;">
+    <ui:VisualElement name="EmailRoot" class="email-panel" style="flex-grow: 1; position: absolute; display: none; -unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);">
         <ui:VisualElement name="EmailHeader" style="flex-grow: 0; height: 32px; border-bottom-width: 2px; border-left-width: 0; border-top-width: 0; border-right-width: 0; background-color: rgb(40, 133, 180); border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80); border-top-color: rgb(44, 62, 80); border-bottom-color: rgb(44, 62, 80); justify-content: space-between; padding-left: 4px; padding-right: 2px; flex-direction: row; align-items: center;">
             <ui:Label text="ELECTRONIC_MAIL_(E-MAIL)" name="EmailName" class="text-reset" style="margin-right: 4px; margin-left: 4px; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
             <ui:VisualElement name="NavigationKeys" class="editor-header__nav">
@@ -85,9 +85,15 @@
         </ui:VisualElement>
         <ui:VisualElement name="EmailContent" style="flex-grow: 1; padding-left: 32px; padding-right: 32px; padding-top: 32px; padding-bottom: 32px;">
             <ui:VisualElement name="EmailDocument" class="email-panel" style="flex-grow: 1; border-left-color: rgb(185, 185, 185); border-right-color: rgb(185, 185, 185); border-top-color: rgb(185, 185, 185); border-bottom-color: rgb(185, 185, 185);">
-                <ui:Label text="" name="EmailTextBox" style="flex-grow: 1; font-size: 14px; -unity-text-align: upper-left; -unity-font-style: normal; white-space: normal;"/>
+                <ui:Label text="" name="EmailTextBox" style="flex-grow: 1; font-size: 14px; -unity-text-align: upper-left; -unity-font-style: normal; white-space: normal; -unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);"/>
             </ui:VisualElement>
         </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="ClippyRoot">
+        <ui:Label text="" name="ClippyBubbleText">
+            <ui:Button text="Got it!" name="ClippyClose" />
+        </ui:Label>
+        <ui:VisualElement name="ClippyGraphic" />
     </ui:VisualElement>
     <ui:VisualElement name="Overlay" enabled="true" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; -unity-material: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/mat_UIEditor.mat?fileID=2100000&amp;guid=2373e26b9f52341209b60e9dc63f186e&amp;type=2#mat_UIEditor&quot;) prop(&quot;_Color&quot; rgb(0, 13, 76)) prop(&quot;_Scale&quot; 2); background-color: rgb(255, 255, 255); visibility: visible; overflow: visible; display: none; top: 0; left: 0; opacity: 1;"/>
 </ui:UXML>

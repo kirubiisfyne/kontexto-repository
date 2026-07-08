@@ -103,9 +103,11 @@ namespace Master.Scripts.TextEditorSystem
         private void OnPointerDown(PointerDownEvent evt)
         {
             _selectionController.HandlePointerDown(evt, (active) => {
-                active?.Blur();
-                _blockManager.ActiveBlock = null;
-                UpdateRibbonState();
+                // If the user misses and clicks the background, ignore it and KEEP the active block focused!
+                if (active != null)
+                {
+                    active.schedule.Execute(() => active.Focus());
+                }
             }, _blockManager.ActiveBlock);
         }
 
@@ -114,8 +116,9 @@ namespace Master.Scripts.TextEditorSystem
         private void OnPointerUp(PointerUpEvent evt)
         {
             _selectionController.HandlePointerUp(evt, () => {
-                _blockManager.ActiveBlock?.Blur();
-                _blockManager.ActiveBlock = null;
+                // Keep the active block focused so the user doesn't lose their caret.
+                // Just update the ribbon to reflect the new multi-selection!
+                UpdateRibbonState();
             });
         }
 
