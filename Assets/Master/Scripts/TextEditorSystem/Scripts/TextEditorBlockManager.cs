@@ -47,8 +47,15 @@ namespace Master.Scripts.TextEditorSystem
 
             newBlock.RegisterCallback<FocusInEvent>(evt =>
             {
+                // Only clear multi-selection if we are focusing a completely different block.
+                // If we are just re-focusing the same block (e.g. after clicking a font dropdown),
+                // we want to keep the multi-selection intact!
+                if (_activeBlock != newBlock)
+                {
+                    _clearSelection?.Invoke();
+                }
+
                 _activeBlock = newBlock;
-                _clearSelection?.Invoke();
                 newBlock.schedule.Execute(_updateRibbonState);
             });
             newBlock.RegisterCallback<KeyDownEvent, TextField>(OnKeyDown, newBlock, TrickleDown.TrickleDown);

@@ -189,7 +189,20 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 21. Summary of Technical Rationale (Revised)
+## 21. Milestone: UI Toolkit Text Editor Hardening
+**Actions**: Refactored `TextEditorSystem` styles, implemented pointer capture failsafes, and built a custom focus bypass for `TextField`.
+*   **Decision**: Strip inline UXML styles to organized `#ID` blocks in `TextEditorStyle.uss`.
+    *   *Why*: Inline styles in UI Builder were causing layout overrides that fought with runtime C# logic. Moving them to USS guarantees predictable specificity.
+*   **Decision**: `schedule.Execute` for `TextField.Focus()`.
+    *   *Why*: In UI Toolkit, raw clicks on the padding of a `TextField` fail to focus natively and actively blur the line instead. By scheduling our focus command to fire *after* the native event resolution step, we bypass the native blur behavior and ensure the caret appears reliably on every click.
+*   **Decision**: Smart Multi-Selection Retention.
+    *   *Why*: Applying styles via the Ribbon (e.g. Dropdowns) steals focus. When the system forcefully pulls focus *back* to the active block, it triggered a `FocusInEvent` that wiped the multi-line selection. Added a check (`_activeBlock != newBlock`) to bypass the wipe, allowing users to stack multiple ribbon styles without losing their marquee highlight.
+*   **Decision**: Failsafe Pointer Release & `picking-mode: ignore`.
+    *   *Why*: Solved a silent UI Toolkit bug where interrupted drags permanently captured the pointer, breaking all future clicks. Added explicit `ReleasePointer` checks and set `picking-mode: ignore` on the marquee overlay to prevent transparent elements from swallowing raycasts.
+
+---
+
+## 22. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.

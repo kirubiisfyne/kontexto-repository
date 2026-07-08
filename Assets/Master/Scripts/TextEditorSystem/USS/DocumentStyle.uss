@@ -3,6 +3,7 @@
     font-size: 14px;
     width: 100%;
     min-width: 20px;
+    min-height: 24px;
     margin: 0;
     padding: 0;
     padding-left: 4px;
@@ -12,6 +13,8 @@
 
 .editor-block--selected {
     background-color: rgba(44, 130, 201, 0.2);
+    --unity-cursor-color: transparent;
+    --unity-selection-color: transparent;
 }
 
 #marquee-box {
@@ -20,6 +23,7 @@
     border-width: 1px;
     border-color: rgba(44, 130, 201, 0.5);
     display: none;
+    picking-mode: ignore;
 }
 
 .editor-block > .unity-text-field__input {
