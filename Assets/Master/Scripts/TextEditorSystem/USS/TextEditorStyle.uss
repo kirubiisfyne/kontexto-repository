@@ -227,16 +227,16 @@
     -unity-font-definition: url("project://database/Assets/Master/Scripts/TextEditorSystem/Resources/EditorFonts/Carlito-Regular.ttf?fileID=12800000&guid=1e14649b7b62e4523869578f79dbe5da&type=3#Carlito-Regular");
 }
 
-#ClippyRoot {
+#PennyRoot {
     flex-grow: 1;
     position: absolute;
-    right: 23px;
+    right: 32px;
     flex-direction: row;
-    bottom: 32px;
+    bottom: 48px;
     align-items: flex-start;
 }
 
-#ClippyBubbleText {
+#PennyBubbleText {
     background-color: rgb(185, 185, 185);
     border-width: 2px;
     border-color: rgb(51, 51, 51);
@@ -246,16 +246,14 @@
     white-space: normal;
     -unity-font-definition: url("project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&guid=d1b87e1ab6bfe4900a28613db31ad1ac&type=3#PixeloidSans");
     text-overflow: ellipsis;
-    min-width: 128px;
-    max-width: 200px;
-    min-height: 80px;
-    justify-content: flex-end;
-    flex-grow: 1;
+    min-width: 144px;
+    max-width: 256px;
+    min-height: 98px;
     font-size: 12px;
     margin-bottom: 24px;
 }
 
-#ClippyClose {
+#PennyClose {
     position: absolute;
     bottom: -20px;
     margin: 0;
@@ -268,9 +266,19 @@
     border-color: rgb(51, 51, 51);
     font-size: 12px;
     color: rgb(82, 82, 82);
+    transition-duration: 0.1s;
 }
 
-#ClippyGraphic {
+#PennyClose:hover {
+    background-color: rgb(210, 210, 210);
+    color: rgb(0, 0, 0);
+}
+
+#PennyClose:active {
+    background-color: rgb(150, 150, 150);
+}
+
+#PennyGraphic {
     width: 64px;
     height: 128px;
     background-image: resource("ClippyFrames/0001");

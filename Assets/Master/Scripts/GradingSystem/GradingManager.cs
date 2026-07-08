@@ -31,7 +31,7 @@ public class GradingManager : MonoBehaviour
 
             if (matchedBlock == null)
             {
-                report.adviserFeedback.Add($"Oops! You seem to have deleted or heavily altered the section about: '{req.targetTextSnippet}'.");
+                report.adviserFeedback.Add($"Oh no, '{req.targetTextSnippet}' is missing!");
                 // Penalize heavily for missing a required block entirely (e.g., 4 points)
                 report.maxScore += 4; 
                 continue;
@@ -72,9 +72,9 @@ public class GradingManager : MonoBehaviour
             if (anyCheckRan && blockPerfect)
             {
                 string[] praises = {
-                    $"The '{req.targetTextSnippet}' section was exceptionally well-executed.",
-                    $"You delivered a high level of quality in the '{req.targetTextSnippet}' portion.",
-                    $"Perfect formatting on the '{req.targetTextSnippet}' segment."
+                    $"Awesome job on the '{req.targetTextSnippet}' section!",
+                    $"'{req.targetTextSnippet}' looks absolutely perfect!",
+                    $"Spot on with the '{req.targetTextSnippet}' formatting!"
                 };
                 report.adviserFeedback.Add(praises[Random.Range(0, praises.Length)]);
             }
@@ -102,7 +102,7 @@ public class GradingManager : MonoBehaviour
         if (Mathf.RoundToInt(style.fontSize) == req.requiredSize.Value) 
         { report.score++; return true; }
         
-        report.adviserFeedback.Add($"The text '{req.targetTextSnippet}' should be size {req.requiredSize.Value}.");
+        report.adviserFeedback.Add($"Let's resize '{req.targetTextSnippet}' to {req.requiredSize.Value}!");
         return false;
     }
 
@@ -115,7 +115,7 @@ public class GradingManager : MonoBehaviour
         if (isBold == req.requireBold.Value) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add(req.requireBold.Value ? $"Don't forget to Bold '{req.targetTextSnippet}'!" : $"'{req.targetTextSnippet}' shouldn't be Bold.");
+        report.adviserFeedback.Add(req.requireBold.Value ? $"Try bolding '{req.targetTextSnippet}'!" : $"Let's un-bold '{req.targetTextSnippet}'.");
         return false;
     }
 
@@ -128,7 +128,7 @@ public class GradingManager : MonoBehaviour
         if (isItalic == req.requireItalic.Value) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add(req.requireItalic.Value ? $"Don't forget to Italicize '{req.targetTextSnippet}'!" : $"'{req.targetTextSnippet}' shouldn't be Italicized.");
+        report.adviserFeedback.Add(req.requireItalic.Value ? $"Try italicizing '{req.targetTextSnippet}'!" : $"Let's un-italicize '{req.targetTextSnippet}'.");
         return false;
     }
 
@@ -140,7 +140,7 @@ public class GradingManager : MonoBehaviour
         if (style.unityTextAlign == req.requiredAlignment.Value) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add($"The alignment is incorrect for '{req.targetTextSnippet}'.");
+        report.adviserFeedback.Add($"Let's fix the alignment for '{req.targetTextSnippet}'!");
         return false;
     }
 
@@ -151,7 +151,7 @@ public class GradingManager : MonoBehaviour
         if (block.ClassListContains(req.requiredStyle)) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add($"You need to apply the '{req.requiredStyle}' style to '{req.targetTextSnippet}'.");
+        report.adviserFeedback.Add($"Try the '{req.requiredStyle}' style on '{req.targetTextSnippet}'!");
         return false;
     }
 
@@ -169,7 +169,7 @@ public class GradingManager : MonoBehaviour
         if (currentListType == req.requiredListType.Value) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add($"The list formatting (bullet/number) is incorrect for '{req.targetTextSnippet}'.");
+        report.adviserFeedback.Add($"Let's check the bullets or numbers on '{req.targetTextSnippet}'.");
         return false;
     }
 
@@ -181,7 +181,7 @@ public class GradingManager : MonoBehaviour
         if (hasSpace == req.requireSpaceBefore.Value) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add(req.requireSpaceBefore.Value ? $"Add some Space Before '{req.targetTextSnippet}'." : $"Remove the Space Before '{req.targetTextSnippet}'.");
+        report.adviserFeedback.Add(req.requireSpaceBefore.Value ? $"Add a little Space Before '{req.targetTextSnippet}'." : $"Let's remove the Space Before '{req.targetTextSnippet}'.");
         return false;
     }
 
@@ -193,7 +193,7 @@ public class GradingManager : MonoBehaviour
         if (hasSpace == req.requireSpaceAfter.Value) 
         { report.score++; return true; }
 
-        report.adviserFeedback.Add(req.requireSpaceAfter.Value ? $"Add some Space After '{req.targetTextSnippet}'." : $"Remove the Space After '{req.targetTextSnippet}'.");
+        report.adviserFeedback.Add(req.requireSpaceAfter.Value ? $"Add a little Space After '{req.targetTextSnippet}'." : $"Let's remove the Space After '{req.targetTextSnippet}'.");
         return false;
     }
 }

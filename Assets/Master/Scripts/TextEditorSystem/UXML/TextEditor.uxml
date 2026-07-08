@@ -89,11 +89,11 @@
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="ClippyRoot">
-        <ui:Label text="" name="ClippyBubbleText">
-            <ui:Button text="Got it!" name="ClippyClose" />
+    <ui:VisualElement name="PennyRoot">
+        <ui:Label text="" name="PennyBubbleText">
+            <ui:Button text="Got it!" name="PennyClose" />
         </ui:Label>
-        <ui:VisualElement name="ClippyGraphic" />
+        <ui:VisualElement name="PennyGraphic" />
     </ui:VisualElement>
     <ui:VisualElement name="Overlay" enabled="true" picking-mode="Ignore" style="flex-grow: 1; position: absolute; width: 100%; height: 100%; -unity-material: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/mat_UIEditor.mat?fileID=2100000&amp;guid=2373e26b9f52341209b60e9dc63f186e&amp;type=2#mat_UIEditor&quot;) prop(&quot;_Color&quot; rgb(0, 13, 76)) prop(&quot;_Scale&quot; 2); background-color: rgb(255, 255, 255); visibility: visible; overflow: visible; display: none; top: 0; left: 0; opacity: 1;"/>
 </ui:UXML>
