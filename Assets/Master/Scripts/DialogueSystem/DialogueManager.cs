@@ -54,6 +54,18 @@ namespace Master.Scripts.DialogueSystem
             }
         }
 
+        private void Start()
+        {
+            // Auto-inject feedback from Editor if this is the Adviser
+            if (dialogueJson != null && dialogueJson.name.ToLower().Contains("adviser") && 
+                GameManager.Instance != null && GameManager.Instance.pendingAdviserFeedback != null && GameManager.Instance.pendingAdviserFeedback.Count > 0)
+            {
+                // Index 2 is assumed to be the "Completed" conversation branch
+                InjectDynamicLines(2, GameManager.Instance.pendingAdviserFeedback, "Adviser");
+                GameManager.Instance.pendingAdviserFeedback.Clear();
+            }
+        }
+
         #region Public API
 
         public void UseIdleDialogue()
@@ -121,6 +133,16 @@ namespace Master.Scripts.DialogueSystem
         public void SetIndex(int index)
         {
             currentConversationIndex = Mathf.Clamp(index, 0, conversations.Count - 1);
+        }
+
+        public void InjectDynamicLines(int index, List<string> newLines, string speakerName = "Adviser")
+        {
+            if (index < 0 || index >= conversations.Count) return;
+            
+            foreach (var text in newLines)
+            {
+                conversations[index].lines.Add(new DialogueLine { speaker = speakerName, text = text });
+            }
         }
 
         #endregion

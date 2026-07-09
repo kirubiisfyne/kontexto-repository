@@ -21,6 +21,10 @@ public class FormatDataLoader : MonoBehaviour
     [FormerlySerializedAs("clippyAssistant")]
     public PennyAssistantController pennyAssistant;
 
+    [Header("Warping")]
+    [Tooltip("The name of the Campus scene to warp back to when passed")]
+    public string campusSceneName = "Campus";
+
 
     [Header("UI Components")] 
     [Space(10)]
@@ -102,26 +106,63 @@ public class FormatDataLoader : MonoBehaviour
 
         GradeReport result = gradingManager.GradeDocument(documentPage, convertedDocumentData);
 
-        if (result.passedPerfectly)
+        if (result.passedLevel)
         {
-            Debug.Log($"Score: {result.score}/{result.maxScore} - PERFECT PRINT!");
-            
-            if (pennyAssistant != null) 
+            // Signal success for the Computer in the Campus scene
+            if (GameManager.Instance != null) 
             {
-                pennyAssistant.ShowFeedback("Wow! The formatting is absolutely perfect. Great job!");
+                GameManager.Instance.pendingDocumentSuccess = true;
             }
             
-            HandleFeedbackUI(true, result);
+            // Store dynamic lines for the Campus scene to pick up
+            if (GameManager.Instance != null)
+            {
+                var feedbackLines = new System.Collections.Generic.List<string>();
+                
+                if (result.passedPerfectly)
+                {
+                    feedbackLines.Add("Wow, this is completely flawless! You followed every single instruction.");
+                    feedbackLines.Add("You're a natural. Good job!");
+                }
+                else
+                {
+                    feedbackLines.Add("Hmm, it's decent enough to pass, but I noticed a few formatting mistakes.");
+                    if (result.adviserFeedback != null) feedbackLines.AddRange(result.adviserFeedback);
+                    feedbackLines.Add("Try to be more careful next time. Still, good effort.");
+                }
+                
+                GameManager.Instance.pendingAdviserFeedback = feedbackLines;
+            }
+            
+            // Show Penny and wait for dismissal to warp back
+            if (pennyAssistant != null) 
+            {
+                pennyAssistant.onFeedbackDismissed = () => { StartCoroutine(WarpBackRoutine()); };
+                pennyAssistant.ShowFeedback(result.passedPerfectly ? "Wow! The formatting is absolutely perfect. Great job!" : "You passed! But there are some things we can improve. Let's head back!", true);
+            }
+            else
+            {
+                StartCoroutine(WarpBackRoutine());
+            }
         }
         else
         {
-            Debug.Log($"Score: {result.score}/{result.maxScore} - NEEDS REVISION.");
+            Debug.Log($"Score: {result.score}/{result.maxScore} - FAILED. NEEDS REVISION.");
             if (result.adviserFeedback != null && result.adviserFeedback.Count > 0)
             {
                 Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
-                if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.adviserFeedback[0]);
+                if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.adviserFeedback[0], false);
             }
         }
+    }
+
+    private System.Collections.IEnumerator WarpBackRoutine()
+    {
+        if (Master.Scripts.TransitionManager.Instance != null)
+        {
+            yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("anim_TransitionOut");
+        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(campusSceneName);
     }
 
 #region UI Callbacks

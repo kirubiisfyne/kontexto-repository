@@ -23,3 +23,7 @@ MonoBehaviour:
     spawnPosition: {x: 0, y: 0, z: 0}
     spawnRotation: {x: 0, y: 0, z: 0}
     usePrefabTransform: 1
+  - prefab: {fileID: 2851217387826432468, guid: d7c61538d8e4844b09f81bc261feed96, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 0}
+    spawnRotation: {x: 0, y: 0, z: 0}
+    usePrefabTransform: 1

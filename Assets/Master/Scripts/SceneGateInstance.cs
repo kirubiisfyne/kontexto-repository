@@ -33,6 +33,9 @@ namespace Master.Scripts
             {
                 if (!string.IsNullOrEmpty(sceneToName))
                 {
+                    // Save player's current position so they return here after the editor
+                    Master.Scripts.SaveSystem.LevelLoader.Current?.SaveGame();
+                    
                     SceneGateManager.Instance.StartWarp(sceneToName);
                     Debug.Log($"Warping to {sceneToName}...");
                 }

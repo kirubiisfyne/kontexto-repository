@@ -9,8 +9,8 @@ These systems are built but require final wiring, UI connections, or polish.
   - Ensure the `TextEditorSystem` UI is visually complete and functionally smooth for the player to edit documents. (Completed: Refactored UXML styles, resolved UI Toolkit pointer capture bugs, fixed multi-select persistence, and ensured stable caret focus).
 - [x] **Step 4: Grading Failure Feedback Loop**
   - In `FormatDataLoader.cs` (`EvaluatePrintJob`), replace the `TODO` with actual logic to display `result.adviserFeedback[0]` in the Adviser dialogue box so the player knows why their print failed. (Completed: Implemented Clippy UI Toolkit connection)
-- [ ] **Step 4: Grading Success/Print Polish**
-  - In `FormatDataLoader.cs` (`EvaluatePrintJob`), replace the `TODO` for perfect prints. Wire up the success sound, grant XP (if applicable), and trigger the final success UI.
+- [x] **Step 4: Grading Success/Print Polish**
+  - In `FormatDataLoader.cs` (`EvaluatePrintJob`), replace the `TODO` for perfect prints. Wire up the success sound, grant XP (if applicable), and trigger the final success UI. (Completed: Built cross-scene GameManager mailbox architecture, implemented auto-collection script, and wired dynamic Dialogue System injection).
 
 ## ❌ Not Yet (Needs to be built)
 These elements are missing and must be constructed from scratch for the beta flow.

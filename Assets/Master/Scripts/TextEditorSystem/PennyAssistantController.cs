@@ -5,6 +5,8 @@ using UnityEngine.UIElements;
 
 public class PennyAssistantController : MonoBehaviour
 {
+    public System.Action onFeedbackDismissed;
+    
     public UIDocument uiDocument;
     
     [Header("Animation Settings")]
@@ -36,9 +38,12 @@ public class PennyAssistantController : MonoBehaviour
         if (closeBtn != null) closeBtn.clicked += HideFeedback;
     }
 
-    public void ShowFeedback(string message)
+    public void ShowFeedback(string message, bool centerOnScreen = false)
     {
         if (_root == null) return;
+        
+        if (centerOnScreen) _root.AddToClassList("penny-center");
+        else _root.RemoveFromClassList("penny-center");
         
         _bubbleText.text = message;
         
@@ -52,6 +57,9 @@ public class PennyAssistantController : MonoBehaviour
     private void HideFeedback()
     {
         if (_root == null) return;
+        
+        onFeedbackDismissed?.Invoke();
+        onFeedbackDismissed = null;
         
         if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
         _fadeCoroutine = StartCoroutine(FadeRoutine(0f));

@@ -26,6 +26,10 @@ namespace Master.Scripts
             
             public int currentLevel = 0;
             public List<TaskData> availableTasks;
+            
+            // Cross-Scene Data
+            public bool pendingDocumentSuccess = false;
+            public List<string> pendingAdviserFeedback = new List<string>();
         #endregion
         
         private void Awake()
