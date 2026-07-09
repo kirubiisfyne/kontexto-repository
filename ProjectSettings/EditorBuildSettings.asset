@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/scn_campus.unity
     guid: d4d294597db0a4af78d72d0ee16df4a8
   - enabled: 0
-    path: Assets/Scenes/Templates/scn_prototype_scene.unity
+    path: Assets/Scenes/_templates/scn_prototype_scene.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 0
     path: Assets/Scenes/scn_prototype_scene 1.unity
