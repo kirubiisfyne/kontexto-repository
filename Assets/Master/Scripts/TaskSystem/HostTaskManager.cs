@@ -69,6 +69,15 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
+            // Prerequisite check must happen synchronously so it can override the DialogueManager
+            // before the DialogueManager's coroutine yields for the first frame.
+            if (status == TaskStatus.Inactive && HasUnmetPrerequisite())
+            {
+                Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
+                events.onPrerequisiteNotMet?.Invoke();
+                return;
+            }
+
             // Both: defers the state change by one frame so DialogueManager.Interact()
             // can snapshot the correct conversation index before status (and index) changes.
             if (hostType == HostType.Both)
@@ -80,12 +89,6 @@ namespace Master.Scripts.TaskSystem
             // Givers only start the task.
             if (status == TaskStatus.Inactive)
             {
-                if (HasUnmetPrerequisite())
-                {
-                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
-                    events.onPrerequisiteNotMet?.Invoke();
-                    return;
-                }
                 StartTask();
             }
         }
@@ -97,15 +100,7 @@ namespace Master.Scripts.TaskSystem
             yield return null;
             if (status == TaskStatus.Inactive)
             {
-                if (HasUnmetPrerequisite())
-                {
-                    Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
-                    events.onPrerequisiteNotMet?.Invoke();
-                }
-                else
-                {
-                    StartTask();
-                }
+                StartTask();
             }
             else if (status == TaskStatus.ReadyToComplete)
             {
@@ -152,7 +147,7 @@ namespace Master.Scripts.TaskSystem
             return true; // Prerequisite is UNMET
         }
 
-        private void StartTask()
+        public void StartTask()
         {
             if (task == null || task.requirements == null || task.requirements.objectives == null)
             {

@@ -56,6 +56,7 @@ Avoid splitting systems unnecessarily if it introduces coupling.
 
 - All new features MUST be built to fit seamlessly into the Unity Inspector workflow.
 - Code should be written assuming that prefabs might be instanced dynamically. Prefabs should not hold hard references to scene objects; use bridging scripts (e.g., `SaveGameBridge`) or scene-local managers.
+- All significant code changes, feature implementations, or architectural updates MUST be documented in `Assets/Master/Docs/DEVELOPMENT_DIARY.md` prior to committing changes. This ensures the historical archive is always up-to-date with the codebase.
 
 ## Governance
 

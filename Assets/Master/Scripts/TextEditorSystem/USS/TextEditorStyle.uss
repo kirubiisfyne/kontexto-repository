@@ -287,3 +287,11 @@
     min-height: 128px;
     max-height: 128px;
 }
+
+.penny-center {
+    right: auto;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+}

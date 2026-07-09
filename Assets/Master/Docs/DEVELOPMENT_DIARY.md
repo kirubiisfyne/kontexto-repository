@@ -202,7 +202,31 @@ This diary documents the architectural evolution of the project, the major decis
 
 ---
 
-## 22. Summary of Technical Rationale (Revised)
+## 22. Milestone: Cross-Scene Dialogue Architecture
+**Actions**: Added `pendingDocumentSuccess` and `pendingAdviserFeedback` to `GameManager.cs`, introduced `AutoCollectPrintJob.cs`, and implemented `InjectDynamicLines` in `DialogueManager.cs`.
+*   **Decision**: Decouple the UI Editor from the Campus Scene entirely.
+    *   *Why*: The UI Editor is an isolated additive/swapped scene that cannot hold references to 3D Campus objects. Instead of creating convoluted cross-scene dependencies, we use the persistent `GameManager` as a "mailbox" to temporarily store the dynamic grading feedback.
+*   **Decision**: Auto-Injection via `DialogueManager.Start()`.
+    *   *Why*: When the Campus scene loads, the Adviser NPC organically checks the `GameManager` mailbox. If there is pending feedback, it dynamically injects the lines into its own JSON-loaded memory and clears the box. This allows the Dialogue System to remain agnostic to where the lines came from.
+*   **Decision**: Autonomous Objective Completion (`AutoCollectPrintJob`).
+    *   *Why*: We removed `HostTaskManager.ReportProgress()` from the UI Editor to keep it "dumb". Instead, the Editor flips a boolean flag on the `GameManager`. When the Campus loads, the `AutoCollectPrintJob` script on the Computer reads the flag and forces the `KeyItemInstance` to complete the objective organically.
+
+---
+
+## 23. Milestone: Beta Loop Hardening & UI Polish
+**Actions**: Patched the cross-scene Save Gap, fixed the `DialogueManager` 1-frame flicker, and shifted Editor UI feedback from a timer to a manual delegate.
+*   **Decision**: Synchronous Prerequisite Checking.
+    *   *Why*: The 1-frame coroutine delay for `HostType.Both` caused a race condition where the Inactive dialogue would briefly flash on screen before the prerequisite failure could invoke `UseIdleDialogue()`. Moving the prerequisite check *before* the coroutine yields strictly enforces the state override.
+*   **Decision**: Force-Resume Active Tasks in `AutoCollectPrintJob`.
+    *   *Why*: The Save System ignores half-finished (`Active`) tasks to prevent file corruption. When the Campus scene reloads after the Editor, the Adviser's task drops to `Inactive`. `AutoCollectPrintJob` now manually forces the task back to `Active` right before organically reporting progress. It also uses a dynamic scene scan if the designer forgets to assign the `targetGiver` slot.
+*   **Decision**: Dynamic Compliment Assembly (`FormatDataLoader`).
+    *   *Why*: Graders previously only sent a list of errors. If the player got a perfect score, the Dialogue System had nothing to inject, leaving the NPC silent. The grader now builds custom string arrays based on perfect vs. passing scores, ensuring context-aware feedback is always delivered.
+*   **Decision**: Manual UI Dismissal Delegate (`onFeedbackDismissed`).
+    *   *Why*: Instead of an arbitrary 4-second delay before warping back to Campus, Penny now displays the grade in the absolute center of the screen (`.penny-center`). The scene warp is delegated directly to her Close button, returning agency to the player.
+
+---
+
+## 24. Summary of Technical Rationale (Revised)
 
 ### Stability & Purity
 By moving to a "Dumb" system model, we've ensured that a bug in the Task System cannot crash the Dialogue System. The code is cleaner, more robust against null references, and follows the SOLID principle of Single Responsibility.

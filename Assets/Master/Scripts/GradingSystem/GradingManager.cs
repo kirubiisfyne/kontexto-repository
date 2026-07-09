@@ -9,11 +9,14 @@ public class GradeReport
     public int score;
     public int maxScore;
     public bool passedPerfectly;
+    public bool passedLevel;
     public List<string> adviserFeedback = new List<string>();
 }
 
 public class GradingManager : MonoBehaviour
 {
+    [Range(0f, 1f)]
+    public float passingGradeThreshold = 0.5f;
     public GradeReport GradeDocument(VisualElement documentPage, DocumentData currentDocument)
     {
         GradeReport report = new GradeReport();
@@ -82,6 +85,7 @@ public class GradingManager : MonoBehaviour
 
         // 5. Finalize
         report.passedPerfectly = (report.score == report.maxScore) && (report.maxScore > 0);
+        report.passedLevel = (report.maxScore == 0) || ((float)report.score / report.maxScore >= passingGradeThreshold);
         if (report.passedPerfectly)
         {
             report.adviserFeedback.Add("Perfect formatting! You nailed the whole document.");
