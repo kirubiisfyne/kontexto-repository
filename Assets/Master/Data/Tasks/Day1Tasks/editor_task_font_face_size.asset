@@ -17,7 +17,7 @@ MonoBehaviour:
   description: Fix the Club Application Form to the Adviser's Instructions. Adjust
     Font Face and Size Appropriately.
   prerequisite:
-    task: {fileID: 11400000, guid: f82ece31532d74d7d91b5dea4907f6cb, type: 2}
+    task: {fileID: 0}
     requiredStatus: 3
   requirements:
     needsSequentialOrder: 0
