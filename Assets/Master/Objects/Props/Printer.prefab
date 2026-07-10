@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 7473671721052858586}
   - component: {fileID: 4660735422204319637}
   - component: {fileID: 1871762599165663223}
+  - component: {fileID: 6984685511069867403}
   m_Layer: 0
-  m_Name: msh_Printer
+  m_Name: Printer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66,11 +67,10 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0cd62df37376f438bac0ad862ac67aed, type: 2}
-  - {fileID: 2100000, guid: 776abe12822cb40c099dbe5e69309f37, type: 2}
-  - {fileID: 2100000, guid: 3415cf0e7473a4294804313ba761d603, type: 2}
-  - {fileID: 2100000, guid: 69da67aad795e4e779dda8f51ed4462e, type: 2}
-  - {fileID: 2100000, guid: 590112af75c2b4fe6813d66bb8e5387c, type: 2}
+  - {fileID: 2100000, guid: e6716c58ae3234173a3b2d24e6dc1638, type: 2}
+  - {fileID: 2100000, guid: f2c49e4750e3f4ede853f414505a86f9, type: 2}
+  - {fileID: 2100000, guid: e20f8c89a08c94a769edab3fac7c4206, type: 2}
+  - {fileID: 2100000, guid: d53388c5e83f842859ffd4de297dcb20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,3 +94,20 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!111 &6984685511069867403
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4735699818098819806}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: bd536929604c2432fa62fccc1adcf50e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bd536929604c2432fa62fccc1adcf50e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0

@@ -26,6 +26,17 @@ namespace Master.Scripts.TaskSystem
         public UnityEvent onAcceptedReport;
 
         /// <summary>
+        /// Forces an interaction even if the script is disabled. Perfect for wiring to UnityEvents (like an NPC's onCompleted event).
+        /// </summary>
+        public void ForceInteract()
+        {
+            bool previousState = enabled;
+            enabled = true;
+            Interact();
+            enabled = previousState;
+        }
+
+        /// <summary>
         /// Reports progress and optionally disables the item or this script based on a "receipt" from the Giver.
         /// </summary>
         public void Interact()
