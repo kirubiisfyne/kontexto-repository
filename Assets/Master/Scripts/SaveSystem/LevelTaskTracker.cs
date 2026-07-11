@@ -19,6 +19,8 @@ namespace Master.Scripts.SaveSystem
         [Header("Events")]
         public UnityEvent<HostTaskManager> onTaskActivatedEvent;
         public UnityEvent<string> onTaskCompletedEvent;
+        [Tooltip("Fired when the player finishes all currently active tasks, ignoring inactive ones.")]
+        public UnityEvent onAllActiveTasksCompletedEvent;
 
         private string sceneId;
         private PlayerData playerData;
@@ -151,11 +153,30 @@ namespace Master.Scripts.SaveSystem
 
                 onTaskCompletedEvent?.Invoke(taskId);
 
+                if (!AreAnyTasksActive())
+                {
+                    Debug.Log($"LevelTaskTracker: All currently ACTIVE tasks are completed.");
+                    onAllActiveTasksCompletedEvent?.Invoke();
+                }
+
                 if (AreAllTasksCompleted())
                 {
                     Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are now COMPLETED. Ready for level completion.");
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns true if there is at least one task currently Active or ReadyToComplete.
+        /// </summary>
+        public bool AreAnyTasksActive()
+        {
+            foreach (var mgr in spawnedGivers)
+            {
+                if (mgr != null && (mgr.status == TaskStatus.Active || mgr.status == TaskStatus.ReadyToComplete))
+                    return true;
+            }
+            return false;
         }
 
         public bool AreAllTasksCompleted()
