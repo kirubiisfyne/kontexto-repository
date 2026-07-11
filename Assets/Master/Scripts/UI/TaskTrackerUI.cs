@@ -37,7 +37,13 @@ namespace Master.Scripts.UI
             }
         }
 
-
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                TogglePanel();
+            }
+        }
 
         /// <summary>
         /// Called when a task becomes active dynamically (e.g., after NPC conversation).

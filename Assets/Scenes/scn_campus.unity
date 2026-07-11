@@ -17343,108 +17343,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1635912039667471943, guid: a57ea5529665d460caf0b8f37afa2a76, type: 3}
   m_PrefabInstance: {fileID: 794505097}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &414821855
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 897235885}
-    m_Modifications:
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015484341291765438, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-      propertyPath: m_Name
-      value: TaskItem
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
---- !u!224 &414821856 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 962267524402144287, guid: 47a6454b876ea41be94816fd90564e79, type: 3}
-  m_PrefabInstance: {fileID: 414821855}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &415506817
 GameObject:
   m_ObjectHideFlags: 0
@@ -33293,8 +33191,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 414821856}
+  m_Children: []
   m_Father: {fileID: 1811378760}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -33320,7 +33217,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 16
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -36318,6 +36215,21 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: Master.Scripts.UI.TaskTrackerUI, Assembly-CSharp
         m_MethodName: OnTaskCompleted
         m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onAllActiveTasksCompletedEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3145481887956326664}
+        m_TargetAssemblyTypeName: Master.Scripts.UI.TaskTrackerUI, Assembly-CSharp
+        m_MethodName: TogglePanel
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
