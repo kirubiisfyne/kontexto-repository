@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Master.Scripts.TaskSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Master.Scripts.SaveSystem
 {
@@ -14,6 +15,12 @@ namespace Master.Scripts.SaveSystem
         [Header("Runtime (Read-Only)")]
         [Tooltip("All Giver/Both HostTaskManagers spawned by this loader.")]
         [SerializeField] private List<HostTaskManager> spawnedGivers = new List<HostTaskManager>();
+
+        [Header("Events")]
+        public UnityEvent<HostTaskManager> onTaskActivatedEvent;
+        public UnityEvent<string> onTaskCompletedEvent;
+        [Tooltip("Fired when the player finishes all currently active tasks, ignoring inactive ones.")]
+        public UnityEvent onAllActiveTasksCompletedEvent;
 
         private string sceneId;
         private PlayerData playerData;
@@ -94,7 +101,9 @@ namespace Master.Scripts.SaveSystem
                         else
                         {
                             var capturedId = mgr.task.taskId;
+                            var capturedMgr = mgr;
                             mgr.events.onCompleted.AddListener(() => OnTaskCompleted(capturedId));
+                            mgr.events.onActive.AddListener(() => OnTaskActivated(capturedMgr));
                         }
                     }
                 }
@@ -126,6 +135,11 @@ namespace Master.Scripts.SaveSystem
             Debug.Log($"LevelTaskTracker: Restored '{mgr.task.taskId}' as Completed.");
         }
 
+        private void OnTaskActivated(HostTaskManager mgr)
+        {
+            onTaskActivatedEvent?.Invoke(mgr);
+        }
+
         private void OnTaskCompleted(string taskId)
         {
             var level = playerData.GetOrCreateLevel(sceneId);
@@ -137,11 +151,32 @@ namespace Master.Scripts.SaveSystem
 
                 Debug.Log($"LevelTaskTracker: Task '{taskId}' saved as completed.");
 
+                onTaskCompletedEvent?.Invoke(taskId);
+
+                if (!AreAnyTasksActive())
+                {
+                    Debug.Log($"LevelTaskTracker: All currently ACTIVE tasks are completed.");
+                    onAllActiveTasksCompletedEvent?.Invoke();
+                }
+
                 if (AreAllTasksCompleted())
                 {
                     Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are now COMPLETED. Ready for level completion.");
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns true if there is at least one task currently Active or ReadyToComplete.
+        /// </summary>
+        public bool AreAnyTasksActive()
+        {
+            foreach (var mgr in spawnedGivers)
+            {
+                if (mgr != null && (mgr.status == TaskStatus.Active || mgr.status == TaskStatus.ReadyToComplete))
+                    return true;
+            }
+            return false;
         }
 
         public bool AreAllTasksCompleted()
