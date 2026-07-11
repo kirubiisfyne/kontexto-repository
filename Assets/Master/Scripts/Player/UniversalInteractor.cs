@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Master.Scripts.DialogueSystem;
 
@@ -5,6 +6,7 @@ namespace Master.Scripts
 {
     /// <summary>
     /// Simple interactor that finds the nearest GameObject with IInteractable components and triggers all of them.
+    /// Broadcasts an event when an interactable object is within range.
     /// </summary>
     public class UniversalInteractor : MonoBehaviour
     {
@@ -12,24 +14,41 @@ namespace Master.Scripts
         public float interactRange = 3f;
         public LayerMask interactableLayer = ~0;
 
+        // --- NEW: Event to broadcast when we are near or far from an interactable
+        public static event Action<bool> OnInteractableProximityChanged;
+        
+        private GameObject currentClosestInteractable = null;
+        private bool isNearInteractable = false;
+
         private void Update()
         {
             // Prevent interaction if a dialogue is currently active
-            if (DialogueManager.IsConversationActive) return;
-
-            if (Input.GetKeyDown(KeyCode.E))
+            if (DialogueManager.IsConversationActive)
             {
-                TryInteract();
+                if (isNearInteractable)
+                {
+                    isNearInteractable = false;
+                    OnInteractableProximityChanged?.Invoke(false);
+                }
+                return;
+            }
+
+            // 1. Constantly check for the closest interactable in range
+            CheckForInteractablesInRange();
+
+            // 2. Interact if we press E and have something in range
+            if (Input.GetKeyDown(KeyCode.E) && currentClosestInteractable != null)
+            {
+                InteractWithCurrent();
             }
         }
 
-        private void TryInteract()
+        private void CheckForInteractablesInRange()
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactRange, interactableLayer);
-            GameObject closestObject = null;
+            currentClosestInteractable = null;
             float closestDistance = float.MaxValue;
 
-            // Find the closest GameObject that has at least one IInteractable component
             foreach (var hit in hitColliders)
             {
                 if (hit.GetComponent<IInteractable>() != null)
@@ -38,15 +57,27 @@ namespace Master.Scripts
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestObject = hit.gameObject;
+                        currentClosestInteractable = hit.gameObject;
                     }
                 }
             }
 
-            // Trigger all IInteractable components on the closest object
-            if (closestObject != null)
+            // Determine if we currently have an interactable in range
+            bool currentlyNearInteractable = (currentClosestInteractable != null);
+
+            // Only invoke the event if the state actually changed
+            if (currentlyNearInteractable != isNearInteractable)
             {
-                IInteractable[] interactables = closestObject.GetComponents<IInteractable>();
+                isNearInteractable = currentlyNearInteractable;
+                OnInteractableProximityChanged?.Invoke(isNearInteractable);
+            }
+        }
+
+        private void InteractWithCurrent()
+        {
+            if (currentClosestInteractable != null)
+            {
+                IInteractable[] interactables = currentClosestInteractable.GetComponents<IInteractable>();
                 foreach (var interactable in interactables)
                 {
                     interactable.Interact();
