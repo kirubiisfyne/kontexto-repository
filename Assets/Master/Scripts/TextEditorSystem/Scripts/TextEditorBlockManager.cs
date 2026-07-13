@@ -84,7 +84,7 @@ namespace Master.Scripts.TextEditorSystem
             }
         }
 
-        public void LoadLevel(DocumentData currentDocument)
+        public void LoadLevel(DocumentData currentDocument, System.Collections.Generic.Dictionary<string, Font> loadedFonts = null)
         {
             ClearBlocks();
             _activeBlock = null;
@@ -119,6 +119,15 @@ namespace Master.Scripts.TextEditorSystem
                     // Apply explicit font size
                     if (blockData.fontSize.HasValue)
                         newBlock.style.fontSize = blockData.fontSize.Value;
+                        
+                    // Apply font face
+                    if (!string.IsNullOrEmpty(blockData.fontFace) && loadedFonts != null)
+                    {
+                        if (loadedFonts.TryGetValue(blockData.fontFace, out Font fontAsset))
+                        {
+                            newBlock.style.unityFontDefinition = new StyleFontDefinition(fontAsset);
+                        }
+                    }
                     
                     // Apply inner input styles (alignment, bold, italic)
                     var input = GetInnerInput(newBlock);
@@ -126,6 +135,14 @@ namespace Master.Scripts.TextEditorSystem
                     {
                         if (blockData.alignment.HasValue)
                             input.style.unityTextAlign = blockData.alignment.Value;
+
+                        if (!string.IsNullOrEmpty(blockData.fontFace) && loadedFonts != null)
+                        {
+                            if (loadedFonts.TryGetValue(blockData.fontFace, out Font fontAsset))
+                            {
+                                input.style.unityFontDefinition = new StyleFontDefinition(fontAsset);
+                            }
+                        }
 
                         if (blockData.isBold.HasValue || blockData.isItalic.HasValue)
                         {

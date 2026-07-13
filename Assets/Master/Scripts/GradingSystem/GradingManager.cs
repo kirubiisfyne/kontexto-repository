@@ -19,6 +19,9 @@ public class GradingManager : MonoBehaviour
     [Range(0f, 1f)]
     public float passingGradeThreshold = 0.5f;
 
+    [Header("Feedback Settings")]
+    public int maxSnippetLength = 25;
+
     [Header("Dialogue Scripts (JSON)")]
     public TextAsset pennyScriptAsset;
     public TextAsset adviserScriptAsset;
@@ -36,6 +39,12 @@ public class GradingManager : MonoBehaviour
 #endif
         pennyScript = pennyScriptAsset != null ? Newtonsoft.Json.JsonConvert.DeserializeObject<GradingDialogueScript>(pennyScriptAsset.text) : new GradingDialogueScript();
         adviserScript = adviserScriptAsset != null ? Newtonsoft.Json.JsonConvert.DeserializeObject<GradingDialogueScript>(adviserScriptAsset.text) : new GradingDialogueScript();
+    }
+
+    private string TruncateSnippet(string snippet)
+    {
+        if (string.IsNullOrEmpty(snippet)) return snippet;
+        return snippet.Length <= maxSnippetLength ? snippet : snippet.Substring(0, maxSnippetLength) + "...";
     }
 
     public GradeReport GradeDocument(VisualElement documentPage, DocumentData currentDocument)
@@ -64,8 +73,9 @@ public class GradingManager : MonoBehaviour
 
             if (matchedBlock == null)
             {
-                report.pennyFeedback.Add(string.Format(pennyScript.missingBlock, req.targetTextSnippet));
-                report.adviserFeedback.Add(string.Format(adviserScript.missingBlock, req.targetTextSnippet));
+                string missingSnippet = TruncateSnippet(req.targetTextSnippet);
+                report.pennyFeedback.Add(string.Format(pennyScript.missingBlock, missingSnippet));
+                report.adviserFeedback.Add(string.Format(adviserScript.missingBlock, missingSnippet));
                 // Penalize heavily for missing a required block entirely (e.g., 4 points)
                 report.maxScore += 4; 
                 continue;
@@ -92,6 +102,9 @@ public class GradingManager : MonoBehaviour
             if (!string.IsNullOrEmpty(req.requiredStyle)) 
             { anyCheckRan = true; blockPerfect &= CheckStyle(matchedBlock, req, report); }
 
+            if (!string.IsNullOrEmpty(req.requiredFontFace)) 
+            { anyCheckRan = true; blockPerfect &= CheckFont(matchedBlock, req, report); }
+
             if (req.requiredListType.HasValue) 
             { anyCheckRan = true; blockPerfect &= CheckList(matchedBlock, req, report); }
 
@@ -104,7 +117,8 @@ public class GradingManager : MonoBehaviour
             // 4. Positive Reinforcement
             if (anyCheckRan && blockPerfect)
             {
-                string[] aPraisesArr = { string.Format(adviserScript.praise1, req.targetTextSnippet), string.Format(adviserScript.praise2, req.targetTextSnippet), string.Format(adviserScript.praise3, req.targetTextSnippet) };
+                string praisedSnippet = TruncateSnippet(req.targetTextSnippet);
+                string[] aPraisesArr = { string.Format(adviserScript.praise1, praisedSnippet), string.Format(adviserScript.praise2, praisedSnippet), string.Format(adviserScript.praise3, praisedSnippet) };
                 
                 aPraises.Add(aPraisesArr[Random.Range(0, aPraisesArr.Length)]);
             }
@@ -139,72 +153,123 @@ public class GradingManager : MonoBehaviour
     private bool CheckSize(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         var style = block.Q(className: "unity-text-field__input").resolvedStyle;
         
         if (Mathf.RoundToInt(style.fontSize) == req.requiredSize.Value) 
         { report.score++; return true; }
         
-        report.pennyFeedback.Add(string.Format(pennyScript.sizeWrong, req.targetTextSnippet, req.requiredSize.Value));
-        report.adviserFeedback.Add(string.Format(adviserScript.sizeWrong, req.targetTextSnippet, req.requiredSize.Value));
+        report.pennyFeedback.Add(string.Format(pennyScript.sizeWrong, displaySnippet, req.requiredSize.Value));
+        report.adviserFeedback.Add(string.Format(adviserScript.sizeWrong, displaySnippet, req.requiredSize.Value));
         return false;
     }
 
     private bool CheckBold(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         var style = block.Q(className: "unity-text-field__input").resolvedStyle;
         bool isBold = style.unityFontStyleAndWeight == FontStyle.Bold || style.unityFontStyleAndWeight == FontStyle.BoldAndItalic;
 
         if (isBold == req.requireBold.Value) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(req.requireBold.Value ? string.Format(pennyScript.boldMissing, req.targetTextSnippet) : string.Format(pennyScript.boldExtra, req.targetTextSnippet));
-        report.adviserFeedback.Add(req.requireBold.Value ? string.Format(adviserScript.boldMissing, req.targetTextSnippet) : string.Format(adviserScript.boldExtra, req.targetTextSnippet));
+        report.pennyFeedback.Add(req.requireBold.Value ? string.Format(pennyScript.boldMissing, displaySnippet) : string.Format(pennyScript.boldExtra, displaySnippet));
+        report.adviserFeedback.Add(req.requireBold.Value ? string.Format(adviserScript.boldMissing, displaySnippet) : string.Format(adviserScript.boldExtra, displaySnippet));
         return false;
     }
 
     private bool CheckItalic(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         var style = block.Q(className: "unity-text-field__input").resolvedStyle;
         bool isItalic = style.unityFontStyleAndWeight == FontStyle.Italic || style.unityFontStyleAndWeight == FontStyle.BoldAndItalic;
 
         if (isItalic == req.requireItalic.Value) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(req.requireItalic.Value ? string.Format(pennyScript.italicMissing, req.targetTextSnippet) : string.Format(pennyScript.italicExtra, req.targetTextSnippet));
-        report.adviserFeedback.Add(req.requireItalic.Value ? string.Format(adviserScript.italicMissing, req.targetTextSnippet) : string.Format(adviserScript.italicExtra, req.targetTextSnippet));
+        report.pennyFeedback.Add(req.requireItalic.Value ? string.Format(pennyScript.italicMissing, displaySnippet) : string.Format(pennyScript.italicExtra, displaySnippet));
+        report.adviserFeedback.Add(req.requireItalic.Value ? string.Format(adviserScript.italicMissing, displaySnippet) : string.Format(adviserScript.italicExtra, displaySnippet));
         return false;
     }
 
     private bool CheckAlignment(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         var style = block.Q(className: "unity-text-field__input").resolvedStyle;
 
         if (style.unityTextAlign == req.requiredAlignment.Value) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(string.Format(pennyScript.alignmentWrong, req.targetTextSnippet));
-        report.adviserFeedback.Add(string.Format(adviserScript.alignmentWrong, req.targetTextSnippet));
+        report.pennyFeedback.Add(string.Format(pennyScript.alignmentWrong, displaySnippet));
+        report.adviserFeedback.Add(string.Format(adviserScript.alignmentWrong, displaySnippet));
         return false;
     }
 
     private bool CheckStyle(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
 
         if (block.ClassListContains(req.requiredStyle)) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(string.Format(pennyScript.styleWrong, req.requiredStyle, req.targetTextSnippet));
-        report.adviserFeedback.Add(string.Format(adviserScript.styleWrong, req.requiredStyle, req.targetTextSnippet));
+        report.pennyFeedback.Add(string.Format(pennyScript.styleWrong, req.requiredStyle, displaySnippet));
+        report.adviserFeedback.Add(string.Format(adviserScript.styleWrong, req.requiredStyle, displaySnippet));
+        return false;
+    }
+
+    private bool CheckFont(TextField block, Requirement req, GradeReport report)
+    {
+        report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
+        var style = block.Q(className: "unity-text-field__input").resolvedStyle;
+        
+        string actualFontName = "";
+        if (style.unityFontDefinition.font != null)
+        {
+            actualFontName = style.unityFontDefinition.font.name;
+        }
+        else if (style.unityFont != null)
+        {
+            actualFontName = style.unityFont.name;
+        }
+
+        string expectedFontName = req.requiredFontFace;
+        TextAsset json = Resources.Load<TextAsset>("FontMappings");
+        if (json != null)
+        {
+            var data = JsonUtility.FromJson<Master.Scripts.TextEditorSystem.FontMappingsData>(json.text);
+            if (data != null && data.mappings != null)
+            {
+                foreach (var mapping in data.mappings)
+                {
+                    if (mapping.displayName == req.requiredFontFace)
+                    {
+                        expectedFontName = mapping.regular;
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!string.IsNullOrEmpty(actualFontName) && (actualFontName == expectedFontName || actualFontName.Contains(req.requiredFontFace))) 
+        { 
+            report.score++; 
+            return true; 
+        }
+
+        report.pennyFeedback.Add(string.Format(pennyScript.fontWrong, displaySnippet, req.requiredFontFace));
+        report.adviserFeedback.Add(string.Format(adviserScript.fontWrong, displaySnippet, req.requiredFontFace));
         return false;
     }
 
     private bool CheckList(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         int currentListType = 0;
 
         if (block.style.paddingLeft.value.value > 0) // It has an indent
@@ -216,34 +281,36 @@ public class GradingManager : MonoBehaviour
         if (currentListType == req.requiredListType.Value) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(string.Format(pennyScript.listWrong, req.targetTextSnippet));
-        report.adviserFeedback.Add(string.Format(adviserScript.listWrong, req.targetTextSnippet));
+        report.pennyFeedback.Add(string.Format(pennyScript.listWrong, displaySnippet));
+        report.adviserFeedback.Add(string.Format(adviserScript.listWrong, displaySnippet));
         return false;
     }
 
     private bool CheckSpaceBefore(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         bool hasSpace = block.style.marginTop.value.value > 0.1f;
 
         if (hasSpace == req.requireSpaceBefore.Value) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(req.requireSpaceBefore.Value ? string.Format(pennyScript.spaceBeforeMissing, req.targetTextSnippet) : string.Format(pennyScript.spaceBeforeExtra, req.targetTextSnippet));
-        report.adviserFeedback.Add(req.requireSpaceBefore.Value ? string.Format(adviserScript.spaceBeforeMissing, req.targetTextSnippet) : string.Format(adviserScript.spaceBeforeExtra, req.targetTextSnippet));
+        report.pennyFeedback.Add(req.requireSpaceBefore.Value ? string.Format(pennyScript.spaceBeforeMissing, displaySnippet) : string.Format(pennyScript.spaceBeforeExtra, displaySnippet));
+        report.adviserFeedback.Add(req.requireSpaceBefore.Value ? string.Format(adviserScript.spaceBeforeMissing, displaySnippet) : string.Format(adviserScript.spaceBeforeExtra, displaySnippet));
         return false;
     }
 
     private bool CheckSpaceAfter(TextField block, Requirement req, GradeReport report)
     {
         report.maxScore++;
+        string displaySnippet = TruncateSnippet(req.targetTextSnippet);
         bool hasSpace = block.style.marginBottom.value.value > 0.1f;
 
         if (hasSpace == req.requireSpaceAfter.Value) 
         { report.score++; return true; }
 
-        report.pennyFeedback.Add(req.requireSpaceAfter.Value ? string.Format(pennyScript.spaceAfterMissing, req.targetTextSnippet) : string.Format(pennyScript.spaceAfterExtra, req.targetTextSnippet));
-        report.adviserFeedback.Add(req.requireSpaceAfter.Value ? string.Format(adviserScript.spaceAfterMissing, req.targetTextSnippet) : string.Format(adviserScript.spaceAfterExtra, req.targetTextSnippet));
+        report.pennyFeedback.Add(req.requireSpaceAfter.Value ? string.Format(pennyScript.spaceAfterMissing, displaySnippet) : string.Format(pennyScript.spaceAfterExtra, displaySnippet));
+        report.adviserFeedback.Add(req.requireSpaceAfter.Value ? string.Format(adviserScript.spaceAfterMissing, displaySnippet) : string.Format(adviserScript.spaceAfterExtra, displaySnippet));
         return false;
     }
 }

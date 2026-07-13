@@ -61,7 +61,7 @@ namespace Master.Scripts.DialogueSystem
                 GameManager.Instance != null && GameManager.Instance.pendingAdviserFeedback != null && GameManager.Instance.pendingAdviserFeedback.Count > 0)
             {
                 // Index 2 is assumed to be the "Completed" conversation branch
-                InjectDynamicLines(2, GameManager.Instance.pendingAdviserFeedback, "Adviser");
+                InjectDynamicLines(2, GameManager.Instance.pendingAdviserFeedback, "Mrs. Santos");
                 GameManager.Instance.pendingAdviserFeedback.Clear();
             }
         }
@@ -135,13 +135,25 @@ namespace Master.Scripts.DialogueSystem
             currentConversationIndex = Mathf.Clamp(index, 0, conversations.Count - 1);
         }
 
-        public void InjectDynamicLines(int index, List<string> newLines, string speakerName = "Adviser")
+        public void InjectDynamicLines(int index, List<string> newLines, string speakerName = "Mrs. Santos")
         {
             if (index < 0 || index >= conversations.Count) return;
+            var branch = conversations[index];
+            
+            int insertIndex = branch.lines.FindIndex(l => l.text == "[FEEDBACK]");
+            if (insertIndex != -1)
+            {
+                branch.lines.RemoveAt(insertIndex);
+            }
+            else
+            {
+                insertIndex = branch.lines.Count;
+            }
             
             foreach (var text in newLines)
             {
-                conversations[index].lines.Add(new DialogueLine { speaker = speakerName, text = text });
+                branch.lines.Insert(insertIndex, new DialogueLine { speaker = speakerName, text = text });
+                insertIndex++;
             }
         }
 

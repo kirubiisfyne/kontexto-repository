@@ -122,7 +122,7 @@ namespace Master.Scripts.TextEditorSystem
             });
         }
 
-        public void LoadLevel(DocumentData currentDocument) => _blockManager.LoadLevel(currentDocument);
+        public void LoadLevel(DocumentData currentDocument) => _blockManager.LoadLevel(currentDocument, _loadedFonts);
         private void SetupRibbon()
         {
             _ribbonController.SetupRibbon(
