@@ -291,7 +291,7 @@
 .penny-center {
     right: auto;
     bottom: auto;
-    top: 40%;
-    left: 40%;
-    translate: -40% -40%;
+    top: 70%;
+    left: 70%;
+    translate: -70% -70%;
 }

@@ -63,5 +63,6 @@ namespace Master.Scripts.GradingSystem
         public string praise3 = "Good job on '{0}'.";
         public string perfectDocument = "Perfect!";
         public string passedWithErrors = "Passed with errors.";
+        public string idleMessage = "If you're finished formatting, you can press Print in the toolbar!";
     }
 }

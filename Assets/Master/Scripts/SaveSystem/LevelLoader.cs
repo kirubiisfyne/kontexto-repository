@@ -15,6 +15,10 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("The LevelData asset for this scene.")]
         public LevelData levelData;
 
+        [Header("Debug/Beta Settings")]
+        [Tooltip("If true, all save operations will be ignored.")]
+        public bool disableSaving = false;
+
         private PlayerData playerData;
         private string sceneId;
         
@@ -73,6 +77,12 @@ namespace Master.Scripts.SaveSystem
 
         public void SaveGame()
         {
+            if (disableSaving)
+            {
+                Debug.Log($"LevelLoader: Saving is currently disabled in '{sceneId}'.");
+                return;
+            }
+
             CapturePlayerTransform();
             playerData.currentScene = sceneId;
             SaveManager.Save(playerData);

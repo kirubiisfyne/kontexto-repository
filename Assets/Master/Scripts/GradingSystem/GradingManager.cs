@@ -23,6 +23,8 @@ public class GradingManager : MonoBehaviour
     public TextAsset pennyScriptAsset;
     public TextAsset adviserScriptAsset;
 
+    public GradingDialogueScript PennyScript => pennyScript;
+
     private GradingDialogueScript pennyScript;
     private GradingDialogueScript adviserScript;
 
