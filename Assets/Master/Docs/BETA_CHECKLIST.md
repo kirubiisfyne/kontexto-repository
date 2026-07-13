@@ -19,8 +19,8 @@ These elements are missing and must be constructed from scratch for the beta flo
   - Build the timeline/sequence for the player spawning into the campus.
   - Implement player movement locking during the sequence.
   - Deliver the introductory context/dialogue before the player gains control.
-- [ ] **Step 5: Campus Exit Trigger**
-  - Build the physical interaction trigger at the campus gate.
+- [x] **Step 5: Campus Exit Trigger (Adapted for Beta)**
+  - Updated `SceneGateInstance` with a Trigger Mode enum (`Interact` or `OnEnter`) to automatically warp the player out of the publication office once the beta concludes.
 - [ ] **Step 5: Outro Cutscene**
   - Build the outro timeline/sequence triggered by the campus gate.
   - Ensure `CompleteLevel()` and the final game save are explicitly called at the end of this cutscene to finish the beta demo.

@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: cac908a1ea1e54d81a85a7acc29e0406, type: 3}
   m_Name: club_application_form
   m_EditorClassIdentifier: Assembly-CSharp:Master.Scripts.TaskSystem:TaskData
-  taskId: d1_clubApplicationForm
-  taskName: Get a Club Application Form
-  description: Get yourself a Club Application Form to get in the Publication Office.
+  taskId: d1_signApplicationForm
+  taskName: Get your Club Application Form signed by Enzo
+  description: 
   prerequisite:
     task: {fileID: 0}
-    requiredStatus: 3
+    requiredStatus: 0
   requirements:
-    needsSequentialOrder: 0
+    needsSequentialOrder: 1
     objectives:
     - key: club_application_form
       requiredAmount: 1

@@ -45,6 +45,11 @@ namespace Master.Scripts
             DontDestroyOnLoad(gameObject);
         }
 
+        private void Start()
+        {
+            AudioManager.Instance.PlayBGM("GoldenGleam");
+        }
+
 
     }
 }

@@ -243,7 +243,7 @@ namespace Master.Scripts.DialogueSystem
 
         private void Update()
         {
-            if (isTalking && Input.GetKeyDown(KeyCode.E)) 
+            if (isTalking && Input.GetKeyDown(KeyCode.F)) 
                 DisplayNextLine();
         }
 

@@ -13,11 +13,10 @@ public class MainMenuController : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject menuButtonsPanel;
     [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject betaThankYouPanel;
 
     [Header("Options Functionality")]
     [SerializeField] private Toggle fullscreenToggle; // <-- Reference to your UI Toggle object
-
-    private AsyncOperation loadOp;
 
     private void Start()
     {
@@ -32,48 +31,48 @@ public class MainMenuController : MonoBehaviour
             fullscreenToggle.isOn = Screen.fullScreen;
         }
 
-        // Start loading the gameplay scene additively as a background
-        StartCoroutine(LoadBackgroundAsync());
-    }
-
-    private IEnumerator LoadBackgroundAsync()
-    {
-        // Load target environment without unloading UI context
-        loadOp = SceneManager.LoadSceneAsync(gameplaySceneName, LoadSceneMode.Additive);
-        loadOp.allowSceneActivation = true;
-
-        while (!loadOp.isDone)
+        if (betaThankYouPanel != null)
         {
-            yield return null;
+            betaThankYouPanel.SetActive(false);
+            PlayerData data = SaveManager.Load();
+            if (data != null)
+            {
+                foreach (var level in data.levels)
+                {
+                    if (level.isCompleted)
+                    {
+                        betaThankYouPanel.SetActive(true);
+                        break;
+                    }
+                }
+            }
         }
 
-        // Set environment active to inherit correct skybox/ambient lighting settings
-        Scene bgScene = SceneManager.GetSceneByName(gameplaySceneName);
-        if (bgScene.IsValid())
-        {
-            SceneManager.SetActiveScene(bgScene);
-        }
+        // WIPE old save data here so the next playthrough is totally fresh!
+        // (We do this AFTER checking for the beta completion panel above)
+        SaveManager.DeleteSave();
     }
 
     public void PlayGame()
     {
-        // Safety Check: Ensure the background scene is actually loaded
-        if (loadOp == null || !loadOp.isDone)
+        Debug.Log("Play button clicked! Playing transition...");
+        StartCoroutine(PlayGameRoutine());
+    }
+
+    private IEnumerator PlayGameRoutine()
+    {
+        // Play the transition animation if the TransitionManager exists in the scene
+        if (Master.Scripts.TransitionManager.Instance != null)
         {
-            Debug.LogWarning("PlayGame: Background scene is still loading...");
-            return; 
+            yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
+        }
+        else
+        {
+            Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
         }
 
-        // Find the player in the additively loaded scene and activate them
-        PlayerController player = Object.FindAnyObjectByType<PlayerController>();
-        if (player != null)
-        {
-            player.SetInputActive(true);
-        }
-
-        // Unload the UI scene this script is part of, leaving the background scene active
-        SceneManager.UnloadSceneAsync(gameObject.scene);
-        Debug.Log("Play button clicked! Transitioning to gameplay scene...");
+        Debug.Log("Transition complete. Loading gameplay scene...");
+        SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
     }
 
     /// Swaps the active panel from the Main Menu to the Options Menu.

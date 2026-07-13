@@ -8,8 +8,8 @@ namespace Master.Scripts
     {
         public static SceneGateManager Instance { get; private set; }
         
-        public GameObject player;
-        public string lastSceneString;
+        [HideInInspector] public string lastSceneString;
+
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -19,72 +19,88 @@ namespace Master.Scripts
             }
 
             Instance = this;
-
             DontDestroyOnLoad(gameObject);
         }
 
         public void StartWarp(string sceneTo)
         {
-            StartCoroutine(Warp(sceneTo));
+            if (string.IsNullOrEmpty(sceneTo))
+            {
+                Debug.LogWarning("[SceneGateManager] StartWarp was called with a null or empty scene string. If you are playing the UI scene directly, this is expected. Aborting warp to prevent crash.");
+                return;
+            }
+            StartCoroutine(WarpRoutine(sceneTo));
         }
         
-        private IEnumerator Warp(string sceneTo)
+        private IEnumerator WarpRoutine(string sceneTo)
         {
-            // Wait for the animation to finish.
-            yield return (TransitionManager.Instance.PlayTransitionAndWait("anim_TransitionOut"));
+            // Play fade out transition and wait for it to complete
+            if (TransitionManager.Instance != null)
+            {
+                yield return TransitionManager.Instance.PlayTransitionAndWait("transition");
+            }
             
             lastSceneString = SceneManager.GetActiveScene().name;
-            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneTo);
             
-            while (operation is { isDone: false })
+            AsyncOperation operation = SceneManager.LoadSceneAsync(sceneTo);
+            if (operation == null)
+            {
+                Debug.LogError($"[SceneGateManager] Failed to load scene '{sceneTo}'. Please ensure it is added to the Build Settings!");
+                yield break;
+            }
+
+            while (!operation.isDone)
             {
                 yield return null; 
             }
             
+            // Allow one frame for objects in the new scene to fully awaken
             yield return new WaitForEndOfFrame();
 
-            if (GameObject.FindGameObjectWithTag("Player") != null)
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            if (playerObj != null)
             {
-                SpawnPlayerToGate();
-                Debug.Log("Player Warped!");
+                SpawnPlayerToGate(playerObj);
+                Debug.Log($"[SceneGateManager] Player warped to {sceneTo}");
             }
             else
             {
+                // If there's no player (like in the Main Menu), free the cursor
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
             }
-            
-            // Look for the Transition GO again.
-            TransitionManager.Instance.FindTransitionObject();
         }
 
-        private void SpawnPlayerToGate()
+        private void SpawnPlayerToGate(GameObject playerObj)
         {
             Vector3 spawnPosition = Vector3.zero;
             Vector3 spawnRotation = Vector3.zero;
-            // Look for the gate with the corresponding gate.
-            GameObject[] gates = GameObject.FindGameObjectsWithTag("Gate");
+            bool gateFound = false;
 
+            // Find the corresponding return gate in the new scene
+            GameObject[] gates = GameObject.FindGameObjectsWithTag("Gate");
             foreach (GameObject gate in gates)
             {
                 SceneGateInstance gateInstance = gate.GetComponent<SceneGateInstance>();
-                if (gateInstance != null && gateInstance.enabled)
+                if (gateInstance != null && gateInstance.enabled && gateInstance.sceneToName == lastSceneString)
                 {
-                    if (gateInstance.sceneToName == lastSceneString)
-                    {
-                        spawnPosition = gate.transform.position;
-                        spawnRotation = gate.transform.rotation.eulerAngles;
-                    }
+                    spawnPosition = gate.transform.position;
+                    spawnRotation = gate.transform.rotation.eulerAngles;
+                    gateFound = true;
+                    break; // Stop searching once we find the correct gate
                 }
             }
-            // Disable cc.
-            player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<CharacterController>().enabled = false;
-            // Move Player.
-            player.transform.position = spawnPosition;
-            player.transform.rotation = Quaternion.Euler(spawnRotation);
-            // Enable cc.
-            player.GetComponent<CharacterController>().enabled = true;
+
+            if (!gateFound) return;
+
+            // Disable CharacterController before teleporting to prevent physics jitter/snapback
+            CharacterController cc = playerObj.GetComponent<CharacterController>();
+            if (cc != null) cc.enabled = false;
+            
+            playerObj.transform.position = spawnPosition;
+            playerObj.transform.rotation = Quaternion.Euler(spawnRotation);
+            
+            if (cc != null) cc.enabled = true;
         }
     }
 }

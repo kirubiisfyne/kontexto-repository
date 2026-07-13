@@ -117,28 +117,15 @@ public class FormatDataLoader : MonoBehaviour
             // Store dynamic lines for the Campus scene to pick up
             if (GameManager.Instance != null)
             {
-                var feedbackLines = new System.Collections.Generic.List<string>();
-                
-                if (result.passedPerfectly)
-                {
-                    feedbackLines.Add("Wow, this is completely flawless! You followed every single instruction.");
-                    feedbackLines.Add("You're a natural. Good job!");
-                }
-                else
-                {
-                    feedbackLines.Add("Hmm, it's decent enough to pass, but I noticed a few formatting mistakes.");
-                    if (result.adviserFeedback != null) feedbackLines.AddRange(result.adviserFeedback);
-                    feedbackLines.Add("Try to be more careful next time. Still, good effort.");
-                }
-                
-                GameManager.Instance.pendingAdviserFeedback = feedbackLines;
+                GameManager.Instance.pendingAdviserFeedback = new System.Collections.Generic.List<string>(result.adviserFeedback);
             }
             
             // Show Penny and wait for dismissal to warp back
             if (pennyAssistant != null) 
             {
                 pennyAssistant.onFeedbackDismissed = () => { StartCoroutine(WarpBackRoutine()); };
-                pennyAssistant.ShowFeedback(result.passedPerfectly ? "Wow! The formatting is absolutely perfect. Great job!" : "You passed! But there are some things we can improve. Let's head back!", true);
+                string passMsg = (result.pennyFeedback != null && result.pennyFeedback.Count > 0) ? result.pennyFeedback[0] : "You passed!";
+                pennyAssistant.ShowFeedback(passMsg, true);
             }
             else
             {
@@ -148,10 +135,10 @@ public class FormatDataLoader : MonoBehaviour
         else
         {
             Debug.Log($"Score: {result.score}/{result.maxScore} - FAILED. NEEDS REVISION.");
-            if (result.adviserFeedback != null && result.adviserFeedback.Count > 0)
+            if (result.pennyFeedback != null && result.pennyFeedback.Count > 0)
             {
-                Debug.Log("Adviser Feedback: " + result.adviserFeedback[0]);
-                if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.adviserFeedback[0], false);
+                Debug.Log("Penny Feedback: " + result.pennyFeedback[0]);
+                if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.pennyFeedback[0], false);
             }
         }
     }
@@ -160,7 +147,7 @@ public class FormatDataLoader : MonoBehaviour
     {
         if (Master.Scripts.TransitionManager.Instance != null)
         {
-            yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("anim_TransitionOut");
+            yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
         }
         UnityEngine.SceneManagement.SceneManager.LoadScene(campusSceneName);
     }
@@ -168,7 +155,7 @@ public class FormatDataLoader : MonoBehaviour
 #region UI Callbacks
     public void HandleFeedbackUI(bool isActive, GradeReport report)
     {
-        foreach (string feedback in report.adviserFeedback)
+        foreach (string feedback in report.pennyFeedback)
         {
             GameObject feedbackField = Instantiate(feedbackPrefab, feedbackContainer.transform, true);
             feedbackField.GetComponent<TMPro.TextMeshProUGUI>().text = feedback;
