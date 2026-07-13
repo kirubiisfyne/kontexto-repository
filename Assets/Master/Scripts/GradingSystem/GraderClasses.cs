@@ -8,6 +8,7 @@ namespace Master.Scripts.GradingSystem
     {
         public string text;
         public string styleClass; // e.g. "Title", "Heading 1", etc.
+        public string fontFace;
         public int? fontSize;
         public bool? isBold;
         public bool? isItalic;
@@ -30,6 +31,7 @@ namespace Master.Scripts.GradingSystem
     {
         public string targetTextSnippet; 
         public string requiredStyle; 
+        public string requiredFontFace;
 
         public int? requiredSize;
         public int? requiredListType;
@@ -54,6 +56,7 @@ namespace Master.Scripts.GradingSystem
         public string alignmentWrong = "Wrong alignment on '{0}'.";
         public string styleWrong = "Wrong style '{0}' on '{1}'.";
         public string listWrong = "Wrong list on '{0}'.";
+        public string fontWrong = "Wrong font on '{0}'. Expected {1}.";
         public string spaceBeforeMissing = "Missing space before '{0}'.";
         public string spaceBeforeExtra = "Extra space before '{0}'.";
         public string spaceAfterMissing = "Missing space after '{0}'.";

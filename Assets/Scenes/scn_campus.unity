@@ -36286,6 +36286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelLoader
   levelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
+  disableSaving: 0
 --- !u!114 &986174011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65018,7 +65019,7 @@ MonoBehaviour:
   animator: {fileID: 1820927844}
   transitionDuration: 0.5
   textSpeed: 0.7
-  speakerDatabase: {fileID: 11400000, guid: 8e9eef2e71e6e4e8bb706e1b064b45e1, type: 2}
+  speakerDatabase: {fileID: 11400000, guid: 4621abb2f29bb467bb2add2ea97066ab, type: 2}
   speakerProfileImage: {fileID: 2088657159}
 --- !u!4 &1685435261 stripped
 Transform:
