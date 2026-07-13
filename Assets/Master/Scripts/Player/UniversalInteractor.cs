@@ -36,8 +36,8 @@ namespace Master.Scripts
             // 1. Constantly check for the closest interactable in range
             CheckForInteractablesInRange();
 
-            // 2. Interact if we press E and have something in range
-            if (Input.GetKeyDown(KeyCode.E) && currentClosestInteractable != null)
+            // 2. Interact if we press F and have something in range
+            if (Input.GetKeyDown(KeyCode.F) && currentClosestInteractable != null)
             {
                 InteractWithCurrent();
             }

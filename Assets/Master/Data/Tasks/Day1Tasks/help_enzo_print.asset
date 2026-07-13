@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
   taskId: d1_helpEnzoPrint
   taskName: Help Enzo print The Paragon papers
-  description: Help Enzo print The Paragon papers asigned to him by Mrs. Santos so
-    Enzo could sign your Club Application Form.
+  description: 
   prerequisite:
     task: {fileID: 11400000, guid: f82ece31532d74d7d91b5dea4907f6cb, type: 2}
     requiredStatus: 1

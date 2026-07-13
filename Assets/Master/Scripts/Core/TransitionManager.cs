@@ -5,79 +5,134 @@ namespace Master.Scripts
 {
     public class TransitionManager : MonoBehaviour
     {
-        // 1. The Singleton Instance
         public static TransitionManager Instance { get; private set; }
 
-        [Header("References")] [Tooltip("The GameObject handling the visual transition.")]
+        [Header("References")] 
+        [Tooltip("The GameObject handling the visual transition.")]
         public GameObject transitionGameObject;
 
-        // The legacy Animation component attached to the transition object
-        public Animation legacyAnimation;
+        public Animator animator;
+
+        [Header("Grace Periods")]
+        [Tooltip("Seconds to wait as a solid black screen BEFORE fading in when a scene loads.")]
+        public float gracePeriodIn = 1f;
+        [Tooltip("Seconds to wait as a solid black screen AFTER fading out before loading the next scene.")]
+        public float gracePeriodOut = 1f;
+
+        [Header("Performance")]
+        [Tooltip("Disables the GameObject after the Fade-In completes so it doesn't waste performance during gameplay.")]
+        public bool disableAfterTransitionIn = true;
+        [Tooltip("Disables the GameObject after the Fade-Out completes. (Warning: This will hide the black screen before the scene loads!)")]
+        public bool disableAfterTransitionOut = false;
         
         private void Awake()
         {
-            // Singleton Setup
             if (Instance != null && Instance != this)
             {
-                Destroy(gameObject); // Destroy duplicates if they exist
+                Destroy(gameObject);
                 return;
             }
 
             Instance = this;
-
-            // Optional but recommended: Keep this manager alive across scene loads
-            DontDestroyOnLoad(gameObject);
-
-            // Look for the Transition GO for the first time.
             FindTransitionObject();
         }
 
-        /// <summary>
-        /// Searches the scene for the transition object and grabs its Animation component.
-        /// </summary>
+        private IEnumerator Start()
+        {
+            if (animator != null)
+            {
+                // Delay the "Transition In" animation by freezing the Animator
+                if (gracePeriodIn > 0f)
+                {
+                    animator.speed = 0f; // Freeze the animation
+                    yield return new WaitForSecondsRealtime(gracePeriodIn);
+                    animator.speed = 1f; // Let it play
+                }
+
+                // Wait for the Fade-In animation to completely finish
+                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+                {
+                    yield return null;
+                }
+
+                // Disable it during gameplay to save performance!
+                if (disableAfterTransitionIn && transitionGameObject != null)
+                {
+                    transitionGameObject.SetActive(false);
+                }
+            }
+        }
+
         public void FindTransitionObject()
         {
-            // Searching by Tag is more efficient than searching by name
             transitionGameObject = GameObject.FindWithTag("TransitionObject");
 
             if (transitionGameObject != null)
             {
-                legacyAnimation = transitionGameObject.GetComponent<Animation>();
+                animator = transitionGameObject.GetComponent<Animator>();
 
-                if (legacyAnimation == null)
+                if (animator == null)
                 {
-                    Debug.LogWarning(
-                        "TransitionManager: Transition object found, but it is missing a Legacy Animation component.");
+                    Debug.LogWarning("TransitionManager: Transition object found, but it is missing an Animator component.");
                 }
             }
             else
             {
-                Debug.LogWarning(
-                    "TransitionManager: No GameObject with the tag 'TransitionObject' was found in the scene.");
+                Debug.LogWarning("TransitionManager: No GameObject with the tag 'TransitionObject' was found in the scene.");
             }
         }
 
-        /// <summary>
-        /// 3. Triggers a legacy animation by name.
-        /// </summary>
-        /// <param name="animationName">The name of the animation clip to play (e.g., "FadeOut").</param>
-        public IEnumerator PlayTransitionAndWait(string animationName)
+        public IEnumerator PlayTransitionAndWait(string triggerName)
         {
-            if (legacyAnimation != null)
+            // Re-enable the GameObject in case we disabled it after Fade-In
+            if (transitionGameObject != null && !transitionGameObject.activeSelf)
             {
-                // Start the animation
-                legacyAnimation.Play(animationName);
+                transitionGameObject.SetActive(true);
+            }
 
-                // Keep yielding (waiting) for one frame at a time 
-                // as long as this specific animation is still playing.
-                while (legacyAnimation.IsPlaying(animationName))
+            if (animator != null)
+            {
+                // Force the animator to ignore paused time
+                animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
+                int currentStateHash = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+                
+                // Set the animator trigger
+                animator.SetTrigger(triggerName);
+
+                // 1. Wait until the animator actually starts transitioning out of the current state
+                while (animator.GetCurrentAnimatorStateInfo(0).fullPathHash == currentStateHash && !animator.IsInTransition(0))
+                {
+                    yield return null;
+                }
+
+                // 2. Wait until the crossfade/transition into the new clip is complete
+                while (animator.IsInTransition(0))
+                {
+                    yield return null;
+                }
+
+                // 3. Wait until the new animation clip finishes playing
+                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
                 {
                     yield return null; 
+                }
+
+                // 4. Grace Period Out (wait as a solid screen)
+                if (gracePeriodOut > 0f)
+                {
+                    yield return new WaitForSecondsRealtime(gracePeriodOut);
+                }
+
+                // 5. Disable after transition out (if requested)
+                if (disableAfterTransitionOut && transitionGameObject != null)
+                {
+                    transitionGameObject.SetActive(false);
                 }
             }
             else
             {
-                Debug.LogError($"TransitionManager: Cannot play '{animationName}'. Component missing.");
+                Debug.LogError($"TransitionManager: Cannot fire trigger '{triggerName}'. Animator missing.");
             }
         }
     }

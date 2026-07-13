@@ -13,11 +13,10 @@ MonoBehaviour:
   m_Name: editor_task_font_face_size
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
   taskId: d1_fontFaceSize
-  taskName: Fix Club Application Form's Font Face and SizeFont
-  description: Fix the Club Application Form to the Adviser's Instructions. Adjust
-    Font Face and Size Appropriately.
+  taskName: Pass The Paragon's Assesment.
+  description: 
   prerequisite:
-    task: {fileID: 0}
+    task: {fileID: 11400000, guid: f82ece31532d74d7d91b5dea4907f6cb, type: 2}
     requiredStatus: 3
   requirements:
     needsSequentialOrder: 0
