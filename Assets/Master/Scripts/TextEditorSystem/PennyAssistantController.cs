@@ -14,6 +14,13 @@ public class PennyAssistantController : MonoBehaviour
     public float frameRate = 0.1f;
     public float fadeDuration = 0.5f;
 
+    [Header("Idle Settings")]
+    public float idleTimeThreshold = 30f;
+    public string idleMessage = "If you're finished formatting, you can press Print in the toolbar!";
+
+    private float _idleTimer = 0f;
+    private bool _isIdle = false;
+
     private VisualElement _root;
     private Label _bubbleText;
     private VisualElement _graphic;
@@ -36,6 +43,20 @@ public class PennyAssistantController : MonoBehaviour
 
         var closeBtn = _root?.Q<Button>("PennyClose");
         if (closeBtn != null) closeBtn.clicked += HideFeedback;
+
+        // Listen for ANY interaction to reset the idle timer
+        if (root != null)
+        {
+            root.RegisterCallback<PointerDownEvent>(ResetIdleTimer, TrickleDown.TrickleDown);
+            root.RegisterCallback<KeyDownEvent>(ResetIdleTimer, TrickleDown.TrickleDown);
+        }
+
+        // Fetch dynamic idle message from GradingManager JSON if available
+        var gm = Object.FindFirstObjectByType<GradingManager>();
+        if (gm != null && gm.PennyScript != null && !string.IsNullOrEmpty(gm.PennyScript.idleMessage))
+        {
+            idleMessage = gm.PennyScript.idleMessage;
+        }
     }
 
     public void ShowFeedback(string message, bool centerOnScreen = false)
@@ -60,6 +81,9 @@ public class PennyAssistantController : MonoBehaviour
         
         onFeedbackDismissed?.Invoke();
         onFeedbackDismissed = null;
+
+        _isIdle = false;
+        _idleTimer = 0f;
         
         if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
         _fadeCoroutine = StartCoroutine(FadeRoutine(0f));
@@ -99,6 +123,36 @@ public class PennyAssistantController : MonoBehaviour
             
             currentFrame = (currentFrame + 1) % frames.Count;
             yield return new WaitForSeconds(frameRate);
+        }
+    }
+
+    private void Update()
+    {
+        if (_root == null) return;
+
+        // If Penny is hidden, count up the timer
+        if (_root.style.opacity.value < 0.1f && !_isIdle)
+        {
+            _idleTimer += Time.deltaTime;
+            if (_idleTimer >= idleTimeThreshold)
+            {
+                _isIdle = true;
+                ShowFeedback(idleMessage, false);
+            }
+        }
+    }
+
+    private void ResetIdleTimer(EventBase evt)
+    {
+        _idleTimer = 0f;
+        if (_isIdle)
+        {
+            _isIdle = false;
+            // Auto-hide her if she's currently showing the idle message and the user interacts
+            if (_root != null && _bubbleText != null && _bubbleText.text == idleMessage)
+            {
+                HideFeedback();
+            }
         }
     }
 }

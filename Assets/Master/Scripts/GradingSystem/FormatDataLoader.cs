@@ -24,15 +24,6 @@ public class FormatDataLoader : MonoBehaviour
     [Header("Warping")]
     [Tooltip("The name of the Campus scene to warp back to when passed")]
     public string campusSceneName = "Campus";
-
-
-    [Header("UI Components")] 
-    [Space(10)]
-    public GameObject feedbackPanel;
-    public GameObject feedbackPrefab;
-    public VerticalLayoutGroup feedbackContainer;
-    public TMPro.TextMeshProUGUI scoreText;
-    public TMPro.TextMeshProUGUI documentTitleText;
     
     [Header("Testing / Default Level")]
     [Tooltip("If you play the UI scene directly, it will load this JSON.")]
@@ -153,18 +144,6 @@ public class FormatDataLoader : MonoBehaviour
     }
 
 #region UI Callbacks
-    public void HandleFeedbackUI(bool isActive, GradeReport report)
-    {
-        foreach (string feedback in report.pennyFeedback)
-        {
-            GameObject feedbackField = Instantiate(feedbackPrefab, feedbackContainer.transform, true);
-            feedbackField.GetComponent<TMPro.TextMeshProUGUI>().text = feedback;
-        }
-        
-        scoreText.text = $"{report.score}/{report.maxScore}";
-        documentTitleText.text = convertedDocumentData.startingTextBlocks[0].text;
-        feedbackPanel.SetActive(isActive);
-    }
 
     public void HandleInstructionEmail(bool isActive)
     {

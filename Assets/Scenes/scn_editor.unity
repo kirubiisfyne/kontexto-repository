@@ -229,6 +229,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1554034543547544380, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
+      propertyPath: pennyScriptAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: d933b297d89304d4880870192aff350c, type: 3}
+    - target: {fileID: 1554034543547544380, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
+      propertyPath: adviserScriptAsset
+      value: 
+      objectReference: {fileID: 4900000, guid: d8c8732508c9541e7a61cd669c4ef112, type: 3}
+    - target: {fileID: 1554034543547544380, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
+      propertyPath: passingGradeThreshold
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 2151721442624843441, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
       propertyPath: m_Name
       value: TextEditor
@@ -464,6 +476,8 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 83e2114f2fec64a82b11a50ac34a63e7, type: 3}
   frameRate: 0.1
   fadeDuration: 0.5
+  idleTimeThreshold: 10
+  idleMessage: If you're finished formatting, you can press Print in the toolbar!
 --- !u!1 &644775986
 GameObject:
   m_ObjectHideFlags: 19
