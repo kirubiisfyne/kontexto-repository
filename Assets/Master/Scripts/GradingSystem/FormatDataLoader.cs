@@ -37,6 +37,10 @@ public class FormatDataLoader : MonoBehaviour
     private Label _senderLabel;
     private Label _subjectLabel;
 
+    private VisualElement _editorRoot;
+    private UnityEngine.UIElements.Button _taskbarBtnEditor;
+    private UnityEngine.UIElements.Button _taskbarBtnEmail;
+
 
     private void Start()
     {
@@ -47,6 +51,16 @@ public class FormatDataLoader : MonoBehaviour
         
         _senderLabel = root.Q<Label>("SenderLabel");
         _subjectLabel = root.Q<Label>("SubjectLabel");
+
+        _editorRoot = root.Q<VisualElement>("Root");
+        _taskbarBtnEditor = root.Q<UnityEngine.UIElements.Button>("TaskbarButton_Editor");
+        _taskbarBtnEmail = root.Q<UnityEngine.UIElements.Button>("TaskbarButton_Email");
+
+        if (_taskbarBtnEditor != null)
+            _taskbarBtnEditor.clicked += () => ToggleWindow(_editorRoot);
+
+        if (_taskbarBtnEmail != null)
+            _taskbarBtnEmail.clicked += () => ToggleWindow(_emailRoot);
 
 
         // Hook up the close button
@@ -144,6 +158,20 @@ public class FormatDataLoader : MonoBehaviour
     }
 
 #region UI Callbacks
+
+    private void ToggleWindow(VisualElement window)
+    {
+        if (window == null) return;
+        
+        if (window.style.display == DisplayStyle.None)
+        {
+            window.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            window.style.display = DisplayStyle.None;
+        }
+    }
 
     public void HandleInstructionEmail(bool isActive)
     {
