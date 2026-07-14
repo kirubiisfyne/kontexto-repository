@@ -1,0 +1,30 @@
+{
+  "sender": "Mrs. Santos",
+  "subject": "Assessment: Format Your Database Entry",
+  "instructionString" : "Rookie,\n\nHere are the exact specifications for the digital database. Don't make me repeat myself.\n\n1. Name: Arial, 18pt\n2. Basic Info: Arial, 14pt\n3. Bio: Times New Roman, 12pt\n\nFormat your document accordingly before you submit it.\n\n- Mrs. Santos",
+  
+  "startingTextBlocks": [
+    {
+      "text": "Name: Magbanua, Francisco",
+      "fontFace": "Comic Sans MS",
+      "fontSize": 14
+    },
+    {
+      "text": "Bio: I am a first-year journalism student, eager to uncover the truth and write compelling stories for The Paragon.",
+      "fontFace": "Comic Sans MS",
+      "fontSize": 14
+    }
+  ],
+  "answerKey": [
+    {
+      "targetTextSnippet": "Name: Magbanua, Francisco",
+      "requiredFontFace": "Arial",
+      "requiredSize": 18
+    },
+    {
+      "targetTextSnippet": "Bio: I am a first-year journalism student, eager to uncover the truth and write compelling stories for The Paragon.",
+      "requiredFontFace": "Times New Roman",
+      "requiredSize": 12
+    }
+  ]
+}

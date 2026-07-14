@@ -1,0 +1,44 @@
+{
+  "conversationMap": [
+    {
+      "name": "Professor_Intro",
+      "lines": [
+        {
+          "speaker": "Professor",
+          "text": "Oh, drat! This is a disaster. I've misplaced the library keys again."
+        },
+        {
+          "speaker": "Professor",
+          "text": "If you want that application form, you'll have to help me. Find the library keys and take them to my Assistant."
+        }
+      ]
+    },
+    {
+      "name": "Professor_Waiting",
+      "lines": [
+        {
+          "speaker": "Professor",
+          "text": "Any luck finding the library keys? My Assistant is waiting for them."
+        }
+      ]
+    },
+    {
+      "name": "Professor_Finished",
+      "lines": [
+        {
+          "speaker": "Professor",
+          "text": "Excellent work finding those keys. I trust my Assistant gave you the application form you needed?"
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Professor_Idle",
+    "lines": [
+      {
+        "speaker": "Professor",
+        "text": "I'm incredibly busy searching for something important right now. Please don't interrupt."
+      }
+    ]
+  }
+}
