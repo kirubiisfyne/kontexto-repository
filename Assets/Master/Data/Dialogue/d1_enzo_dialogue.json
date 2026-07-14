@@ -1,0 +1,95 @@
+{
+  "conversationMap": [
+    {
+      "name": "Enzo_Intro",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Uhh… Enzo, can you sign my application form for me, please?"
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Yeah, just leave it there on the table."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "But uh… I kinda need it right now."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "The security guard won’t let me in the office."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "*Siiiiggghhhh*"
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Can't you see I'm doing..."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "...Stuff too."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Alright..."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Help me with print these papers, think of it as your first task in The Paragon."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "You help me, then I'll help you. Got it?"
+        }, {
+          "speaker": "Enzo",
+          "text": "Grab this stack of paper and bring them to the printer near the Librarian's desk, and start printing."
+        }
+      ]
+    },
+    {
+      "name": "Enzo_Waiting",
+      "lines": [
+        {
+          "speaker": "Enzo",
+          "text": "Are you done yet?"
+        },
+        {
+          "speaker": "Enzo",
+          "text": "No? then what are you doing slaking off?"
+        }
+      ]
+    },
+    {
+      "name": "Enzo_Finished",
+      "lines": [
+        {
+          "speaker": "Enzo",
+          "text": "Mmmhhhmm… page one to page fifty seven! A4, All complete with zero missing parts and jams."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Nice job. Hand me your Club Application Form, I'll sign it."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "..."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Here. now scraamm! I still got stuff to do."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Enzo_Idle",
+    "lines": [
+      {
+        "speaker": "Enzo",
+        "text": "Huh? What are you doing here? Mrs. Santo is looking for you."
+      }
+    ]
+  }
+}
