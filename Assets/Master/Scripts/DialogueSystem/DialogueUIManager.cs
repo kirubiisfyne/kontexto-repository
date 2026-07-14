@@ -123,13 +123,19 @@ namespace Master.Scripts.DialogueSystem
             currentFullText = sentence;
             dialogueText.maxVisibleCharacters = 0;
             dialogueText.text = sentence;
+            
+            // Force mesh update so the full text geometry is pre-calculated once, 
+            // preventing array resizing during the character reveal.
+            dialogueText.ForceMeshUpdate();
 
             float waitTime = 0.02f / textSpeed;
+            // Cache WaitForSeconds to prevent generating garbage every character loop
+            WaitForSeconds wait = new WaitForSeconds(waitTime);
             
             foreach (char letter in sentence)
             {
                 dialogueText.maxVisibleCharacters++;
-                yield return new WaitForSeconds(waitTime);
+                yield return wait;
             }
             
             IsTyping = false;
