@@ -102,3 +102,9 @@ InitTestScene*.unity*
 # nTools plugin
 Assets/nTools/
 Assets/nTools.meta
+
+# Ignore json files globally, but allow them in important Unity directories
+*.json
+!/[Aa]ssets/**/*.json
+!/[Pp]ackages/**/*.json
+!/[Pp]rojectSettings/**/*.json
