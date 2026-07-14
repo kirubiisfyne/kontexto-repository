@@ -15,21 +15,11 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private GameObject betaThankYouPanel;
 
-    [Header("Options Functionality")]
-    [SerializeField] private Toggle fullscreenToggle; // <-- Reference to your UI Toggle object
-
     private void Start()
     {
         // Ensure cursor is visible in main menu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        // When the game boots up, automatically make the checkbox match 
-        // whatever display state the computer is currently running in.
-        if (fullscreenToggle != null)
-        {
-            fullscreenToggle.isOn = Screen.fullScreen;
-        }
 
         if (betaThankYouPanel != null)
         {
@@ -89,14 +79,6 @@ public class MainMenuController : MonoBehaviour
         menuButtonsPanel.SetActive(true);   // Show main buttons
     }
 
-    /// <summary>
-    /// Swaps between Fullscreen and Windowed display modes.
-    /// </summary>
-    public void SetFullscreen(bool isFullscreen)
-    {
-        Screen.fullScreen = isFullscreen;
-        Debug.Log("Fullscreen display toggled to: " + isFullscreen);
-    }
 
     public void QuitGame()
     {
