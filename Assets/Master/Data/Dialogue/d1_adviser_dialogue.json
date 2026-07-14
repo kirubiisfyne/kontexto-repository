@@ -1,0 +1,104 @@
+{
+  "conversationMap": [
+    {
+      "name": "Mrs. Santos_Intro",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Hi, Rookie. You’re late."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>Oh no. She noticed. Do I tell her about the guard? Or do I just apologize?</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "The guard wouldn't let me in, Ma'am."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "The guard? Good. That means he's doing his job."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "We have standards here at The Paragon."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "If you can't present a proper ID, you can't be trusted with a headline."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Since you're the new encoder, let's see if you can follow simple instructions."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "I need your staff profile for the digital database."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Just... type my name and bio?"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Not just 'type,' Rookie. Format."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "I want your Name in a professional standard."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "I want your Bio in Times New Roman."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "And for goodness sake, use proper sizing."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Waiting",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "That's your station. Don't make me use the red pen on your first attempt. Go."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Finished",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Hmmmm… I gotta say, not bad for a Rookie."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Well done. Let's see how you did."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "[FEEDBACK]"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Well, that should be it."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Dismissed."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Mrs. Santos_Idle",
+    "lines": [
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Did the guard see you? You should really get yourself an Application Form first."
+      }
+    ]
+  }
+}
