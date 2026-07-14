@@ -1,0 +1,21 @@
+{
+  "missingBlock": "Oops! It looks like you're missing the '{0}' section. Make sure to type it in!",
+  "sizeWrong": "Let's adjust the size of '{0}' to {1} pt!",
+  "boldMissing": "Try adding bold to '{0}'!",
+  "boldExtra": "Let's remove the bold from '{0}'.",
+  "italicMissing": "Try italicizing '{0}'!",
+  "italicExtra": "Let's remove the italics from '{0}'.",
+  "alignmentWrong": "Let's fix the text alignment for '{0}'!",
+  "styleWrong": "Try the '{0}' style on '{1}'!",
+  "listWrong": "Let's check the bullets or numbers on '{0}'.",
+  "spaceBeforeMissing": "Add a little Space Before '{0}'.",
+  "spaceBeforeExtra": "Let's remove the Space Before '{0}'.",
+  "spaceAfterMissing": "Add a little Space After '{0}'.",
+  "spaceAfterExtra": "Let's remove the Space After '{0}'.",
+  "praise1": "Awesome job on the '{0}' section!",
+  "praise2": "'{0}' looks absolutely perfect!",
+  "praise3": "Spot on with the '{0}' formatting!",
+  "perfectDocument": "Perfect formatting! You nailed the whole document.",
+  "passedWithErrors": "You passed! But there are some things we can improve. Let's head back!",
+  "idleMessage": "If you're finished formatting, you can press Print in the toolbar!"
+}

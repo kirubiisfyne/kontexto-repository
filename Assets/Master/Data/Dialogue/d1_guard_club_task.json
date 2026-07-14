@@ -1,0 +1,81 @@
+{
+  "conversationMap": [
+    {
+      "name": "Sekyu_Intro",
+      "lines": [
+        {
+          "speaker": "Sekyu",
+          "text": "Hold up, Kid. Where’s your application form? This area is restricted to editorial staff only."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Oh! I have it! Enzo signed me up!"
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "..."
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "Your form is not signed. The Paragon has rules. "
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "If I let you in now, the admin will have my badge. Go get it signed by the Editor-in-Chief."
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "Just.. go get the form signed kid. it’s as easy as that."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>Great… I haven't even stepped inside, and I'm already failing. Okay... let’s look for Enzo...</i></color>"
+        }
+      ]
+    },
+    {
+      "name": "Sekyu_Waiting",
+      "lines": [
+        {
+          "speaker": "Sekyu",
+          "text": "Sorry bud, no form, no entry.."
+        }
+      ]
+    },
+    {
+      "name": "Sekyu_Handover",
+      "lines": [
+        {
+          "speaker": "Sekyu",
+          "text": "Let me see that..."
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "..."
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "Alright, rookie. You look like you belong now. Go on in."
+        }
+      ]
+    },
+    {
+      "name": "Sekyu_Finished",
+      "lines": [
+        {
+          "speaker": "Sekyu",
+          "text": "Keep your nose clean in there, kid."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Sekyu_Idle",
+    "lines": [
+      {
+        "speaker": "Sekyu",
+        "text": "Move along, nothing to see here."
+      }
+    ]
+  }
+}

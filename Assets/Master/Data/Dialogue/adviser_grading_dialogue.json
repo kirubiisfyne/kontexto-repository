@@ -1,0 +1,21 @@
+{
+  "missingBlock": "The document is incomplete. You completely forgot to include '{0}'. Unacceptable.",
+  "sizeWrong": "The sizing on '{0}' is incorrect. It must be exactly {1}.",
+  "boldMissing": "You missed the bold formatting on '{0}'. Fix it.",
+  "boldExtra": "Why is '{0}' bolded? That wasn't in the instructions.",
+  "italicMissing": "'{0}' needs to be italicized. Attention to detail is key.",
+  "italicExtra": "'{0}' shouldn't be italicized. Read the guidelines.",
+  "alignmentWrong": "Your alignment is off on '{0}'. That's basic formatting.",
+  "styleWrong": "The '{0}' style was not applied to '{1}'. Please follow the guidelines.",
+  "listWrong": "The list formatting for '{0}' is wrong. Use the correct list type.",
+  "spaceBeforeMissing": "You forgot the Space Before '{0}'.",
+  "spaceBeforeExtra": "Remove the extra Space Before '{0}'.",
+  "spaceAfterMissing": "You forgot the Space After '{0}'.",
+  "spaceAfterExtra": "Remove the extra Space After '{0}'.",
+  "praise1": "'{0}' is formatted adequately.",
+  "praise2": "At least '{0}' looks correct.",
+  "praise3": "I see you managed to format '{0}' properly.",
+  "perfectDocument": "Perfect formatting! You nailed the whole document. I'm impressed.",
+  "passedWithErrors": "It's acceptable, but it has flaws. We will take it.",
+  "idleMessage": ""
+}
