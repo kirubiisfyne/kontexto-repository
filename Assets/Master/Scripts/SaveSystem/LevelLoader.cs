@@ -30,7 +30,7 @@ namespace Master.Scripts.SaveSystem
 
             if (levelData == null)
             {
-                Debug.LogWarning($"LevelLoader on {gameObject.name}: No LevelData assigned. Nothing to spawn.");
+                //Debug.LogWarning($"LevelLoader on {gameObject.name}: No LevelData assigned. Nothing to spawn.");
                 return;
             }
 
@@ -79,7 +79,7 @@ namespace Master.Scripts.SaveSystem
         {
             if (disableSaving)
             {
-                Debug.Log($"LevelLoader: Saving is currently disabled in '{sceneId}'.");
+                //Debug.Log($"LevelLoader: Saving is currently disabled in '{sceneId}'.");
                 return;
             }
 
@@ -87,7 +87,7 @@ namespace Master.Scripts.SaveSystem
             playerData.currentScene = sceneId;
             SaveManager.Save(playerData);
 
-            Debug.Log($"LevelLoader: Game saved in '{sceneId}'.");
+            //Debug.Log($"LevelLoader: Game saved in '{sceneId}'.");
         }
 
         public void LoadGame()
@@ -99,7 +99,7 @@ namespace Master.Scripts.SaveSystem
 
             RestorePlayerPosition();
 
-            Debug.Log($"LevelLoader: Game loaded in '{sceneId}'.");
+            //Debug.Log($"LevelLoader: Game loaded in '{sceneId}'.");
         }
 
         // ── Player Transform Persistence ──
@@ -130,7 +130,7 @@ namespace Master.Scripts.SaveSystem
 
             if (cc != null) cc.enabled = true;
 
-            Debug.Log($"LevelLoader: Restored player position to {pos} in '{sceneId}'.");
+            //Debug.Log($"LevelLoader: Restored player position to {pos} in '{sceneId}'.");
         }
 
         private void OnDestroy()

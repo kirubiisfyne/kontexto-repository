@@ -73,7 +73,7 @@ namespace Master.Scripts.TaskSystem
             // before the DialogueManager's coroutine yields for the first frame.
             if (status == TaskStatus.Inactive && HasUnmetPrerequisite())
             {
-                Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
+                //Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
                 events.onPrerequisiteNotMet?.Invoke();
                 return;
             }
@@ -151,7 +151,7 @@ namespace Master.Scripts.TaskSystem
         {
             if (task == null || task.requirements == null || task.requirements.objectives == null)
             {
-                Debug.LogError($"HostTaskManager on {gameObject.name}: Cannot start task. TaskData or Objectives are missing!");
+                //Debug.LogError($"HostTaskManager on {gameObject.name}: Cannot start task. TaskData or Objectives are missing!");
                 return;
             }
 
@@ -164,7 +164,7 @@ namespace Master.Scripts.TaskSystem
                 currentProgress.Add(0);
             }
 
-            Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' started.");
+            //Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' started.");
         }
 
         /// <summary>
@@ -198,20 +198,20 @@ namespace Master.Scripts.TaskSystem
                 {
                     return giver.ReportProgress(key, amount);
                 }
-                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Is a Closer, but could not find a Giver that links to it.");
+                //Debug.LogWarning($"HostTaskManager on {gameObject.name}: Is a Closer, but could not find a Giver that links to it.");
                 return false;
             }
 
             if (status == TaskStatus.Completed)
             {
-                Debug.Log($"{gameObject.name}: Ignoring report for '{key}'. Task is already completed.");
+                //Debug.Log($"{gameObject.name}: Ignoring report for '{key}'. Task is already completed.");
                 return false;
             }
 
             if (status != TaskStatus.Active || task == null) return false;
             if (currentProgress == null || task.requirements == null || task.requirements.objectives == null || currentProgress.Count < task.requirements.objectives.Count)
             {
-                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Progress reported but currentProgress is not initialized/ready.");
+                //Debug.LogWarning($"HostTaskManager on {gameObject.name}: Progress reported but currentProgress is not initialized/ready.");
                 return false;
             }
 
@@ -226,14 +226,14 @@ namespace Master.Scripts.TaskSystem
                         {
                             if (currentProgress[prev] < task.requirements.objectives[prev].requiredAmount)
                             {
-                                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Interaction for '{key}' ignored. Complete '{task.requirements.objectives[prev].key}' first.");
+                                //Debug.LogWarning($"HostTaskManager on {gameObject.name}: Interaction for '{key}' ignored. Complete '{task.requirements.objectives[prev].key}' first.");
                                 return false;
                             }
                         }
                     }
 
                     currentProgress[i] = Mathf.Clamp(currentProgress[i] + amount, 0, task.requirements.objectives[i].requiredAmount);
-                    Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
+                    //Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
                     
                     CheckCompletion();
                     return true;
@@ -281,7 +281,7 @@ namespace Master.Scripts.TaskSystem
                     giver.CompleteTask();
                     return;
                 }
-                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Is a Closer, but could not find a Giver that links to it.");
+                //Debug.LogWarning($"HostTaskManager on {gameObject.name}: Is a Closer, but could not find a Giver that links to it.");
                 return;
             }
 
@@ -289,12 +289,12 @@ namespace Master.Scripts.TaskSystem
 
             if (!AreObjectivesMet())
             {
-                Debug.LogWarning($"HostTaskManager on {gameObject.name}: Manual completion failed. Requirements not met.");
+                //Debug.LogWarning($"HostTaskManager on {gameObject.name}: Manual completion failed. Requirements not met.");
                 return;
             }
 
             UpdateStatus(TaskStatus.Completed);
-            Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' completed!");
+            //Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' completed!");
         }
 
         /// <summary>
@@ -312,7 +312,7 @@ namespace Master.Scripts.TaskSystem
                 case TaskStatus.ReadyToComplete:  events.onReadyToComplete?.Invoke();  break;
                 case TaskStatus.Completed:        events.onCompleted?.Invoke();        break;
             }
-            Debug.Log($"{gameObject.name}: Task status changed to {newStatus}.");
+            //Debug.Log($"{gameObject.name}: Task status changed to {newStatus}.");
 
             // Givers and Both push status to all corresponding Closers in the scene.
             if (hostType == HostType.Giver || hostType == HostType.Both)

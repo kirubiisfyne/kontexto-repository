@@ -46,7 +46,7 @@ namespace Master.Scripts.SaveSystem
             {
                 if (entry.prefab == null)
                 {
-                    Debug.LogWarning($"LevelTaskTracker: A task entry in '{levelData.name}' has a null prefab. Skipping.");
+                    //Debug.LogWarning($"LevelTaskTracker: A task entry in '{levelData.name}' has a null prefab. Skipping.");
                     continue;
                 }
 
@@ -76,13 +76,13 @@ namespace Master.Scripts.SaveSystem
 
                         if (mgr.task == null)
                         {
-                            Debug.LogWarning($"LevelTaskTracker: HostTaskManager on '{mgr.gameObject.name}' has no TaskData assigned.");
+                            //Debug.LogWarning($"LevelTaskTracker: HostTaskManager on '{mgr.gameObject.name}' has no TaskData assigned.");
                             continue;
                         }
 
                         if (string.IsNullOrEmpty(mgr.task.taskId))
                         {
-                            Debug.LogWarning($"LevelTaskTracker: TaskData '{mgr.task.taskName}' has an empty taskId. Save/load will not track this task.");
+                            //Debug.LogWarning($"LevelTaskTracker: TaskData '{mgr.task.taskName}' has an empty taskId. Save/load will not track this task.");
                             continue;
                         }
 
@@ -112,11 +112,11 @@ namespace Master.Scripts.SaveSystem
                 yield return null; 
             }
 
-            Debug.Log($"LevelTaskTracker: Spawned {spawnedGivers.Count} task(s) for '{sceneId}'.");
+            //Debug.Log($"LevelTaskTracker: Spawned {spawnedGivers.Count} task(s) for '{sceneId}'.");
 
             if (spawnedGivers.Count > 0 && AreAllTasksCompleted())
             {
-                Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are already COMPLETED (restored from save). Ready for level completion.");
+                //Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are already COMPLETED (restored from save). Ready for level completion.");
             }
         }
 
@@ -135,7 +135,7 @@ namespace Master.Scripts.SaveSystem
             mgr.UpdateStatus(TaskStatus.ReadyToComplete);
             mgr.UpdateStatus(TaskStatus.Completed);
 
-            Debug.Log($"LevelTaskTracker: Restored '{mgr.task.taskId}' as Completed.");
+            //Debug.Log($"LevelTaskTracker: Restored '{mgr.task.taskId}' as Completed.");
         }
 
         private void OnTaskActivated(HostTaskManager mgr)
@@ -152,19 +152,19 @@ namespace Master.Scripts.SaveSystem
                 level.completedTaskIds.Add(taskId);
                 saveGameCallback?.Invoke();
 
-                Debug.Log($"LevelTaskTracker: Task '{taskId}' saved as completed.");
+                //Debug.Log($"LevelTaskTracker: Task '{taskId}' saved as completed.");
 
                 onTaskCompletedEvent?.Invoke(taskId);
 
                 if (!AreAnyTasksActive())
                 {
-                    Debug.Log($"LevelTaskTracker: All currently ACTIVE tasks are completed.");
+                    //Debug.Log($"LevelTaskTracker: All currently ACTIVE tasks are completed.");
                     onAllActiveTasksCompletedEvent?.Invoke();
                 }
 
                 if (AreAllTasksCompleted())
                 {
-                    Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are now COMPLETED. Ready for level completion.");
+                    //Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are now COMPLETED. Ready for level completion.");
                 }
             }
         }
@@ -196,7 +196,7 @@ namespace Master.Scripts.SaveSystem
         {
             if (!AreAllTasksCompleted())
             {
-                Debug.LogWarning($"LevelTaskTracker: Cannot complete level '{sceneId}'. Not all tasks are finished.");
+                //Debug.LogWarning($"LevelTaskTracker: Cannot complete level '{sceneId}'. Not all tasks are finished.");
                 return;
             }
 
@@ -204,7 +204,7 @@ namespace Master.Scripts.SaveSystem
             level.isCompleted = true;
             saveGameCallback?.Invoke();
 
-            Debug.Log($"LevelTaskTracker: Level '{sceneId}' marked as COMPLETE.");
+            //Debug.Log($"LevelTaskTracker: Level '{sceneId}' marked as COMPLETE.");
         }
     }
 }

@@ -15,21 +15,11 @@ public class MainMenuController : MonoBehaviour
     [SerializeField] private GameObject optionsPanel;
     [SerializeField] private GameObject betaThankYouPanel;
 
-    [Header("Options Functionality")]
-    [SerializeField] private Toggle fullscreenToggle; // <-- Reference to your UI Toggle object
-
     private void Start()
     {
         // Ensure cursor is visible in main menu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        // When the game boots up, automatically make the checkbox match 
-        // whatever display state the computer is currently running in.
-        if (fullscreenToggle != null)
-        {
-            fullscreenToggle.isOn = Screen.fullScreen;
-        }
 
         if (betaThankYouPanel != null)
         {
@@ -55,7 +45,7 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        Debug.Log("Play button clicked! Playing transition...");
+        //Debug.Log("Play button clicked! Playing transition...");
         StartCoroutine(PlayGameRoutine());
     }
 
@@ -68,10 +58,10 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
+            //Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
         }
 
-        Debug.Log("Transition complete. Loading gameplay scene...");
+        //Debug.Log("Transition complete. Loading gameplay scene...");
         SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
     }
 
@@ -95,12 +85,12 @@ public class MainMenuController : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
-        Debug.Log("Fullscreen display toggled to: " + isFullscreen);
+        //Debug.Log("Fullscreen display toggled to: " + isFullscreen);
     }
 
     public void QuitGame()
     {
-        Debug.Log("Quit button clicked! Closing application...");
+        //Debug.Log("Quit button clicked! Closing application...");
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else
