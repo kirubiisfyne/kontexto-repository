@@ -1,4 +1,5 @@
 using System.Collections;
+using Master.Scripts;
 using UnityEngine;
 
 public class PauseMenuController : MonoBehaviour
@@ -76,6 +77,31 @@ public class PauseMenuController : MonoBehaviour
 
         // Use Realtime so the coroutine doesn't freeze when timeScale is 0
         yield return new WaitForSecondsRealtime(transitionDuration);
+    }
+
+    public void ReturnToMenu()
+    {
+        // 1. Auto-save the game before leaving
+        if (Master.Scripts.SaveSystem.LevelLoader.Current != null)
+        {
+            Master.Scripts.SaveSystem.LevelLoader.Current.SaveGame();
+        }
+
+        // 2. Hide the pause menu immediately for a cleaner fade-out
+        PauseMenuUI.SetActive(false);
+
+        // 3. We intentionally leave Time.timeScale at 0f so the game stays frozen during the fade out.
+        GameIsPaused = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        SceneGateManager.Instance.StartWarp("scn_main-menu");
+    }
+
+    public void Quit()
+    {
+        TransitionManager.Instance.PlayTransitionAndWait("transition");
+        Application.Quit();
     }
 
 }

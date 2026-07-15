@@ -41,6 +41,9 @@ namespace Master.Scripts
         {
             if (animator != null)
             {
+                // Force animator to ignore paused time so the fade-in never gets stuck
+                animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+
                 // Delay the "Transition In" animation by freezing the Animator
                 if (gracePeriodIn > 0f)
                 {
