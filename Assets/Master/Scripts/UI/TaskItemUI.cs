@@ -1,3 +1,4 @@
+using System.Text;
 using TMPro;
 using UnityEngine;
 
@@ -16,6 +17,8 @@ namespace Master.Scripts.UI
         [SerializeField] private GameObject checkmarkImage;
 
         public string TaskId { get; private set; }
+        
+        private readonly StringBuilder _sb = new StringBuilder();
 
         /// <summary>
         /// Initializes the UI with the task data.
@@ -26,11 +29,14 @@ namespace Master.Scripts.UI
             
             if (descriptionText != null)
             {
-                descriptionText.text = description;
+                descriptionText.raycastTarget = false;
+                _sb.Clear();
+                _sb.Append(description);
+                descriptionText.SetText(_sb);
             }
             else
             {
-                Debug.LogWarning("TaskItemUI: descriptionText is not assigned.", this);
+                //Debug.LogWarning("TaskItemUI: descriptionText is not assigned.", this);
             }
 
             if (checkmarkImage != null)

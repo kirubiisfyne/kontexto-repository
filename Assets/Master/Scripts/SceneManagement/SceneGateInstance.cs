@@ -71,11 +71,11 @@ namespace Master.Scripts
                     Master.Scripts.SaveSystem.LevelLoader.Current?.SaveGame();
                     
                     SceneGateManager.Instance.StartWarp(sceneToName);
-                    Debug.Log($"[SceneGate] Warping to {sceneToName}...");
+                    //Debug.Log($"[SceneGate] Warping to {sceneToName}...");
                 }
                 else
                 {
-                    Debug.LogError("[SceneGate] Scene To Name is empty! Please assign a scene name in the Inspector.");
+                    //Debug.LogError("[SceneGate] Scene To Name is empty! Please assign a scene name in the Inspector.");
                 }
             }
         }

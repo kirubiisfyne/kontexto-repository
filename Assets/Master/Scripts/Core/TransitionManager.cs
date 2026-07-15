@@ -73,12 +73,12 @@ namespace Master.Scripts
 
                 if (animator == null)
                 {
-                    Debug.LogWarning("TransitionManager: Transition object found, but it is missing an Animator component.");
+                    //Debug.LogWarning("TransitionManager: Transition object found, but it is missing an Animator component.");
                 }
             }
             else
             {
-                Debug.LogWarning("TransitionManager: No GameObject with the tag 'TransitionObject' was found in the scene.");
+                //Debug.LogWarning("TransitionManager: No GameObject with the tag 'TransitionObject' was found in the scene.");
             }
         }
 
@@ -132,7 +132,7 @@ namespace Master.Scripts
             }
             else
             {
-                Debug.LogError($"TransitionManager: Cannot fire trigger '{triggerName}'. Animator missing.");
+                //Debug.LogError($"TransitionManager: Cannot fire trigger '{triggerName}'. Animator missing.");
             }
         }
     }
