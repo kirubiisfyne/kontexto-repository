@@ -27,6 +27,9 @@ namespace Master.Scripts.UI
         // Maps taskId to its visual UI component
         private Dictionary<string, TaskItemUI> activeTaskItems = new Dictionary<string, TaskItemUI>();
         
+        // Pool for UI elements
+        private Queue<TaskItemUI> itemPool = new Queue<TaskItemUI>();
+        
         private bool isPanelVisible = false;
 
         private void Awake()
@@ -55,13 +58,36 @@ namespace Master.Scripts.UI
             // Prevent duplicates
             if (activeTaskItems.ContainsKey(mgr.task.taskId)) return;
 
-            var instance = Instantiate(itemPrefab, listContainer);
+            TaskItemUI instance;
+            if (itemPool.Count > 0)
+            {
+                instance = itemPool.Dequeue();
+                instance.gameObject.SetActive(true);
+            }
+            else
+            {
+                instance = Instantiate(itemPrefab, listContainer);
+            }
+            
             instance.Setup(mgr.task.taskId, mgr.task.taskName);
             
             activeTaskItems[mgr.task.taskId] = instance;
             
             // Show the tracker if it was hidden
             Show();
+        }
+
+        /// <summary>
+        /// Returns a task item to the pool instead of destroying it.
+        /// </summary>
+        public void ReturnToPool(string taskId)
+        {
+            if (activeTaskItems.TryGetValue(taskId, out var item))
+            {
+                item.gameObject.SetActive(false);
+                itemPool.Enqueue(item);
+                activeTaskItems.Remove(taskId);
+            }
         }
 
         /// <summary>

@@ -1,0 +1,53 @@
+{
+  "conversationMap": [
+    {
+      "name": "Assistant_Idle",
+      "lines": [
+        {
+          "speaker": "Assistant",
+          "text": "I really hope the Professor finds those keys soon..."
+        }
+      ]
+    },
+    {
+      "name": "Assistant_Asking",
+      "lines": [
+        {
+          "speaker": "Assistant",
+          "text": "Did the Professor ask you to look for the library keys? Let me know if you find them."
+        }
+      ]
+    },
+    {
+      "name": "Assistant_Handover",
+      "lines": [
+        {
+          "speaker": "Assistant",
+          "text": "You found the library keys! That's a huge relief, thank you."
+        },
+        {
+          "speaker": "Assistant",
+          "text": "The Professor said you needed a Club Application Form for the Guard? Here you go, all stamped and approved."
+        }
+      ]
+    },
+    {
+      "name": "Assistant_Finished",
+      "lines": [
+        {
+          "speaker": "Assistant",
+          "text": "Good luck with the Guard! He can be a bit strict."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Assistant_True_Idle",
+    "lines": [
+      {
+        "speaker": "Assistant",
+        "text": "Let me know if you need any forms or paperwork. I handle all of it for the Professor."
+      }
+    ]
+  }
+}

@@ -104,13 +104,13 @@ namespace Master.Scripts.UI
 
                 if (wasChanged && enableLogging)
                 {
-                    Debug.Log(
+                    /* Debug.Log(
                         $"[UIScalingEnforcer] Corrected CanvasScaler on " +
                         $"'{scaler.gameObject.name}' in scene '{scaler.gameObject.scene.name}' → " +
                         $"ScaleWithScreenSize @ {referenceResolution.x}×{referenceResolution.y}, " +
                         $"match={matchWidthOrHeight}",
                         scaler
-                    );
+                    ); */
                 }
             }
         }

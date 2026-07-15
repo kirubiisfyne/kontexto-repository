@@ -45,7 +45,7 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        Debug.Log("Play button clicked! Playing transition...");
+        //Debug.Log("Play button clicked! Playing transition...");
         StartCoroutine(PlayGameRoutine());
     }
 
@@ -58,10 +58,10 @@ public class MainMenuController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
+            //Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
         }
 
-        Debug.Log("Transition complete. Loading gameplay scene...");
+        //Debug.Log("Transition complete. Loading gameplay scene...");
         SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
     }
 
@@ -79,10 +79,18 @@ public class MainMenuController : MonoBehaviour
         menuButtonsPanel.SetActive(true);   // Show main buttons
     }
 
+    /// <summary>
+    /// Swaps between Fullscreen and Windowed display modes.
+    /// </summary>
+    public void SetFullscreen(bool isFullscreen)
+    {
+        Screen.fullScreen = isFullscreen;
+        //Debug.Log("Fullscreen display toggled to: " + isFullscreen);
+    }
 
     public void QuitGame()
     {
-        Debug.Log("Quit button clicked! Closing application...");
+        //Debug.Log("Quit button clicked! Closing application...");
         #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
         #else

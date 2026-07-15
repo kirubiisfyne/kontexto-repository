@@ -93,7 +93,7 @@ namespace Master.Scripts.Editor
                 {
                     SaveManager.DeleteSave();
                     cachedData = null;
-                    Debug.Log("LevelLoaderEditor: Save data wiped.");
+                    //Debug.Log("LevelLoaderEditor: Save data wiped.");
                 }
             }
             GUI.backgroundColor = originalColor;
