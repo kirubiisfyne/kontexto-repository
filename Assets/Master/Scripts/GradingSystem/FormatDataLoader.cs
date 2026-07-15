@@ -37,6 +37,10 @@ public class FormatDataLoader : MonoBehaviour
     private Label _senderLabel;
     private Label _subjectLabel;
 
+    private VisualElement _editorRoot;
+    private UnityEngine.UIElements.Button _taskbarBtnEditor;
+    private UnityEngine.UIElements.Button _taskbarBtnEmail;
+
 
     private void Start()
     {
@@ -48,6 +52,16 @@ public class FormatDataLoader : MonoBehaviour
         _senderLabel = root.Q<Label>("SenderLabel");
         _subjectLabel = root.Q<Label>("SubjectLabel");
 
+        _editorRoot = root.Q<VisualElement>("Root");
+        _taskbarBtnEditor = root.Q<UnityEngine.UIElements.Button>("TaskbarButton_Editor");
+        _taskbarBtnEmail = root.Q<UnityEngine.UIElements.Button>("TaskbarButton_Email");
+
+        if (_taskbarBtnEditor != null)
+            _taskbarBtnEditor.clicked += () => ToggleWindow(_editorRoot);
+
+        if (_taskbarBtnEmail != null)
+            _taskbarBtnEmail.clicked += () => ToggleWindow(_emailRoot);
+
 
         // Hook up the close button
         var closeButton = _emailRoot?.Q<UnityEngine.UIElements.Button>("Exit");
@@ -58,7 +72,7 @@ public class FormatDataLoader : MonoBehaviour
 
         if (GameManager.Instance == null)
         {
-            Debug.LogWarning("No GameManager instance found. Falling back to default.");
+            //Debug.LogWarning("No GameManager instance found. Falling back to default.");
             currentLevelJson = fallbackLevelJSON;
         }
         else
@@ -79,21 +93,21 @@ public class FormatDataLoader : MonoBehaviour
         {
             // 2. Parse it
             convertedDocumentData = JsonConvert.DeserializeObject<DocumentData>(jsonToLoad.text);
-            Debug.Log("Task Controller: Level Data Loaded.");
+            //Debug.Log("Task Controller: Level Data Loaded.");
 
             // 3. Send it to the UI
             editorManager.LoadLevel(convertedDocumentData);
         }
         else
         {
-            Debug.LogError("No JSON file assigned to the Document Task Controller!");
+            //Debug.LogError("No JSON file assigned to the Document Task Controller!");
         }
     }
 
     // This gets called by your TextEditorManager when the user clicks Print
     public void EvaluatePrintJob(VisualElement documentPage)
     {
-        Debug.Log("Task Controller: Sending document to grader...");
+        //Debug.Log("Task Controller: Sending document to grader...");
 
         GradeReport result = gradingManager.GradeDocument(documentPage, convertedDocumentData);
 
@@ -125,10 +139,10 @@ public class FormatDataLoader : MonoBehaviour
         }
         else
         {
-            Debug.Log($"Score: {result.score}/{result.maxScore} - FAILED. NEEDS REVISION.");
+            //Debug.Log($"Score: {result.score}/{result.maxScore} - FAILED. NEEDS REVISION.");
             if (result.pennyFeedback != null && result.pennyFeedback.Count > 0)
             {
-                Debug.Log("Penny Feedback: " + result.pennyFeedback[0]);
+                //Debug.Log("Penny Feedback: " + result.pennyFeedback[0]);
                 if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.pennyFeedback[0], false);
             }
         }
@@ -144,6 +158,20 @@ public class FormatDataLoader : MonoBehaviour
     }
 
 #region UI Callbacks
+
+    private void ToggleWindow(VisualElement window)
+    {
+        if (window == null) return;
+        
+        if (window.style.display == DisplayStyle.None)
+        {
+            window.style.display = DisplayStyle.Flex;
+        }
+        else
+        {
+            window.style.display = DisplayStyle.None;
+        }
+    }
 
     public void HandleInstructionEmail(bool isActive)
     {

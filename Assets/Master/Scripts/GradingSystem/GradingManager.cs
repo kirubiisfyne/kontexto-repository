@@ -30,6 +30,8 @@ public class GradingManager : MonoBehaviour
 
     private GradingDialogueScript pennyScript;
     private GradingDialogueScript adviserScript;
+    
+    private Master.Scripts.TextEditorSystem.FontMappingsData _fontMappingsData;
 
     private void Awake()
     {
@@ -39,6 +41,12 @@ public class GradingManager : MonoBehaviour
 #endif
         pennyScript = pennyScriptAsset != null ? Newtonsoft.Json.JsonConvert.DeserializeObject<GradingDialogueScript>(pennyScriptAsset.text) : new GradingDialogueScript();
         adviserScript = adviserScriptAsset != null ? Newtonsoft.Json.JsonConvert.DeserializeObject<GradingDialogueScript>(adviserScriptAsset.text) : new GradingDialogueScript();
+        
+        TextAsset fontMappingJson = Resources.Load<TextAsset>("FontMappings");
+        if (fontMappingJson != null)
+        {
+            _fontMappingsData = JsonUtility.FromJson<Master.Scripts.TextEditorSystem.FontMappingsData>(fontMappingJson.text);
+        }
     }
 
     private string TruncateSnippet(string snippet)
@@ -58,18 +66,30 @@ public class GradingManager : MonoBehaviour
 
         // 1. Get all player blocks
         var allPlayerBlocks = documentPage.Query<TextField>().ToList();
+        
+        // Precompute lowercased values to avoid O(N*M) string allocations in the loop
+        var blockValuesLower = allPlayerBlocks.Select(b => b.value.Trim().ToLower()).ToList();
 
         // 2. Loop through Answer Key
         foreach (var req in currentDocument.answerKey)
         {
             if (string.IsNullOrEmpty(req.targetTextSnippet))
             {
-                Debug.LogWarning("GradingManager: Skipping a requirement because targetTextSnippet is null or empty. Please check the JSON.");
+                //Debug.LogWarning("GradingManager: Skipping a requirement because targetTextSnippet is null or empty. Please check the JSON.");
                 continue;
             }
 
             string searchTarget = req.targetTextSnippet.Trim().ToLower();
-            TextField matchedBlock = allPlayerBlocks.FirstOrDefault(b => b.value.Trim().ToLower().Contains(searchTarget));
+            
+            TextField matchedBlock = null;
+            for (int i = 0; i < allPlayerBlocks.Count; i++)
+            {
+                if (blockValuesLower[i].Contains(searchTarget))
+                {
+                    matchedBlock = allPlayerBlocks[i];
+                    break;
+                }
+            }
 
             if (matchedBlock == null)
             {
@@ -118,9 +138,10 @@ public class GradingManager : MonoBehaviour
             if (anyCheckRan && blockPerfect)
             {
                 string praisedSnippet = TruncateSnippet(req.targetTextSnippet);
-                string[] aPraisesArr = { string.Format(adviserScript.praise1, praisedSnippet), string.Format(adviserScript.praise2, praisedSnippet), string.Format(adviserScript.praise3, praisedSnippet) };
-                
-                aPraises.Add(aPraisesArr[Random.Range(0, aPraisesArr.Length)]);
+                int r = Random.Range(0, 3);
+                if (r == 0) aPraises.Add(string.Format(adviserScript.praise1, praisedSnippet));
+                else if (r == 1) aPraises.Add(string.Format(adviserScript.praise2, praisedSnippet));
+                else aPraises.Add(string.Format(adviserScript.praise3, praisedSnippet));
             }
         }
 
@@ -238,19 +259,14 @@ public class GradingManager : MonoBehaviour
         }
 
         string expectedFontName = req.requiredFontFace;
-        TextAsset json = Resources.Load<TextAsset>("FontMappings");
-        if (json != null)
+        if (_fontMappingsData != null && _fontMappingsData.mappings != null)
         {
-            var data = JsonUtility.FromJson<Master.Scripts.TextEditorSystem.FontMappingsData>(json.text);
-            if (data != null && data.mappings != null)
+            foreach (var mapping in _fontMappingsData.mappings)
             {
-                foreach (var mapping in data.mappings)
+                if (mapping.displayName == req.requiredFontFace)
                 {
-                    if (mapping.displayName == req.requiredFontFace)
-                    {
-                        expectedFontName = mapping.regular;
-                        break;
-                    }
+                    expectedFontName = mapping.regular;
+                    break;
                 }
             }
         }

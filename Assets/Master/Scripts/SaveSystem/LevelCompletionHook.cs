@@ -12,13 +12,13 @@ namespace Master.Scripts.SaveSystem
         {
             if (LevelLoader.Current != null && LevelLoader.Current.AreAllTasksCompleted())
             {
-                Debug.Log("LevelCompletionHook: All tasks complete. Wrapping up level data...");
+                //Debug.Log("LevelCompletionHook: All tasks complete. Wrapping up level data...");
                 LevelLoader.Current.CompleteLevel();
                 // Note: LevelLoader.Current.SaveGame() is handled by the gate itself right after this.
             }
             else
             {
-                Debug.LogWarning("LevelCompletionHook: Player warped, but tasks were NOT fully complete.");
+                //Debug.LogWarning("LevelCompletionHook: Player warped, but tasks were NOT fully complete.");
             }
         }
     }
