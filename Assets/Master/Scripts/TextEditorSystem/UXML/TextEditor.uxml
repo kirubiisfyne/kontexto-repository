@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/TextEditorStyle.uss?fileID=7433441132597879392&amp;guid=dab8fefc2ae48434d981cd9b73428717&amp;type=3#TextEditorStyle"/>
-    <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3#DocumentStyle"/>
+    <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3"/>
     <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; align-self: center; height: 632px;">
         <ui:VisualElement name="Header" class="editor-toolbar" style="flex-grow: 0; padding-top: 4px; padding-left: 8px; padding-right: 4px; padding-bottom: 4px; border-top-width: 2px; background-color: rgb(40, 133, 180); height: 64px;">
             <ui:VisualElement name="WindowName" style="flex-grow: 1; flex-direction: row;">
@@ -95,8 +95,19 @@
         </ui:Label>
         <ui:VisualElement name="PennyGraphic"/>
     </ui:VisualElement>
-    <ui:VisualElement name="TaskbarRoot" class="taskbar-panel">
-        <ui:Button name="TaskbarButton_Editor" text="Text Editor" class="taskbar-button"/>
-        <ui:Button name="TaskbarButton_Email" text="Email" class="taskbar-button"/>
+    <ui:VisualElement name="TaskbarRoot" class="taskbar-panel" style="background-color: rgb(150, 150, 150); padding-left: 0; padding-right: 0; bottom: 0; right: 0; left: 0;">
+        <ui:Button name="TaskbarButton_Start" text="" icon-image="" class="taskbar-button">
+            <ui:Label text="START" style="padding-right: 2px; padding-left: 2px; margin-right: 0; margin-top: 2px; width: 34px; overflow: hidden; font-size: 8px; -unity-text-align: middle-center; -unity-font-style: bold; text-overflow: ellipsis; margin-left: 0;"/>
+            <ui:Image style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/DesktopIcon.svg?fileID=7388822144124034973&amp;guid=b3d9fa4207a2946e89ed6da6f9b632bd&amp;type=3#DesktopIcon&quot;); flex-grow: 1; width: 15px; height: 14px; margin-left: 2px; margin-right: 4px;"/>
+        </ui:Button>
+        <ui:VisualElement name="ToolDivider" style="width: 2px; height: 24px; background-color: rgb(150, 150, 150); margin-left: 6px; margin-right: 6px; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(128, 128, 128); border-right-color: rgb(185, 185, 185); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);"/>
+        <ui:Button name="TaskbarButton_Editor" text="" icon-image="" class="taskbar-button">
+            <ui:Label text="TEXT_EDITOR" style="padding-right: 2px; padding-left: 2px; margin-right: 0; margin-top: 2px; width: 64px; overflow: hidden; font-size: 8px; -unity-text-align: middle-left; -unity-font-style: bold; text-overflow: ellipsis; margin-left: 0;"/>
+            <ui:Image style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;); flex-grow: 1; width: 13px; height: 14px; margin-left: 4px; margin-right: 4px;"/>
+        </ui:Button>
+        <ui:Button name="TaskbarButton_Email" text="" class="taskbar-button">
+            <ui:Label text="E-MAIL" style="padding-right: 2px; padding-left: 2px; margin-right: 0; margin-top: 2px; width: 64px; overflow: hidden; font-size: 8px; -unity-text-align: middle-left; -unity-font-style: bold; text-overflow: ellipsis; margin-left: 0;"/>
+            <ui:Image style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/EmailIcon.svg?fileID=7388822144124034973&amp;guid=db0f36f4f7f85440e9f73374ef8e2314&amp;type=3#EmailIcon&quot;); flex-grow: 1; width: 14px; height: 13px; margin-left: 4px; margin-right: 4px;"/>
+        </ui:Button>
     </ui:VisualElement>
 </ui:UXML>
