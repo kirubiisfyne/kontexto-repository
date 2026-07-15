@@ -130,7 +130,7 @@ public class BlenderFlipMapper : EditorWindow
             count++;
         }
 
-        Debug.Log($"Successfully swapped and normalized {count} instances of {group.OriginalMesh.name}!");
+        //Debug.Log($"Successfully swapped and normalized {count} instances of {group.OriginalMesh.name}!");
         ScanScene(); // Rescan to update UI
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -34,6 +35,8 @@ namespace Master.Scripts.DialogueSystem
         private string currentFullText;
         private Coroutine typingCoroutine;
         private Coroutine hideCoroutine;
+        
+        private readonly StringBuilder _sb = new StringBuilder();
 
         private void Awake()
         {
@@ -41,6 +44,10 @@ namespace Master.Scripts.DialogueSystem
             else Destroy(gameObject);
             
             dialoguePanel.SetActive(false);
+            
+            if (speakerNameText != null) speakerNameText.raycastTarget = false;
+            if (dialogueText != null) dialogueText.raycastTarget = false;
+            if (speakerProfileImage != null) speakerProfileImage.raycastTarget = false;
         }
 
         public void Show()
@@ -90,7 +97,9 @@ namespace Master.Scripts.DialogueSystem
         {
             Show(); 
 
-            speakerNameText.text = !string.IsNullOrEmpty(line.speaker) ? line.speaker : "";
+            _sb.Clear();
+            _sb.Append(!string.IsNullOrEmpty(line.speaker) ? line.speaker : "");
+            speakerNameText.SetText(_sb);
 
             if (speakerProfileImage != null)
             {
@@ -122,14 +131,22 @@ namespace Master.Scripts.DialogueSystem
             IsTyping = true;
             currentFullText = sentence;
             dialogueText.maxVisibleCharacters = 0;
-            dialogueText.text = sentence;
+            _sb.Clear();
+            _sb.Append(sentence);
+            dialogueText.SetText(_sb);
+            
+            // Force mesh update so the full text geometry is pre-calculated once, 
+            // preventing array resizing during the character reveal.
+            dialogueText.ForceMeshUpdate();
 
             float waitTime = 0.02f / textSpeed;
+            // Cache WaitForSeconds to prevent generating garbage every character loop
+            WaitForSeconds wait = new WaitForSeconds(waitTime);
             
             foreach (char letter in sentence)
             {
                 dialogueText.maxVisibleCharacters++;
-                yield return new WaitForSeconds(waitTime);
+                yield return wait;
             }
             
             IsTyping = false;
