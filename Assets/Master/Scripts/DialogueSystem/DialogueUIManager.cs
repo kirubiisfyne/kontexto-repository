@@ -131,6 +131,7 @@ namespace Master.Scripts.DialogueSystem
             IsTyping = true;
             currentFullText = sentence;
             dialogueText.maxVisibleCharacters = 0;
+            dialogueText.text = sentence;
             _sb.Clear();
             _sb.Append(sentence);
             dialogueText.SetText(_sb);
