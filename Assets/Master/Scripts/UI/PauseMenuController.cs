@@ -100,8 +100,33 @@ public class PauseMenuController : MonoBehaviour
 
     public void Quit()
     {
-        TransitionManager.Instance.PlayTransitionAndWait("transition");
+        // Start the quit sequence as a coroutine so we can wait for animations
+        StartCoroutine(QuitRoutine());
+    }
+
+    private IEnumerator QuitRoutine()
+    {
+        // 1. Auto-save the game before quitting
+        if (Master.Scripts.SaveSystem.LevelLoader.Current != null)
+        {
+            Master.Scripts.SaveSystem.LevelLoader.Current.SaveGame();
+        }
+
+        // 2. Hide the pause menu immediately for a cleaner fade-out
+        PauseMenuUI.SetActive(false);
+
+        // 3. Play the transition and WAIT for it to finish
+        if (TransitionManager.Instance != null)
+        {
+            yield return TransitionManager.Instance.PlayTransitionAndWait("transition");
+        }
+
+        // 4. Safely close the application
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
         Application.Quit();
+#endif
     }
 
 }

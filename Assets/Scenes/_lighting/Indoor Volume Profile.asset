@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a074ec59f6e910b4e8c49f57e56cf95a, type: 3}
   m_Name: VolumetricFogVolumeComponent
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogVolumeComponent
-  active: 0
+  active: 1
   distance:
     m_OverrideState: 1
     m_Value: 16
@@ -403,7 +403,7 @@ MonoBehaviour:
     m_Value: 0.3
   scattering:
     m_OverrideState: 1
-    m_Value: 0.7
+    m_Value: 0.4
   tint:
     m_OverrideState: 1
     m_Value: {r: 1, g: 0.707174, b: 0.5424528, a: 1}
