@@ -20,14 +20,14 @@ namespace Master.Scripts.SaveSystem
         {
             if (!File.Exists(SavePath))
             {
-                Debug.Log("SaveManager: No save file found. Starting fresh.");
+                //Debug.Log("SaveManager: No save file found. Starting fresh.");
                 return new PlayerData();
             }
 
             string json = File.ReadAllText(SavePath);
             var data = JsonUtility.FromJson<PlayerData>(json);
 
-            Debug.Log($"SaveManager: Loaded save from {SavePath}");
+            //Debug.Log($"SaveManager: Loaded save from {SavePath}");
             return data ?? new PlayerData();
         }
 
@@ -39,7 +39,7 @@ namespace Master.Scripts.SaveSystem
             string json = JsonUtility.ToJson(data, true);
             File.WriteAllText(SavePath, json);
 
-            Debug.Log($"SaveManager: Saved to {SavePath}");
+            //Debug.Log($"SaveManager: Saved to {SavePath}");
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Master.Scripts.SaveSystem
             if (File.Exists(SavePath))
             {
                 File.Delete(SavePath);
-                Debug.Log("SaveManager: Save file deleted.");
+                //Debug.Log("SaveManager: Save file deleted.");
             }
         }
     }

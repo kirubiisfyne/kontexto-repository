@@ -405,7 +405,7 @@ public class SnapToGridWindow : EditorWindow
         positionGroups.Sort((a, b) => string.Compare(a.label, b.label, System.StringComparison.Ordinal));
 
         int totalDupes = positionGroups.Sum(g => g.DuplicateCount);
-        Debug.Log($"[Same Position] {positionGroups.Count} group(s), {totalDupes} duplicate(s) found.");
+        //Debug.Log($"[Same Position] {positionGroups.Count} group(s), {totalDupes} duplicate(s) found.");
         Repaint();
     }
 
@@ -472,7 +472,7 @@ public class SnapToGridWindow : EditorWindow
             }
         }
 
-        Debug.Log($"[Colliding Bounds] {boundsGroups.Count} collision(s) found.");
+        //Debug.Log($"[Colliding Bounds] {boundsGroups.Count} collision(s) found.");
         Repaint();
     }
 
@@ -486,7 +486,7 @@ public class SnapToGridWindow : EditorWindow
         GameObject[] selected = Selection.gameObjects;
         if (selected.Length == 0)
         {
-            Debug.LogWarning("[Snap to Grid] No objects selected.");
+            //Debug.LogWarning("[Snap to Grid] No objects selected.");
             return;
         }
 
@@ -502,7 +502,7 @@ public class SnapToGridWindow : EditorWindow
             );
             count++;
         }
-        Debug.Log($"[Snap to Grid] Snapped {count} object(s).");
+        //Debug.Log($"[Snap to Grid] Snapped {count} object(s).");
     }
 
     private void SelectAllFlagged(List<OverlapGroup> groups)
@@ -513,7 +513,7 @@ public class SnapToGridWindow : EditorWindow
                 if (o != null) all.Add(o);
 
         Selection.objects = all.Cast<Object>().ToArray();
-        Debug.Log($"[Select All] Selected {all.Count} object(s).");
+        //Debug.Log($"[Select All] Selected {all.Count} object(s).");
     }
 
     private void BulkDelete(List<OverlapGroup> groups)
@@ -535,7 +535,7 @@ public class SnapToGridWindow : EditorWindow
         }
 
         groups.RemoveAll(g => g.objects.Count <= 1);
-        Debug.Log($"[Delete All] Deleted {deleted} object(s).");
+        //Debug.Log($"[Delete All] Deleted {deleted} object(s).");
         Repaint();
     }
 

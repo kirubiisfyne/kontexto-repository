@@ -97,8 +97,17 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
-*.json
+
 
 # nTools plugin
 Assets/nTools/
 Assets/nTools.meta
+
+# Ignore json files globally, but allow them in important Unity directories
+*.json
+!/[Aa]ssets/**/*.json
+!/[Pp]ackages/**/*.json
+!/[Pp]rojectSettings/**/*.json
+
+# Ignore Profiler Captures (huge file size)
+/[Pp]rofilerCaptures/

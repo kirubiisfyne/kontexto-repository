@@ -18,7 +18,6 @@ public class PennyAssistantController : MonoBehaviour
     public float idleTimeThreshold = 30f;
     public string idleMessage = "If you're finished formatting, you can press Print in the toolbar!";
 
-    private float _idleTimer = 0f;
     private bool _isIdle = false;
 
     private VisualElement _root;
@@ -26,6 +25,7 @@ public class PennyAssistantController : MonoBehaviour
     private VisualElement _graphic;
     private Coroutine _animCoroutine;
     private Coroutine _fadeCoroutine;
+    private Coroutine _idleCoroutine;
 
     private void Start()
     {
@@ -57,11 +57,29 @@ public class PennyAssistantController : MonoBehaviour
         {
             idleMessage = gm.PennyScript.idleMessage;
         }
+
+        StartIdleTimer();
+    }
+
+    private void StartIdleTimer()
+    {
+        if (_idleCoroutine != null) StopCoroutine(_idleCoroutine);
+        _isIdle = false;
+        _idleCoroutine = StartCoroutine(IdleTimerRoutine());
+    }
+
+    private IEnumerator IdleTimerRoutine()
+    {
+        yield return new WaitForSeconds(idleTimeThreshold);
+        _isIdle = true;
+        ShowFeedback(idleMessage, false);
     }
 
     public void ShowFeedback(string message, bool centerOnScreen = false)
     {
         if (_root == null) return;
+        
+        if (_idleCoroutine != null) StopCoroutine(_idleCoroutine);
         
         if (centerOnScreen) _root.AddToClassList("penny-center");
         else _root.RemoveFromClassList("penny-center");
@@ -82,9 +100,6 @@ public class PennyAssistantController : MonoBehaviour
         onFeedbackDismissed?.Invoke();
         onFeedbackDismissed = null;
 
-        _isIdle = false;
-        _idleTimer = 0f;
-        
         if (_fadeCoroutine != null) StopCoroutine(_fadeCoroutine);
         _fadeCoroutine = StartCoroutine(FadeRoutine(0f));
 
@@ -93,6 +108,8 @@ public class PennyAssistantController : MonoBehaviour
             StopCoroutine(_animCoroutine);
             _animCoroutine = null;
         }
+
+        StartIdleTimer();
     }
 
     private IEnumerator FadeRoutine(float targetOpacity)
@@ -126,25 +143,8 @@ public class PennyAssistantController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if (_root == null) return;
-
-        // If Penny is hidden, count up the timer
-        if (_root.style.opacity.value < 0.1f && !_isIdle)
-        {
-            _idleTimer += Time.deltaTime;
-            if (_idleTimer >= idleTimeThreshold)
-            {
-                _isIdle = true;
-                ShowFeedback(idleMessage, false);
-            }
-        }
-    }
-
     private void ResetIdleTimer(EventBase evt)
     {
-        _idleTimer = 0f;
         if (_isIdle)
         {
             _isIdle = false;
@@ -153,6 +153,10 @@ public class PennyAssistantController : MonoBehaviour
             {
                 HideFeedback();
             }
+        }
+        else
+        {
+            StartIdleTimer();
         }
     }
 }

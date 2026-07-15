@@ -1,0 +1,24 @@
+{
+  "mappings": [
+    {
+      "displayName": "Calibri",
+      "regular": "Carlito-Regular"
+    },
+    {
+      "displayName": "Arial",
+      "regular": "Arimo-Regular"
+    },
+    {
+      "displayName": "Times New Roman",
+      "regular": "Tinos-Regular"
+    },
+    {
+      "displayName": "Courier New",
+      "regular": "Cousine-Regular"
+    },
+    {
+      "displayName": "Comic Sans MS",
+      "regular": "ComicNeue-Regular"
+    }
+  ]
+}
