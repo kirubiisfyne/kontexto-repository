@@ -7,6 +7,10 @@ namespace Master.Scripts.TextEditorSystem
 {
     public class TextEditorFormatting
     {
+        private static readonly string[] _allStyles = { "format-normal", "format-title", "format-subtitle", "format-h1", "format-h2", "format-h3", "format-h4", "format-h5" };
+        private static readonly System.Text.RegularExpressions.Regex _bulletCleanRegex = new System.Text.RegularExpressions.Regex(@"^(•\s*|\d+\.\s*)", System.Text.RegularExpressions.RegexOptions.Compiled);
+        private static readonly System.Text.RegularExpressions.Regex _numberPrefixRegex = new System.Text.RegularExpressions.Regex(@"^\s*(\d+)\.\s*", System.Text.RegularExpressions.RegexOptions.Compiled);
+
         private readonly VisualElement _documentPage;
         private readonly System.Func<IEnumerable<TextField>> _getAffectedBlocks;
         private readonly System.Action _updateRibbonState;
@@ -113,7 +117,7 @@ namespace Master.Scripts.TextEditorSystem
             var blocks = _getAffectedBlocks().ToList();
             if (!blocks.Any()) return;
 
-            bool isAlreadyNumber = System.Text.RegularExpressions.Regex.IsMatch(blocks[0].value, @"^\s*\d+\.\s*");
+            bool isAlreadyNumber = _numberPrefixRegex.IsMatch(blocks[0].value);
             ApplyListFormat(!isAlreadyNumber, true);
         }
 
@@ -130,7 +134,7 @@ namespace Master.Scripts.TextEditorSystem
                 TextField prevBlock = _documentPage[firstIndex - 1] as TextField;
                 if (prevBlock != null)
                 {
-                    var match = System.Text.RegularExpressions.Regex.Match(prevBlock.value, @"^\s*(\d+)\.\s*");
+                    var match = _numberPrefixRegex.Match(prevBlock.value);
                     if (match.Success) runningNumber = int.Parse(match.Groups[1].Value) + 1;
                 }
             }
@@ -165,7 +169,7 @@ namespace Master.Scripts.TextEditorSystem
             {
                 if (_documentPage[i] is TextField block)
                 {
-                    var match = System.Text.RegularExpressions.Regex.Match(block.value, @"^\s*(\d+)\.\s*");
+                    var match = _numberPrefixRegex.Match(block.value);
                     if (match.Success)
                     {
                         string cleanText = GetCleanText(block.value);
@@ -179,9 +183,6 @@ namespace Master.Scripts.TextEditorSystem
 
         public void ApplyStyle(string styleName)
         {
-            string[] allStyles = { "format-normal", "format-title", "format-subtitle", 
-                                   "format-h1", "format-h2", "format-h3", "format-h4", "format-h5" };
-
             foreach (var block in _getAffectedBlocks())
             {
                 // Clear manual overrides when switching presets
@@ -191,8 +192,8 @@ namespace Master.Scripts.TextEditorSystem
                 {
                     input.style.unityFontStyleAndWeight = new StyleEnum<FontStyle>(StyleKeyword.Null);
                 }
-foreach (var style in allStyles) 
-    block.RemoveFromClassList(style);
+                foreach (var style in _allStyles) 
+                    block.RemoveFromClassList(style);
 
 switch (styleName)
 {
@@ -229,7 +230,7 @@ switch (styleName)
         {
             if (string.IsNullOrEmpty(text)) return "";
             string cleaned = text.TrimStart();
-            cleaned = System.Text.RegularExpressions.Regex.Replace(cleaned, @"^(•\s*|\d+\.\s*)", "");
+            cleaned = _bulletCleanRegex.Replace(cleaned, "");
             return cleaned.TrimStart();
         }
 

@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d69a19d29ef66464ea0afc7cd84fd6c2, type: 3}
   m_Name: VolumetricFogRendererFeature
   m_EditorClassIdentifier: com.cqf.urpvolumetricfog.runtime::VolumetricFogRendererFeature
-  m_Active: 1
+  m_Active: 0
   downsampleDepthShader: {fileID: 4800000, guid: cffeaeec0396a2c4dad475266cc8dfeb, type: 3}
   volumetricFogShader: {fileID: 4800000, guid: 08f816187f9af0244a95556ee0cab83f, type: 3}
 --- !u!114 &1985049643412547654

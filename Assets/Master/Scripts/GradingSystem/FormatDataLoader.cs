@@ -72,7 +72,7 @@ public class FormatDataLoader : MonoBehaviour
 
         if (GameManager.Instance == null)
         {
-            Debug.LogWarning("No GameManager instance found. Falling back to default.");
+            //Debug.LogWarning("No GameManager instance found. Falling back to default.");
             currentLevelJson = fallbackLevelJSON;
         }
         else
@@ -93,21 +93,21 @@ public class FormatDataLoader : MonoBehaviour
         {
             // 2. Parse it
             convertedDocumentData = JsonConvert.DeserializeObject<DocumentData>(jsonToLoad.text);
-            Debug.Log("Task Controller: Level Data Loaded.");
+            //Debug.Log("Task Controller: Level Data Loaded.");
 
             // 3. Send it to the UI
             editorManager.LoadLevel(convertedDocumentData);
         }
         else
         {
-            Debug.LogError("No JSON file assigned to the Document Task Controller!");
+            //Debug.LogError("No JSON file assigned to the Document Task Controller!");
         }
     }
 
     // This gets called by your TextEditorManager when the user clicks Print
     public void EvaluatePrintJob(VisualElement documentPage)
     {
-        Debug.Log("Task Controller: Sending document to grader...");
+        //Debug.Log("Task Controller: Sending document to grader...");
 
         GradeReport result = gradingManager.GradeDocument(documentPage, convertedDocumentData);
 
@@ -139,10 +139,10 @@ public class FormatDataLoader : MonoBehaviour
         }
         else
         {
-            Debug.Log($"Score: {result.score}/{result.maxScore} - FAILED. NEEDS REVISION.");
+            //Debug.Log($"Score: {result.score}/{result.maxScore} - FAILED. NEEDS REVISION.");
             if (result.pennyFeedback != null && result.pennyFeedback.Count > 0)
             {
-                Debug.Log("Penny Feedback: " + result.pennyFeedback[0]);
+                //Debug.Log("Penny Feedback: " + result.pennyFeedback[0]);
                 if (pennyAssistant != null) pennyAssistant.ShowFeedback(result.pennyFeedback[0], false);
             }
         }

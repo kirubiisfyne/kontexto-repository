@@ -8,6 +8,10 @@ namespace Master.Scripts.TextEditorSystem
 {
     public class TextEditorBlockManager
     {
+        private static readonly string[] _allStyles = { "format-normal", "format-title", "format-subtitle", "format-h1", "format-h2", "format-h3", "format-h4", "format-h5" };
+        private static readonly System.Text.RegularExpressions.Regex _bulletPrefixRegex = new System.Text.RegularExpressions.Regex(@"^\s*•\s*", System.Text.RegularExpressions.RegexOptions.Compiled);
+        private static readonly System.Text.RegularExpressions.Regex _numberPrefixRegex = new System.Text.RegularExpressions.Regex(@"^\s*(\d+)\.\s*", System.Text.RegularExpressions.RegexOptions.Compiled);
+
         private readonly VisualElement _documentPage;
         private readonly System.Action _updateRibbonState;
         private readonly System.Action _clearSelection;
@@ -99,9 +103,7 @@ namespace Master.Scripts.TextEditorSystem
                     // Apply Style Class
                     if (!string.IsNullOrEmpty(blockData.styleClass))
                     {
-                        string[] allStyles = { "format-normal", "format-title", "format-subtitle", 
-                                               "format-h1", "format-h2", "format-h3", "format-h4", "format-h5" };
-                        foreach (var style in allStyles) newBlock.RemoveFromClassList(style);
+                        foreach (var style in _allStyles) newBlock.RemoveFromClassList(style);
                         
                         switch (blockData.styleClass)
                         {
@@ -173,40 +175,48 @@ namespace Master.Scripts.TextEditorSystem
 
         public void OnKeyDown(KeyDownEvent evt, TextField currentBlock)
         {
-            var selectedBlocks = _getSelectedBlocks().ToList();
-
-            if (selectedBlocks.Count > 0 && (evt.keyCode == KeyCode.Backspace || evt.keyCode == KeyCode.Delete))
+            if (evt.keyCode == KeyCode.Backspace || evt.keyCode == KeyCode.Delete)
             {
-                evt.StopImmediatePropagation();
-
-                var blocksToDelete = selectedBlocks.OrderBy(b => _documentPage.IndexOf(b)).ToList();
-                int firstIndex = _documentPage.IndexOf(blocksToDelete[0]);
-
-                foreach (var block in blocksToDelete)
+                var selectedBlocks = _getSelectedBlocks().ToList();
+                if (selectedBlocks.Count > 0)
                 {
-                    _documentPage.Remove(block);
-                }
+                    evt.StopImmediatePropagation();
 
-                _clearSelection?.Invoke();
+                    var blocksToDelete = selectedBlocks.OrderBy(b => _documentPage.IndexOf(b)).ToList();
+                    int firstIndex = _documentPage.IndexOf(blocksToDelete[0]);
 
-                if (_documentPage.childCount == 0)
-                {
-                    _activeBlock = CreateBlock(0, "");
-                }
-                else
-                {
-                    int focusIndex = Mathf.Clamp(firstIndex, 0, _documentPage.childCount - 1);
-                    _activeBlock = _documentPage[focusIndex] as TextField;
-                    
-                    if (_activeBlock != null)
+                    foreach (var block in blocksToDelete)
                     {
-                        _activeBlock.Focus();
-                        _activeBlock.SelectRange(0, 0);
+                        _documentPage.Remove(block);
                     }
-                }
 
-                _updateRibbonState?.Invoke();
-                return;
+                    _clearSelection?.Invoke();
+
+                    if (_documentPage.childCount == 0)
+                    {
+                        _activeBlock = CreateBlock(0, "");
+                    }
+                    else
+                    {
+                        int focusIndex = Mathf.Clamp(firstIndex, 0, _documentPage.childCount - 1);
+                        _activeBlock = _documentPage[focusIndex] as TextField;
+                        
+                        if (_activeBlock != null)
+                        {
+                            _activeBlock.Focus();
+                            _activeBlock.SelectRange(0, 0);
+                        }
+                    }
+
+                    _updateRibbonState?.Invoke();
+                }
+                
+                // If it's a backspace and we didn't have a multi-selection to delete,
+                // fall through to the single block backspace handling.
+                if (evt.keyCode == KeyCode.Delete || selectedBlocks.Count > 0)
+                {
+                    return;
+                }
             }
 
             if (evt.keyCode == KeyCode.Return || evt.keyCode == KeyCode.KeypadEnter)
@@ -218,13 +228,13 @@ namespace Master.Scripts.TextEditorSystem
                 string currentText = currentBlock.value;
                 
                 string nextPrefix = "";
-                if (System.Text.RegularExpressions.Regex.IsMatch(currentText, @"^\s*•\s*")) 
+                if (_bulletPrefixRegex.IsMatch(currentText)) 
                 {
                     nextPrefix = "• ";
                 }
-                else if (System.Text.RegularExpressions.Regex.IsMatch(currentText, @"^\s*\d+\.\s*")) 
+                else if (_numberPrefixRegex.IsMatch(currentText)) 
                 {
-                    var match = System.Text.RegularExpressions.Regex.Match(currentText, @"^\s*(\d+)\.\s*");
+                    var match = _numberPrefixRegex.Match(currentText);
                     int nextNum = int.Parse(match.Groups[1].Value) + 1;
                     nextPrefix = $"{nextNum}. ";
                 }
@@ -242,9 +252,12 @@ namespace Master.Scripts.TextEditorSystem
                     newBlock.style.paddingLeft = 20;
                     if (nextPrefix.Contains("."))
                     {
-                        var match = System.Text.RegularExpressions.Regex.Match(nextPrefix, @"^(\d+)\.");
-                        int nextNum = int.Parse(match.Groups[1].Value) + 1;
-                        _formatting.ReindexListFrom(currentIndex + 2, nextNum);
+                        var match = _numberPrefixRegex.Match(nextPrefix);
+                        if (match.Success)
+                        {
+                            int nextNum = int.Parse(match.Groups[1].Value) + 1;
+                            _formatting.ReindexListFrom(currentIndex + 2, nextNum);
+                        }
                     }
                 }
 
@@ -269,7 +282,7 @@ namespace Master.Scripts.TextEditorSystem
                         int prevLength = prevBlock.text.Length;
                         prevBlock.value += _formatting.GetCleanText(currentBlock.value);
 
-                        var match = System.Text.RegularExpressions.Regex.Match(prevBlock.value, @"^\s*(\d+)\.\s*");
+                        var match = _numberPrefixRegex.Match(prevBlock.value);
                         int nextNum = match.Success ? int.Parse(match.Groups[1].Value) + 1 : 1;
                         
                         _documentPage.Remove(currentBlock);

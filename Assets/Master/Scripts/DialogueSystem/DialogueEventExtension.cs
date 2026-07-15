@@ -70,7 +70,7 @@ namespace Master.Scripts.DialogueSystem
             {
                 if (item.index == playedIndex)
                 {
-                    Debug.Log($"DialogueEventExtension on {gameObject.name}: Triggering 'OnStart' for index {playedIndex}.");
+                    //Debug.Log($"DialogueEventExtension on {gameObject.name}: Triggering 'OnStart' for index {playedIndex}.");
                     item.onStart?.Invoke();
                 }
             }
@@ -86,7 +86,7 @@ namespace Master.Scripts.DialogueSystem
             {
                 if (item.index == playedIndex)
                 {
-                    Debug.Log($"DialogueEventExtension on {gameObject.name}: Triggering 'OnEnd' for index {playedIndex}.");
+                    //Debug.Log($"DialogueEventExtension on {gameObject.name}: Triggering 'OnEnd' for index {playedIndex}.");
                     item.onEnd?.Invoke();
                 }
             }
