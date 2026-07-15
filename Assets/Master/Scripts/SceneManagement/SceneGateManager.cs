@@ -26,7 +26,7 @@ namespace Master.Scripts
         {
             if (string.IsNullOrEmpty(sceneTo))
             {
-                Debug.LogWarning("[SceneGateManager] StartWarp was called with a null or empty scene string. If you are playing the UI scene directly, this is expected. Aborting warp to prevent crash.");
+                //Debug.LogWarning("[SceneGateManager] StartWarp was called with a null or empty scene string. If you are playing the UI scene directly, this is expected. Aborting warp to prevent crash.");
                 return;
             }
             StartCoroutine(WarpRoutine(sceneTo));
@@ -45,7 +45,7 @@ namespace Master.Scripts
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneTo);
             if (operation == null)
             {
-                Debug.LogError($"[SceneGateManager] Failed to load scene '{sceneTo}'. Please ensure it is added to the Build Settings!");
+                //Debug.LogError($"[SceneGateManager] Failed to load scene '{sceneTo}'. Please ensure it is added to the Build Settings!");
                 yield break;
             }
 
@@ -61,7 +61,7 @@ namespace Master.Scripts
             if (playerObj != null)
             {
                 SpawnPlayerToGate(playerObj);
-                Debug.Log($"[SceneGateManager] Player warped to {sceneTo}");
+                //Debug.Log($"[SceneGateManager] Player warped to {sceneTo}");
             }
             else
             {

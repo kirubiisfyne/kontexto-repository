@@ -171,10 +171,10 @@ namespace Master.Scripts.TextEditorSystem
             {
                 printButton.clicked += () => 
                 {
-                    Debug.Log("Print button clicked!");
+                    //Debug.Log("Print button clicked!");
                     if (_taskController == null)
                     {
-                        Debug.LogError("Task Controller is null! Attempting to find it again...");
+                        //Debug.LogError("Task Controller is null! Attempting to find it again...");
                         _taskController = Object.FindFirstObjectByType<FormatDataLoader>();
                     }
                     _taskController?.EvaluatePrintJob(_documentPage);
@@ -182,7 +182,7 @@ namespace Master.Scripts.TextEditorSystem
             }
             else
             {
-                Debug.LogError("Could not find Print button in UI!");
+                //Debug.LogError("Could not find Print button in UI!");
             }
         }
 
@@ -212,9 +212,16 @@ namespace Master.Scripts.TextEditorSystem
         private IEnumerable<TextField> GetAffectedBlocks()
         {
             if (_selectionController.SelectedBlocks.Count > 0)
-                return _selectionController.SelectedBlocks.OrderBy(block => _documentPage.IndexOf(block));
-            
-            return _blockManager.ActiveBlock != null ? new[] { _blockManager.ActiveBlock } : Enumerable.Empty<TextField>();
+            {
+                foreach (var block in _selectionController.SelectedBlocks.OrderBy(b => _documentPage.IndexOf(b)))
+                {
+                    yield return block;
+                }
+            }
+            else if (_blockManager.ActiveBlock != null)
+            {
+                yield return _blockManager.ActiveBlock;
+            }
         }
     }
 }

@@ -41,11 +41,11 @@ namespace Master.Scripts
                     // We must forcefully resume it to Active before reporting progress!
                     if (foundGiver != null && foundGiver.status == TaskStatus.Inactive)
                     {
-                        Debug.Log("AutoCollectPrintJob: Force-resuming task state to Active before collection.");
+                        //Debug.Log("AutoCollectPrintJob: Force-resuming task state to Active before collection.");
                         foundGiver.StartTask();
                     }
                     
-                    Debug.Log("AutoCollectPrintJob: Automatically collecting KeyItem based on GameManager success flag.");
+                    //Debug.Log("AutoCollectPrintJob: Automatically collecting KeyItem based on GameManager success flag.");
                     keyItem.enabled = true; // Force enable so it doesn't return early
                     keyItem.Interact();
                 }

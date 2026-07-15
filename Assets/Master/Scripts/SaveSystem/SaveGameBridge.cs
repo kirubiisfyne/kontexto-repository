@@ -17,8 +17,9 @@ namespace Master.Scripts.SaveSystem
         {
             if (LevelLoader.Current != null)
                 LevelLoader.Current.SaveGame();
-            else
-                Debug.LogWarning("SaveGameBridge: No LevelLoader in this scene.");
+            else {
+                //Debug.LogWarning("SaveGameBridge: No LevelLoader in this scene.");
+            }
         }
 
         /// <summary>
@@ -29,8 +30,9 @@ namespace Master.Scripts.SaveSystem
         {
             if (LevelLoader.Current != null)
                 LevelLoader.Current.LoadGame();
-            else
-                Debug.LogWarning("SaveGameBridge: No LevelLoader in this scene.");
+            else {
+                //Debug.LogWarning("SaveGameBridge: No LevelLoader in this scene.");
+            }
         }
     }
 }
