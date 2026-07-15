@@ -108,3 +108,6 @@ Assets/nTools.meta
 !/[Aa]ssets/**/*.json
 !/[Pp]ackages/**/*.json
 !/[Pp]rojectSettings/**/*.json
+
+# Ignore Profiler Captures (huge file size)
+/[Pp]rofilerCaptures/
