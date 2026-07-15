@@ -17,6 +17,9 @@ public class MainMenuController : MonoBehaviour
 
     private void Start()
     {
+        // Reset time scale to 1 when the menu finishes loading (in case we arrived from a paused game)
+        Time.timeScale = 1f;
+
         // Ensure cursor is visible in main menu
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -38,9 +41,6 @@ public class MainMenuController : MonoBehaviour
             }
         }
 
-        // WIPE old save data here so the next playthrough is totally fresh!
-        // (We do this AFTER checking for the beta completion panel above)
-        SaveManager.DeleteSave();
     }
 
     public void PlayGame()
@@ -51,6 +51,9 @@ public class MainMenuController : MonoBehaviour
 
     private IEnumerator PlayGameRoutine()
     {
+        // For a new game, wipe old save data so the next playthrough is fresh
+        SaveManager.DeleteSave();
+
         // Play the transition animation if the TransitionManager exists in the scene
         if (Master.Scripts.TransitionManager.Instance != null)
         {
@@ -62,6 +65,23 @@ public class MainMenuController : MonoBehaviour
         }
 
         //Debug.Log("Transition complete. Loading gameplay scene...");
+        SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+    }
+
+    public void ContinueGame()
+    {
+        StartCoroutine(ContinueGameRoutine());
+    }
+
+    private IEnumerator ContinueGameRoutine()
+    {
+        if (Master.Scripts.TransitionManager.Instance != null)
+        {
+            yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
+        }
+
+        // Since we only use one Unity scene for all days/levels, we always load the gameplaySceneName.
+        // The GameManager/LevelLoader in that scene will handle the current day logic based on the save file!
         SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
     }
 
