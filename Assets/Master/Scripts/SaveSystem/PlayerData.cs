@@ -12,6 +12,7 @@ namespace Master.Scripts.SaveSystem
         public string sceneId;
         public bool isCompleted;
         public List<string> completedTaskIds = new List<string>();
+        public List<string> activeTaskIds = new List<string>();
     }
 
     /// <summary>
@@ -96,6 +97,35 @@ namespace Master.Scripts.SaveSystem
                     return lp.completedTaskIds.Contains(taskId);
             }
             return false;
+        }
+
+        /// <summary>
+        /// Returns true if the given taskId is marked as currently active for the given scene.
+        /// </summary>
+        public bool IsTaskActive(string sceneId, string taskId)
+        {
+            foreach (var lp in levels)
+            {
+                if (lp.sceneId == sceneId)
+                    return lp.activeTaskIds.Contains(taskId);
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Sets a task's active status.
+        /// </summary>
+        public void SetTaskActive(string sceneId, string taskId, bool isActive)
+        {
+            var level = GetOrCreateLevel(sceneId);
+            if (isActive && !level.activeTaskIds.Contains(taskId))
+            {
+                level.activeTaskIds.Add(taskId);
+            }
+            else if (!isActive && level.activeTaskIds.Contains(taskId))
+            {
+                level.activeTaskIds.Remove(taskId);
+            }
         }
 
         /// <summary>

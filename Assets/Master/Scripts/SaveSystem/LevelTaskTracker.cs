@@ -86,6 +86,12 @@ namespace Master.Scripts.SaveSystem
                             continue;
                         }
 
+                        // ALWAYS hook listeners first so the UI can catch both active AND completed tasks when restored
+                        var capturedId = mgr.task.taskId;
+                        var capturedMgr = mgr;
+                        mgr.events.onCompleted.AddListener(() => OnTaskCompleted(capturedId));
+                        mgr.events.onActive.AddListener(() => OnTaskActivated(capturedMgr));
+
                         if (playerData.IsTaskCompleted(sceneId, mgr.task.taskId))
                         {
                             RestoreCompletedTask(mgr);
@@ -98,12 +104,10 @@ namespace Master.Scripts.SaveSystem
                                 }
                             }
                         }
-                        else
+                        else if (playerData.IsTaskActive(sceneId, mgr.task.taskId))
                         {
-                            var capturedId = mgr.task.taskId;
-                            var capturedMgr = mgr;
-                            mgr.events.onCompleted.AddListener(() => OnTaskCompleted(capturedId));
-                            mgr.events.onActive.AddListener(() => OnTaskActivated(capturedMgr));
+                            // Restore active state
+                            mgr.StartTask();
                         }
                     }
                 }
@@ -140,6 +144,16 @@ namespace Master.Scripts.SaveSystem
 
         private void OnTaskActivated(HostTaskManager mgr)
         {
+            if (mgr != null && mgr.task != null)
+            {
+                var level = playerData.GetOrCreateLevel(sceneId);
+                // Only save if it's genuinely new (prevents redundant saves during scene load)
+                if (!level.activeTaskIds.Contains(mgr.task.taskId) && !level.completedTaskIds.Contains(mgr.task.taskId))
+                {
+                    playerData.SetTaskActive(sceneId, mgr.task.taskId, true);
+                    saveGameCallback?.Invoke();
+                }
+            }
             onTaskActivatedEvent?.Invoke(mgr);
         }
 
@@ -149,12 +163,9 @@ namespace Master.Scripts.SaveSystem
 
             if (!level.completedTaskIds.Contains(taskId))
             {
+                playerData.SetTaskActive(sceneId, taskId, false);
                 level.completedTaskIds.Add(taskId);
                 saveGameCallback?.Invoke();
-
-                //Debug.Log($"LevelTaskTracker: Task '{taskId}' saved as completed.");
-
-                onTaskCompletedEvent?.Invoke(taskId);
 
                 if (!AreAnyTasksActive())
                 {
@@ -167,6 +178,9 @@ namespace Master.Scripts.SaveSystem
                     //Debug.Log($"LevelTaskTracker: All tasks in '{sceneId}' are now COMPLETED. Ready for level completion.");
                 }
             }
+
+            // ALWAYS notify the UI that it's completed, even if we just restored it from a save!
+            onTaskCompletedEvent?.Invoke(taskId);
         }
 
         /// <summary>
