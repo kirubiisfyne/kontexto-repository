@@ -36286,7 +36286,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelLoader
   levelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
-  disableSaving: 0
 --- !u!114 &986174011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51761,13 +51760,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4484365717201957645, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: interactRange
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 4534763766120316799, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
+      propertyPath: footstepVolume
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
+      propertyPath: walkStepInterval
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
+      propertyPath: sprintStepInterval
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8333583239881714959, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
       propertyPath: m_LocalPosition.x
@@ -233867,10 +233874,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1024358968331778187, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 7833964791042017386, guid: 44232f637c92b4d168a747489f8fbb56, type: 2}
     - target: {fileID: 1113021556791085594, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -233911,10 +233914,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2076646329845346659, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
-      propertyPath: OutputAudioMixerGroup
-      value: 
-      objectReference: {fileID: 2190837797063478421, guid: 44232f637c92b4d168a747489f8fbb56, type: 2}
     - target: {fileID: 5091053895483440018, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
       propertyPath: m_Name
       value: AudioManager

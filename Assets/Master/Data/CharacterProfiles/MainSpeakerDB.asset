@@ -16,7 +16,7 @@ MonoBehaviour:
   - characterName: Kiko
     portraitSprite: {fileID: 21300000, guid: 428e68cb836794ddbb10e28ac5679401, type: 3}
   - characterName: Enzo
-    portraitSprite: {fileID: 21300000, guid: 170939deba7054a0babe07465aeb37be, type: 3}
+    portraitSprite: {fileID: 21300000, guid: 3533c228b556a4dafa8acf945f4e50ad, type: 3}
   - characterName: Sekyu
     portraitSprite: {fileID: 21300000, guid: 8cebf78f44f9c44b7b730ddee952085e, type: 3}
   - characterName: Mrs. Santos

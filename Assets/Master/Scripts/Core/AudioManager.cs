@@ -53,7 +53,7 @@ namespace Master.Scripts
         /// <summary>
         /// Plays a sound effect with optional pitch shifting. (Call this version from your C# scripts!)
         /// </summary>
-        public void PlaySFX(string name, bool randomPitch, float minPitch = 0.85f, float maxPitch = 1.15f)
+        public void PlaySFX(string name, bool randomPitch, float minPitch = 0.85f, float maxPitch = 1.15f, float volumeScale = 1f)
         {
             AudioClip clipToPlay = null;
 
@@ -84,7 +84,7 @@ namespace Master.Scripts
             }
 
             // PlayOneShot allows overlapping sounds on the same AudioSource
-            sfxSource.PlayOneShot(clipToPlay);
+            sfxSource.PlayOneShot(clipToPlay, volumeScale);
         }
 
         /// <summary>
