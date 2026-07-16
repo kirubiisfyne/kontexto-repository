@@ -59,6 +59,9 @@ public class PauseMenuController : MonoBehaviour
         if (resumeCoroutine != null) StopCoroutine(resumeCoroutine);
         resumeCoroutine = null;
         
+        // Turn on the UI before setting triggers, otherwise the Animator throws an error
+        PauseMenuUI.SetActive(true);
+        
         PauseMenuAnimator.ResetTrigger("Out");
         PauseMenuAnimator.SetTrigger("In");
         pauseCoroutine = StartCoroutine(PauseCoroutine());
@@ -66,9 +69,6 @@ public class PauseMenuController : MonoBehaviour
 
     private IEnumerator PauseCoroutine()
     {
-        // Turn on the UI immediately so the animation is visible
-        PauseMenuUI.SetActive(true);
-        
         // Pause the game immediately so the player is safe
         Time.timeScale = 0f;
         GameIsPaused = true;
