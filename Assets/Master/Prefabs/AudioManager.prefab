@@ -58,6 +58,10 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d9138a7394ccc4e2697fda0e8cb87d3a, type: 3}
   - name: UIPop1
     clip: {fileID: 8300000, guid: cc80a0a74c9fa431cb2727797b2a9803, type: 3}
+  - name: StepFloor
+    clip: {fileID: 8300000, guid: ad94ea65a407c44d9a7c28cdae1eff46, type: 3}
+  - name: StepTerrain
+    clip: {fileID: 8300000, guid: 4b069f1d5a48d42128c79a7124db68ab, type: 3}
 --- !u!82 &1024358968331778187
 AudioSource:
   m_ObjectHideFlags: 0

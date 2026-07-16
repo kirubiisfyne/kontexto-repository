@@ -19,6 +19,8 @@ namespace Master.Scripts
     
         private Vector3 velocity;
         private const float Gravity = -9.81f;
+        
+        public bool IsRunning { get; private set; }
     
         [Header("Aim")]
         [SerializeField] [Range(0, 1)] private float sensitivity = 0.2f;
@@ -81,7 +83,7 @@ namespace Master.Scripts
             float moveX = Input.GetAxis("Horizontal");
             float moveY = Input.GetAxis("Vertical");
             bool isMoving = Mathf.Abs(moveX) > 0.1f || Mathf.Abs(moveY) > 0.1f;
-            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            IsRunning = Input.GetKey(KeyCode.LeftShift) && isMoving && moveY > 0f;
         
             inputDirection = new Vector3(moveX, 0f, moveY).normalized;
 
@@ -89,7 +91,7 @@ namespace Master.Scripts
             float currentSpeed = walkSpeed * BaseSpeed;
             if (isMoving)
             {
-                if (isRunning && moveY > 0f) // If moveY is negative (moving backwards), return false
+                if (IsRunning)
                 {
                     xTargetAnimValue = moveY;
                     currentSpeed = runSpeed * BaseSpeed;

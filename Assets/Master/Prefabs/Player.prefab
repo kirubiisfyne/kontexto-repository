@@ -66,6 +66,7 @@ GameObject:
   - component: {fileID: 8333583239881714959}
   - component: {fileID: 7229804897660789965}
   - component: {fileID: 1566913693677451294}
+  - component: {fileID: 5343475780188079556}
   - component: {fileID: 4484365717201957645}
   m_Layer: 0
   m_Name: Player
@@ -135,6 +136,22 @@ MonoBehaviour:
   sensitivity: 0.4
   animator: {fileID: 7082575390880084125}
   animationLerpTime: 0.1
+--- !u!114 &5343475780188079556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4534763766120316799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465e8752e5a2848e0b7d443856a7cc57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.Player.PlayerFootsteps
+  terrainStepName: StepTerrain
+  floorStepName: StepFloor
+  walkStepInterval: 0.5
+  sprintStepInterval: 0.3
 --- !u!114 &4484365717201957645
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8858f3ac2142741289cf640c14b2a7ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.UniversalInteractor
-  interactRange: 3
+  interactRange: 2
   interactableLayer:
     serializedVersion: 2
     m_Bits: 128
