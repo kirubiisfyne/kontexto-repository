@@ -46,6 +46,10 @@ namespace Master.Scripts
                     animator.speed = 1f; // Let it play
                 }
 
+                // Wait one frame to ensure the Animator has fully transitioned into its default state
+                // otherwise GetCurrentAnimatorStateInfo(0).length might return 0 on the very first frame.
+                yield return null;
+
                 // Wait for the Fade-In animation to completely finish based on its clip length
                 float transitionLength = animator.GetCurrentAnimatorStateInfo(0).length;
                 yield return new WaitForSecondsRealtime(transitionLength);

@@ -9,6 +9,7 @@ namespace Master.Scripts
         public static SceneGateManager Instance { get; private set; }
         
         [HideInInspector] public string lastSceneString;
+        [HideInInspector] public string targetGateId;
 
         private void Awake()
         {
@@ -22,13 +23,14 @@ namespace Master.Scripts
             DontDestroyOnLoad(gameObject);
         }
 
-        public void StartWarp(string sceneTo)
+        public void StartWarp(string sceneTo, string targetGateId = "")
         {
             if (string.IsNullOrEmpty(sceneTo))
             {
                 //Debug.LogWarning("[SceneGateManager] StartWarp was called with a null or empty scene string. If you are playing the UI scene directly, this is expected. Aborting warp to prevent crash.");
                 return;
             }
+            this.targetGateId = targetGateId;
             StartCoroutine(WarpRoutine(sceneTo));
         }
         
@@ -42,6 +44,7 @@ namespace Master.Scripts
             
             lastSceneString = SceneManager.GetActiveScene().name;
             
+            // Start the async load AFTER the screen is black to prevent stutter
             AsyncOperation operation = SceneManager.LoadSceneAsync(sceneTo);
             if (operation == null)
             {
@@ -73,6 +76,11 @@ namespace Master.Scripts
 
         private void SpawnPlayerToGate(GameObject playerObj)
         {
+            if (string.IsNullOrEmpty(targetGateId))
+            {
+                return; // Do not move player if no target gate was specified
+            }
+
             Vector3 spawnPosition = Vector3.zero;
             Vector3 spawnRotation = Vector3.zero;
             bool gateFound = false;
@@ -82,7 +90,7 @@ namespace Master.Scripts
             foreach (GameObject gate in gates)
             {
                 SceneGateInstance gateInstance = gate.GetComponent<SceneGateInstance>();
-                if (gateInstance != null && gateInstance.enabled && gateInstance.sceneToName == lastSceneString)
+                if (gateInstance != null && gateInstance.enabled && gateInstance.gateId == targetGateId)
                 {
                     spawnPosition = gate.transform.position;
                     spawnRotation = gate.transform.rotation.eulerAngles;
