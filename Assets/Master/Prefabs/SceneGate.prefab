@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3982073598485015124}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20.829, y: -0, z: 25.704}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66,7 +66,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd16cbfa1411d4a03b2c7d65b5c649e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneGate
-  gateID: Gate_e6c96
-  sceneTo: {fileID: 102900000, guid: 0802498b9716d4012924b785f3010fb3, type: 3}
-  sceneFrom: {fileID: 102900000, guid: 99c9720ab356a0642a771bea13969a05, type: 3}
+  sceneToName: 
+  gateId: 
+  targetGateId: 
   canPlayerWarp: 1
+  triggerMode: 0
+  onWarpStart:
+    m_PersistentCalls:
+      m_Calls: []
