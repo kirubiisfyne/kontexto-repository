@@ -46,11 +46,9 @@ namespace Master.Scripts
                     animator.speed = 1f; // Let it play
                 }
 
-                // Wait for the Fade-In animation to completely finish
-                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-                {
-                    yield return null;
-                }
+                // Wait for the Fade-In animation to completely finish based on its clip length
+                float transitionLength = animator.GetCurrentAnimatorStateInfo(0).length;
+                yield return new WaitForSecondsRealtime(transitionLength);
 
                 // Disable it during gameplay to save performance!
                 if (disableAfterTransitionIn && transitionGameObject != null)
@@ -85,6 +83,8 @@ namespace Master.Scripts
             if (transitionGameObject != null && !transitionGameObject.activeSelf)
             {
                 transitionGameObject.SetActive(true);
+                // Wait one frame for the Animator to fully re-initialize
+                yield return null;
             }
 
             if (animator != null)
