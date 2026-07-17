@@ -37,10 +37,10 @@ namespace Master.Scripts.SaveSystem
             playerData = pData;
             saveGameCallback = saveCallback;
 
-            StartCoroutine(SpawnAndRestoreTasksRoutine(data));
+            SpawnAndRestoreTasks(data);
         }
 
-        private System.Collections.IEnumerator SpawnAndRestoreTasksRoutine(LevelData levelData)
+        private void SpawnAndRestoreTasks(LevelData levelData)
         {
             foreach (var entry in levelData.taskEntries)
             {
@@ -112,8 +112,7 @@ namespace Master.Scripts.SaveSystem
                     }
                 }
                 
-                // Spread out the instantiation over multiple frames to prevent massive CPU spikes.
-                yield return null; 
+                // Synchronous instantiation to hide spikes behind the black loading screen
             }
 
             //Debug.Log($"LevelTaskTracker: Spawned {spawnedGivers.Count} task(s) for '{sceneId}'.");
