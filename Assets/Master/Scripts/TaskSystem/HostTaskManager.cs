@@ -33,6 +33,10 @@ namespace Master.Scripts.TaskSystem
     /// </summary>
     public class HostTaskManager : MonoBehaviour, IInteractable
     {
+        // Global events to notify UI Controllers without Inspector wiring
+        public static event System.Action<string, string, float> OnTaskStartedGlobal;
+        public static event System.Action<string, string, float, float> OnProgressReportedGlobal;
+
         [Header("Task Configuration")]
         public TaskData task;
         public HostType hostType;
@@ -162,6 +166,10 @@ namespace Master.Scripts.TaskSystem
             foreach (var objective in task.requirements.objectives)
             {
                 currentProgress.Add(0);
+                
+                // Notify the UI that this objective has started
+                string uniqueId = $"{task.taskId}_{objective.key}";
+                OnTaskStartedGlobal?.Invoke(uniqueId, task.taskName, objective.requiredAmount);
             }
 
             //Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' started.");
@@ -235,6 +243,10 @@ namespace Master.Scripts.TaskSystem
                     currentProgress[i] = Mathf.Clamp(currentProgress[i] + amount, 0, task.requirements.objectives[i].requiredAmount);
                     //Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
                     
+                    // Notify the UI Controller of the new progress!
+                    string uniqueId = $"{task.taskId}_{task.requirements.objectives[i].key}";
+                    OnProgressReportedGlobal?.Invoke(uniqueId, task.taskName, currentProgress[i], task.requirements.objectives[i].requiredAmount);
+
                     CheckCompletion();
                     return true;
                 }
