@@ -22,6 +22,8 @@ MonoBehaviour:
     needsSequentialOrder: 1
     objectives:
     - key: paper_stack
+      notificationDisplayName: Picked-Up Paper Stack
       requiredAmount: 1
     - key: print_paper
+      notificationDisplayName: Printed Paper Stack
       requiredAmount: 1

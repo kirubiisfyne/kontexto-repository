@@ -169,7 +169,8 @@ namespace Master.Scripts.TaskSystem
                 
                 // Notify the UI that this objective has started
                 string uniqueId = $"{task.taskId}_{objective.key}";
-                OnTaskStartedGlobal?.Invoke(uniqueId, task.taskName, objective.requiredAmount);
+                string displayName = string.IsNullOrEmpty(objective.notificationDisplayName) ? task.taskName : objective.notificationDisplayName;
+                OnTaskStartedGlobal?.Invoke(uniqueId, displayName, objective.requiredAmount);
             }
 
             //Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' started.");
@@ -245,7 +246,8 @@ namespace Master.Scripts.TaskSystem
                     
                     // Notify the UI Controller of the new progress!
                     string uniqueId = $"{task.taskId}_{task.requirements.objectives[i].key}";
-                    OnProgressReportedGlobal?.Invoke(uniqueId, task.taskName, currentProgress[i], task.requirements.objectives[i].requiredAmount);
+                    string displayName = string.IsNullOrEmpty(task.requirements.objectives[i].notificationDisplayName) ? task.taskName : task.requirements.objectives[i].notificationDisplayName;
+                    OnProgressReportedGlobal?.Invoke(uniqueId, displayName, currentProgress[i], task.requirements.objectives[i].requiredAmount);
 
                     CheckCompletion();
                     return true;
