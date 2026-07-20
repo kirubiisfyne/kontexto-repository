@@ -64,8 +64,8 @@ namespace Kontexto.UI
             // 4. Cleanup tracking when the objective is completely finished
             if (currentProgress >= maxProgress)
             {
-                // We remove it from the dictionary so it doesn't take up memory forever.
-                // (We don't Destroy the object yet, so the player can watch the final "max/max" animation!)
+                // We remove it from the dictionary and tell the UI to gracefully hide and destroy itself.
+                uiInstance.CompleteAndDestroy();
                 activeNotifications.Remove(uniqueId);
             }
         }

@@ -627,6 +627,7 @@ GameObject:
   - component: {fileID: 23980177615174488}
   - component: {fileID: 1383372359963055365}
   - component: {fileID: 8646184866467837441}
+  - component: {fileID: 4783976063235536402}
   m_Layer: 5
   m_Name: ObjectiveNotifRoot
   m_TagString: Untagged
@@ -670,7 +671,7 @@ MonoBehaviour:
   objectiveNameText: {fileID: 818435186507809493}
   notificationText: {fileID: 7362984970380979462}
   progressBar: {fileID: 5499518160506771101}
-  displayDuration: 3
+  layoutElement: {fileID: 4783976063235536402}
 --- !u!222 &8646184866467837441
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -679,6 +680,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6014718490687100483}
   m_CullTransparentMesh: 1
+--- !u!114 &4783976063235536402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014718490687100483}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: 121
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &7426801455095449271
 GameObject:
   m_ObjectHideFlags: 0

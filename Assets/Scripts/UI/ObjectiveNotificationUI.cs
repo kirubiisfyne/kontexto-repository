@@ -20,14 +20,8 @@ namespace Kontexto.UI
         [Tooltip("The slider acting as the progress bar.")]
         [SerializeField] private Slider progressBar;
 
-        [Header("Settings")]
-        [Tooltip("How long the notification stays fully visible before the Hide animation is triggered.")]
-        [SerializeField] private float displayDuration = 3f;
-
         // Cached Animator parameter hash for performance
         private static readonly int IsVisibleBool = Animator.StringToHash("IsVisible");
-
-        private Coroutine displayCoroutine;
 
         /// <summary>
         /// Modular method to set the objective's title or name.
@@ -63,7 +57,7 @@ namespace Kontexto.UI
         }
 
         /// <summary>
-        /// Modular method to trigger the show animation and timer without changing data.
+        /// Triggers the transition to display the notification.
         /// </summary>
         public void Show()
         {
@@ -71,13 +65,6 @@ namespace Kontexto.UI
             {
                 animator.SetBool(IsVisibleBool, true);
             }
-
-            // Restart the display timer to handle rapid sequential interruptions smoothly
-            if (displayCoroutine != null)
-            {
-                StopCoroutine(displayCoroutine);
-            }
-            displayCoroutine = StartCoroutine(DisplayTimerSequence());
         }
 
         /// <summary>
@@ -121,24 +108,18 @@ namespace Kontexto.UI
             Show();
         }
 
-        private IEnumerator DisplayTimerSequence()
+        /// <summary>
+        /// Plays the hide animation and destroys the UI object after a delay.
+        /// </summary>
+        public void CompleteAndDestroy()
         {
-            float timer = displayDuration;
-            
-            // Using unscaledDeltaTime to ensure the timer works even when Time.timeScale = 0
-            while (timer > 0)
-            {
-                timer -= Time.unscaledDeltaTime;
-                yield return null;
-            }
-
             if (animator != null)
             {
-                // Trigger the fade out animation
                 animator.SetBool(IsVisibleBool, false);
             }
-
-            displayCoroutine = null;
+            
+            // Destroy the object after 1 second to give the Hide animation time to play
+            Destroy(gameObject, 1f);
         }
     }
 }
