@@ -132,6 +132,10 @@ MonoBehaviour:
   targetGiver: {fileID: 1361237180897165087}
   destroyOnInteract: 1
   updateLocalIndex: 0
+  waitDuration: 0
+  onWaitStarted:
+    m_PersistentCalls:
+      m_Calls: []
   onAcceptedReport:
     m_PersistentCalls:
       m_Calls:
@@ -435,7 +439,8 @@ MonoBehaviour:
   targetGiver: {fileID: 1361237180897165087}
   destroyOnInteract: 0
   updateLocalIndex: 0
-  onAcceptedReport:
+  waitDuration: 3
+  onWaitStarted:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4582509942074781494}
@@ -447,7 +452,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Printer
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 6768632166837569913}
@@ -462,6 +467,9 @@ MonoBehaviour:
           m_StringArgument: Printer
           m_BoolArgument: 0
         m_CallState: 2
+  onAcceptedReport:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &7293033568810551435
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -891,6 +899,10 @@ MonoBehaviour:
   targetGiver: {fileID: 0}
   destroyOnInteract: 0
   updateLocalIndex: 0
+  waitDuration: 0
+  onWaitStarted:
+    m_PersistentCalls:
+      m_Calls: []
   onAcceptedReport:
     m_PersistentCalls:
       m_Calls: []

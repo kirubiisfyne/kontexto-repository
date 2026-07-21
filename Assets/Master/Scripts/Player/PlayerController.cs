@@ -71,6 +71,18 @@ namespace Master.Scripts
             }
         }
 
+        public void SetCinematicWait(bool isWaiting)
+        {
+            this.enabled = !isWaiting; // Disable movement and camera rotation
+
+            // Force the player into an idle pose so they don't freeze mid-run
+            if (isWaiting && animator != null)
+            {
+                animator.SetFloat(XVelocityHash, 0f);
+                animator.SetFloat(YVelocityHash, 0f);
+            }
+        }
+
         void Update()
         {
             HandleMovement();
