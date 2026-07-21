@@ -21,6 +21,13 @@ namespace Master.Scripts.TaskSystem
         [Tooltip("If true, automatically updates the DialogueManager index on this GameObject.")]
         public bool updateLocalIndex = false;
 
+        [Header("Wait Settings")]
+        [Tooltip("If greater than 0, the player will be forced to wait this long before the item is collected.")]
+        public float waitDuration = 0f;
+        
+        [Tooltip("Optional event fired when the waiting starts (e.g. play printer sound).")]
+        public UnityEvent onWaitStarted;
+
         [Header("Events")]
         [Tooltip("Fired ONLY if the Giver NPC accepts the report. Use this for SFX, VFX, or specific state changes.")]
         public UnityEvent onAcceptedReport;
@@ -70,6 +77,41 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
+            if (waitDuration > 0f)
+            {
+                StartCoroutine(WaitThenReportCoroutine());
+            }
+            else
+            {
+                ProcessReport();
+            }
+        }
+
+        private System.Collections.IEnumerator WaitThenReportCoroutine()
+        {
+            // Disable interactions to prevent spam clicking while waiting
+            bool previousState = enabled;
+            enabled = false;
+            
+            // Fire start event (e.g., play printer sound)
+            onWaitStarted?.Invoke();
+
+            // Lock the player in cinematic mode
+            var player = FindFirstObjectByType<Master.Scripts.PlayerController>();
+            if (player != null) player.SetCinematicWait(true);
+
+            yield return new WaitForSeconds(waitDuration);
+
+            // Unlock the player
+            if (player != null) player.SetCinematicWait(false);
+
+            // Restore script state and complete the objective
+            enabled = previousState;
+            ProcessReport();
+        }
+
+        private void ProcessReport()
+        {
             // RECEIPT MODEL: Only retire if the Giver NPC actually accepted the report
             bool wasAccepted = targetGiver.ReportProgress(itemKey, 1);
 
