@@ -25,11 +25,14 @@ namespace Master.Scripts.TaskSystem
         [Tooltip("If greater than 0, the player will be forced to wait this long before the item is collected.")]
         public float waitDuration = 0f;
         
+        [Tooltip("Optional text to display while waiting (e.g., 'Printing...').")]
+        public string waitText = "";
+        
         [Tooltip("Optional event fired when the waiting starts (e.g. play printer sound).")]
         public UnityEvent onWaitStarted;
 
         [field: Header("Events")]
-        public static event System.Action<float, Transform> OnActionWaitStartedGlobal;
+        public static event System.Action<float, string, Transform> OnActionWaitStartedGlobal;
 
         [Tooltip("Fired ONLY if the Giver NPC accepts the report. Use this for SFX, VFX, or specific state changes.")]
         public UnityEvent onAcceptedReport;
@@ -103,7 +106,7 @@ namespace Master.Scripts.TaskSystem
             if (player != null) player.SetCinematicWait(true);
 
             // Shout to the UI!
-            OnActionWaitStartedGlobal?.Invoke(waitDuration, transform);
+            OnActionWaitStartedGlobal?.Invoke(waitDuration, waitText, transform);
 
             yield return new WaitForSeconds(waitDuration);
 

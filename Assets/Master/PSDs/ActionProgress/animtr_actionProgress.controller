@@ -83,7 +83,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: InteractDurationPanel
+  m_Name: animtr_actionProgress
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IsVisible

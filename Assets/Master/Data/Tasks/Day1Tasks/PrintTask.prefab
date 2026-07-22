@@ -133,6 +133,7 @@ MonoBehaviour:
   destroyOnInteract: 1
   updateLocalIndex: 0
   waitDuration: 0
+  waitText: 
   onWaitStarted:
     m_PersistentCalls:
       m_Calls: []
@@ -440,6 +441,7 @@ MonoBehaviour:
   destroyOnInteract: 0
   updateLocalIndex: 0
   waitDuration: 3
+  waitText: Printing...
   onWaitStarted:
     m_PersistentCalls:
       m_Calls:
@@ -900,6 +902,7 @@ MonoBehaviour:
   destroyOnInteract: 0
   updateLocalIndex: 0
   waitDuration: 0
+  waitText: 
   onWaitStarted:
     m_PersistentCalls:
       m_Calls: []
