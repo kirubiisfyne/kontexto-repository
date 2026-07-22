@@ -193,6 +193,42 @@ namespace Master.Scripts.TaskSystem
         }
 
         /// <summary>
+        /// Checks if an objective is currently valid to be reported (checks Active status and Sequential Order).
+        /// </summary>
+        public bool CanReportProgress(string key)
+        {
+            // Closers delegate to the Giver.
+            if (hostType == HostType.Closer)
+            {
+                var giver = FindGiver();
+                return giver != null && giver.CanReportProgress(key);
+            }
+
+            if (status == TaskStatus.Completed || status != TaskStatus.Active || task == null) return false;
+            if (currentProgress == null || task.requirements == null || task.requirements.objectives == null || currentProgress.Count < task.requirements.objectives.Count) return false;
+
+            for (int i = 0; i < task.requirements.objectives.Count; i++)
+            {
+                if (task.requirements.objectives[i].key == key)
+                {
+                    // SEQUENCE CHECK
+                    if (task.requirements.needsSequentialOrder)
+                    {
+                        for (int prev = 0; prev < i; prev++)
+                        {
+                            if (currentProgress[prev] < task.requirements.objectives[prev].requiredAmount)
+                            {
+                                return false; // A previous objective is not complete!
+                            }
+                        }
+                    }
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Reports progress toward a specific objective key. Returns true if the report was accepted.
         /// Enforces sequential completion based on the list order in TaskData.
         /// </summary>
