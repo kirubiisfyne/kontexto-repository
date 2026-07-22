@@ -82,6 +82,12 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
+            // PERMISSION CHECK: Ensure the objective isn't sequence-locked or invalid before starting the UI wait!
+            if (!targetGiver.CanReportProgress(itemKey))
+            {
+                return;
+            }
+
             if (waitDuration > 0f)
             {
                 StartCoroutine(WaitThenReportCoroutine());
