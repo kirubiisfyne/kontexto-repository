@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ namespace Master.Scripts.UI
         [SerializeField] private GameObject visualPanel;
         [SerializeField] private Animator animator;
         [SerializeField] private Slider progressBar;
+        [SerializeField] private TMP_Text actionText;
         
         private static readonly int IsVisibleBool = Animator.StringToHash("IsVisible");
 
@@ -23,11 +25,24 @@ namespace Master.Scripts.UI
             Master.Scripts.TaskSystem.KeyItemInstance.OnActionWaitStartedGlobal -= StartProgress;
         }
 
-        private void StartProgress(float duration, Transform sourceTransform)
+        private void StartProgress(float duration, string text, Transform sourceTransform)
         {
             // We ignore the sourceTransform for the 2D HUD, but it's there if you ever want to make it 3D!
             if (visualPanel != null) visualPanel.SetActive(true);
             if (animator != null) animator.SetBool(IsVisibleBool, true);
+            
+            if (actionText != null)
+            {
+                if (string.IsNullOrEmpty(text))
+                {
+                    actionText.gameObject.SetActive(false);
+                }
+                else
+                {
+                    actionText.gameObject.SetActive(true);
+                    actionText.text = text;
+                }
+            }
             
             // Stop any existing coroutine if they trigger rapidly
             StopAllCoroutines();
