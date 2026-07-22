@@ -28,7 +28,9 @@ namespace Master.Scripts.TaskSystem
         [Tooltip("Optional event fired when the waiting starts (e.g. play printer sound).")]
         public UnityEvent onWaitStarted;
 
-        [Header("Events")]
+        [field: Header("Events")]
+        public static event System.Action<float, Transform> OnActionWaitStartedGlobal;
+
         [Tooltip("Fired ONLY if the Giver NPC accepts the report. Use this for SFX, VFX, or specific state changes.")]
         public UnityEvent onAcceptedReport;
 
@@ -99,6 +101,9 @@ namespace Master.Scripts.TaskSystem
             // Lock the player in cinematic mode
             var player = FindFirstObjectByType<Master.Scripts.PlayerController>();
             if (player != null) player.SetCinematicWait(true);
+
+            // Shout to the UI!
+            OnActionWaitStartedGlobal?.Invoke(waitDuration, transform);
 
             yield return new WaitForSeconds(waitDuration);
 
