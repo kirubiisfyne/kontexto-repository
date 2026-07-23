@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7800967110177024242}
   - component: {fileID: 25230240231078292}
   - component: {fileID: 7708536475958050880}
+  - component: {fileID: 4894559067696375161}
   m_Layer: 0
   m_Name: PlasticCupFilled
   m_TagString: Untagged
@@ -92,3 +93,25 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4894559067696375161
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6994219973858656792}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -592240362707135924, guid: 718219d31cad54c56852d116a66078e4, type: 3}

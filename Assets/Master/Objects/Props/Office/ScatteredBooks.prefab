@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5179988996057832045}
   - component: {fileID: 3391078361023979954}
   - component: {fileID: 2684581957502356774}
+  - component: {fileID: 6342377043562527647}
   m_Layer: 0
   m_Name: ScatteredBooks
   m_TagString: Untagged
@@ -94,3 +95,25 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6342377043562527647
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3027237769127809086}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6241585558361706385, guid: fa91c148097c44a8f8796e68292c45c5, type: 3}
