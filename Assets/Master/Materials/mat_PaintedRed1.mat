@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_Fridge
-  m_Shader: {fileID: -6465566751694194690, guid: d69eeefd478a243879171c1a19fccd88, type: 3}
+  m_Name: mat_PaintedRed1
+  m_Shader: {fileID: -6465566751694194690, guid: b0439f9dd9df846d6a6a6b775719b6f7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,12 +28,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: 318df15a7e5ec400f8ac86e89d58c215, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Channel_Texture:
+        m_Texture: {fileID: 2800000, guid: 51e4d909e96e6442d9fdb0538c8b3b3e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -107,6 +107,8 @@ Material:
     - _GlossyReflections: 0
     - _ISEMMISIVE: 0
     - _Metallic: 0
+    - _Noise_Contrast: 0.5
+    - _Noise_Scale: 5
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
@@ -118,19 +120,23 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _USECUSTOMSHADOWS: 0
     - _WorkflowMode: 1
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Base_Color: {r: 0.5188679, g: 0.09545213, b: 0.09545213, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Detail_Color: {r: 0.4339623, g: 0.079832695, b: 0.079832695, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Highlight_Color: {r: 0.4716981, g: 0.13572444, b: 0.13572444, a: 1}
     - _Offset: {r: 1, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5441374646751075962
+--- !u!114 &4788656931687537442
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

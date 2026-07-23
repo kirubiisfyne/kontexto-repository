@@ -22,10 +22,9 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_PaintedGreen0
   m_Shader: {fileID: -6465566751694194690, guid: b0439f9dd9df846d6a6a6b775719b6f7, type: 3}
-  m_Parent: {fileID: 2100000, guid: 7144e18bdf7a7459c936b99f0cd64dec, type: 2}
+  m_Parent: {fileID: 2100000, guid: f49796e3cc6d53848ae72b0819429fb1, type: 2}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _USECUSTOMSHADOWS
+  m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0

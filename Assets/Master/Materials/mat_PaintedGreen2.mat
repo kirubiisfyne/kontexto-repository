@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5472784787901393199
+--- !u!114 &-8198996436281236017
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_PaintedBlue1
+  m_Name: mat_PaintedGreen2
   m_Shader: {fileID: -6465566751694194690, guid: b0439f9dd9df846d6a6a6b775719b6f7, type: 3}
-  m_Parent: {fileID: 2100000, guid: ebcc26b61bc30445691d95c15fc3cadb, type: 2}
+  m_Parent: {fileID: 2100000, guid: 718265f79bcfd4e15aa514211a3db44b, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _USECUSTOMSHADOWS
@@ -37,13 +37,18 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _Channel_Texture:
+        m_Texture: {fileID: 2800000, guid: 51e4d909e96e6442d9fdb0538c8b3b3e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _Base_Color: {r: 0.8632076, g: 0.91953385, b: 1, a: 1}
-    - _Detail_Color: {r: 0.25231397, g: 0.31149292, b: 0.3962264, a: 1}
-    - _Highlight_Color: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
+    - _Base_Color: {r: 0.3017069, g: 0.5471698, b: 0.12130651, a: 1}
+    - _Detail_Color: {r: 0.20597744, g: 0.3584906, b: 0.093004644, a: 1}
+    - _Highlight_Color: {r: 0.080783136, g: 0.14899999, b: 0.030518068, a: 1}
     - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
