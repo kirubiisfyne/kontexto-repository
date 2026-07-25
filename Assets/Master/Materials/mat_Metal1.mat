@@ -23,12 +23,12 @@ Material:
   m_Name: mat_Metal1
   m_Shader: {fileID: -6465566751694194690, guid: b0439f9dd9df846d6a6a6b775719b6f7, type: 3}
   m_Parent: {fileID: 2100000, guid: 55941935e6679446a8df6689f84515e1, type: 2}
-  m_ModifiedSerializedProperties: 0
+  m_ModifiedSerializedProperties: 4
   m_ValidKeywords:
   - _USECUSTOMSHADOWS
   m_InvalidKeywords: []
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
