@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_PaintedRed0
+  m_Name: mat_PaintedPurple0
   m_Shader: {fileID: -6465566751694194690, guid: b0439f9dd9df846d6a6a6b775719b6f7, type: 3}
-  m_Parent: {fileID: 2100000, guid: e20f8c89a08c94a769edab3fac7c4206, type: 2}
+  m_Parent: {fileID: 2100000, guid: f49796e3cc6d53848ae72b0819429fb1, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -25,13 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _USECUSTOMSHADOWS: 0
+    m_Floats: []
     m_Colors:
-    - _Base_Color: {r: 0.8207547, g: 0.20392157, b: 0.20392157, a: 1}
-    - _Detail_Color: {r: 0.509434, g: 0.12255251, b: 0.12255251, a: 1}
-    - _Highlight_Color: {r: 0.6132076, g: 0.10702208, b: 0.10702208, a: 1}
-    - _Offset: {r: 1, g: 1, b: 0, a: 0}
+    - _Base_Color: {r: 0.49133265, g: 0.32498217, b: 0.6320754, a: 1}
+    - _Detail_Color: {r: 0.41552702, g: 0.2627451, b: 0.7058824, a: 1}
+    - _Highlight_Color: {r: 0.23776694, g: 0.15267888, b: 0.4433962, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4788656931687537442
