@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_PaintedOldGray1
   m_Shader: {fileID: -6465566751694194690, guid: b0439f9dd9df846d6a6a6b775719b6f7, type: 3}
-  m_Parent: {fileID: 2100000, guid: f2c49e4750e3f4ede853f414505a86f9, type: 2}
+  m_Parent: {fileID: 2100000, guid: 3415cf0e7473a4294804313ba761d603, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _USECUSTOMSHADOWS
