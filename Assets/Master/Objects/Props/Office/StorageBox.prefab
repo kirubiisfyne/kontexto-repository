@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5291999102207645954}
   - component: {fileID: 373184008970741554}
   - component: {fileID: 5519622707866795715}
-  - component: {fileID: 1057935110830323919}
+  - component: {fileID: 1682027659141189326}
   m_Layer: 0
   m_Name: StorageBox
   m_TagString: Untagged
@@ -92,8 +92,8 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1057935110830323919
-BoxCollider:
+--- !u!64 &1682027659141189326
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -110,6 +110,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.57448137, y: 0.5850696, z: 0.3695773}
-  m_Center: {x: 0.24395163, y: 0.21543278, z: 0.1852378}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6739950441467097090, guid: 593f1fba6c6b54dff86426d3daa7d991, type: 3}
