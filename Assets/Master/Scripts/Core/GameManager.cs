@@ -28,6 +28,7 @@ namespace Master.Scripts
             public List<TaskData> availableTasks;
             
             // Cross-Scene Data
+            public TextAsset activeDocumentData;
             public bool pendingDocumentSuccess = false;
             public List<string> pendingAdviserFeedback = new List<string>();
         #endregion

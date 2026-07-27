@@ -17,5 +17,9 @@ namespace Master.Scripts.TaskSystem
         [Space(10)]
         public TaskPrerequisite prerequisite;
         public TaskRequirements requirements;
+
+        [Header("Document Data (Optional)")]
+        [Tooltip("If this task requires editing a document, assign its JSON file here.")]
+        public TextAsset documentData;
     }
 }
