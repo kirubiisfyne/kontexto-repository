@@ -70,6 +70,20 @@ namespace Master.Scripts
             {
                 if (!string.IsNullOrEmpty(sceneToName))
                 {
+                    // Dynamically resolve active task's document data if transitioning to a document editor context
+                    var activeTasks = FindObjectsByType<Master.Scripts.TaskSystem.HostTaskManager>(FindObjectsSortMode.None);
+                    foreach (var manager in activeTasks)
+                    {
+                        if (manager.status == Master.Scripts.TaskSystem.TaskStatus.Active && manager.task != null && manager.task.documentData != null)
+                        {
+                            if (Master.Scripts.GameManager.Instance != null)
+                            {
+                                Master.Scripts.GameManager.Instance.activeDocumentData = manager.task.documentData;
+                            }
+                            break;
+                        }
+                    }
+
                     // Fire any custom hooks (like your Level Completion Hook!)
                     onWarpStart?.Invoke();
 
