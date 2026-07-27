@@ -29,6 +29,10 @@ namespace Master.Scripts.TaskSystem
     public class ObjectiveData
     {
         public string key; 
+        
+        [Tooltip("The text shown on the UI Notification (e.g., 'Collect the Library Books').")]
+        public string notificationDisplayName;
+
         public int requiredAmount;
     }
 

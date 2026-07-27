@@ -22,4 +22,5 @@ MonoBehaviour:
     needsSequentialOrder: 0
     objectives:
     - key: formatting_task
+      notificationDisplayName: Pass Assesment
       requiredAmount: 1

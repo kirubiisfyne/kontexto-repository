@@ -6,6 +6,8 @@ namespace Master.Scripts.UI
     [RequireComponent(typeof(Animator))]
     public class InteractPromptUI : MonoBehaviour
     {
+        [Tooltip("Assign the child Panel here. You can safely disable it in the Editor!")]
+        [SerializeField] private GameObject visualPanel;
         private Animator animator;
         
         // Caching the parameter hash is slightly more performant than using the string name
@@ -36,6 +38,11 @@ namespace Master.Scripts.UI
 
         private void HandleProximityChanged(bool isNearInteractable)
         {
+            if (isNearInteractable && visualPanel != null)
+            {
+                visualPanel.SetActive(true);
+            }
+
             // Tell the Animator to handle the transition
             if (animator != null)
             {

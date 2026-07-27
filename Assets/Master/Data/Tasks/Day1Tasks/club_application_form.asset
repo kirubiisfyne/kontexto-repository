@@ -22,4 +22,5 @@ MonoBehaviour:
     needsSequentialOrder: 1
     objectives:
     - key: club_application_form
+      notificationDisplayName: Signed Appliaction Form
       requiredAmount: 1
