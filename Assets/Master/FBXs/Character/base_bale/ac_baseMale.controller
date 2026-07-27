@@ -9,7 +9,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 87a511af320744383be7fcaa86a1a29b, type: 2}
+    m_Motion: {fileID: 7400000, guid: b877dd860d416444581417a421ec4e82, type: 2}
     m_Threshold: -0.5
     m_Position: {x: -0.5, y: 0}
     m_TimeScale: -1
@@ -17,7 +17,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: fefa6b1b3e17f4d9d82b9a7b372356f9, type: 2}
+    m_Motion: {fileID: 7400000, guid: 9d1dfd4113dfe49eb9a1ac7f685c55f4, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -25,7 +25,7 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 87a511af320744383be7fcaa86a1a29b, type: 2}
+    m_Motion: {fileID: 7400000, guid: b877dd860d416444581417a421ec4e82, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 0.5, y: 0}
     m_TimeScale: 1
@@ -33,20 +33,36 @@ BlendTree:
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 5448eafbea3c74d6290e37d4f6e7df09, type: 2}
+    m_Motion: {fileID: 7400000, guid: 63942018e46f3472e9aa2646aef47520, type: 2}
     m_Threshold: 1
     m_Position: {x: 1, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: ba5e541bcbd234f43bfc849e2caa8e8d, type: 2}
+    m_Threshold: 1.5
+    m_Position: {x: 0, y: -0.5}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: X Velocity
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 72ab2310ce8cb4adaa49882fa075ee88, type: 2}
+    m_Threshold: 2
+    m_Position: {x: 0, y: 0.5}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: X Velocity
+    m_Mirror: 0
   m_BlendParameter: X Velocity
   m_BlendParameterY: Y Velocity
   m_MinThreshold: -0.5
-  m_MaxThreshold: 1
+  m_MaxThreshold: 2
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
-  m_BlendType: 0
+  m_BlendType: 2
 --- !u!91 &9100000
 AnimatorController:
   m_ObjectHideFlags: 0

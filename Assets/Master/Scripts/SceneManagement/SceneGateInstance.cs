@@ -16,6 +16,12 @@ namespace Master.Scripts
         [Tooltip("The name of the scene this gate will load.")]
         public string sceneToName;
 
+        [Tooltip("The unique ID of this gate (e.g. 'CampusFront').")]
+        public string gateId;
+
+        [Tooltip("The ID of the gate to spawn at in the target scene (optional).")]
+        public string targetGateId;
+
         [Tooltip("Check this if the player can warp right now.")]
         public bool canPlayerWarp = true;
         
@@ -64,14 +70,28 @@ namespace Master.Scripts
             {
                 if (!string.IsNullOrEmpty(sceneToName))
                 {
+                    // Dynamically resolve active task's document data if transitioning to a document editor context
+                    var activeTasks = FindObjectsByType<Master.Scripts.TaskSystem.HostTaskManager>(FindObjectsSortMode.None);
+                    foreach (var manager in activeTasks)
+                    {
+                        if (manager.status == Master.Scripts.TaskSystem.TaskStatus.Active && manager.task != null && manager.task.documentData != null)
+                        {
+                            if (Master.Scripts.GameManager.Instance != null)
+                            {
+                                Master.Scripts.GameManager.Instance.activeDocumentData = manager.task.documentData;
+                            }
+                            break;
+                        }
+                    }
+
                     // Fire any custom hooks (like your Level Completion Hook!)
                     onWarpStart?.Invoke();
 
                     // Save player's current position so they return here later
                     Master.Scripts.SaveSystem.LevelLoader.Current?.SaveGame();
                     
-                    SceneGateManager.Instance.StartWarp(sceneToName);
-                    //Debug.Log($"[SceneGate] Warping to {sceneToName}...");
+                    SceneGateManager.Instance.StartWarp(sceneToName, targetGateId);
+                    //Debug.Log($"[SceneGate] Warping to {sceneToName} at gate {targetGateId}...");
                 }
                 else
                 {

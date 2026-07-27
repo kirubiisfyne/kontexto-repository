@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.Cinemachine;
 
@@ -6,18 +7,19 @@ namespace Master.Scripts
 {
     /// <summary>
     /// Handles camera reframing to an NPC's virtual camera during dialogue,
-    /// and fades the player's material in/out to avoid obstruction.
+    /// and fades the player's materials in/out to avoid obstruction.
     /// </summary>
     public class CameraReframer : MonoBehaviour
     {
         [Header("References")]
-        [Tooltip("The player's body material used for opacity fading during NPC focus.")]
-        public Material playerMaterial;
+        [Tooltip("The player's body materials used for opacity fading during NPC focus.")]
+        public Material[] playerMaterials;
 
         [Tooltip("The CinemachineBrain on the main camera. Auto-assigned in Awake if left empty.")]
         public CinemachineBrain cinemachineBrain;
 
-        [Header("Camera")] [Tooltip("The NPC's virtual camera to activate during dialogue.")]
+        [Header("Camera")] 
+        [Tooltip("The NPC's virtual camera to activate during dialogue.")]
         public bool NPCLookAt = true;
         public CinemachineCamera NPCCamera;
 
@@ -32,14 +34,34 @@ namespace Master.Scripts
         private void Awake()
         {
             GameObject playerBody = GameObject.FindGameObjectWithTag("PlayerBody");
-            playerMaterial = playerBody.GetComponent<SkinnedMeshRenderer>().material;
-            playerController = playerBody.GetComponentInParent<PlayerController>();
-            cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+            if (playerBody != null)
+            {
+                Renderer[] renderers = playerBody.GetComponentsInChildren<Renderer>();
+                List<Material> matList = new List<Material>();
+                foreach (Renderer rend in renderers)
+                {
+                    if (rend != null && rend.materials != null)
+                    {
+                        matList.AddRange(rend.materials);
+                    }
+                }
+                playerMaterials = matList.ToArray();
+
+                playerController = playerBody.GetComponentInParent<PlayerController>();
+            }
+
+            if (Camera.main != null)
+            {
+                cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
+            }
         }
 
         public void StartNPCFocus()
         {
-            NPCCamera.Priority = 20;
+            if (NPCCamera != null)
+            {
+                NPCCamera.Priority = 20;
+            }
             playerController?.SetInputActive(false);
 
             float blendDuration = GetBlendDuration(NPCCamera);
@@ -48,13 +70,16 @@ namespace Master.Scripts
             fadeCoroutine = StartCoroutine(FadePlayerMaterial(0.1f, blendDuration));
 
             if (rotateCoroutine != null) StopCoroutine(rotateCoroutine);
-            if (playerController != null  && NPCLookAt)
+            if (playerController != null && NPCLookAt)
                 rotateCoroutine = StartCoroutine(SmoothLookAtPlayer(playerController.transform, blendDuration));
         }
 
         public void EndNPCFocus()
         {
-            NPCCamera.Priority = 0;
+            if (NPCCamera != null)
+            {
+                NPCCamera.Priority = 0;
+            }
             playerController?.SetInputActive(true);
 
             if (rotateCoroutine != null && NPCLookAt)
@@ -72,7 +97,7 @@ namespace Master.Scripts
         {
             float duration = 2f;
 
-            if (cinemachineBrain != null)
+            if (cinemachineBrain != null && targetCam != null)
             {
                 CinemachineBlendDefinition blendDef = cinemachineBrain.CustomBlends != null ?
                     cinemachineBrain.CustomBlends.GetBlendForVirtualCameras(cinemachineBrain.ActiveVirtualCamera?.Name, targetCam.Name, cinemachineBrain.DefaultBlend) :
@@ -85,19 +110,46 @@ namespace Master.Scripts
 
         public IEnumerator FadePlayerMaterial(float targetValue, float duration)
         {
-            float startValue = playerMaterial.GetFloat("_Opacity");
+            if (playerMaterials == null || playerMaterials.Length == 0) yield break;
+
+            float[] startValues = new float[playerMaterials.Length];
+            for (int i = 0; i < playerMaterials.Length; i++)
+            {
+                if (playerMaterials[i] != null && playerMaterials[i].HasProperty("_Opacity"))
+                {
+                    startValues[i] = playerMaterials[i].GetFloat("_Opacity");
+                }
+                else
+                {
+                    startValues[i] = 1f;
+                }
+            }
+
             float timeElapsed = 0f;
 
             while (timeElapsed < duration)
             {
-                float currentValue = Mathf.Lerp(startValue, targetValue, timeElapsed / duration);
-                playerMaterial.SetFloat("_Opacity", currentValue);
+                float t = timeElapsed / duration;
+                for (int i = 0; i < playerMaterials.Length; i++)
+                {
+                    if (playerMaterials[i] != null && playerMaterials[i].HasProperty("_Opacity"))
+                    {
+                        float currentValue = Mathf.Lerp(startValues[i], targetValue, t);
+                        playerMaterials[i].SetFloat("_Opacity", currentValue);
+                    }
+                }
 
                 timeElapsed += Time.deltaTime;
                 yield return null;
             }
 
-            playerMaterial.SetFloat("_Opacity", targetValue);
+            for (int i = 0; i < playerMaterials.Length; i++)
+            {
+                if (playerMaterials[i] != null && playerMaterials[i].HasProperty("_Opacity"))
+                {
+                    playerMaterials[i].SetFloat("_Opacity", targetValue);
+                }
+            }
         }
 
         /// <summary>

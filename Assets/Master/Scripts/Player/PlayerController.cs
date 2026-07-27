@@ -71,6 +71,18 @@ namespace Master.Scripts
             }
         }
 
+        public void SetCinematicWait(bool isWaiting)
+        {
+            this.enabled = !isWaiting; // Disable movement and camera rotation
+
+            // Force the player into an idle pose so they don't freeze mid-run
+            if (isWaiting && animator != null)
+            {
+                animator.SetFloat(XVelocityHash, 0f);
+                animator.SetFloat(YVelocityHash, 0f);
+            }
+        }
+
         void Update()
         {
             HandleMovement();
@@ -88,19 +100,15 @@ namespace Master.Scripts
             inputDirection = new Vector3(moveX, 0f, moveY).normalized;
 
             float xTargetAnimValue = 0f;
+            float yTargetAnimValue = 0f;
             float currentSpeed = walkSpeed * BaseSpeed;
+
             if (isMoving)
             {
-                if (IsRunning)
-                {
-                    xTargetAnimValue = moveY;
-                    currentSpeed = runSpeed * BaseSpeed;
-                }
-                else
-                {
-                    xTargetAnimValue = moveY * 0.5f;
-                    currentSpeed = walkSpeed * BaseSpeed;
-                }
+                float speedFactor = IsRunning ? 1f : 0.5f;
+                xTargetAnimValue = moveY * speedFactor;
+                yTargetAnimValue = moveX * speedFactor;
+                currentSpeed = (IsRunning ? runSpeed : walkSpeed) * BaseSpeed;
             }
         
             Vector3 move = transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical");
@@ -124,6 +132,7 @@ namespace Master.Scripts
             if (animator != null)
             {
                 animator.SetFloat(XVelocityHash, xTargetAnimValue, animationLerpTime, Time.deltaTime);
+                animator.SetFloat(YVelocityHash, yTargetAnimValue, animationLerpTime, Time.deltaTime);
             }
         
             // Apply Movement
