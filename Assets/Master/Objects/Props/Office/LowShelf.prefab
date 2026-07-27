@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2329907487826915456}
   - component: {fileID: 3945836844868330546}
   - component: {fileID: 6029353330633890861}
-  - component: {fileID: 7803092651448133923}
+  - component: {fileID: 363621836327387120}
   m_Layer: 0
   m_Name: LowShelf
   m_TagString: Untagged
@@ -92,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7803092651448133923
+--- !u!65 &363621836327387120
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,5 +111,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.9, y: 1.5000005, z: 0.9}
+  m_Size: {x: 3.0000012, y: 1.5000005, z: 1.0000013}
   m_Center: {x: 1.5000004, y: 0.75000024, z: -0.4999997}

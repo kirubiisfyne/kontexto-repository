@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1500488844589757318}
   - component: {fileID: 1594568330614874834}
   - component: {fileID: 5099881340594002194}
-  - component: {fileID: -5187171521055280025}
+  - component: {fileID: 6531335921155386961}
   m_Layer: 6
   m_Name: TV
   m_TagString: Untagged
@@ -67,7 +67,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 0cd62df37376f438bac0ad862ac67aed, type: 2}
+  - {fileID: 2100000, guid: 3415cf0e7473a4294804313ba761d603, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -91,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-5187171521055280025
+--- !u!65 &6531335921155386961
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,5 +111,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02381446, y: 0.013232407, z: 0.00070602755}
-  m_Center: {x: -0.011907228, y: 0.0066162026, z: 0.00030849743}
+  m_Size: {x: 1.8112288, y: 1.0064019, z: 0.05369752}
+  m_Center: {x: -0.90561426, y: 0.5032008, z: 0.02346303}
