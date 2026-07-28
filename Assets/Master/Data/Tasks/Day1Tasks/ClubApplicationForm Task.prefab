@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3774acb87bdcd433691215f9c4dbe462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.CameraReframer
-  playerMaterial: {fileID: 0}
+  playerMaterials: []
   cinemachineBrain: {fileID: 0}
   NPCLookAt: 1
   NPCCamera: {fileID: 7493855161694828944}

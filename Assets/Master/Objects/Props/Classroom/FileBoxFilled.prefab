@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FileBoxFilled
       objectReference: {fileID: 0}
+    - target: {fileID: 6038153611176453099, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 9034354181191294763, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.17000008
