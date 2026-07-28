@@ -20,6 +20,10 @@ namespace Master.Scripts.SaveSystem
 
         [Header("Task Prefabs")]
         public List<TaskSpawnEntry> taskEntries = new List<TaskSpawnEntry>();
+
+        [Header("Active Rooms")]
+        [Tooltip("List of room IDs that should be enabled and accessible in this level.")]
+        public List<string> activeRoomIds = new List<string>();
     }
 
     [System.Serializable]

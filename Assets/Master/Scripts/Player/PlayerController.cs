@@ -44,7 +44,14 @@ namespace Master.Scripts
             // Initialize rotation variables to match the current scene placement
             // to prevent the camera from "snapping" on the first mouse movement.
             x = transform.localEulerAngles.y;
-            y = cameraAnchor.localEulerAngles.x;
+            if (cameraAnchor != null)
+            {
+                y = cameraAnchor.localEulerAngles.x;
+            }
+
+            // Hide and lock the cursor on start
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         public void SetInputActive(bool active)

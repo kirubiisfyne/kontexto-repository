@@ -1,4 +1,5 @@
 using UnityEngine;
+using Master.Scripts.RoomSystem;
 
 namespace Master.Scripts.SaveSystem
 {
@@ -50,6 +51,9 @@ namespace Master.Scripts.SaveSystem
 
             // Restore player position if save belongs to this scene
             RestorePlayerPosition();
+
+            // 3. Apply room active/inactive states & door angles based on LevelData
+            ApplyRoomStates();
         }
 
         /// <summary>
@@ -125,6 +129,24 @@ namespace Master.Scripts.SaveSystem
             if (cc != null) cc.enabled = true;
 
             //Debug.Log($"LevelLoader: Restored player position to {pos} in '{sceneId}'.");
+        }
+
+        /// <summary>
+        /// Finds all RoomControllers in the scene and activates/deactivates props and doors
+        /// based on levelData.activeRoomIds.
+        /// </summary>
+        public void ApplyRoomStates()
+        {
+            if (levelData == null || levelData.activeRoomIds == null) return;
+
+            var rooms = FindObjectsOfType<RoomController>(true);
+            foreach (var room in rooms)
+            {
+                if (room == null || string.IsNullOrEmpty(room.roomId)) continue;
+
+                bool isActive = levelData.activeRoomIds.Contains(room.roomId);
+                room.SetRoomActive(isActive);
+            }
         }
 
         private void OnDestroy()
