@@ -18,6 +18,14 @@ namespace Master.Scripts.TaskSystem
         public TaskPrerequisite prerequisite;
         public TaskRequirements requirements;
 
+        [Header("Player Initial Transform (Optional)")]
+        [Tooltip("If true, positions the player at this location when starting/spawning for this task.")]
+        public bool setPlayerInitialTransform;
+        [Tooltip("World position to place the player.")]
+        public Vector3 playerInitialPosition;
+        [Tooltip("World rotation (Euler angles) for the player.")]
+        public Vector3 playerInitialRotation;
+
         [Header("Document Data (Optional)")]
         [Tooltip("If this task requires editing a document, assign its JSON file here.")]
         public TextAsset documentData;

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Master.Scripts.SaveSystem
 {
     /// <summary>
-    /// Defines what to spawn when entering a gameplay scene.
+    /// Defines level configuration for entering a gameplay scene.
     /// Each entry is a "task group" prefab (parent with Giver, Closer, KeyItems as children).
     /// </summary>
     [CreateAssetMenu(fileName = "New LevelData", menuName = "Levels/Level Data")]
@@ -14,9 +14,9 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("Must match the scene name exactly (e.g., 'scn_day1').")]
         public string sceneId;
 
-        [Header("Document Data")]
-        [Tooltip("The document data JSON required for this level (if any).")]
-        public TextAsset documentData;
+        [Header("Player Initial Spawn Anchor")]
+        [Tooltip("Assign the spawn anchor prefab. The player will be moved to this prefab's position and rotation on level start.")]
+        public GameObject playerSpawnAnchorPrefab;
 
         [Header("Task Prefabs")]
         public List<TaskSpawnEntry> taskEntries = new List<TaskSpawnEntry>();

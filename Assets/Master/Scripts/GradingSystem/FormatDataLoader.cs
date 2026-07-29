@@ -77,9 +77,7 @@ public class FormatDataLoader : MonoBehaviour
         }
         else
         {
-            currentLevelJson = GameManager.Instance.activeDocumentData != null 
-                ? GameManager.Instance.activeDocumentData 
-                : (GameManager.Instance.currentLevelData != null ? GameManager.Instance.currentLevelData.documentData : null);
+            currentLevelJson = GameManager.Instance.activeDocumentData;
         }
 
         LoadLevelData();

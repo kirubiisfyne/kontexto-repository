@@ -113,22 +113,27 @@ namespace Master.Scripts.SaveSystem
 
         private void RestorePlayerPosition()
         {
-            if (playerData.currentScene != sceneId || !playerData.HasSavedPosition())
-                return;
-
             var player = GameObject.FindGameObjectWithTag("Player");
             if (player == null) return;
 
             var cc = player.GetComponent<CharacterController>();
             if (cc != null) cc.enabled = false;
 
-            var (pos, rot) = playerData.GetPlayerTransform();
-            player.transform.position = pos;
-            player.transform.eulerAngles = rot;
+            // 1. Restore saved player transform if save data exists for this scene
+            if (playerData != null && playerData.currentScene == sceneId && playerData.HasSavedPosition())
+            {
+                var (pos, rot) = playerData.GetPlayerTransform();
+                player.transform.position = pos;
+                player.transform.eulerAngles = rot;
+            }
+            // 2. Move player to playerSpawnAnchorPrefab transform if assigned in LevelData
+            else if (levelData != null && levelData.playerSpawnAnchorPrefab != null)
+            {
+                player.transform.position = levelData.playerSpawnAnchorPrefab.transform.position;
+                player.transform.rotation = levelData.playerSpawnAnchorPrefab.transform.rotation;
+            }
 
             if (cc != null) cc.enabled = true;
-
-            //Debug.Log($"LevelLoader: Restored player position to {pos} in '{sceneId}'.");
         }
 
         /// <summary>
