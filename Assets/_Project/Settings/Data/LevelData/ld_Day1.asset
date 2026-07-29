@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd4b11d94d5f415d8980c0482801cce, type: 3}
+  m_Name: ld_Day1
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.SaveSystem.LevelData
+  sceneId: scn_Day1
+  playerSpawnAnchorPrefab: {fileID: 7530641719458999810, guid: 05e1e69d090f845fc952aebd0ab94091, type: 3}
+  taskEntries:
+  - prefab: {fileID: 2648521508393234826, guid: c672bda6fd47744eab2f0b51e9c98da0, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 0}
+    spawnRotation: {x: 0, y: 0, z: 0}
+    usePrefabTransform: 1
+  - prefab: {fileID: 4814563096834346054, guid: 95d28604301d44c6ca9774d34bd861cc, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 0}
+    spawnRotation: {x: 0, y: 0, z: 0}
+    usePrefabTransform: 1
+  - prefab: {fileID: 2851217387826432468, guid: d7c61538d8e4844b09f81bc261feed96, type: 3}
+    spawnPosition: {x: 0, y: 0, z: 0}
+    spawnRotation: {x: 0, y: 0, z: 0}
+    usePrefabTransform: 1
+  activeRoomIds:
+  - publication_office
+  - upper_library
