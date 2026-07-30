@@ -27,4 +27,7 @@ MonoBehaviour:
     - key: print_paper
       notificationDisplayName: Printed Paper Stack
       requiredAmount: 1
-  documentData: {fileID: 4900000, guid: f6b1b23ccedd74b8088408fdce693295, type: 3}
+  setPlayerInitialTransform: 0
+  playerInitialPosition: {x: 0, y: 0, z: 0}
+  playerInitialRotation: {x: 0, y: 0, z: 0}
+  documentData: {fileID: 0}

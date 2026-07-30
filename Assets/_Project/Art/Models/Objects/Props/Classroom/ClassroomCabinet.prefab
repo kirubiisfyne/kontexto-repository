@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4580334937229018764}
   - component: {fileID: 3615058835496666013}
   - component: {fileID: 4085811588153273025}
-  - component: {fileID: 3525192556135408526}
+  - component: {fileID: 3866021413937543481}
   m_Layer: 6
   m_Name: ClassroomCabinet
   m_TagString: Untagged
@@ -67,8 +67,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f07c272f8d1c4fe1887826146bb16b8, type: 2}
   - {fileID: 2100000, guid: 718265f79bcfd4e15aa514211a3db44b, type: 2}
+  - {fileID: 2100000, guid: 7144e18bdf7a7459c936b99f0cd64dec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -92,7 +92,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3525192556135408526
+--- !u!65 &3866021413937543481
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,5 +111,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.017530255, y: 0.03798221, z: 0.009349493}
-  m_Center: {x: -0.0087651275, y: 0.018991102, z: 0.0046747467}
+  m_Size: {x: 1.753026, y: 3.798221, z: 0.9349496}
+  m_Center: {x: -0.87651396, y: 1.8991103, z: 0.4674748}
