@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8512732076724206236}
   - component: {fileID: 4808425360036138489}
   - component: {fileID: 7333503896826280974}
-  - component: {fileID: 3843353494153956144}
+  - component: {fileID: 7380628842109168276}
   m_Layer: 6
   m_Name: ClassroomTeacherDesk
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3843353494153956144
+--- !u!65 &7380628842109168276
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,5 +110,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.02988961, y: 0.013450332, z: 0.014944811}
-  m_Center: {x: -0.014944801, y: 0.006725165, z: -0.0074724057}
+  m_Size: {x: 2.9889612, y: 1.3450333, z: 1.4944812}
+  m_Center: {x: -1.4944801, y: 0.6725165, z: -0.7472406}
