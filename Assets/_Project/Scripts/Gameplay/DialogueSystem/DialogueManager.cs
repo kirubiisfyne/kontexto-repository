@@ -88,6 +88,17 @@ namespace Master.Scripts.DialogueSystem
 
         public void Interact()
         {
+            // If NPCCoordinator is driving this GameObject, direct interactor calls are handled by NPCCoordinator
+            if (GetComponent("NPCCoordinator") != null) return;
+
+            InteractDirectly();
+        }
+
+        /// <summary>
+        /// Direct entry point for starting dialogue, bypassing NPCCoordinator component checks.
+        /// </summary>
+        public void InteractDirectly()
+        {
             if (overrideFrame == Time.frameCount) return;
 
             LastInteracted = this;
