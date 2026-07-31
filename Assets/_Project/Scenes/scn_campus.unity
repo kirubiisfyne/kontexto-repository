@@ -5,11 +5,11 @@ OcclusionCullingSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_OcclusionBakeSettings:
-    smallestOccluder: 5
-    smallestHole: 0.1
+    smallestOccluder: 1
+    smallestHole: 0.01
     backfaceThreshold: 100
-  m_SceneGUID: d4d294597db0a4af78d72d0ee16df4a8
-  m_OcclusionCullingData: {fileID: 36300000, guid: d64894d87562c4a3490d7fc0021378c4, type: 2}
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -78702,6 +78702,18 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 154815811}
+    - target: {fileID: 4066892959265511203, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4066892959265511203, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 849e72c5524fa45d08f4553541906ccd, type: 2}
+    - target: {fileID: 4066892959265511203, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 849e72c5524fa45d08f4553541906ccd, type: 2}
     - target: {fileID: 4534763766120316799, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
       propertyPath: m_Name
       value: Player

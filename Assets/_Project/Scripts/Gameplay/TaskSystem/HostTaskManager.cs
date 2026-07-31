@@ -64,6 +64,9 @@ namespace Master.Scripts.TaskSystem
         /// </summary>
         public void Interact()
         {
+            // If NPCCoordinator is present, NPCCoordinator manages task state transitions cleanly
+            if (GetComponent("NPCCoordinator") != null) return;
+
             if (task == null) return;
 
             // Closers hand in the task when all objectives are met.
@@ -112,7 +115,29 @@ namespace Master.Scripts.TaskSystem
             }
         }
 
-        private bool HasUnmetPrerequisite()
+        /// <summary>
+        /// Checks if all objectives for the task have reached their required targets.
+        /// </summary>
+        public bool IsReadyToComplete()
+        {
+            if (task == null || task.requirements == null || task.requirements.objectives == null) 
+                return false;
+
+            if (currentProgress == null || currentProgress.Count == 0) 
+                return false;
+
+            for (int i = 0; i < task.requirements.objectives.Count; i++)
+            {
+                int required = task.requirements.objectives[i].requiredAmount;
+                int current = (i < currentProgress.Count) ? currentProgress[i] : 0;
+
+                if (current < required) return false;
+            }
+
+            return true;
+        }
+
+        public bool HasUnmetPrerequisite()
         {
             if (task == null || task.prerequisite == null || task.prerequisite.task == null) return false;
             if (string.IsNullOrEmpty(task.prerequisite.task.taskId)) return false;
