@@ -279,7 +279,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3192966726661144273}
   m_Layer: 0
-  m_Name: EditorTask
+  m_Name: FormatStaffProfileTask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb1a384f71e492fbf78937df07cc459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.KeyItemInstance
-  itemKey: formatting_task
+  itemKey: format_staff_profile
   targetGiver: {fileID: 4064222415921570801}
   destroyOnInteract: 0
   updateLocalIndex: 0
