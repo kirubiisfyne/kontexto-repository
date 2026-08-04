@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cac908a1ea1e54d81a85a7acc29e0406, type: 3}
-  m_Name: editor_task_font_face_size
+  m_Name: leila_binder_task
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
-  taskId: d1_fontFaceSize
-  taskName: Pass The Paragon's Assesment.
-  description: 
+  taskId: d2_findLeilaBinder
+  taskName: Obtain Student Council Tracking Code
+  description: Speak with Leila in the classroom and retrieve her missing binder
+    from the terrace to get the memo tracking code.
   prerequisite:
-    task: {fileID: 11400000, guid: f82ece31532d74d7d91b5dea4907f6cb, type: 2}
-    requiredStatus: 3
+    task: {fileID: 11400000, guid: 7eeea0b738d2a48f095c66850968595c, type: 2}
+    requiredStatus: 1
   requirements:
-    needsSequentialOrder: 0
+    needsSequentialOrder: 1
     objectives:
-    - key: formatting_task
-      notificationDisplayName: Pass Assesment
+    - key: leila_binder
+      notificationDisplayName: Find Leila's Binder on Terrace
       requiredAmount: 1
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
-  documentData: {fileID: 4900000, guid: f6b1b23ccedd74b8088408fdce693295, type: 3}
+  documentData: {fileID: 0}
