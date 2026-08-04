@@ -1,0 +1,21 @@
+{
+  "conversationMap": [
+    {
+      "name": "CATOfficer_Intro",
+      "lines": [
+        {
+          "speaker": "CAT Officer",
+          "text": "EXCUSE ME! PASSING THROUGH! MAKE WAY FOR THE COLORS! CHIN UP! BACK STRAIGHT!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>*Shrinks into the crowd.*</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Sorry! Sorry! Just... shrinking away now. You guys look... very sweaty. Good luck with that."
+        }
+      ]
+    }
+  ]
+}
