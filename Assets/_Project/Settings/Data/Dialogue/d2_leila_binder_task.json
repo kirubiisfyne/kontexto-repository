@@ -1,0 +1,69 @@
+{
+  "conversationMap": [
+    {
+      "name": "Leila_Intro",
+      "lines": [
+        {
+          "speaker": "Leila",
+          "text": "Uhh... hello?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Hi Leila! Sorry to bother you, do you happen to have the official tracking number for the school publication’s frozen operational fund? I'm trying to fix a letter for Mrs. Santos."
+        },
+        {
+          "speaker": "Leila",
+          "text": "Oh! Let me check my student council binder.. Oh no! It’s not here… I must have forgotten it in one of the corridor terraces! Can you perhaps.. Uh... get it for me?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>Seriously??... Ughh. Fine.. All for that code.</i></color>"
+        }
+      ]
+    },
+    {
+      "name": "Leila_Waiting",
+      "lines": [
+        {
+          "speaker": "Leila",
+          "text": "Have you found it? I was just getting some air as I remember, but uhh… I'm not so sure now..."
+        }
+      ]
+    },
+    {
+      "name": "Leila_Handover",
+      "lines": [
+        {
+          "speaker": "Leila",
+          "text": "Aha! Here it is. Thank you so so much… Now let me find the code.. It's uhh… listed under code 'MGT-2004-FIN'."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "MGT-2004-FIN.. Got it. Thanks, Leila! This is exactly what I needed to make this letter ironclad."
+        },
+        {
+          "speaker": "Leila",
+          "text": "Good luck with that letter! Word around the office is that Mr. Reyes is tightening the purse strings for all student organizations this year."
+        }
+      ]
+    },
+    {
+      "name": "Leila_Finished",
+      "lines": [
+        {
+          "speaker": "Leila",
+          "text": "Good luck with that letter! Word around the office is that Mr. Reyes is tightening the purse strings for all student organizations this year."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Leila_Idle",
+    "lines": [
+      {
+        "speaker": "Leila",
+        "text": "Hope Mrs. Santos accepts the letter! Let me know if you need any more student council records."
+      }
+    ]
+  }
+}

@@ -48371,6 +48371,7 @@ MonoBehaviour:
     levels: []
   currentLevel: 0
   availableTasks: []
+  activeDocumentData: {fileID: 0}
   pendingDocumentSuccess: 0
   pendingAdviserFeedback: []
 --- !u!1 &225461981
