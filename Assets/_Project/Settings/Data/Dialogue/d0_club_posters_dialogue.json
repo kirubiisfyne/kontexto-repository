@@ -1,0 +1,73 @@
+{
+  "conversationMap": [
+    {
+      "name": "ClubPosters_DramaClub",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>Teatro Kalinaw Drama Club… 'UNLEASH YOUR SOUL'… Requires a three-minute emotional monologue…</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Prepare a three-minute emotional monologue?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Nope. Absolutely not. I can barely recite during class recitation without my voice cracking."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I don't have enough tears for this club. Hard pass."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>The Debate Society… 'Geopolitical Economics'… 'Ethical AI'…</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Why would I join a club where people argue for fun?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "My anxiety argues with me enough already. Next."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>YES-O… Save the Earth… 6:00 AM call time… bring shovels…</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Save the Earth? Yes. Wake up at 6 AM to dig holes in this heat?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "No. I love nature, but I love not sweating through my uniform more."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Sorry, Mother Earth."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>The Paragon… School Publication… Air-conditioned office… needs writers and encoders…</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Wait. Aircon? And all I have to do is…"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Sit and type? No shouting? No running?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "This looks like the path of least resistance."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Sold."
+        }
+      ]
+    }
+  ]
+}

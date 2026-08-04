@@ -1,0 +1,21 @@
+{
+  "conversationMap": [
+    {
+      "name": "IndayogDancer_Intro",
+      "lines": [
+        {
+          "speaker": "Dancer NPC",
+          "text": "Hey! You! You have the vibe! We need fresh energy! Auditions are today! Rehearsals end at 9 PM! JOIN US!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I have two left feet."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Uh, I can't dance. I trip on flat surfaces. Also, 9 PM? My mom would actually ground me. Bye!"
+        }
+      ]
+    }
+  ]
+}
