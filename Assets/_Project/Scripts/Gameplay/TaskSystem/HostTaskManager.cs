@@ -187,6 +187,8 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
+            Debug.Log($"<color=cyan>[HostTaskManager]</color> Started task '{(task != null ? task.taskName : "Unknown")}' ({(task != null ? task.taskId : "null")}) on '{gameObject.name}'.");
+
             UpdateStatus(TaskStatus.Active);
             
             // Initialize progress list based on task objectives
@@ -310,7 +312,7 @@ namespace Master.Scripts.TaskSystem
                     }
 
                     currentProgress[i] = Mathf.Clamp(currentProgress[i] + amount, 0, task.requirements.objectives[i].requiredAmount);
-                    //Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
+                    Debug.Log($"<color=yellow>[HostTaskManager]</color> '{gameObject.name}' progress updated for '{key}': {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
                     
                     // Notify the UI Controller of the new progress!
                     string uniqueId = $"{task.taskId}_{task.requirements.objectives[i].key}";
@@ -407,7 +409,8 @@ namespace Master.Scripts.TaskSystem
                 case TaskStatus.ReadyToComplete:  events.onReadyToComplete?.Invoke();  break;
                 case TaskStatus.Completed:        events.onCompleted?.Invoke();        break;
             }
-            //Debug.Log($"{gameObject.name}: Task status changed to {newStatus}.");
+            string tName = (task != null) ? task.taskId : "UnknownTask";
+            Debug.Log($"<color=green>[HostTaskManager]</color> '{gameObject.name}' [{tName}] status updated to: <b>{newStatus}</b>");
 
             // Givers and Both push status to all corresponding Closers in the scene.
             if (hostType == HostType.Giver || hostType == HostType.Both)
