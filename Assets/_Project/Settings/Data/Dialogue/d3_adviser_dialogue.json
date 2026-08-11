@@ -1,0 +1,88 @@
+{
+  "conversationMap": [
+    {
+      "name": "Mrs. Santos_Intro",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Kiko, you’re the acting editor-in-chief now."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Did Enzo send you Paragon’s drive?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I... I don't have access to the account, Ma'am."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I work offline."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "But he gave me a flash drive."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "That's it."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Check it using the Office Computer."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "The whistleblower file should be there."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Waiting",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Check the flash drive on the Office Computer."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "We need to know what's in that whistleblower file before Mr. Reyes comes back."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Finished",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Good work getting that transcript cleaned up."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Let's see how you did."
+        },
+        {
+          "speaker":"Mrs. Santos",
+          "text": "[FEEDBACK]"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "We still have a long way to go before NSPC, but this buys us time."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Mrs. Santos_Idle",
+    "lines": [
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Keep working on the publication issue."
+      },
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Don't let Mr. Reyes catch us unprepared."
+      }
+    ]
+  }
+}

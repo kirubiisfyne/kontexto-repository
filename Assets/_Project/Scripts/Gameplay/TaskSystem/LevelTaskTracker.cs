@@ -65,8 +65,8 @@ namespace Master.Scripts.SaveSystem
                     );
                 }
 
-                var managers = instance.GetComponentsInChildren<HostTaskManager>();
-                var keyItems = instance.GetComponentsInChildren<KeyItemInstance>();
+                var managers = instance.GetComponentsInChildren<HostTaskManager>(true);
+                var keyItems = instance.GetComponentsInChildren<KeyItemInstance>(true);
 
                 foreach (var mgr in managers)
                 {
@@ -152,6 +152,7 @@ namespace Master.Scripts.SaveSystem
                     playerData.SetTaskActive(sceneId, mgr.task.taskId, true);
                     saveGameCallback?.Invoke();
                 }
+                Debug.Log($"<color=cyan>[LevelTaskTracker]</color> Task '{mgr.task.taskId}' activated for level '{sceneId}'.");
             }
             onTaskActivatedEvent?.Invoke(mgr);
         }
@@ -165,6 +166,8 @@ namespace Master.Scripts.SaveSystem
                 playerData.SetTaskActive(sceneId, taskId, false);
                 level.completedTaskIds.Add(taskId);
                 saveGameCallback?.Invoke();
+
+                Debug.Log($"<color=green>[LevelTaskTracker]</color> Task '{taskId}' marked COMPLETED for level '{sceneId}'.");
 
                 if (!AreAnyTasksActive())
                 {
