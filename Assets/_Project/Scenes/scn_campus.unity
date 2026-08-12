@@ -15725,7 +15725,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d6901aaf267047f49fc582a0e4f4a3e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.GameManager
+  m_EditorClassIdentifier: Project::Master.Scripts.GameManager
   currentLevelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   currentPlayerData:
     currentScene: 
