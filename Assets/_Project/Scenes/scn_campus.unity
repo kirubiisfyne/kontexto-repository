@@ -15726,7 +15726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6901aaf267047f49fc582a0e4f4a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.GameManager
-  currentLevelData: {fileID: 0}
+  currentLevelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   currentPlayerData:
     currentScene: 
     playerPosition:
@@ -60721,67 +60721,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1698358866513908057, guid: fc025f0c0d8224983a9101b8ec0cf246, type: 3}
   m_PrefabInstance: {fileID: 1071864489}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1072527567
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.1924963
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.0000023460914
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17.035048
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_Name
-      value: msh_npcGirl1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5866666021909216657, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 86d5a1cd7d958ea448d8a0c2df1ae4f7, type: 2}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
 --- !u!1 &1074819784
 GameObject:
   m_ObjectHideFlags: 0
@@ -496902,4 +496841,3 @@ SceneRoots:
   - {fileID: 6590650763134164190}
   - {fileID: 9162233480168153391}
   - {fileID: 115212949}
-  - {fileID: 1072527567}
