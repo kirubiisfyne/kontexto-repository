@@ -1,0 +1,46 @@
+{
+  "sender": "Maya/Kiko",
+  "subject": "Day 4: Gasoline Purchase Receipt & Evidence Board",
+  "instructionString": "Editor-in-Chief,\n\nIntegrate the physical gasoline purchase receipt into the developing whistleblower story.\n\n1. Center-align and Bold the Title: 'EVIDENCE RECORD: FUEL PURCHASE RECEIPT #0482'.\n2. Add Paragraph Spacing (Space After) between testimony and receipt proof blocks.\n3. Add Paragraph Spacing (Space Before) before the concluding editorial statement.\n\n- Maya/Kiko",
+  "startingTextBlocks": [
+    {
+      "text": "EVIDENCE RECORD: FUEL PURCHASE RECEIPT #0482",
+      "fontFace": "Arial",
+      "fontSize": 14
+    },
+    {
+      "text": "WITNESS STATEMENT: 'I saw high-ranking administration personnel transferring gas canisters into unmarked private vehicles late at night behind the gym.'",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "PHYSICAL RECEIPT PROOF: 'Paragon Admin Supply Dept - 150L Unleaded Fuel - Charged to Maintenance Overhead.'",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "EDITORIAL CONCLUSION: Editing isn't just about grammar. It's about clarity. Right now, the truth is no longer buried in a wall of text. Mr. Reyes saw noise. I need to make him see the story.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    }
+  ],
+  "answerKey": [
+    {
+      "targetTextSnippet": "EVIDENCE RECORD: FUEL PURCHASE RECEIPT #0482",
+      "requireBold": true,
+      "requiredAlignment": 1
+    },
+    {
+      "targetTextSnippet": "WITNESS STATEMENT: 'I saw high-ranking administration personnel transferring gas canisters into unmarked private vehicles late at night behind the gym.'",
+      "requireSpaceAfter": true
+    },
+    {
+      "targetTextSnippet": "PHYSICAL RECEIPT PROOF: 'Paragon Admin Supply Dept - 150L Unleaded Fuel - Charged to Maintenance Overhead.'",
+      "requireSpaceAfter": true
+    },
+    {
+      "targetTextSnippet": "EDITORIAL CONCLUSION: Editing isn't just about grammar. It's about clarity. Right now, the truth is no longer buried in a wall of text. Mr. Reyes saw noise. I need to make him see the story.",
+      "requireSpaceBefore": true
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "conversationMap": [
+    {
+      "name": "Mrs. Santos_Intro",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Kiko, you got the physical receipt back from Jules?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Yes, Ma'am!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "It confirms the gasoline purchase charged to school maintenance."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Good."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Now integrate that proof directly into the whistleblower testimony."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Use the Office Computer to format the layout."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Make sure to apply 1.5 line spacing and proper paragraph spacing after each section."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "If Mr. Reyes sees a wall of unspaced text, he won't read it."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Make him see the story."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Waiting",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Have you finished spacing the testimony and fuel receipt on the computer yet?"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "We need this evidence board layout optimized immediately."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Finished",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Let's see how you formatted the evidence document."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "[FEEDBACK]"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Outstanding work, Editor-in-Chief."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "The testimony and fuel receipt are clearly readable together."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Now we're ready for our final editorial stance."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Mrs. Santos_Idle",
+    "lines": [
+      {
+        "speaker": "Mrs. Santos",
+        "text": "We need the physical receipt before we can format the evidence board."
+      },
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Be careful."
+      },
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Mr. Reyes is inspecting the campus grounds today with the C.A.T. officers."
+      }
+    ]
+  }
+}

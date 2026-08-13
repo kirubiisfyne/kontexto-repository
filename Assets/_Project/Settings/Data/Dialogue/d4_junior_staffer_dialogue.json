@@ -1,0 +1,108 @@
+{
+  "conversationMap": [
+    {
+      "name": "Junior_Staffer_Intro",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "The transcript mentions a receipt for gasoline, but the scan in the office drive is totally cut off."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "It's completely useless like this."
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "Hey! I just came from the Admin building."
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "Mr. Reyes is inspecting the campus grounds with the C.A.T. officers!"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "But listen... Enzo sent a frantic text right before his phone died."
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "He said he dropped the physical receipt while running away from the administration office earlier!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Where?!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Did he say where?"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "He just typed 'Bleachers... basketball court... left it near—' and then his phone went offline!"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "The C.A.T. drill just ended out there, so the area is crawling with cadets."
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "If the guard or a school officer finds it first, we lose our only proof!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'm on it."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'll act casual, blend into the crowd, and search the bleachers."
+        }
+      ]
+    },
+    {
+      "name": "Junior_Staffer_Waiting",
+      "lines": [
+        {
+          "speaker": "Junior Staffer",
+          "text": "Did you check the bleachers near the basketball court yet?"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "Search carefully!"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "Enzo said he dropped the physical receipt somewhere around there."
+        }
+      ]
+    },
+    {
+      "name": "Junior_Staffer_Finished",
+      "lines": [
+        {
+          "speaker": "Junior Staffer",
+          "text": "Awesome!"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "You managed to get the physical receipt back from Jules!"
+        },
+        {
+          "speaker": "Junior Staffer",
+          "text": "Show it to Mrs. Santos right away so we can finalize the evidence board."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Junior_Staffer_Idle",
+    "lines": [
+      {
+        "speaker": "Junior Staffer",
+        "text": "Enzo's phone went offline right after he texted us about the receipt!"
+      },
+      {
+        "speaker": "Junior Staffer",
+        "text": "We need to find that physical copy before school officers clean up the bleachers."
+      }
+    ]
+  }
+}

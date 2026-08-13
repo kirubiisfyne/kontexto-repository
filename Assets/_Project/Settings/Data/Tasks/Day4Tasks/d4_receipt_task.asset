@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac908a1ea1e54d81a85a7acc29e0406, type: 3}
+  m_Name: d4_receipt_task
+  m_EditorClassIdentifier: Project::Master.Scripts.TaskSystem.TaskData
+  taskId: d4_receipt_task
+  taskName: Recover the physical receipt from Jules at the Basketball Court.
+  description: Enzo dropped the physical gasoline receipt near the bleachers. Jules
+    found it but needs cold water first.
+  prerequisite:
+    task: {fileID: 0}
+    requiredStatus: 0
+  requirements:
+    needsSequentialOrder: 1
+    objectives:
+    - key: talk_jules
+      notificationDisplayName: Travel to the Basketball Court and talk to Jules.
+      requiredAmount: 1
+    - key: buy_canteen_water
+      notificationDisplayName: Buy an ice-cold bottle of water from the canteen.
+      requiredAmount: 1
+    - key: deliver_water
+      notificationDisplayName: Deliver the cold water to Jules at the Basketball
+        Court.
+      requiredAmount: 1
+  setPlayerInitialTransform: 0
+  playerInitialPosition: {x: 0, y: 0, z: 0}
+  playerInitialRotation: {x: 0, y: 0, z: 0}
+  documentData: {fileID: 0}
