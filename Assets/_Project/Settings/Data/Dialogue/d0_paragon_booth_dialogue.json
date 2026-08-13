@@ -1,0 +1,37 @@
+{
+  "conversationMap": [
+    {
+      "name": "ParagonBooth_Intro",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>There it is. The Promised Land. No dancing. No yelling. Just... paper.</i></color>"
+        },
+        {
+          "speaker": "Enzo",
+          "text": "We aren't giving away free candy, if that's what you're asking."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I... uh... I want to join? For the clearance?"
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Oh. A writer? Or an artist?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I can... type? I guess?"
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Good enough. We need encoders. Just write your name legibly. Don't be late. And don't use Comic Sans on the form."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Comic Sans? Whatever. I just need the signature."
+        }
+      ]
+    }
+  ]
+}
