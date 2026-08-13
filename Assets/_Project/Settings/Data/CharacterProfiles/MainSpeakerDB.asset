@@ -24,4 +24,8 @@ MonoBehaviour:
   - characterName: Leila
     portraitSprite: {fileID: 21300000, guid: f13b0774f272941cd9ee2a03f996c609, type: 3}
   - characterName: Janitor
-    portraitSprite: {fileID: 21300000, guid: 8cebf78f44f9c44b7b730ddee952085e, type: 3}
+    portraitSprite: {fileID: 21300000, guid: 41a8235fcea1a452c8b82023582b141f, type: 3}
+  - characterName: Junior Staffer
+    portraitSprite: {fileID: 21300000, guid: f26980fe79e9247e0bb001d61722e4da, type: 3}
+  - characterName: Jules
+    portraitSprite: {fileID: 21300000, guid: ce4150fc24766455e848ca6e6e8fe257, type: 3}

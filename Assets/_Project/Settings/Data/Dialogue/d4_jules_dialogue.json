@@ -1,0 +1,141 @@
+{
+  "conversationMap": [
+    {
+      "name": "Jules_Idle",
+      "lines": [
+        {
+          "speaker": "Jules",
+          "text": "Ugh, this heat is unbearable out here on guard duty..."
+        },
+        {
+          "speaker": "Jules",
+          "text": "C.A.T. drill just ended, but I can barely stand in this sun."
+        }
+      ]
+    },
+    {
+      "name": "Jules_Intro",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Jules! I'm looking for a receipt."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Enzo said it might have been dropped near the bleachers during the lunch rush."
+        },
+        {
+          "speaker": "Jules",
+          "text": "Oh, I might have seen something like that."
+        },
+        {
+          "speaker": "Jules",
+          "text": "But look, I'm stuck out here on guard duty for my C.A.T. squad, and I am absolutely melting in this heat."
+        },
+        {
+          "speaker": "Jules",
+          "text": "Do me a quick favor?"
+        },
+        {
+          "speaker": "Jules",
+          "text": "Go grab me an ice-cold bottle of water from the canteen."
+        },
+        {
+          "speaker": "Jules",
+          "text": "Do that, and I'll help you look for your paper."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Uhm... sure, Jules."
+        }
+      ]
+    },
+    {
+      "name": "Jules_Waiting",
+      "lines": [
+        {
+          "speaker": "Jules",
+          "text": "Did you get it yet?"
+        },
+        {
+          "speaker": "Jules",
+          "text": "I'll pay you back, I promise... It's just 15 pesos."
+        }
+      ]
+    },
+    {
+      "name": "Jules_Finished",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Here's your water, fully chilled."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Now, about that receipt?"
+        },
+        {
+          "speaker": "Jules",
+          "text": "You mean this?"
+        },
+        {
+          "speaker": "Jules",
+          "text": "I found it near the trash can after the C.A.T. drill."
+        },
+        {
+          "speaker": "Jules",
+          "text": "I figured it was important since it had 'Fuel' and 'Admin' stamped on the header."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "That's exactly it!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I need to bring that back to the office."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Without the physical copy to re-scan, I can't prove the budget was tampered with."
+        },
+        {
+          "speaker": "Jules",
+          "text": "Here."
+        },
+        {
+          "speaker": "Jules",
+          "text": "Better keep it safe."
+        },
+        {
+          "speaker": "Jules",
+          "text": "If Mr. Reyes sees you with that, he'll do more than just use a red pen on your work."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Thanks, Jules."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Time to go back and fix the layout."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I've got to make sure this proof fits perfectly into the story."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Jules_Idle",
+    "lines": [
+      {
+        "speaker": "Jules",
+        "text": "Ugh, this heat is unbearable out here on guard duty..."
+      },
+      {
+        "speaker": "Jules",
+        "text": "C.A.T. drill just ended, but I can barely stand in this sun."
+      }
+    ]
+  }
+}
