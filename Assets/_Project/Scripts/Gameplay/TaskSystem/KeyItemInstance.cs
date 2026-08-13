@@ -5,22 +5,6 @@ using UnityEngine.Events;
 namespace Master.Scripts.TaskSystem
 {
     /// <summary>
-    /// Groups all wait-related properties into a single collapsible field in the Inspector.
-    /// </summary>
-    [System.Serializable]
-    public class WaitSettings
-    {
-        [Tooltip("If greater than 0, the player will be forced to wait this long before the item is collected.")]
-        public float waitDuration = 0f;
-
-        [Tooltip("Optional text to display while waiting (e.g., 'Printing...').")]
-        public string waitText = "";
-
-        [Tooltip("Optional event fired when the waiting starts (e.g. play printer sound).")]
-        public UnityEvent onWaitStarted;
-    }
-
-    /// <summary>
     /// An object or event that reports progress to a specific HostTaskManager.
     /// </summary>
     public class KeyItemInstance : MonoBehaviour, IInteractable
@@ -38,12 +22,18 @@ namespace Master.Scripts.TaskSystem
         public bool updateLocalIndex = false;
 
         [Header("Wait Settings")]
-        [Tooltip("Wait settings for collecting this item.")]
-        public WaitSettings waitSettings = new WaitSettings();
+        [Tooltip("If greater than 0, the player will be forced to wait this long before the item is collected.")]
+        public float waitDuration = 0f;
+        
+        [Tooltip("Optional text to display while waiting (e.g., 'Printing...').")]
+        public string waitText = "";
+        
+        [Tooltip("Optional event fired when the waiting starts (e.g. play printer sound).")]
+        public UnityEvent onWaitStarted;
 
         [field: Header("Events")]
         public static event System.Action<float, string, Transform> OnActionWaitStartedGlobal;
-        [Space(15)]
+
         [Tooltip("Fired ONLY if the Giver NPC accepts the report. Use this for SFX, VFX, or specific state changes.")]
         public UnityEvent onAcceptedReport;
 
@@ -88,6 +78,7 @@ namespace Master.Scripts.TaskSystem
 
             if (targetGiver == null)
             {
+                //Debug.LogWarning($"KeyItemInstance on {gameObject.name}: Could not find any active task requiring the item key '{itemKey}'!");
                 return;
             }
 
@@ -97,7 +88,7 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
-            if (waitSettings != null && waitSettings.waitDuration > 0f)
+            if (waitDuration > 0f)
             {
                 StartCoroutine(WaitThenReportCoroutine());
             }
@@ -114,16 +105,16 @@ namespace Master.Scripts.TaskSystem
             enabled = false;
             
             // Fire start event (e.g., play printer sound)
-            waitSettings?.onWaitStarted?.Invoke();
+            onWaitStarted?.Invoke();
 
             // Lock the player in cinematic mode
             var player = FindFirstObjectByType<Master.Scripts.PlayerController>();
             if (player != null) player.SetCinematicWait(true);
 
             // Shout to the UI!
-            OnActionWaitStartedGlobal?.Invoke(waitSettings.waitDuration, waitSettings.waitText, transform);
+            OnActionWaitStartedGlobal?.Invoke(waitDuration, waitText, transform);
 
-            yield return new WaitForSeconds(waitSettings.waitDuration);
+            yield return new WaitForSeconds(waitDuration);
 
             // Unlock the player
             if (player != null) player.SetCinematicWait(false);

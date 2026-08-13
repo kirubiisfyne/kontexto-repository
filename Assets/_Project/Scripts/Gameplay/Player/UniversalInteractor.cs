@@ -77,7 +77,7 @@ namespace Master.Scripts
         {
             if (currentClosestInteractable != null)
             {
-                IInteractable[] interactables = currentClosestInteractable.GetComponentsInChildren<IInteractable>();
+                IInteractable[] interactables = currentClosestInteractable.GetComponents<IInteractable>();
                 foreach (var interactable in interactables)
                 {
                     interactable.Interact();
