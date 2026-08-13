@@ -64,14 +64,16 @@ namespace Master.Scripts.TaskSystem
         /// </summary>
         public void Interact()
         {
-            // If NPCCoordinator is present, NPCCoordinator manages task state transitions cleanly
-            if (GetComponent("NPCCoordinator") != null) return;
-
             if (task == null) return;
 
             // Closers hand in the task when all objectives are met.
             if (hostType == HostType.Closer)
             {
+                if (status == TaskStatus.Inactive || !IsReadyToComplete())
+                {
+                    events.onInactive?.Invoke();
+                    return;
+                }
                 CompleteTask();
                 return;
             }
@@ -82,6 +84,7 @@ namespace Master.Scripts.TaskSystem
             {
                 //Debug.Log($"HostTaskManager on {gameObject.name}: Prerequisite '{task.prerequisite.task.taskName}' not met. Cannot start task.");
                 events.onPrerequisiteNotMet?.Invoke();
+                events.onInactive?.Invoke();
                 return;
             }
 
@@ -184,18 +187,24 @@ namespace Master.Scripts.TaskSystem
                 return;
             }
 
+            Debug.Log($"<color=cyan>[HostTaskManager]</color> Started task '{(task != null ? task.taskName : "Unknown")}' ({(task != null ? task.taskId : "null")}) on '{gameObject.name}'.");
+
             UpdateStatus(TaskStatus.Active);
             
             // Initialize progress list based on task objectives
             currentProgress = new List<int>();
-            foreach (var objective in task.requirements.objectives)
+            for (int i = 0; i < task.requirements.objectives.Count; i++)
             {
                 currentProgress.Add(0);
                 
-                // Notify the UI that this objective has started
-                string uniqueId = $"{task.taskId}_{objective.key}";
-                string displayName = string.IsNullOrEmpty(objective.notificationDisplayName) ? task.taskName : objective.notificationDisplayName;
-                OnTaskStartedGlobal?.Invoke(uniqueId, displayName, objective.requiredAmount);
+                var objective = task.requirements.objectives[i];
+                // Notify the UI that this objective has started (if sequential, only notify the first objective initially)
+                if (!task.requirements.needsSequentialOrder || i == 0)
+                {
+                    string uniqueId = $"{task.taskId}_{objective.key}";
+                    string displayName = string.IsNullOrEmpty(objective.notificationDisplayName) ? task.taskName : objective.notificationDisplayName;
+                    OnTaskStartedGlobal?.Invoke(uniqueId, displayName, objective.requiredAmount);
+                }
             }
 
             //Debug.Log($"HostTaskManager on {gameObject.name}: Task '{task.taskName}' started.");
@@ -303,12 +312,25 @@ namespace Master.Scripts.TaskSystem
                     }
 
                     currentProgress[i] = Mathf.Clamp(currentProgress[i] + amount, 0, task.requirements.objectives[i].requiredAmount);
-                    //Debug.Log($"HostTaskManager on {gameObject.name}: Progress for '{key}' updated to {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
+                    Debug.Log($"<color=yellow>[HostTaskManager]</color> '{gameObject.name}' progress updated for '{key}': {currentProgress[i]}/{task.requirements.objectives[i].requiredAmount}");
                     
                     // Notify the UI Controller of the new progress!
                     string uniqueId = $"{task.taskId}_{task.requirements.objectives[i].key}";
                     string displayName = string.IsNullOrEmpty(task.requirements.objectives[i].notificationDisplayName) ? task.taskName : task.requirements.objectives[i].notificationDisplayName;
                     OnProgressReportedGlobal?.Invoke(uniqueId, displayName, currentProgress[i], task.requirements.objectives[i].requiredAmount);
+
+                    // SEQUENTIAL NOTIFICATION: Reveal the next objective when current objective completes
+                    if (task.requirements.needsSequentialOrder && currentProgress[i] >= task.requirements.objectives[i].requiredAmount)
+                    {
+                        int nextIndex = i + 1;
+                        if (nextIndex < task.requirements.objectives.Count)
+                        {
+                            var nextObj = task.requirements.objectives[nextIndex];
+                            string nextUniqueId = $"{task.taskId}_{nextObj.key}";
+                            string nextDisplayName = string.IsNullOrEmpty(nextObj.notificationDisplayName) ? task.taskName : nextObj.notificationDisplayName;
+                            OnTaskStartedGlobal?.Invoke(nextUniqueId, nextDisplayName, nextObj.requiredAmount);
+                        }
+                    }
 
                     CheckCompletion();
                     return true;
@@ -387,7 +409,8 @@ namespace Master.Scripts.TaskSystem
                 case TaskStatus.ReadyToComplete:  events.onReadyToComplete?.Invoke();  break;
                 case TaskStatus.Completed:        events.onCompleted?.Invoke();        break;
             }
-            //Debug.Log($"{gameObject.name}: Task status changed to {newStatus}.");
+            string tName = (task != null) ? task.taskId : "UnknownTask";
+            Debug.Log($"<color=green>[HostTaskManager]</color> '{gameObject.name}' [{tName}] status updated to: <b>{newStatus}</b>");
 
             // Givers and Both push status to all corresponding Closers in the scene.
             if (hostType == HostType.Giver || hostType == HostType.Both)

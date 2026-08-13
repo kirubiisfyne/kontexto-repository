@@ -132,11 +132,12 @@ MonoBehaviour:
   targetGiver: {fileID: 1361237180897165087}
   destroyOnInteract: 1
   updateLocalIndex: 0
-  waitDuration: 0
-  waitText: 
-  onWaitStarted:
-    m_PersistentCalls:
-      m_Calls: []
+  waitSettings:
+    waitDuration: 0
+    waitText: 
+    onWaitStarted:
+      m_PersistentCalls:
+        m_Calls: []
   onAcceptedReport:
     m_PersistentCalls:
       m_Calls:
@@ -440,35 +441,36 @@ MonoBehaviour:
   targetGiver: {fileID: 1361237180897165087}
   destroyOnInteract: 0
   updateLocalIndex: 0
-  waitDuration: 3
-  waitText: Printing...
-  onWaitStarted:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4582509942074781494}
-        m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
-        m_MethodName: Stop
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Printer
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6768632166837569913}
-        m_TargetAssemblyTypeName: Master.Scripts.LocalAudioPlayer, Assembly-CSharp
-        m_MethodName: PlaySFX
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Printer
-          m_BoolArgument: 0
-        m_CallState: 2
+  waitSettings:
+    waitDuration: 1
+    waitText: Printing...
+    onWaitStarted:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 6768632166837569913}
+          m_TargetAssemblyTypeName: Master.Scripts.LocalAudioPlayer, Project
+          m_MethodName: PlaySFX
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Printer
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 4582509942074781494}
+          m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
+          m_MethodName: Stop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: Printer
+            m_BoolArgument: 0
+          m_CallState: 2
   onAcceptedReport:
     m_PersistentCalls:
       m_Calls: []
@@ -780,7 +782,20 @@ MonoBehaviour:
   events:
     onInactive:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3812182129020237405}
+          m_TargetAssemblyTypeName: Master.Scripts.DialogueSystem.DialogueManager,
+            Project
+          m_MethodName: UseIdleDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onActive:
       m_PersistentCalls:
         m_Calls:
@@ -854,20 +869,7 @@ MonoBehaviour:
           m_CallState: 2
     onPrerequisiteNotMet:
       m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 3812182129020237405}
-          m_TargetAssemblyTypeName: Master.Scripts.DialogueSystem.DialogueManager,
-            Assembly-CSharp
-          m_MethodName: UseIdleDialogue
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+        m_Calls: []
 --- !u!114 &7151028895316444518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -901,11 +903,12 @@ MonoBehaviour:
   targetGiver: {fileID: 0}
   destroyOnInteract: 0
   updateLocalIndex: 0
-  waitDuration: 0
-  waitText: 
-  onWaitStarted:
-    m_PersistentCalls:
-      m_Calls: []
+  waitSettings:
+    waitDuration: 0
+    waitText: 
+    onWaitStarted:
+      m_PersistentCalls:
+        m_Calls: []
   onAcceptedReport:
     m_PersistentCalls:
       m_Calls: []
@@ -1124,10 +1127,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1648176320780033334, guid: ea609c370b2f34de7ae801335c0f5f85, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6161809687772655706, guid: ea609c370b2f34de7ae801335c0f5f85, type: 3}
-      propertyPath: InitialModule.startSize.scalar
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

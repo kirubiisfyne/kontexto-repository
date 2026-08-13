@@ -21,3 +21,7 @@ MonoBehaviour:
     portraitSprite: {fileID: 21300000, guid: 8cebf78f44f9c44b7b730ddee952085e, type: 3}
   - characterName: Mrs. Santos
     portraitSprite: {fileID: 21300000, guid: 638bb890eea784651b5adb22c92a5bfe, type: 3}
+  - characterName: Leila
+    portraitSprite: {fileID: 21300000, guid: f13b0774f272941cd9ee2a03f996c609, type: 3}
+  - characterName: Janitor
+    portraitSprite: {fileID: 21300000, guid: 8cebf78f44f9c44b7b730ddee952085e, type: 3}
