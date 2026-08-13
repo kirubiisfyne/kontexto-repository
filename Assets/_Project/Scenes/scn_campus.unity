@@ -34618,7 +34618,7 @@ Transform:
   m_GameObject: {fileID: 575189396}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: -45}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -34626,7 +34626,7 @@ Transform:
   - {fileID: 870838117}
   - {fileID: 436833504}
   - {fileID: 763573159}
-  m_Father: {fileID: 8998451554894293108}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &575189398
 MonoBehaviour:
@@ -56335,7 +56335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9e8da8a977f47548a948959529ed4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelLoader
-  levelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
+  levelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
 --- !u!114 &986174011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57119,6 +57119,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5419530950061323937}
+  - {fileID: 8998451554894293108}
   - {fileID: 5900577981375933171}
   - {fileID: 2132078672716066829}
   - {fileID: 4659377320814273522}
@@ -62957,7 +62958,6 @@ Transform:
   - {fileID: 1358966894}
   - {fileID: 663300849}
   - {fileID: 606613944}
-  - {fileID: 8998451554894293108}
   m_Father: {fileID: 5419530950061323937}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1108876264
@@ -487657,7 +487657,7 @@ Transform:
   m_GameObject: {fileID: 3574802199315829976}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 9, y: 0, z: 55}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -487667,8 +487667,7 @@ Transform:
   - {fileID: 5361645612723419840}
   - {fileID: 4758545471739197466}
   - {fileID: 1978884450}
-  - {fileID: 575189397}
-  m_Father: {fileID: 1108726491}
+  m_Father: {fileID: 1001176355}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8998451554894293109
 MonoBehaviour:
@@ -496776,5 +496775,6 @@ SceneRoots:
   - {fileID: 1347280646}
   - {fileID: 303212390}
   - {fileID: 6590650763134164190}
+  - {fileID: 575189397}
   - {fileID: 9162233480168153391}
   - {fileID: 115212949}
