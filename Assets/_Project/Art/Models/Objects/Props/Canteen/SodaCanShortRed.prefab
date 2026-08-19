@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6829611259508516488}
   - component: {fileID: 8287599876007764283}
   m_Layer: 0
-  m_Name: SodaCanShort
+  m_Name: SodaCanShortRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
