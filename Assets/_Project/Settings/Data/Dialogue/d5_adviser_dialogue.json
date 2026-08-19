@@ -1,0 +1,72 @@
+{
+  "conversationMap": [
+    {
+      "name": "Mrs. Santos_Intro",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Kiko, did Mr. Reyes give you the manuscript guidelines?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Yes, Ma'am. Numbered lists for student demands and bullet points for supporting arguments."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Good. Head over to the Office Computer and format the editorial draft accordingly."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Once you finish, let me review it before we hand it over to Mr. Reyes."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Waiting",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Have you finished formatting the demands and evidence on the computer yet?"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Make sure every demand is numbered and every supporting point is bulleted."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Finished",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Let's see how you formatted our official editorial stance."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "[FEEDBACK]"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Outstanding work, Editor-in-Chief!"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "The structure is clear, professional, and undeniable."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Now bring this copy directly to Mr. Reyes in the Admin Office for final sign-off."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Mrs. Santos_Idle",
+    "lines": [
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Be meticulous with the formatting. Mr. Reyes will reject anything less than perfect."
+      }
+    ]
+  }
+}

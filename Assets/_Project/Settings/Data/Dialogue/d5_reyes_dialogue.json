@@ -1,0 +1,60 @@
+{
+  "conversationMap": [
+    {
+      "name": "Mr.Reyes_Guidelines",
+      "lines": [
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Here. These are the official manuscript guidelines."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Format the student demands as a numbered list and supporting arguments as bullet points."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "If your editorial is off by even a millimeter, don't bother bringing it back."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Understood, Sir."
+        }
+      ]
+    },
+    {
+      "name": "Mr.Reyes_Waiting",
+      "lines": [
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Do not return until your editorial strictly follows the formatting guidelines and is reviewed by your adviser."
+        }
+      ]
+    },
+    {
+      "name": "Mr.Reyes_Finished",
+      "lines": [
+        {
+          "speaker": "Mr. Reyes",
+          "text": "The alignment is clean. The numbered demands and bulleted evidence are clear."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "I suppose I cannot reject a manuscript that follows publication style guides so... religiously."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Enjoy this victory, Acting Editor."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Mr.Reyes_Idle",
+    "lines": [
+      {
+        "speaker": "Mr. Reyes",
+        "text": "Don't bother me if you'll end up wasting my time..."
+      }
+    ]
+  }
+}
