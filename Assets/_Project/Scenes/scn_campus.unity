@@ -56335,7 +56335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d9e8da8a977f47548a948959529ed4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelLoader
-  levelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
+  levelData: {fileID: 11400000, guid: d5000000000000000000000000000000, type: 2}
 --- !u!114 &986174011
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84500,19 +84500,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3805056
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.92477864
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -84520,7 +84520,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 135.27
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
