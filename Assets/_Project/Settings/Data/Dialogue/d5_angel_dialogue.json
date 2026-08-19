@@ -1,0 +1,76 @@
+{
+  "conversationMap": [
+    {
+      "name": "Angel_Intro",
+      "lines": [
+        {
+          "speaker": "Angel",
+          "text": "Hello! Are you from the Paragon?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Hello, are you the Student Council President?"
+        },
+        {
+          "speaker": "Angel",
+          "text": "Yup! That's me. How can I help?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Our editorial draft needs the exact list of student demands."
+        },
+        {
+          "speaker": "Angel",
+          "text": "I want to give them to you, Kiko, but if we don't cite the exact school charter article, Mr. Reyes will dismiss it."
+        },
+        {
+          "speaker": "Angel",
+          "text": "The old Student Council Constitution Handbook is in the library archives. Can you find it and bring it to me?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'm on it!"
+        }
+      ]
+    },
+    {
+      "name": "Angel_Waiting",
+      "lines": [
+        {
+          "speaker": "Angel",
+          "text": "The library archives have so many records... good luck finding the handbook!"
+        }
+      ]
+    },
+    {
+      "name": "Angel_Finished",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "I found the Student Council Constitution Handbook in the archives!"
+        },
+        {
+          "speaker": "Angel",
+          "text": "Perfect! 'Article IV, Section 2: Student funds shall not be diverted without bilateral consent.' Exactly what we need!"
+        },
+        {
+          "speaker": "Angel",
+          "text": "Here is the raw list of demands. But watch out—Mr. Reyes requires strict list formatting on official petitions!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Got it. Time to head back to Mr. Reyes for the guidelines memo and format the editorial."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Angel_Idle",
+    "lines": [
+      {
+        "speaker": "Angel",
+        "text": "We need that charter article from the handbook before we finalize the demands!"
+      }
+    ]
+  }
+}
