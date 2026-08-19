@@ -1,0 +1,69 @@
+{
+  "sender": "Mr. Reyes / Admin Office",
+  "subject": "Official Manuscript Guidelines - Editorial",
+  "instructionString": "Editor-in-Chief,\n\nFormat the official editorial stance regarding student budget cuts:\n\n1. Format the Student Demands as a NUMBERED LIST (1, 2, 3).\n2. Format the Key Supporting Points as a BULLETED LIST (•).\n\n- Mr. Reyes",
+  "startingTextBlocks": [
+    {
+      "text": "PARAGON EDITORIAL: DEMANDING FISCAL TRANSPARENCY",
+      "fontFace": "Arial",
+      "fontSize": 14
+    },
+    {
+      "text": "The student body hereby submits the following official demands regarding recent unauthorized budget reallocations:",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Immediate restoration of all diverted student activity funds to original allocations.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Publication of itemized maintenance expenditure reports for public review.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Strict adherence to Article IV, Section 2 of the Student Council Charter prohibiting unilateral fund transfers.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Supporting Evidence & Position:",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Unilateral fund diversion directly compromises student journalism and athletic facilities.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Official administrative responses must be documented and made accessible to all students.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    }
+  ],
+  "answerKey": [
+    {
+      "targetTextSnippet": "Immediate restoration of all diverted student activity funds to original allocations.",
+      "requiredListType": 2
+    },
+    {
+      "targetTextSnippet": "Publication of itemized maintenance expenditure reports for public review.",
+      "requiredListType": 2
+    },
+    {
+      "targetTextSnippet": "Strict adherence to Article IV, Section 2 of the Student Council Charter prohibiting unilateral fund transfers.",
+      "requiredListType": 2
+    },
+    {
+      "targetTextSnippet": "Unilateral fund diversion directly compromises student journalism and athletic facilities.",
+      "requiredListType": 1
+    },
+    {
+      "targetTextSnippet": "Official administrative responses must be documented and made accessible to all students.",
+      "requiredListType": 1
+    }
+  ]
+}
