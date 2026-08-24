@@ -7,14 +7,15 @@ using System.IO;
 namespace Master.Scripts.Editor
 {
     /// <summary>
-    /// Custom Inspector for LevelLoader that visualizes the save JSON
-    /// for the current scene in real-time and provides a restart button.
+    /// Custom Inspector for LevelLoader that visualizes the save JSON,
+    /// allows quick day/level switching in Editor, and tracks active progression.
     /// </summary>
     [CustomEditor(typeof(LevelLoader))]
     public class LevelLoaderEditor : UnityEditor.Editor
     {
         private PlayerData cachedData;
         private bool showAllLevels = false;
+        private bool showDatabaseLevels = true;
 
         private GUIStyle headerStyle;
         private GUIStyle completedStyle;
@@ -69,6 +70,59 @@ namespace Master.Scripts.Editor
 
             EditorGUILayout.Space(16);
 
+            // ── Level Database & Quick Testing ──
+            if (loader.levelDatabase != null && loader.levelDatabase.Count > 0)
+            {
+                EditorGUILayout.LabelField("Level Database & Day Controls", headerStyle);
+                DrawSeparator();
+
+                showDatabaseLevels = EditorGUILayout.Foldout(showDatabaseLevels, $"Database Days ({loader.levelDatabase.Count})", true);
+                if (showDatabaseLevels)
+                {
+                    EditorGUI.indentLevel++;
+                    for (int i = 0; i < loader.levelDatabase.Count; i++)
+                    {
+                        var level = loader.levelDatabase.GetLevelByIndex(i);
+                        if (level == null) continue;
+
+                        bool isCurrent = loader.ActiveLevelData == level;
+
+                        EditorGUILayout.BeginHorizontal();
+                        string label = isCurrent ? $"► [{i}] {level.name} ({level.sceneId})" : $"  [{i}] {level.name} ({level.sceneId})";
+                        EditorGUILayout.LabelField(label, isCurrent ? EditorStyles.boldLabel : EditorStyles.label);
+
+                        if (Application.isPlaying)
+                        {
+                            if (GUILayout.Button("Load This Day", GUILayout.Width(110)))
+                            {
+                                loader.LoadLevel(level);
+                            }
+                        }
+                        else
+                        {
+                            if (GUILayout.Button("Set As Override", GUILayout.Width(110)))
+                            {
+                                Undo.RecordObject(loader, "Set Editor Override Level");
+                                loader.editorOverrideLevel = level;
+                            }
+                        }
+                        EditorGUILayout.EndHorizontal();
+                    }
+                    EditorGUI.indentLevel--;
+                }
+
+                if (Application.isPlaying)
+                {
+                    EditorGUILayout.Space(6);
+                    if (GUILayout.Button("Advance To Next Level", GUILayout.Height(26)))
+                    {
+                        loader.AdvanceToNextLevel();
+                    }
+                }
+
+                EditorGUILayout.Space(12);
+            }
+
             // ── Save Data Visualizer ──
             EditorGUILayout.LabelField("Save Data Visualizer", headerStyle);
             DrawSeparator();
@@ -93,7 +147,6 @@ namespace Master.Scripts.Editor
                 {
                     SaveManager.DeleteSave();
                     cachedData = null;
-                    //Debug.Log("LevelLoaderEditor: Save data wiped.");
                 }
             }
             GUI.backgroundColor = originalColor;
@@ -115,19 +168,19 @@ namespace Master.Scripts.Editor
 
             // Show current scene info
             EditorGUILayout.LabelField("Current Scene", EditorStyles.miniBoldLabel);
-            string currentScene = loader.levelData != null ? loader.levelData.sceneId : "(no LevelData assigned)";
-            EditorGUILayout.LabelField("  Scene ID:", currentScene);
+            string currentScene = loader.ActiveLevelData != null ? loader.ActiveLevelData.sceneId : "(no LevelData active)";
+            EditorGUILayout.LabelField("  Active Level ID:", currentScene);
             EditorGUILayout.LabelField("  Save → Continue Scene:", cachedData.currentScene ?? "(not set)");
 
             EditorGUILayout.Space(8);
 
             // ── Current Scene Progress ──
-            if (loader.levelData != null)
+            if (loader.ActiveLevelData != null)
             {
                 LevelProgress currentLevel = null;
                 foreach (var lp in cachedData.levels)
                 {
-                    if (lp.sceneId == loader.levelData.sceneId)
+                    if (lp.sceneId == loader.ActiveLevelData.sceneId)
                     {
                         currentLevel = lp;
                         break;
@@ -140,20 +193,20 @@ namespace Master.Scripts.Editor
                 }
                 else
                 {
-                    EditorGUILayout.HelpBox($"No save record for '{loader.levelData.sceneId}' yet.", MessageType.None);
+                    EditorGUILayout.HelpBox($"No save record for '{loader.ActiveLevelData.sceneId}' yet.", MessageType.None);
                 }
             }
 
             EditorGUILayout.Space(8);
 
             // ── All Levels (collapsible) ──
-            showAllLevels = EditorGUILayout.Foldout(showAllLevels, $"All Levels ({cachedData.levels.Count})", true);
+            showAllLevels = EditorGUILayout.Foldout(showAllLevels, $"All Saved Levels ({cachedData.levels.Count})", true);
             if (showAllLevels)
             {
                 EditorGUI.indentLevel++;
                 foreach (var level in cachedData.levels)
                 {
-                    bool isCurrent = loader.levelData != null && level.sceneId == loader.levelData.sceneId;
+                    bool isCurrent = loader.ActiveLevelData != null && level.sceneId == loader.ActiveLevelData.sceneId;
                     DrawLevelProgress(level, isCurrent, loader);
                     EditorGUILayout.Space(4);
                 }

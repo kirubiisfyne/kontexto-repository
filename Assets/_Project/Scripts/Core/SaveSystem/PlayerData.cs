@@ -141,5 +141,18 @@ namespace Master.Scripts.SaveSystem
             }
             return false;
         }
+
+        /// <summary>
+        /// Returns true if the level with the given sceneId is marked as completed.
+        /// </summary>
+        public bool IsLevelCompleted(string sceneId)
+        {
+            foreach (var lp in levels)
+            {
+                if (lp.sceneId == sceneId)
+                    return lp.isCompleted;
+            }
+            return false;
+        }
     }
 }
