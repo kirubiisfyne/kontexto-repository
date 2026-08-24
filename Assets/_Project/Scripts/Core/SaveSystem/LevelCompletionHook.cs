@@ -4,7 +4,7 @@ namespace Master.Scripts.SaveSystem
 {
     /// <summary>
     /// An extension script that can be attached to Scene Gates.
-    /// Hooks into the warp event to finalize level data if all tasks are done.
+    /// Hooks into the warp event to advance to the next level when all tasks are finished.
     /// </summary>
     public class LevelCompletionHook : MonoBehaviour
     {
@@ -12,13 +12,11 @@ namespace Master.Scripts.SaveSystem
         {
             if (LevelLoader.Current != null && LevelLoader.Current.AreAllTasksCompleted())
             {
-                //Debug.Log("LevelCompletionHook: All tasks complete. Wrapping up level data...");
-                LevelLoader.Current.CompleteLevel();
-                // Note: LevelLoader.Current.SaveGame() is handled by the gate itself right after this.
+                LevelLoader.Current.AdvanceToNextLevel();
             }
             else
             {
-                //Debug.LogWarning("LevelCompletionHook: Player warped, but tasks were NOT fully complete.");
+                Debug.LogWarning("[LevelCompletionHook] Player triggered exit, but not all tasks are complete.");
             }
         }
     }

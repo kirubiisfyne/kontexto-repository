@@ -9,11 +9,21 @@ namespace Master.Scripts
         OnTriggerEnter 
     }
 
+    public enum GateFunction
+    {
+        SceneWarp,
+        LevelAdvance
+    }
+
     [RequireComponent(typeof(Collider))]
     public class SceneGateInstance : MonoBehaviour, IInteractable
     {
+        [Header("Gate Functionality")]
+        [Tooltip("SceneWarp loads another scene (e.g., scn_editor). LevelAdvance transitions to the next day via LevelLoader without needing a scene name.")]
+        public GateFunction gateFunction = GateFunction.SceneWarp;
+
         [Header("Scene Settings")]
-        [Tooltip("The name of the scene this gate will load.")]
+        [Tooltip("The name of the scene this gate will load (required for SceneWarp mode).")]
         public string sceneToName;
 
         [Tooltip("The unique ID of this gate (e.g. 'CampusFront').")]
@@ -66,37 +76,57 @@ namespace Master.Scripts
 
         private void TryWarp()
         {
-            if (isPlayerInRange && canPlayerWarp)
+            if (!isPlayerInRange || !canPlayerWarp) return;
+
+            // 1. Level Advance Mode (in-place progression without external scene requirement)
+            if (gateFunction == GateFunction.LevelAdvance)
             {
-                if (!string.IsNullOrEmpty(sceneToName))
+                onWarpStart?.Invoke();
+
+                // Only call AdvanceToNextLevel if LevelCompletionHook hasn't already handled it via onWarpStart
+                var completionHook = GetComponent<SaveSystem.LevelCompletionHook>();
+                if (completionHook == null)
                 {
-                    // Dynamically resolve active task's document data if transitioning to a document editor context
-                    var activeTasks = FindObjectsByType<Master.Scripts.TaskSystem.HostTaskManager>(FindObjectsSortMode.None);
-                    foreach (var manager in activeTasks)
+                    if (SaveSystem.LevelLoader.Current != null && SaveSystem.LevelLoader.Current.AreAllTasksCompleted())
                     {
-                        if (manager.status == Master.Scripts.TaskSystem.TaskStatus.Active && manager.task != null && manager.task.documentData != null)
-                        {
-                            if (Master.Scripts.GameManager.Instance != null)
-                            {
-                                Master.Scripts.GameManager.Instance.activeDocumentData = manager.task.documentData;
-                            }
-                            break;
-                        }
+                        SaveSystem.LevelLoader.Current.AdvanceToNextLevel();
                     }
-
-                    // Fire any custom hooks (like your Level Completion Hook!)
-                    onWarpStart?.Invoke();
-
-                    // Save player's current position so they return here later
-                    Master.Scripts.SaveSystem.LevelLoader.Current?.SaveGame();
-                    
-                    SceneGateManager.Instance.StartWarp(sceneToName, targetGateId);
-                    //Debug.Log($"[SceneGate] Warping to {sceneToName} at gate {targetGateId}...");
+                    else
+                    {
+                        Debug.LogWarning("[SceneGate] Cannot advance: Tasks for this day are not yet completed.");
+                    }
                 }
-                else
+                return;
+            }
+
+            // 2. Standard Cross-Scene Warp Mode (e.g., Computer -> scn_editor)
+            if (!string.IsNullOrEmpty(sceneToName))
+            {
+                // Dynamically resolve active task's document data if transitioning to a document editor context
+                var activeTasks = FindObjectsByType<Master.Scripts.TaskSystem.HostTaskManager>(FindObjectsSortMode.None);
+                foreach (var manager in activeTasks)
                 {
-                    //Debug.LogError("[SceneGate] Scene To Name is empty! Please assign a scene name in the Inspector.");
+                    if (manager.status == Master.Scripts.TaskSystem.TaskStatus.Active && manager.task != null && manager.task.documentData != null)
+                    {
+                        if (Master.Scripts.GameManager.Instance != null)
+                        {
+                            Master.Scripts.GameManager.Instance.activeDocumentData = manager.task.documentData;
+                        }
+                        break;
+                    }
                 }
+
+                // Fire any custom hooks (like your Level Completion Hook!)
+                onWarpStart?.Invoke();
+
+                // Save player's current position so they return here later
+                Master.Scripts.SaveSystem.LevelLoader.Current?.SaveGame();
+                
+                SceneGateManager.Instance.StartWarp(sceneToName, targetGateId);
+            }
+            else
+            {
+                Debug.LogError("[SceneGate] Scene To Name is empty! Please assign a scene name in the Inspector for SceneWarp mode.");
             }
         }
     }
