@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_kikoHead
-  m_Shader: {fileID: -6465566751694194690, guid: 1b258520fd5764ccebb21be24139d4c9, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 55ecde70e21e84ed691eafc8827da1f1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -47,6 +47,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha_Clip_Threshold: 0
+    - _Emmision: 0
+    - _ISEMMISIVE: 0
     - _Opacity: 1
     - _QueueControl: 0
     - _QueueOffset: 0
