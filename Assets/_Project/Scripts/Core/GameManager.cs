@@ -6,6 +6,12 @@ using Master.Scripts.TaskSystem;
 
 namespace Master.Scripts
 {
+    public enum CutsceneMode
+    {
+        Intro,
+        Outro
+    }
+
     [System.Serializable]
     public struct NpcTaskAsignment
     {
@@ -22,8 +28,10 @@ namespace Master.Scripts
             [Tooltip("The central database of all days/levels in the game.")]
             public LevelDatabase levelDatabase;
 
-            // Current Level Data
+            // Current Level Sequence & Data
+            public LevelSequenceData currentLevelSequence;
             public LevelData currentLevelData;
+            public CutsceneMode cutsceneMode = CutsceneMode.Intro;
             public int currentLevel = 0;
             
             // Save and Load
@@ -59,13 +67,30 @@ namespace Master.Scripts
 
         #region Level Progression Helpers
         /// <summary>
-        /// Sets the active level and updates the level index.
+        /// Sets the active level sequence and synchronized level data.
         /// </summary>
-        public void SetLevel(LevelData levelData)
+        public void SetLevel(LevelSequenceData sequence, CutsceneMode mode = CutsceneMode.Intro)
+        {
+            currentLevelSequence = sequence;
+            currentLevelData = sequence != null ? sequence.levelData : null;
+            cutsceneMode = mode;
+
+            if (levelDatabase != null && sequence != null)
+            {
+                currentLevel = levelDatabase.GetLevelIndex(sequence);
+            }
+        }
+
+        /// <summary>
+        /// Overload for direct LevelData references.
+        /// </summary>
+        public void SetLevel(LevelData levelData, CutsceneMode mode = CutsceneMode.Intro)
         {
             currentLevelData = levelData;
+            cutsceneMode = mode;
             if (levelDatabase != null && levelData != null)
             {
+                currentLevelSequence = levelDatabase.GetSequenceForLevelData(levelData);
                 currentLevel = levelDatabase.GetLevelIndex(levelData);
             }
         }
@@ -73,17 +98,21 @@ namespace Master.Scripts
         /// <summary>
         /// Advances the stored level to the next day in the database.
         /// </summary>
-        public LevelData AdvanceToNextLevel()
+        public LevelSequenceData AdvanceToNextLevel()
         {
-            if (levelDatabase == null || currentLevelData == null) return null;
+            if (levelDatabase == null) return null;
 
-            LevelData nextLevel = levelDatabase.GetNextLevel(currentLevelData);
-            if (nextLevel != null)
+            LevelSequenceData nextSequence = (currentLevelSequence != null)
+                ? levelDatabase.GetNextLevel(currentLevelSequence)
+                : levelDatabase.GetNextLevel(currentLevelData);
+
+            if (nextSequence != null)
             {
-                SetLevel(nextLevel);
+                SetLevel(nextSequence, CutsceneMode.Intro);
             }
-            return nextLevel;
+            return nextSequence;
         }
         #endregion
     }
 }
+
