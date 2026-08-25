@@ -10,6 +10,10 @@ public class MainMenuController : MonoBehaviour
     [Header("Scene Configuration")]
     [SerializeField] private string gameplaySceneName = "scn_campus";
 
+    [Header("Level Configuration")]
+    [Tooltip("The central LevelDatabase to determine starting/continuing days.")]
+    [SerializeField] private LevelDatabase levelDatabase;
+
     [Header("UI Panels")]
     [SerializeField] private GameObject menuButtonsPanel;
     [SerializeField] private GameObject optionsPanel;
@@ -54,6 +58,12 @@ public class MainMenuController : MonoBehaviour
         // For a new game, wipe old save data so the next playthrough is fresh
         SaveManager.DeleteSave();
 
+        // Set initial starting level (Index 0) in GameManager
+        if (GameManager.Instance != null && levelDatabase != null && levelDatabase.Count > 0)
+        {
+            GameManager.Instance.SetLevel(levelDatabase.GetLevelByIndex(0));
+        }
+
         // Play the transition animation if the TransitionManager exists in the scene
         if (Master.Scripts.TransitionManager.Instance != null)
         {
@@ -75,13 +85,19 @@ public class MainMenuController : MonoBehaviour
 
     private IEnumerator ContinueGameRoutine()
     {
+        // Resolve resume level based on save progress
+        PlayerData data = SaveManager.Load();
+        if (GameManager.Instance != null && levelDatabase != null)
+        {
+            LevelData resumeLevel = levelDatabase.GetFirstIncompleteLevel(data);
+            GameManager.Instance.SetLevel(resumeLevel);
+        }
+
         if (Master.Scripts.TransitionManager.Instance != null)
         {
             yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
         }
 
-        // Since we only use one Unity scene for all days/levels, we always load the gameplaySceneName.
-        // The GameManager/LevelLoader in that scene will handle the current day logic based on the save file!
         SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
     }
 

@@ -48357,7 +48357,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d6901aaf267047f49fc582a0e4f4a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.GameManager
+  levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   currentLevelData: {fileID: 0}
+  currentLevel: 1
   currentPlayerData:
     currentScene: 
     playerPosition:
@@ -48369,7 +48371,6 @@ MonoBehaviour:
     - 0
     - 0
     levels: []
-  currentLevel: 0
   availableTasks: []
   activeDocumentData: {fileID: 0}
   pendingDocumentSuccess: 0
@@ -423732,6 +423733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuController
   gameplaySceneName: scn_campus
+  levelDatabase: {fileID: 0}
   menuButtonsPanel: {fileID: 1766691561}
   optionsPanel: {fileID: 0}
   betaThankYouPanel: {fileID: 555651281}
