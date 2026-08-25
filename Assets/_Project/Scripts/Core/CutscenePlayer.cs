@@ -53,6 +53,21 @@ namespace Master.Scripts
         {
             if (nextButton != null) nextButton.onClick.AddListener(AdvanceShot);
             if (skipButton != null) skipButton.onClick.AddListener(SkipCutscene);
+
+            // Auto-resolve Canvas as the spawn container if not explicitly set
+            if (shotSpawnContainer == null)
+            {
+                var canvas = GetComponent<Canvas>();
+                if (canvas == null)
+                {
+                    canvas = FindObjectOfType<Canvas>();
+                }
+
+                if (canvas != null)
+                {
+                    shotSpawnContainer = canvas.transform;
+                }
+            }
         }
 
         private void Start()
@@ -145,8 +160,15 @@ namespace Master.Scripts
                 if (prefab != null)
                 {
                     currentShotInstance = (shotSpawnContainer != null)
-                        ? Instantiate(prefab, shotSpawnContainer)
+                        ? Instantiate(prefab, shotSpawnContainer, false)
                         : Instantiate(prefab, Vector3.zero, Quaternion.identity);
+
+                    RectTransform rt = currentShotInstance.GetComponent<RectTransform>();
+                    if (rt != null)
+                    {
+                        rt.anchoredPosition = Vector2.zero;
+                        rt.localScale = Vector3.one;
+                    }
                 }
             }
         }

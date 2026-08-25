@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/scn_editor.unity
     guid: 572e0d937b5ef4b348d3c693c1ea39df
+  - enabled: 1
+    path: Assets/_Project/Scenes/scn_cutscene.unity
+    guid: dbb89b0ff499141e48326692c3165a9d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
