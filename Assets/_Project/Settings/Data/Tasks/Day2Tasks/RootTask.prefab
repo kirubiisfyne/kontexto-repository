@@ -991,6 +991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd16cbfa1411d4a03b2c7d65b5c649e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneGate
+  gateFunction: 0
   sceneToName: scn_editor
   gateId: d2_toEditor
   targetGateId: 
@@ -2064,7 +2065,6 @@ Transform:
   m_Children:
   - {fileID: 736617611179865161}
   - {fileID: 6838115899501717978}
-  - {fileID: 7995021798514100225}
   m_Father: {fileID: 491530244792182948}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5829376636298536412
@@ -2186,6 +2186,7 @@ Transform:
   m_Children:
   - {fileID: 7916585480475688232}
   - {fileID: 8758401563756418557}
+  - {fileID: 8102951074936194410}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6015329548632800671
@@ -2756,80 +2757,6 @@ Transform:
   - {fileID: 4423541664539140485}
   m_Father: {fileID: 5250077255197122214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7683763584440797291
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7995021798514100225}
-  - component: {fileID: 2535170244213369677}
-  - component: {fileID: 8240087772433180821}
-  m_Layer: 7
-  m_Name: LevelEndGate
-  m_TagString: Gate
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &7995021798514100225
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7683763584440797291}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25, y: 4.0999994, z: -15}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8758401563756418557}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &2535170244213369677
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7683763584440797291}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 1.5, z: 0}
---- !u!114 &8240087772433180821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7683763584440797291}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd16cbfa1411d4a03b2c7d65b5c649e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneGate
-  sceneToName: scn_main-menu
-  gateId: d2_levelEnd
-  targetGateId: 
-  canPlayerWarp: 1
-  triggerMode: 1
-  onWarpStart:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7696834610149482501
 GameObject:
   m_ObjectHideFlags: 0
@@ -8676,7 +8603,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-        - m_Target: {fileID: 7683763584440797291}
+        - m_Target: {fileID: 8369170936903763200}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
@@ -8787,3 +8714,82 @@ Transform:
   - {fileID: 1461067716603851414}
   m_Father: {fileID: 4124250281630942248}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8651335626490640737
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 491530244792182948}
+    m_Modifications:
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.1000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 876780578627386465, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_Name
+      value: LevelEndGate Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 876780578627386465, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500377232064748703, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: gateId
+      value: d2_levelEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500377232064748703, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+      propertyPath: sceneToName
+      value: 
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+--- !u!4 &8102951074936194410 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 611575821409647627, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+  m_PrefabInstance: {fileID: 8651335626490640737}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8369170936903763200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 876780578627386465, guid: b64f750bc08b9407786ae753b74d6a64, type: 3}
+  m_PrefabInstance: {fileID: 8651335626490640737}
+  m_PrefabAsset: {fileID: 0}
