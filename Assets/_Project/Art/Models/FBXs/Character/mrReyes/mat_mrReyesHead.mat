@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7876161699478735721
+--- !u!114 &-7615736912952013743
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: amt_enzoBody
-  m_Shader: {fileID: -6465566751694194690, guid: d69eeefd478a243879171c1a19fccd88, type: 3}
+  m_Name: mat_mrReyesHead
+  m_Shader: {fileID: -6465566751694194690, guid: 55ecde70e21e84ed691eafc8827da1f1, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: f73fd3a48570f4c4699761a5fd908bc6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0d235f190bb2f4c4c9566c504660f20d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
