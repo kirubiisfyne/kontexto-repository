@@ -21,8 +21,15 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("Fallback LevelData if no database or save data exists.")]
         public LevelData defaultLevelData;
 
+        [Header("Cutscene Configuration")]
+        [Tooltip("The cutscene scene name to load for intro/outro cutscenes.")]
+        public string cutsceneSceneName = "scn_cutscene";
+
         [Header("Editor Debugging")]
-        [Tooltip("If assigned, overrides save data and GameManager for instant testing in Editor.")]
+        [Tooltip("If assigned, overrides save data and GameManager with a full LevelSequenceData for instant testing in Editor.")]
+        public LevelSequenceData editorOverrideSequence;
+
+        [Tooltip("If assigned, overrides save data and GameManager with LevelData for instant testing in Editor.")]
         public LevelData editorOverrideLevel;
 
         [Header("Runtime State")]
@@ -61,6 +68,11 @@ namespace Master.Scripts.SaveSystem
         private LevelData ResolveLevelData()
         {
             #if UNITY_EDITOR
+            if (editorOverrideSequence != null && editorOverrideSequence.levelData != null)
+            {
+                Debug.Log($"<color=yellow>[LevelLoader]</color> Using Editor Override Sequence: {editorOverrideSequence.name}");
+                return editorOverrideSequence.levelData;
+            }
             if (editorOverrideLevel != null)
             {
                 Debug.Log($"<color=yellow>[LevelLoader]</color> Using Editor Override Level: {editorOverrideLevel.name}");
@@ -69,15 +81,26 @@ namespace Master.Scripts.SaveSystem
             #endif
 
             // 1. Cross-scene explicit assignment from GameManager
-            if (GameManager.Instance != null && GameManager.Instance.currentLevelData != null)
+            if (GameManager.Instance != null)
             {
-                return GameManager.Instance.currentLevelData;
+                if (GameManager.Instance.currentLevelSequence != null && GameManager.Instance.currentLevelSequence.levelData != null)
+                {
+                    return GameManager.Instance.currentLevelSequence.levelData;
+                }
+                if (GameManager.Instance.currentLevelData != null)
+                {
+                    return GameManager.Instance.currentLevelData;
+                }
             }
 
             // 2. Resolve from Save Data and Database
             if (levelDatabase != null)
             {
-                return levelDatabase.GetFirstIncompleteLevel(playerData);
+                var seq = levelDatabase.GetFirstIncompleteLevel(playerData);
+                if (seq != null && seq.levelData != null)
+                {
+                    return seq.levelData;
+                }
             }
 
             // 3. Fallback
@@ -133,55 +156,42 @@ namespace Master.Scripts.SaveSystem
         }
 
         /// <summary>
-        /// Marks the current day completed, updates save data, queries the next day,
-        /// and transitions into the new day cleanly behind the screen transition.
+        /// Marks the current day completed, updates save data, sets cutscene mode to Outro,
+        /// and transitions into scn_cutscene to play the Outro cutscene.
         /// </summary>
         public void AdvanceToNextLevel()
         {
-            if (levelDatabase == null || currentLevelData == null)
+            if (currentLevelData == null)
             {
-                Debug.LogWarning("[LevelLoader] Cannot advance: LevelDatabase or CurrentLevelData is missing.");
+                Debug.LogWarning("[LevelLoader] Cannot advance: CurrentLevelData is missing.");
                 return;
             }
 
             // 1. Mark current level completed in save data
             CompleteLevel();
 
-            // 2. Look up the next day in the database (e.g. Day 1 -> Day 2)
-            LevelData nextLevel = levelDatabase.GetNextLevel(currentLevelData);
-
-            if (nextLevel != null)
+            // 2. Configure GameManager for Outro cutscene
+            if (GameManager.Instance != null)
             {
-                Debug.Log($"<color=green>[LevelLoader]</color> Advancing from {currentLevelData.name} to {nextLevel.name}!");
-
-                if (GameManager.Instance != null)
+                if (GameManager.Instance.currentLevelSequence == null && levelDatabase != null)
                 {
-                    GameManager.Instance.currentLevelData = nextLevel;
-                    GameManager.Instance.currentLevel = levelDatabase.GetLevelIndex(nextLevel);
+                    GameManager.Instance.currentLevelSequence = levelDatabase.GetSequenceForLevelData(currentLevelData);
                 }
-
-                // Clear mid-day position in save file so player spawns at the next day's spawn anchor
-                playerData.currentScene = nextLevel.sceneId;
-                playerData.playerPosition = null;
-                SaveManager.Save(playerData);
-
-                // Play transition and reload scene
-                StartCoroutine(TransitionToNextDayRoutine());
+                GameManager.Instance.cutsceneMode = CutsceneMode.Outro;
             }
-            else
-            {
-                Debug.Log("<color=gold>[LevelLoader]</color> All levels in the database have been completed!");
-            }
+
+            // 3. Play transition and load cutscene scene
+            StartCoroutine(TransitionToOutroRoutine());
         }
 
-        private IEnumerator TransitionToNextDayRoutine()
+        private IEnumerator TransitionToOutroRoutine()
         {
             if (TransitionManager.Instance != null)
             {
                 yield return TransitionManager.Instance.PlayTransitionAndWait("transition");
             }
 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(cutsceneSceneName, LoadSceneMode.Single);
         }
 
         // ── Public Save / Load ──
