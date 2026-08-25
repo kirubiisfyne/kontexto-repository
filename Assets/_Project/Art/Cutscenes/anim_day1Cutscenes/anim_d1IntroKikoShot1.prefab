@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 359684165583396482}
   - component: {fileID: 950089481148840654}
   - component: {fileID: 502009443007277823}
+  - component: {fileID: 6762991387918254302}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -98,6 +99,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &6762991387918254302
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2482882052698391297}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &7165951085191143103
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +180,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2356151504299316225}
     m_Modifications:
+    - target: {fileID: -8991256244768668059, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
       propertyPath: m_Name
       value: Level 1 Intro (1)
@@ -246,15 +264,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -150.485
       objectReference: {fileID: 0}
+    - target: {fileID: -7143818262520823776, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4153083917793864611, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4257508509235537429, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.43301
       objectReference: {fileID: 0}
+    - target: {fileID: 8442352221121546490, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+      propertyPath: m_SortingLayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7743754138993411211}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+--- !u!1 &5693496254026365538 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
+  m_PrefabInstance: {fileID: 5252485186441747423}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &7743754138993411211
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693496254026365538}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!4 &6902687242616660481 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: e05af9bf69763470ca7ea5dfe10cb767, type: 3}
