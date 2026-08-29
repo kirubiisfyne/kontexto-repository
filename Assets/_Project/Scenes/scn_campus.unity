@@ -36604,7 +36604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelLoader
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   defaultLevelData: {fileID: 11400000, guid: b6e18d8c3751c447bb28150239df5233, type: 2}
-  editorOverrideLevel: {fileID: 11400000, guid: d4000000000000000000000000000004, type: 2}
+  editorOverrideLevel: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   currentLevelData: {fileID: 11400000, guid: b6e18d8c3751c447bb28150239df5233, type: 2}
 --- !u!114 &986174011
 MonoBehaviour:

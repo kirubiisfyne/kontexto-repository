@@ -963,6 +963,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: msh_npcGirl1
       objectReference: {fileID: 0}
+    - target: {fileID: 2530178882365283764, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 61959b1b7b72a4b4f9737c71796cbc49, type: 2}
+    - target: {fileID: 2530178882365283764, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 664d28812071567459b1729c605b6bb0, type: 2}
+    - target: {fileID: 2530178882365283764, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 664d28812071567459b1729c605b6bb0, type: 2}
     - target: {fileID: 5866666021909216657, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
       propertyPath: m_Controller
       value: 
