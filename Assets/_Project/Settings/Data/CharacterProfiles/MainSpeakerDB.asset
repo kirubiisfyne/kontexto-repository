@@ -29,3 +29,11 @@ MonoBehaviour:
     portraitSprite: {fileID: 21300000, guid: f26980fe79e9247e0bb001d61722e4da, type: 3}
   - characterName: Jules
     portraitSprite: {fileID: 21300000, guid: ce4150fc24766455e848ca6e6e8fe257, type: 3}
+  - characterName: Mr. Reyes
+    portraitSprite: {fileID: 21300000, guid: 6f5028bdce21313468cc5ed7d0838fd7, type: 3}
+  - characterName: Angel
+    portraitSprite: {fileID: 21300000, guid: 340d9db7991291248a56828518a4d7fe, type: 3}
+  - characterName: Dancer NPC
+    portraitSprite: {fileID: 21300000, guid: a8ca4bc99d767e449af5fe54e900a6e7, type: 3}
+  - characterName: CAT Officer
+    portraitSprite: {fileID: 21300000, guid: ce4150fc24766455e848ca6e6e8fe257, type: 3}
