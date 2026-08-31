@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 8002603650951616822}
   - component: {fileID: 7343180087366786250}
   - component: {fileID: 3279392344552632281}
+  - component: {fileID: 4574982158949088059}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -135,6 +136,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &4574982158949088059
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8647412709139356171}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1001 &4955815128486190468
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +228,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 295732f5da261489fbf159ce2e492c0d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4966232294781178060}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 295732f5da261489fbf159ce2e492c0d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8637055577490607633}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 295732f5da261489fbf159ce2e492c0d, type: 3}
 --- !u!1 &4837244532367277113 stripped
 GameObject:
@@ -242,6 +259,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &8637055577490607633
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4837244532367277113}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!4 &6046436066552505434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 295732f5da261489fbf159ce2e492c0d, type: 3}

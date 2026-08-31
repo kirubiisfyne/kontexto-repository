@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 6629159184793381442}
   - component: {fileID: 6288744849741551536}
   - component: {fileID: 304235227657409580}
+  - component: {fileID: 6362485026739090371}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -158,6 +159,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &6362485026739090371
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6414648020407397839}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1001 &535729081662314888
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,6 +291,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 93f2343b880a8463bb904854ca1b4502, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3440353165540819953}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 93f2343b880a8463bb904854ca1b4502, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5586545531426999484}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 93f2343b880a8463bb904854ca1b4502, type: 3}
 --- !u!1 &38426957016905781 stripped
 GameObject:
@@ -305,6 +322,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &5586545531426999484
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 38426957016905781}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!4 &1171108294350200918 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 93f2343b880a8463bb904854ca1b4502, type: 3}
