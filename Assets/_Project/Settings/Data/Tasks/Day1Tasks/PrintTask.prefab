@@ -632,6 +632,8 @@ GameObject:
   - component: {fileID: 1361237180897165087}
   - component: {fileID: 7151028895316444518}
   - component: {fileID: 6370158376714886181}
+  - component: {fileID: 2636693088578533437}
+  - component: {fileID: 8578947832198308795}
   m_Layer: 7
   m_Name: Enzo
   m_TagString: Untagged
@@ -912,6 +914,42 @@ MonoBehaviour:
   onAcceptedReport:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &2636693088578533437
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248382223944268979}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8578947832198308795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5248382223944268979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bcd589118d2048b18ea51eac49a9340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.NPC.NPCAnimationManager
+  standbyClip: {fileID: 7400000, guid: 9f1c39441ab054fe58babb055438b8e8, type: 2}
+  animator: {fileID: 7841911590701125375}
 --- !u!1 &8811744110849680563
 GameObject:
   m_ObjectHideFlags: 0
@@ -1050,7 +1088,7 @@ PrefabInstance:
     - target: {fileID: 5866666021909216657, guid: 63844ecdeb4724b89bf7631a1769e299, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: a2e8e5dd9d2d447488110396450c1a0f, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1059,6 +1097,11 @@ PrefabInstance:
 --- !u!4 &4194045183773348997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 63844ecdeb4724b89bf7631a1769e299, type: 3}
+  m_PrefabInstance: {fileID: 4449139316832269166}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7841911590701125375 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 63844ecdeb4724b89bf7631a1769e299, type: 3}
   m_PrefabInstance: {fileID: 4449139316832269166}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7645843060008410988

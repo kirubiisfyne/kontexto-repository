@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 3581872468955383647}
   - component: {fileID: 4064222415921570801}
   - component: {fileID: 1653165495106500732}
+  - component: {fileID: 1802013242202775241}
+  - component: {fileID: 143289196563418386}
   m_Layer: 7
   m_Name: Adviser
   m_TagString: Untagged
@@ -269,6 +271,41 @@ MonoBehaviour:
   NPCLookAt: 0
   NPCCamera: {fileID: 7117867004552467135}
   playerController: {fileID: 0}
+--- !u!95 &1802013242202775241
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650142142167006536}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &143289196563418386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 650142142167006536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bcd589118d2048b18ea51eac49a9340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.NPC.NPCAnimationManager
+  standbyClip: {fileID: 7400000, guid: 4a46f875441254b1e8dfe72a78ce4707, type: 2}
 --- !u!1 &2851217387826432468
 GameObject:
   m_ObjectHideFlags: 0
