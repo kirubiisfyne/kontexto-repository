@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 9128656108573145774}
   - component: {fileID: 5552406055370302349}
   - component: {fileID: 3547975429181921945}
+  - component: {fileID: 1259995307322668575}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -135,6 +136,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &1259995307322668575
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8680753316131412757}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1001 &7304578558133426962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +228,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 7c08872107a8343c2a362a68121ac4dc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4003637491941447064}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 7c08872107a8343c2a362a68121ac4dc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 315667221808610434}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 7c08872107a8343c2a362a68121ac4dc, type: 3}
 --- !u!1 &7113678193430952623 stripped
 GameObject:
@@ -242,6 +259,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &315667221808610434
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7113678193430952623}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!4 &8246308021088527052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 7c08872107a8343c2a362a68121ac4dc, type: 3}

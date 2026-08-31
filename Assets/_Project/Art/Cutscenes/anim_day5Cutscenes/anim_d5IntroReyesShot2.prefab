@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 2403997428593564177}
   - component: {fileID: 7991246724551721141}
   - component: {fileID: 4451793537328640537}
+  - component: {fileID: 8783300289654027436}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!210 &8783300289654027436
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6535316163463262255}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1001 &8035137245924070125
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -210,8 +224,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: c561d264dfa3c4990b6f58e8e0cc9e4d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4389680668648074027}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: c561d264dfa3c4990b6f58e8e0cc9e4d, type: 3}
+--- !u!1 &7522494752479916880 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: c561d264dfa3c4990b6f58e8e0cc9e4d, type: 3}
+  m_PrefabInstance: {fileID: 8035137245924070125}
+  m_PrefabAsset: {fileID: 0}
+--- !u!210 &4389680668648074027
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7522494752479916880}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!4 &8695708485939456819 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: c561d264dfa3c4990b6f58e8e0cc9e4d, type: 3}

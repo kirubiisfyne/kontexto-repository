@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 2517850357115735423}
   - component: {fileID: 3847564035768682342}
   - component: {fileID: 6433884596677645072}
+  - component: {fileID: 1824932433996647978}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -158,6 +159,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &1824932433996647978
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833968550546656571}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1001 &5293611152021693876
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -241,6 +255,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 70902786ceac5431abae8a7c793c7c20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4228909078602040625}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 70902786ceac5431abae8a7c793c7c20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2737730592183217644}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 70902786ceac5431abae8a7c793c7c20, type: 3}
 --- !u!1 &5661412395584717833 stripped
 GameObject:
@@ -269,6 +286,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &2737730592183217644
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5661412395584717833}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!4 &6798598431923854442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 70902786ceac5431abae8a7c793c7c20, type: 3}

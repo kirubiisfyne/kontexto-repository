@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6188754072775203768}
   - component: {fileID: 1121795568759405686}
   - component: {fileID: 1250702875865707371}
+  - component: {fileID: 4287579493485764100}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -75,6 +76,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!210 &4287579493485764100
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043056424096970876}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
 --- !u!1 &7100076340803427416
 GameObject:
   m_ObjectHideFlags: 0
@@ -266,6 +280,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: b564fd1c5f2634985a893faad6e3d1c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 22163013724823552}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: b564fd1c5f2634985a893faad6e3d1c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 959347178047844881}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: b564fd1c5f2634985a893faad6e3d1c1, type: 3}
 --- !u!4 &642771586766967885 stripped
 Transform:
@@ -299,3 +316,16 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!210 &959347178047844881
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739388425032617006}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_SortAtRoot: 0
+  m_Sort3DAs2D: 0
