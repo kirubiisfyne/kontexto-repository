@@ -56338,7 +56338,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelLoader
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   defaultLevelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
-  editorOverrideLevel: {fileID: 11400000, guid: d6000000000000000000000000000000, type: 2}
+  editorOverrideLevel: {fileID: 11400000, guid: d7000000000000000000000000000000, type: 2}
   currentLevelData: {fileID: 0}
 --- !u!114 &986174011
 MonoBehaviour:
@@ -110873,7 +110873,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -20.697002
+      value: -20.097002
       objectReference: {fileID: 0}
     - target: {fileID: 3706151548222924630, guid: 58f7a1cbf908fd74d8c3e4bbca1b2bdf, type: 3}
       propertyPath: m_LocalRotation.w
