@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cac908a1ea1e54d81a85a7acc29e0406, type: 3}
+  m_Name: d7_submit_master_zine_task
+  m_EditorClassIdentifier: Project::Master.Scripts.TaskSystem.TaskData
+  taskId: d7_submit_master_zine_task
+  taskName: Submit the Master Zine to Mr. Reyes.
+  description: Pick up the printed Master Portfolio folder from the publication desk
+    and deliver it to Mr. Reyes at the Admin Office.
+  prerequisite:
+    task: {fileID: 0}
+    requiredStatus: 0
+  requirements:
+    needsSequentialOrder: 1
+    objectives:
+    - key: grab_folder
+      notificationDisplayName: Pick up the Master Portfolio folder from the publication
+        desk.
+      requiredAmount: 1
+  setPlayerInitialTransform: 0
+  playerInitialPosition: {x: 0, y: 0, z: 0}
+  playerInitialRotation: {x: 0, y: 0, z: 0}
+  documentData: {fileID: 0}
