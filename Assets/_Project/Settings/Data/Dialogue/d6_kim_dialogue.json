@@ -1,0 +1,80 @@
+{
+  "conversationMap": [
+    {
+      "name": "Kim_Admin_Entrance_Intro",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "Kiko! There you are! We have a complete disaster on our hands!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "What happened? Is the portfolio missing?"
+        },
+        {
+          "speaker": "Kim",
+          "text": "The Master Cover page is gone! Without Enzo's design, the NSPC judges won't even open our portfolio!"
+        },
+        {
+          "speaker": "Kim",
+          "text": "We tore the entire publication office apart searching for it. It's a complete mess—if Mrs. Santos sees it, we're finished!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Did Enzo leave a physical backup anywhere else?"
+        },
+        {
+          "speaker": "Kim",
+          "text": "Yes! He mentioned storing a backup USB drive inside the old 'AP Style Guide 2018' in the Upper Library reference section!"
+        },
+        {
+          "speaker": "Kim",
+          "text": "Please, head over to the Library, find the drive, and meet me back here!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'm on it. I'll search the Library and bring the drive right back."
+        }
+      ]
+    },
+    {
+      "name": "Kim_Waiting",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "I'm keeping watch outside the Admin office! Head upstairs to the Library and check the AP Style Guide!"
+        }
+      ]
+    },
+    {
+      "name": "Kim_Finished",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Kim! I found Enzo's backup USB in the library reference shelf!"
+        },
+        {
+          "speaker": "Kim",
+          "text": "Thank goodness! Now you need to format and finalize the Master Portfolio on the computer."
+        },
+        {
+          "speaker": "Kim",
+          "text": "Mrs. Santos is inside the publication office right now. Go ask her for permission to use the workstation!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "On my way. I'll speak with Mrs. Santos and get this printed."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Kim_Idle",
+    "lines": [
+      {
+        "speaker": "Kim",
+        "text": "Go to the publication office and talk to Mrs. Santos so you can use the workstation!"
+      }
+    ]
+  }
+}

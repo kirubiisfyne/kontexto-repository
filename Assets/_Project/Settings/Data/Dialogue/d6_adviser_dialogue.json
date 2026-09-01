@@ -1,0 +1,76 @@
+{
+  "conversationMap": [
+    {
+      "name": "Mrs. Santos_Intro",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Kiko. The NSPC morning deadline is approaching rapidly. Is the publication portfolio ready?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Almost, Ma'am! We've retrieved all master assets. May I use the office computer to apply the final formatting touches?"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Of course. Workstation is all yours."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Remember: this portfolio represents everything you've learned. Fonts, emphasis, alignment, spacing, and lists must all be flawless."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Once you're done printing, bring it to my desk for final review."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Yes, Ma'am. I'll make sure it exceeds every standard."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Waiting",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Use the office computer to compile and format all sections of the Master Portfolio."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Let me know when the print job is ready for review."
+        }
+      ]
+    },
+    {
+      "name": "Mrs. Santos_Finished",
+      "lines": [
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Let's inspect the master proof for the 2026 NSPC Submission."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "[FEEDBACK]"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Incredible work, Kiko. You have mastered every principle of publication formatting."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "The Master Portfolio is unified, disciplined, and ready for Mr. Reyes' final submission tomorrow."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Mrs. Santos_Idle",
+    "lines": [
+      {
+        "speaker": "Mrs. Santos",
+        "text": "Double check all titles, alignments, and lists before sending the final print job."
+      }
+    ]
+  }
+}

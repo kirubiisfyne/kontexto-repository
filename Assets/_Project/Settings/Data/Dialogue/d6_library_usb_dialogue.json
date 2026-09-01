@@ -1,0 +1,26 @@
+{
+  "conversationMap": [
+    {
+      "name": "Library_USB_Found",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Here it is—the dusty 'AP Style Guide 2018' on the reference shelf."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Taped right inside the back cover: Enzo's backup USB drive with the Master Cover and full editorial suite!"
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Library_USB_Idle",
+    "lines": [
+      {
+        "speaker": "Kiko",
+        "text": "I've already grabbed the USB drive. Better bring it back to Kim at the Admin entrance."
+      }
+    ]
+  }
+}
