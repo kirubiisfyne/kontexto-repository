@@ -1908,8 +1908,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd16cbfa1411d4a03b2c7d65b5c649e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SceneGate
-  gateFunction: 0
-  sceneToName: scn_main-menu
+  gateFunction: 1
+  sceneToName: 
   gateId: d6_completeToMenu
   targetGateId: 
   canPlayerWarp: 1
