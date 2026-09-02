@@ -979,6 +979,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 86d5a1cd7d958ea448d8a0c2df1ae4f7, type: 2}
+    - target: {fileID: 7915297952300074473, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
+      propertyPath: m_Name
+      value: msh_npcAbigail
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -997,6 +1001,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8395979563977127215}
     m_Modifications:
+    - target: {fileID: 2978448610228156602, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0d0f289a12fe834479f94f5ad648c917, type: 2}
+    - target: {fileID: 2978448610228156602, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f184a6cdfedae0a43a51d29c02924f36, type: 2}
+    - target: {fileID: 2978448610228156602, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
+      propertyPath: 'm_Materials.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f184a6cdfedae0a43a51d29c02924f36, type: 2}
+    - target: {fileID: 2978448610228156602, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
+      propertyPath: 'm_Materials.Array.data[3]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0601c8b993f2d114b88b98003b79f3a7, type: 2}
+    - target: {fileID: 2978448610228156602, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
+      propertyPath: 'm_Materials.Array.data[4]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 7754dfe1f8a82764e861f483cfe0b9cc, type: 2}
+    - target: {fileID: 2978448610228156602, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
+      propertyPath: 'm_Materials.Array.data[5]'
+      value: 
+      objectReference: {fileID: 2100000, guid: f8e575bc08de6174b91a05ee21c33e35, type: 2}
     - target: {fileID: 3543930859348769931, guid: 352e9517c0520f14a8256db048fb49f4, type: 3}
       propertyPath: m_Name
       value: HallBulletinBoard 1
