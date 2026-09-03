@@ -1,0 +1,39 @@
+{
+  "cutscenes": [
+    {
+      "name": "Intro_Shot_1_HallwayEntrance",
+      "lines": [
+        {
+          "text": "You can do this...",
+          "duration": 2.5
+        }
+      ]
+    },
+    {
+      "name": "Intro_Shot_2_DramaClubPoster",
+      "lines": [
+        {
+          "text": "Prepare a three-minute emotional monologue? Nope. Absolutely not.",
+          "duration": 3.5
+        },
+        {
+          "text": "I don't have enough tears for this club. Hard pass.",
+          "duration": 2.8
+        }
+      ]
+    },
+    {
+      "name": "Intro_Shot_3_ParagonPoster",
+      "lines": [
+        {
+          "text": "Wait. Aircon? And all I have to do is... sit and type?",
+          "duration": 3.0
+        },
+        {
+          "text": "This looks like the path of least resistance. Sold.",
+          "duration": 2.5
+        }
+      ]
+    }
+  ]
+}
