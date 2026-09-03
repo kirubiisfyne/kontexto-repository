@@ -1,12 +1,15 @@
+using System.Collections;
 using System.Collections.Generic;
 using Master.Scripts.TaskSystem;
+using TMPro;
 using UnityEngine;
 
 namespace Master.Scripts.UI
 {
     /// <summary>
     /// Manages the visual list of active tasks for the current level.
-    /// Hooks into LevelTaskTracker via UnityEvents and manages notebook visibility and cursor state.
+    /// Hooks into LevelTaskTracker via UnityEvents and manages notebook visibility,
+    /// HUD new-task notifications, and the active task count badge (red dot).
     /// </summary>
     public class TaskTrackerUI : MonoBehaviour
     {
@@ -17,12 +20,32 @@ namespace Master.Scripts.UI
         [Tooltip("The container where task items will be spawned (e.g., a VerticalLayoutGroup).")]
         [SerializeField] private Transform listContainer;
 
-        [Header("Animation")]
-        [Tooltip("The Animator component that handles the transition.")]
+        [Header("Notebook Animation & Visibility")]
+        [Tooltip("The Animator component that handles the notebook open/close transition.")]
         [SerializeField] private Animator panelAnimator;
         
         [Tooltip("The boolean parameter name in the Animator Controller to trigger show/hide.")]
         [SerializeField] private string isVisibleBool = "IsVisible";
+
+        [Header("New Task Notification Banner")]
+        [Tooltip("Root GameObject of the popup notification panel.")]
+        [SerializeField] private GameObject notificationRoot;
+
+        [Tooltip("The Animator on the notification panel.")]
+        [SerializeField] private Animator notificationAnimator;
+
+        [Tooltip("Optional text component to display the new task title.")]
+        [SerializeField] private TMP_Text notificationTitleText;
+
+        [Tooltip("Animator boolean parameter name to trigger notification show/hide.")]
+        [SerializeField] private string notificationVisibleBool = "IsVisible";
+
+        [Tooltip("How many seconds the notification stays on screen before hiding.")]
+        [SerializeField] private float notificationDuration = 3.5f;
+
+        [Header("Active Task Badge (Red Dot)")]
+        [Tooltip("Text component inside the red dot displaying the active task count.")]
+        [SerializeField] private TMP_Text badgeCountText;
 
         [Header("Player Control (Optional)")]
         [Tooltip("Reference to the PlayerController to freeze movement/aim while notebook is open. Auto-detected if null.")]
@@ -30,11 +53,11 @@ namespace Master.Scripts.UI
 
         // Maps taskId to its visual UI component
         private Dictionary<string, TaskItemUI> activeTaskItems = new Dictionary<string, TaskItemUI>();
-        
-        // Pool for UI elements
         private Queue<TaskItemUI> itemPool = new Queue<TaskItemUI>();
         
+        private int activeUncompletedCount = 0;
         private bool isPanelVisible = false;
+        private Coroutine notificationCoroutine;
 
         private void Awake()
         {
@@ -47,11 +70,17 @@ namespace Master.Scripts.UI
             {
                 playerController = FindFirstObjectByType<PlayerController>();
             }
+
+            if (notificationRoot != null && notificationAnimator == null)
+            {
+                notificationRoot.SetActive(false);
+            }
+
+            UpdateBadge();
         }
 
         private void Update()
         {
-            // Toggle with Tab, or close with Escape if already open
             if (Input.GetKeyDown(KeyCode.Tab) || (isPanelVisible && Input.GetKeyDown(KeyCode.Escape)))
             {
                 TogglePanel();
@@ -66,14 +95,12 @@ namespace Master.Scripts.UI
             }
         }
 
-        /// <summary>
-        /// Called when a task becomes active dynamically (e.g., after NPC conversation).
-        /// </summary>
+        #region Task Management
+
         public void AddTask(HostTaskManager mgr)
         {
             if (mgr == null || mgr.task == null || string.IsNullOrEmpty(mgr.task.taskId)) return;
 
-            // Prevent duplicates
             if (activeTaskItems.ContainsKey(mgr.task.taskId)) return;
 
             TaskItemUI instance;
@@ -88,16 +115,14 @@ namespace Master.Scripts.UI
             }
             
             instance.Setup(mgr.task.taskId, mgr.task.taskName);
-            
             activeTaskItems[mgr.task.taskId] = instance;
-            
-            // Show the tracker if it was hidden
-            Show();
+
+            activeUncompletedCount++;
+            UpdateBadge();
+
+            TriggerNotification(mgr.task.taskName);
         }
 
-        /// <summary>
-        /// Returns a task item to the pool instead of destroying it.
-        /// </summary>
         public void ReturnToPool(string taskId)
         {
             if (activeTaskItems.TryGetValue(taskId, out var item))
@@ -108,21 +133,76 @@ namespace Master.Scripts.UI
             }
         }
 
-        /// <summary>
-        /// Called when a task is completed.
-        /// </summary>
-        /// <param name="taskId">The ID of the completed task.</param>
         public void OnTaskCompleted(string taskId)
         {
             if (activeTaskItems.TryGetValue(taskId, out var item))
             {
                 item.MarkCompleted();
+
+                if (activeUncompletedCount > 0)
+                {
+                    activeUncompletedCount--;
+                }
+                UpdateBadge();
             }
         }
 
-        /// <summary>
-        /// Toggles the visibility state of the panel using the Animator.
-        /// </summary>
+        #endregion
+
+        #region Notification & Badge
+
+        private void TriggerNotification(string taskName)
+        {
+            if (notificationTitleText != null && !string.IsNullOrEmpty(taskName))
+            {
+                notificationTitleText.text = taskName;
+            }
+
+            if (notificationCoroutine != null)
+            {
+                StopCoroutine(notificationCoroutine);
+            }
+            notificationCoroutine = StartCoroutine(NotificationRoutine());
+        }
+
+        private IEnumerator NotificationRoutine()
+        {
+            if (notificationRoot != null)
+            {
+                notificationRoot.SetActive(true);
+            }
+
+            if (notificationAnimator != null)
+            {
+                notificationAnimator.SetBool(notificationVisibleBool, true);
+            }
+
+            yield return new WaitForSeconds(notificationDuration);
+
+            if (notificationAnimator != null)
+            {
+                notificationAnimator.SetBool(notificationVisibleBool, false);
+            }
+            else if (notificationRoot != null)
+            {
+                notificationRoot.SetActive(false);
+            }
+
+            notificationCoroutine = null;
+        }
+
+        private void UpdateBadge()
+        {
+            if (badgeCountText != null)
+            {
+                badgeCountText.text = activeUncompletedCount.ToString();
+            }
+        }
+
+        #endregion
+
+        #region Visibility
+
         public void TogglePanel()
         {
             isPanelVisible = !isPanelVisible;
@@ -155,11 +235,9 @@ namespace Master.Scripts.UI
 
         private void SetCursorAndInputState(bool isOpen)
         {
-            // Unlock & show cursor when open; lock & hide cursor when closed
             Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = isOpen;
 
-            // Pause player movement and camera rotation so mouse clicks don't rotate the player
             if (playerController == null)
             {
                 playerController = FindFirstObjectByType<PlayerController>();
@@ -170,5 +248,7 @@ namespace Master.Scripts.UI
                 playerController.SetInputActive(!isOpen);
             }
         }
+
+        #endregion
     }
 }
