@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a58ad81bdda4e2bafdff3ac4f00426, type: 3}
+  m_Name: seq_Day5
+  m_EditorClassIdentifier: Project::Master.Scripts.SaveSystem.LevelSequenceData
+  levelData: {fileID: 11400000, guid: d5000000000000000000000000000000, type: 2}
+  introCutscenePrefabs:
+  - {fileID: 2779386657207624001, guid: 51c00480dcf174c7ead976b0b270ff63, type: 3}
+  - {fileID: 1195745725807122380, guid: 6713522c383dd47d298d2dbe51f6fd65, type: 3}
+  - {fileID: 5729593141918445180, guid: 150707bd2335d496cb0a35cb5d0faa62, type: 3}
+  - {fileID: 1479062973418067274, guid: c1014b487f5944afe8e9f763c2ab2d5f, type: 3}
+  outroCutscenePrefabs:
+  - {fileID: 6887084836007257703, guid: bda072630888e4c2dbec412df9c174b8, type: 3}
