@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: mat_ClubTeatroClapboard
+  m_Name: mat_WallClock
   m_Shader: {fileID: -6465566751694194690, guid: d69eeefd478a243879171c1a19fccd88, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Base_Texture:
-        m_Texture: {fileID: 2800000, guid: 8e61c51f40c5cff488217a76f315982a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 06be7df174d46324b894047a5d41fbdd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:

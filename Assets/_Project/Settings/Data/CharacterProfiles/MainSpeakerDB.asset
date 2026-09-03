@@ -37,3 +37,13 @@ MonoBehaviour:
     portraitSprite: {fileID: 21300000, guid: a8ca4bc99d767e449af5fe54e900a6e7, type: 3}
   - characterName: CAT Officer
     portraitSprite: {fileID: 21300000, guid: ce4150fc24766455e848ca6e6e8fe257, type: 3}
+  - characterName: Kalbo
+    portraitSprite: {fileID: 21300000, guid: bfc4061753a80aa478c0a96214fad5bc, type: 3}
+  - characterName: John
+    portraitSprite: {fileID: 21300000, guid: 23dafec8df5cdf74f96755f9120f85b6, type: 3}
+  - characterName: Joshua
+    portraitSprite: {fileID: 21300000, guid: 4c5f73bcb516f764dabfdf7e3db4130b, type: 3}
+  - characterName: Mika
+    portraitSprite: {fileID: 21300000, guid: ff7a7a49e3bf6a5429fb618480abd752, type: 3}
+  - characterName: Louis
+    portraitSprite: {fileID: 21300000, guid: 65fc306be6161a140a156e0b2e33cf0f, type: 3}
