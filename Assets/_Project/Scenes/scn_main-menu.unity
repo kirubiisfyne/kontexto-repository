@@ -48358,7 +48358,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.GameManager
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
-  currentLevelSequence: {fileID: 11400000, guid: bdae24b0efe08455ab1bcf1d9f68dde5, type: 2}
+  currentLevelSequence: {fileID: 0}
   currentLevelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
   cutsceneMode: 0
   currentLevel: 1
