@@ -6,7 +6,7 @@ namespace Master.Scripts.UI
 {
     /// <summary>
     /// Manages the visual list of active tasks for the current level.
-    /// Hooks into LevelTaskTracker via UnityEvents.
+    /// Hooks into LevelTaskTracker via UnityEvents and manages notebook visibility and cursor state.
     /// </summary>
     public class TaskTrackerUI : MonoBehaviour
     {
@@ -24,6 +24,10 @@ namespace Master.Scripts.UI
         [Tooltip("The boolean parameter name in the Animator Controller to trigger show/hide.")]
         [SerializeField] private string isVisibleBool = "IsVisible";
 
+        [Header("Player Control (Optional)")]
+        [Tooltip("Reference to the PlayerController to freeze movement/aim while notebook is open. Auto-detected if null.")]
+        [SerializeField] private PlayerController playerController;
+
         // Maps taskId to its visual UI component
         private Dictionary<string, TaskItemUI> activeTaskItems = new Dictionary<string, TaskItemUI>();
         
@@ -38,13 +42,27 @@ namespace Master.Scripts.UI
             {
                 panelAnimator = GetComponent<Animator>();
             }
+
+            if (playerController == null)
+            {
+                playerController = FindFirstObjectByType<PlayerController>();
+            }
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
+            // Toggle with Tab, or close with Escape if already open
+            if (Input.GetKeyDown(KeyCode.Tab) || (isPanelVisible && Input.GetKeyDown(KeyCode.Escape)))
             {
                 TogglePanel();
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (isPanelVisible)
+            {
+                SetCursorAndInputState(false);
             }
         }
 
@@ -112,6 +130,7 @@ namespace Master.Scripts.UI
             {
                 panelAnimator.SetBool(isVisibleBool, isPanelVisible);
             }
+            SetCursorAndInputState(isPanelVisible);
         }
 
         public void Show()
@@ -121,6 +140,7 @@ namespace Master.Scripts.UI
             {
                 panelAnimator.SetBool(isVisibleBool, true);
             }
+            SetCursorAndInputState(true);
         }
 
         public void Hide()
@@ -129,6 +149,25 @@ namespace Master.Scripts.UI
             if (panelAnimator != null)
             {
                 panelAnimator.SetBool(isVisibleBool, false);
+            }
+            SetCursorAndInputState(false);
+        }
+
+        private void SetCursorAndInputState(bool isOpen)
+        {
+            // Unlock & show cursor when open; lock & hide cursor when closed
+            Cursor.lockState = isOpen ? CursorLockMode.None : CursorLockMode.Locked;
+            Cursor.visible = isOpen;
+
+            // Pause player movement and camera rotation so mouse clicks don't rotate the player
+            if (playerController == null)
+            {
+                playerController = FindFirstObjectByType<PlayerController>();
+            }
+
+            if (playerController != null)
+            {
+                playerController.SetInputActive(!isOpen);
             }
         }
     }
