@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7814655017494158666}
   - component: {fileID: 2885379051634980263}
-  - component: {fileID: 9137897497998962924}
+  - component: {fileID: 5185700702112703439}
   m_Layer: 5
   m_Name: TransitionManager
   m_TagString: Untagged
@@ -155,19 +155,29 @@ MonoBehaviour:
   gracePeriodOut: 0.25
   disableAfterTransitionIn: 1
   disableAfterTransitionOut: 0
---- !u!210 &9137897497998962924
-SortingGroup:
+--- !u!223 &5185700702112703439
+Canvas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2775676250010044340}
   m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_SortAtRoot: 0
-  m_Sort3DAs2D: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &3626056857813876813
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,10 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("Ordered prefabs instantiated in sequence for the level's Outro cutscene.")]
         public List<GameObject> outroCutscenePrefabs = new List<GameObject>();
 
+        [Header("Dialogue Configuration")]
+        [Tooltip("Optional cutscene dialogue JSON asset for this day/level containing intro and outro dialogue.")]
+        public TextAsset cutsceneDialogueJson;
+
         public string SceneId => levelData != null ? levelData.sceneId : string.Empty;
         public bool HasIntro => introCutscenePrefabs != null && introCutscenePrefabs.Count > 0;
         public bool HasOutro => outroCutscenePrefabs != null && outroCutscenePrefabs.Count > 0;

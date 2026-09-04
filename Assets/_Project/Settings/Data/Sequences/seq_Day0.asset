@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a58ad81bdda4e2bafdff3ac4f00426, type: 3}
   m_Name: seq_Day0
   m_EditorClassIdentifier: Project::Master.Scripts.SaveSystem.LevelSequenceData
-  levelData: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
+  levelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   introCutscenePrefabs:
   - {fileID: 2589841583820658194, guid: e44fa3f29fddb42aaa618416de20ca87, type: 3}
   - {fileID: 2875012211614210246, guid: 725f0bc60849847899f68bc15daea291, type: 3}
   outroCutscenePrefabs:
   - {fileID: 3121032304839999921, guid: 9ca65171ccd6742e3807b7b628cbc558, type: 3}
+  cutsceneDialogueJson: {fileID: 4900000, guid: f1e2d3c4b5a697887766554433221100, type: 3}

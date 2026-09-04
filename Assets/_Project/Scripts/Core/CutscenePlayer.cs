@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Master.Scripts.SaveSystem;
+using Master.Scripts.CutsceneSystem;
 
 namespace Master.Scripts
 {
@@ -13,6 +14,9 @@ namespace Master.Scripts
     /// </summary>
     public class CutscenePlayer : MonoBehaviour
     {
+        [Header("Subtitle Integration")]
+        [SerializeField] private CutsceneSubtitleManager subtitleManager;
+
         [Header("Scene Routing")]
         [SerializeField] private string gameplaySceneName = "scn_campus";
         [SerializeField] private string cutsceneSceneName = "scn_cutscene";
@@ -54,6 +58,11 @@ namespace Master.Scripts
             if (nextButton != null) nextButton.onClick.AddListener(AdvanceShot);
             if (skipButton != null) skipButton.onClick.AddListener(SkipCutscene);
 
+            if (subtitleManager == null)
+            {
+                subtitleManager = FindObjectOfType<CutsceneSubtitleManager>();
+            }
+
             // Auto-resolve Canvas as the spawn container if not explicitly set
             if (shotSpawnContainer == null)
             {
@@ -79,6 +88,11 @@ namespace Master.Scripts
 
             ResolveActiveSequence();
             InitializeShotList();
+
+            if (subtitleManager != null && activeSequence != null && activeSequence.cutsceneDialogueJson != null)
+            {
+                subtitleManager.SetSubtitleJson(activeSequence.cutsceneDialogueJson);
+            }
 
             if (activeShots.Count == 0)
             {
@@ -171,11 +185,34 @@ namespace Master.Scripts
                     }
                 }
             }
+
+            if (subtitleManager != null)
+            {
+                subtitleManager.LoadShotDialogue(activeMode == CutsceneMode.Intro, currentShotIndex);
+            }
         }
 
         public void AdvanceShot()
         {
             if (isTransitioning || Time.unscaledTime < lastAdvanceTime + inputCooldown) return;
+
+            // 1. If subtitle text is still typing, finish typing first
+            if (subtitleManager != null && subtitleManager.IsTyping)
+            {
+                subtitleManager.FinishTyping();
+                lastAdvanceTime = Time.unscaledTime;
+                return;
+            }
+
+            // 2. If there are more lines for the current shot, show the next line
+            if (subtitleManager != null && subtitleManager.HasMoreLinesForCurrentShot)
+            {
+                subtitleManager.AdvanceLine();
+                lastAdvanceTime = Time.unscaledTime;
+                return;
+            }
+
+            // 3. Last line for this shot is complete -> advance to next shot
             lastAdvanceTime = Time.unscaledTime;
 
             currentShotIndex++;
@@ -186,6 +223,7 @@ namespace Master.Scripts
             }
             else
             {
+                if (subtitleManager != null) subtitleManager.HideDialogue();
                 StartCoroutine(CompleteCutsceneRoutine());
             }
         }
@@ -193,6 +231,7 @@ namespace Master.Scripts
         public void SkipCutscene()
         {
             if (isTransitioning) return;
+            if (subtitleManager != null) subtitleManager.HideDialogue();
             StartCoroutine(CompleteCutsceneRoutine());
         }
 

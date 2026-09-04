@@ -20,3 +20,4 @@ MonoBehaviour:
   - {fileID: 2746923855727002602, guid: 59fc468fa3b7440a4827f52ad103ad12, type: 3}
   - {fileID: 5698275931810963529, guid: abc5f7b203ccb4eb7bd503dbba286507, type: 3}
   - {fileID: 5975924254288483166, guid: 210f3fb855f0c40dba503a7a459dfc39, type: 3}
+  cutsceneDialogueJson: {fileID: 4900000, guid: d7e2d3c4b5a697887766554433221107, type: 3}
