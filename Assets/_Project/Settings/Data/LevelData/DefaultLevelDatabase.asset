@@ -13,4 +13,11 @@ MonoBehaviour:
   m_Name: DefaultLevelDatabase
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.SaveSystem.LevelDatabase
   levels:
+  - {fileID: 11400000, guid: bc03761b906814245bebf3729ea301b0, type: 2}
   - {fileID: 11400000, guid: bdae24b0efe08455ab1bcf1d9f68dde5, type: 2}
+  - {fileID: 11400000, guid: 38b8d49d24d0142b6ae907d87b7454e1, type: 2}
+  - {fileID: 11400000, guid: d651c6aa53bbe4da3bf5e0db504e92ea, type: 2}
+  - {fileID: 11400000, guid: 3c88146895e6f497faa7745c2044cd4d, type: 2}
+  - {fileID: 11400000, guid: bd2b303c1c6934dbbac0ae4814b04e0e, type: 2}
+  - {fileID: 11400000, guid: 12ebe137ff55f4ff4b1f4e82d6a842f1, type: 2}
+  - {fileID: 11400000, guid: f7f7f7c050f884ef3948071a9a4fa0a0, type: 2}

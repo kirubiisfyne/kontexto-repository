@@ -1,49 +1,68 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Newtonsoft.Json.Linq;
 
 namespace Master.Scripts.CutsceneSystem
 {
     /// <summary>
-    /// Root object for cutscene subtitle JSON mapping.
-    /// Supports both "cutscenes" and "conversationMap" keys for JSON consistency with DialogueManager.
+    /// Root object for cutscene dialogue JSON mapping.
+    /// Supports multiple lines per shot: intro[i] or outro[i] contains a list of lines for shot index i.
     /// </summary>
     [Serializable]
-    public class CutsceneSubtitleMap
+    public class CutsceneDialogueData
     {
-        public List<CutsceneSequence> cutscenes;
-        public List<CutsceneSequence> conversationMap;
+        public List<List<string>> intro = new List<List<string>>();
+        public List<List<string>> outro = new List<List<string>>();
 
         /// <summary>
-        /// Returns the loaded sequences regardless of whether "cutscenes" or "conversationMap" key was used.
+        /// Retrieves the list of lines for the specified shot index.
         /// </summary>
-        public List<CutsceneSequence> GetSequences()
+        public List<string> GetLinesForShot(bool isIntro, int shotIndex)
         {
-            if (cutscenes != null && cutscenes.Count > 0) return cutscenes;
-            if (conversationMap != null && conversationMap.Count > 0) return conversationMap;
-            return new List<CutsceneSequence>();
+            var list = isIntro ? intro : outro;
+            if (list != null && shotIndex >= 0 && shotIndex < list.Count)
+            {
+                return list[shotIndex];
+            }
+            return null;
         }
-    }
 
-    /// <summary>
-    /// Represents a single cutscene shot or sequence of lines.
-    /// </summary>
-    [Serializable]
-    public class CutsceneSequence
-    {
-        public string name;
-        public List<CutsceneLine> lines = new List<CutsceneLine>();
-    }
+        /// <summary>
+        /// Flexible parser supporting both arrays of line arrays and arrays of single strings.
+        /// </summary>
+        public static CutsceneDialogueData Parse(string jsonContent)
+        {
+            var data = new CutsceneDialogueData();
+            if (string.IsNullOrEmpty(jsonContent)) return data;
 
-    /// <summary>
-    /// A single line of cutscene subtitle with optional duration.
-    /// </summary>
-    [Serializable]
-    public class CutsceneLine
-    {
-        [TextArea(2, 4)]
-        public string text;
-        [Tooltip("Optional custom duration in seconds. If 0 or negative, manager uses default duration.")]
-        public float duration;
+            var root = JObject.Parse(jsonContent);
+            ParseSection(root["intro"], data.intro);
+            ParseSection(root["outro"], data.outro);
+
+            return data;
+        }
+
+        private static void ParseSection(JToken token, List<List<string>> targetList)
+        {
+            if (token == null || !token.HasValues) return;
+
+            foreach (var item in token)
+            {
+                if (item is JArray arr)
+                {
+                    var lines = new List<string>();
+                    foreach (var lineToken in arr)
+                    {
+                        lines.Add(lineToken.ToString());
+                    }
+                    targetList.Add(lines);
+                }
+                else
+                {
+                    // Fallback for single string item
+                    targetList.Add(new List<string> { item.ToString() });
+                }
+            }
+        }
     }
 }

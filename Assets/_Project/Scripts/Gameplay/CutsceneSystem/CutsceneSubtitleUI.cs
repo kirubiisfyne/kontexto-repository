@@ -6,7 +6,7 @@ namespace Master.Scripts.CutsceneSystem
 {
     /// <summary>
     /// Clean, cinematic subtitle presenter for cutscenes.
-    /// Handles typewriter reveals and smooth alpha fading.
+    /// Handles typewriter character reveals and smooth alpha fading.
     /// </summary>
     public class CutsceneSubtitleUI : MonoBehaviour
     {
@@ -15,6 +15,8 @@ namespace Master.Scripts.CutsceneSystem
         [SerializeField] private TMP_Text subtitleText;
 
         [Header("Animation & Settings")]
+        [Tooltip("Delay in seconds before the typewriter begins typing the first character.")]
+        [SerializeField] private float initialTypingDelay = 0.5f;
         [Range(0.01f, 0.1f)] [SerializeField] private float typingCharDelay = 0.03f;
         [SerializeField] private float fadeDuration = 0.3f;
         [SerializeField] private bool useTypewriter = true;
@@ -36,10 +38,16 @@ namespace Master.Scripts.CutsceneSystem
         }
 
         /// <summary>
-        /// Displays the given subtitle line with optional typing animation.
+        /// Displays the given subtitle text with typewriter reveal and alpha fade.
         /// </summary>
-        public void DisplayLine(CutsceneLine line)
+        public void DisplayLine(string sentence)
         {
+            if (string.IsNullOrEmpty(sentence))
+            {
+                Hide();
+                return;
+            }
+
             if (canvasGroup != null && canvasGroup.alpha < 1f)
             {
                 FadeTo(1f);
@@ -49,11 +57,11 @@ namespace Master.Scripts.CutsceneSystem
 
             if (useTypewriter && subtitleText != null)
             {
-                typingCoroutine = StartCoroutine(TypewriterRoutine(line.text));
+                typingCoroutine = StartCoroutine(TypewriterRoutine(sentence));
             }
             else if (subtitleText != null)
             {
-                subtitleText.text = line.text;
+                subtitleText.text = sentence;
                 IsTyping = false;
             }
         }
@@ -88,9 +96,12 @@ namespace Master.Scripts.CutsceneSystem
 
             subtitleText.maxVisibleCharacters = 0;
             subtitleText.text = currentFullSentence;
-            
-            // Force mesh update once before revealing characters to avoid garbage during reveal
             subtitleText.ForceMeshUpdate();
+
+            if (initialTypingDelay > 0f)
+            {
+                yield return new WaitForSeconds(initialTypingDelay);
+            }
 
             var wait = new WaitForSeconds(typingCharDelay);
 

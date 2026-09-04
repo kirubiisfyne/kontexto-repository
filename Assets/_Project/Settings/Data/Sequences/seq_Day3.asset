@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 6289898787864667271, guid: 0f0dc1cf5a9d846ddb44bd570ac65526, type: 3}
   outroCutscenePrefabs:
   - {fileID: 5018178031228150088, guid: 4a2a07cea05ac4df5a31a62dff8103f9, type: 3}
+  cutsceneDialogueJson: {fileID: 4900000, guid: d3e2d3c4b5a697887766554433221103, type: 3}
