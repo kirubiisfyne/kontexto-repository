@@ -9,6 +9,7 @@ public class MainMenuController : MonoBehaviour
 {
     [Header("Scene Configuration")]
     [SerializeField] private string gameplaySceneName = "scn_campus";
+    [SerializeField] private string cutsceneSceneName = "scn_cutscene";
 
     [Header("Level Configuration")]
     [Tooltip("The central LevelDatabase to determine starting/continuing days.")]
@@ -59,9 +60,14 @@ public class MainMenuController : MonoBehaviour
         SaveManager.DeleteSave();
 
         // Set initial starting level (Index 0) in GameManager
-        if (GameManager.Instance != null && levelDatabase != null && levelDatabase.Count > 0)
+        LevelSequenceData startingSequence = null;
+        if (levelDatabase != null && levelDatabase.Count > 0)
         {
-            GameManager.Instance.SetLevel(levelDatabase.GetLevelByIndex(0));
+            startingSequence = levelDatabase.GetLevelByIndex(0);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SetLevel(startingSequence, CutsceneMode.Intro);
+            }
         }
 
         // Play the transition animation if the TransitionManager exists in the scene
@@ -74,8 +80,15 @@ public class MainMenuController : MonoBehaviour
             //Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
         }
 
-        //Debug.Log("Transition complete. Loading gameplay scene...");
-        SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+        // If level 0 has intro cutscenes, load cutscene scene; otherwise go directly to gameplay
+        if (startingSequence != null && startingSequence.HasIntro)
+        {
+            SceneManager.LoadScene(cutsceneSceneName, LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+        }
     }
 
     public void ContinueGame()
@@ -87,10 +100,14 @@ public class MainMenuController : MonoBehaviour
     {
         // Resolve resume level based on save progress
         PlayerData data = SaveManager.Load();
-        if (GameManager.Instance != null && levelDatabase != null)
+        LevelSequenceData resumeSequence = null;
+        if (levelDatabase != null)
         {
-            LevelData resumeLevel = levelDatabase.GetFirstIncompleteLevel(data);
-            GameManager.Instance.SetLevel(resumeLevel);
+            resumeSequence = levelDatabase.GetFirstIncompleteLevel(data);
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.SetLevel(resumeSequence, CutsceneMode.Intro);
+            }
         }
 
         if (Master.Scripts.TransitionManager.Instance != null)
@@ -98,7 +115,20 @@ public class MainMenuController : MonoBehaviour
             yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
         }
 
-        SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+        // If player already has a mid-day saved position, resume in gameplay scene directly
+        if (data != null && data.HasSavedPosition())
+        {
+            SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+        }
+        // Otherwise, if this day has an Intro cutscene, play it first
+        else if (resumeSequence != null && resumeSequence.HasIntro)
+        {
+            SceneManager.LoadScene(cutsceneSceneName, LoadSceneMode.Single);
+        }
+        else
+        {
+            SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+        }
     }
 
     /// Swaps the active panel from the Main Menu to the Options Menu.
