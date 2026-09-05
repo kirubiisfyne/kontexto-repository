@@ -1,0 +1,17 @@
+{
+  "cutscenes": [
+    {
+      "name": "Outro_Shot_1_ParagonOffice",
+      "lines": [
+        {
+          "text": "Good work on your first day, Maya.",
+          "duration": 3.0
+        },
+        {
+          "text": "Thank you, ma'am! See you tomorrow.",
+          "duration": 2.5
+        }
+      ]
+    }
+  ]
+}

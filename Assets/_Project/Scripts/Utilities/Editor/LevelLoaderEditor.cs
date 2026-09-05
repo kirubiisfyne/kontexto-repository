@@ -82,20 +82,26 @@ namespace Master.Scripts.Editor
                     EditorGUI.indentLevel++;
                     for (int i = 0; i < loader.levelDatabase.Count; i++)
                     {
-                        var level = loader.levelDatabase.GetLevelByIndex(i);
-                        if (level == null) continue;
+                        var sequence = loader.levelDatabase.GetLevelByIndex(i);
+                        if (sequence == null) continue;
 
-                        bool isCurrent = loader.ActiveLevelData == level;
+                        var level = sequence.levelData;
+                        bool isCurrent = level != null && loader.ActiveLevelData == level;
+                        string sceneId = level != null ? level.sceneId : "no LevelData";
+                        string cutsceneInfo = $" [In: {sequence.introCutscenePrefabs.Count}, Out: {sequence.outroCutscenePrefabs.Count}]";
 
                         EditorGUILayout.BeginHorizontal();
-                        string label = isCurrent ? $"► [{i}] {level.name} ({level.sceneId})" : $"  [{i}] {level.name} ({level.sceneId})";
+                        string label = isCurrent ? $"► [{i}] {sequence.name} ({sceneId}){cutsceneInfo}" : $"  [{i}] {sequence.name} ({sceneId}){cutsceneInfo}";
                         EditorGUILayout.LabelField(label, isCurrent ? EditorStyles.boldLabel : EditorStyles.label);
 
                         if (Application.isPlaying)
                         {
                             if (GUILayout.Button("Load This Day", GUILayout.Width(110)))
                             {
-                                loader.LoadLevel(level);
+                                if (level != null)
+                                {
+                                    loader.LoadLevel(level);
+                                }
                             }
                         }
                         else
@@ -103,6 +109,7 @@ namespace Master.Scripts.Editor
                             if (GUILayout.Button("Set As Override", GUILayout.Width(110)))
                             {
                                 Undo.RecordObject(loader, "Set Editor Override Level");
+                                loader.editorOverrideSequence = sequence;
                                 loader.editorOverrideLevel = level;
                             }
                         }
