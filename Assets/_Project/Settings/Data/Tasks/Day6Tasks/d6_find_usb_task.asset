@@ -15,7 +15,8 @@ MonoBehaviour:
   taskId: d6_find_usb_task
   taskName: Search Upper Library for Enzo's Backup USB.
   description: Kim is panicking at the Admin entrance. Go to the Upper Library, retrieve
-    the USB from the AP Style Guide 2018 in the reference stacks, and report back to Kim.
+    the USB from the AP Style Guide 2018 in the reference stacks, and report back
+    to Kim.
   prerequisite:
     task: {fileID: 0}
     requiredStatus: 0
@@ -26,6 +27,7 @@ MonoBehaviour:
       notificationDisplayName: Find Enzo's backup USB in the Upper Library and report
         back to Kim.
       requiredAmount: 1
+  startsActive: 1
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
