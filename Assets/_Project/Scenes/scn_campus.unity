@@ -57335,8 +57335,8 @@ MonoBehaviour:
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   defaultLevelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   cutsceneSceneName: scn_cutscene
-  editorOverrideSequence: {fileID: 0}
-  editorOverrideLevel: {fileID: 0}
+  editorOverrideSequence: {fileID: 11400000, guid: 3c88146895e6f497faa7745c2044cd4d, type: 2}
+  editorOverrideLevel: {fileID: 11400000, guid: d4000000000000000000000000000004, type: 2}
   currentLevelData: {fileID: 0}
 --- !u!114 &986174011
 MonoBehaviour:
