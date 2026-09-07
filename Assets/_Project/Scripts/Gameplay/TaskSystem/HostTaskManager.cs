@@ -59,6 +59,18 @@ namespace Master.Scripts.TaskSystem
             // Initialization logic (if any)
         }
 
+        private void Start()
+        {
+            // Standalone scene / editor testing fallback without LevelTaskTracker:
+            if ((hostType == HostType.Giver || hostType == HostType.Both) && status == TaskStatus.Inactive)
+            {
+                if (task != null && task.startsActive && !HasUnmetPrerequisite())
+                {
+                    StartTask();
+                }
+            }
+        }
+
         /// <summary>
         /// Handles the task-related interaction logic.
         /// </summary>
