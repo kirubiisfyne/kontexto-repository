@@ -126,11 +126,11 @@ namespace Master.Scripts.SaveSystem
                 }
             }
 
-            // 1. Initialize Task Tracker (spawns prefabs and restores state)
-            taskTracker.Initialize(currentLevelData, playerData, SaveGame);
-
-            // 2. Restore player transform or place at spawn anchor
+            // 1. Restore player transform or place at spawn anchor FIRST
             RestorePlayerPosition();
+
+            // 2. Initialize Task Tracker (spawns prefabs, auto-starts active tasks, and restores state)
+            taskTracker.Initialize(currentLevelData, playerData, SaveGame);
 
             // 3. Apply room active/inactive states
             ApplyRoomStates();
@@ -236,6 +236,18 @@ namespace Master.Scripts.SaveSystem
 
             var cc = player.GetComponent<CharacterController>();
             if (cc != null) cc.enabled = false;
+
+            #if UNITY_EDITOR
+            // When explicitly testing a level in the Editor with an override,
+            // always prioritize the level's spawn anchor over stale saved coordinates.
+            if ((editorOverrideLevel != null || editorOverrideSequence != null) && currentLevelData != null && currentLevelData.playerSpawnAnchorPrefab != null)
+            {
+                player.transform.position = currentLevelData.playerSpawnAnchorPrefab.transform.position;
+                player.transform.rotation = currentLevelData.playerSpawnAnchorPrefab.transform.rotation;
+                if (cc != null) cc.enabled = true;
+                return;
+            }
+            #endif
 
             // 1. Restore saved player transform if save data exists for this scene
             if (playerData != null && playerData.currentScene == sceneId && playerData.HasSavedPosition())
