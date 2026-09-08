@@ -5,43 +5,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Rookie! Or should I say, Junior Encoder..."
+          "text": "Don't stand around, Junior Encoder. Remember what we discussed."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Don’t get too comfortable."
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "Our computers are lagging, the printer is out of ink..."
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "...and the administration has quietly 'paused' our funding for the Press Conference."
-        },
-        {
-          "speaker": "Kiko",
-          "text": "Whatt?! They can do that, ma'am?"
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "They call it an 'administrative review'."
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "I’ve drafted a formal Letter of Request to School Director Mr. Reyes."
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "Right now, it’s a walls-of-text mess."
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "If it doesn't look strictly professional, he will throw it in the trash."
-        },
-        {
-          "speaker": "Mrs. Santos",
-          "text": "Also, it's missing the official Student Council tracking code. Go find Leila in the classroom—she manages the budget logs."
+          "text": "The draft letter is missing the official Student Council tracking code. Go find Leila in the classroom—she manages the budget logs."
         },
         {
           "speaker": "Mrs. Santos",
@@ -49,15 +17,7 @@
         },
         {
           "speaker": "Kiko",
-          "text": "<color=#707070><i>An official letter to the big boss?</i></color>"
-        },
-        {
-          "speaker": "Kiko",
-          "text": "<color=#707070><i>This is looking incredibly intimidating...</i></color>"
-        },
-        {
-          "speaker": "Kiko",
-          "text": "<color=#707070><i>Time to put my typing skills to the test.</i></color>"
+          "text": "<color=#707070><i>Right on it, Ma'am. Let's find Leila.</i></color>"
         }
       ]
     },
@@ -87,15 +47,15 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Good job, Junior Encoder."
+          "text": "Exquisite. The bold subject line gives it immediate urgency, and the designations look authoritative."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "I will deliver this to the Admin Office myself."
+          "text": "Mr. Reyes won't be able to ignore this. Excellent work, Junior Encoder."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Go home and rest up, Rookie. We've officially drawn a line in the sand."
+          "text": "You are dismissed for today."
         }
       ]
     }

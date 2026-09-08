@@ -1,0 +1,80 @@
+{
+  "conversationMap": [
+    {
+      "name": "Reyes_Inactive",
+      "lines": [
+        {
+          "speaker": "Mr. Reyes",
+          "text": "The morning submission deadline is in thirty minutes. Why are you loitering outside my office instead of preparing your final submission?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'm heading back to the publication office right now, Sir."
+        }
+      ]
+    },
+    {
+      "name": "Reyes_Waiting",
+      "lines": [
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Where is the Master Portfolio? I asked for the final print, not empty hands. Go get the document."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Right away, Sir. The proof is on the desk."
+        }
+      ]
+    },
+    {
+      "name": "Reyes_Submission",
+      "lines": [
+        {
+          "speaker": "Mr. Reyes",
+          "text": "You’re exactly on time. I assume this 'Master Zine' is as perfect as you claimed it would be?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "See for yourself, Sir. Every margin is aligned, the typographic hierarchy is strictly enforced, and the reporting is accurate."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Let me see that folder..."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "..."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "..."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "..."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "The layout... it's immaculate. You didn't just write stories; you gave them the discipline and structure they deserved."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "Consider your clearance signed. The Paragon still has a place at Likha High."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Thank you, Sir. We won't let you down."
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Reyes_Idle",
+    "lines": [
+      {
+        "speaker": "Mr. Reyes",
+        "text": "Your clearance has been approved. Go celebrate with your editorial team."
+      }
+    ]
+  }
+}

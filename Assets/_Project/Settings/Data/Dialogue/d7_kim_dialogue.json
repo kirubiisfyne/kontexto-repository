@@ -1,0 +1,39 @@
+{
+  "conversationMap": [
+    {
+      "name": "Staffer_Opening",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "This is it, Chief. The Master Zine is printed and ready. The fate of The Paragon rests on what's inside this folder."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "After all the editing, formatting, and late nights... it all comes down to this. I'm taking this straight to Mr. Reyes in the Admin Office."
+        },
+        {
+          "speaker": "Kim",
+          "text": "Good luck, Kiko! Don't let him intimidate you—our layout is solid and follows every rule!"
+        }
+      ]
+    },
+    {
+      "name": "Staffer_Waiting",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "Hurry over to the Admin Office before the morning submission window closes!"
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Staffer_Idle",
+    "lines": [
+      {
+        "speaker": "Kim",
+        "text": "Go make us proud at the Admin Office!"
+      }
+    ]
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "sender": "The Paragon Editorial Board",
+  "subject": "NSPC Master Portfolio Submission",
+  "instructionString": "Editor-in-Chief,\n\nSynthesize all formatting standards for the final NSPC Master Portfolio:\n\n1. Center and format the Master Title in Arial 18pt Bold.\n2. Center the Subtitle / Byline in Arial 12pt Italic.\n3. Format Section Headings in Arial 14pt Bold with Space Before.\n4. Format News & Investigation Highlights as a BULLETED LIST (•).\n5. Format the Official Action Demands as a NUMBERED LIST (1, 2, 3).\n\n- Mrs. Santos & The Paragon Staff",
+  "startingTextBlocks": [
+    {
+      "text": "THE PARAGON: 2026 NSPC SPECIAL EDITION",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Official Campus Journal of Likha High School | Final Submission Portfolio",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "INVESTIGATIVE REPORT: CAMPUS TRANSPARENCY & INTEGRITY",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "An exhaustive multi-part inquiry into budget reallocation and student press rights.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Key Investigation Findings:",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Official gasoline purchase receipts verify unapproved off-campus travel expenses.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Library archive records confirm Article IV bilateral consent protections.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Action Plan for Student Governance:",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Submit the finalized Master Zine proof directly to the Administration Office.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    },
+    {
+      "text": "Present the audited expenditure report to the Student Council for review.",
+      "fontFace": "Arial",
+      "fontSize": 12
+    }
+  ],
+  "answerKey": [
+    {
+      "targetTextSnippet": "THE PARAGON: 2026 NSPC SPECIAL EDITION",
+      "requiredSize": 18,
+      "requireBold": true,
+      "requiredAlignment": 4
+    },
+    {
+      "targetTextSnippet": "Official Campus Journal of Likha High School | Final Submission Portfolio",
+      "requiredSize": 12,
+      "requireItalic": true,
+      "requiredAlignment": 4
+    },
+    {
+      "targetTextSnippet": "INVESTIGATIVE REPORT: CAMPUS TRANSPARENCY & INTEGRITY",
+      "requiredSize": 14,
+      "requireBold": true,
+      "requireSpaceBefore": true
+    },
+    {
+      "targetTextSnippet": "Official gasoline purchase receipts verify unapproved off-campus travel expenses.",
+      "requiredListType": 1
+    },
+    {
+      "targetTextSnippet": "Library archive records confirm Article IV bilateral consent protections.",
+      "requiredListType": 1
+    },
+    {
+      "targetTextSnippet": "Submit the finalized Master Zine proof directly to the Administration Office.",
+      "requiredListType": 2
+    },
+    {
+      "targetTextSnippet": "Present the audited expenditure report to the Student Council for review.",
+      "requiredListType": 2
+    }
+  ]
+}

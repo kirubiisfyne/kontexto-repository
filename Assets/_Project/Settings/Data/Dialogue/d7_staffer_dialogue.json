@@ -1,0 +1,39 @@
+{
+  "conversationMap": [
+    {
+      "name": "Staffer_Opening",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "This is it, Chief. The printer just finished with the final proof. Grab the Master Portfolio folder from the desk!"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "After all the editing and formatting... it all comes down to this. I'll grab the folder and take it straight to Mr. Reyes in the Admin Office."
+        },
+        {
+          "speaker": "Kim",
+          "text": "Good luck, Kiko! Don't let him intimidate you—our layout is solid!"
+        }
+      ]
+    },
+    {
+      "name": "Staffer_Waiting",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "Grab the folder from the desk and hurry to the Admin Office before the morning submission window closes!"
+        }
+      ]
+    }
+  ],
+  "idleDialogue": {
+    "name": "Staffer_Idle",
+    "lines": [
+      {
+        "speaker": "Kim",
+        "text": "Go make us proud at the Admin Office!"
+      }
+    ]
+  }
+}
