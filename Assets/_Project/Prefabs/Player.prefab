@@ -462,7 +462,7 @@ MonoBehaviour:
   walkSpeed: 0.4
   runSpeed: 0.8
   jumpHeight: 1
-  sensitivity: 0.4
+  sensitivity: 0.1
   animator: {fileID: 8402723905735560182}
   animationLerpTime: 0.1
 --- !u!114 &5343475780188079556
@@ -477,9 +477,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465e8752e5a2848e0b7d443856a7cc57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.Player.PlayerFootsteps
-  terrainStepName: StepTerrain
-  floorStepName: StepFloor
-  footstepVolume: 0.15
+  audioSource: {fileID: 0}
+  terrainSFX:
+  - {fileID: 8300000, guid: eb7cbec38419b46bebb8fea81862c516, type: 3}
+  - {fileID: 8300000, guid: 58095b302eddd4800bd13046ed95ce01, type: 3}
+  - {fileID: 8300000, guid: 9509d11b9a74947f19b05b932f99add0, type: 3}
+  - {fileID: 8300000, guid: 1bd58f4dc81ab40779fd49c0efcbe336, type: 3}
+  floorSFX:
+  - {fileID: 8300000, guid: bc9ad3491121a4644b1c6a9ba88f9f35, type: 3}
+  - {fileID: 8300000, guid: 17ddab69e7a8a4ad5bba8265d42467c6, type: 3}
+  - {fileID: 8300000, guid: d01ee89bda350467c81e5cb3de6f34be, type: 3}
+  - {fileID: 8300000, guid: 45c8d4b8014484d7ca687b17711d51dd, type: 3}
+  footstepVolume: 0.175
+  volumeJitter: 0.15
+  basePitch: 1
+  pitchJitter: 0.05
   walkStepInterval: 0.45
   sprintStepInterval: 0.25
 --- !u!114 &4484365717201957645
@@ -1161,8 +1173,8 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4cc0e23dd56b94e46a223b9b4b36f8a8, type: 2}
-  - {fileID: 2100000, guid: 4cc0e23dd56b94e46a223b9b4b36f8a8, type: 2}
-  - {fileID: 2100000, guid: 4cc0e23dd56b94e46a223b9b4b36f8a8, type: 2}
+  - {fileID: 2100000, guid: 849e72c5524fa45d08f4553541906ccd, type: 2}
+  - {fileID: 2100000, guid: 849e72c5524fa45d08f4553541906ccd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
