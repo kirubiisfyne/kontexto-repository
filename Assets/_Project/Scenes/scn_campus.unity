@@ -10816,11 +10816,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8438246290020256477, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
   m_PrefabInstance: {fileID: 1347280646}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &154815811 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8402723905735560182, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-  m_PrefabInstance: {fileID: 1347280646}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &155099920
 GameObject:
   m_ObjectHideFlags: 0
@@ -57335,8 +57330,8 @@ MonoBehaviour:
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   defaultLevelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   cutsceneSceneName: scn_cutscene
-  editorOverrideSequence: {fileID: 11400000, guid: 3c88146895e6f497faa7745c2044cd4d, type: 2}
-  editorOverrideLevel: {fileID: 11400000, guid: d4000000000000000000000000000004, type: 2}
+  editorOverrideSequence: {fileID: 0}
+  editorOverrideLevel: {fileID: 0}
   currentLevelData: {fileID: 0}
 --- !u!114 &986174011
 MonoBehaviour:
@@ -80055,85 +80050,13 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1566913693677451294, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 154815811}
-    - target: {fileID: 4066892959265511203, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 3
+      propertyPath: sensitivity
+      value: 0.2
       objectReference: {fileID: 0}
-    - target: {fileID: 4066892959265511203, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'm_Materials.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 849e72c5524fa45d08f4553541906ccd, type: 2}
-    - target: {fileID: 4066892959265511203, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'm_Materials.Array.data[2]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 849e72c5524fa45d08f4553541906ccd, type: 2}
     - target: {fileID: 4534763766120316799, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4534763766120316799, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: volumeJitter
-      value: 0.15
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: footstepVolume
-      value: 0.175
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: walkStepInterval
-      value: 0.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: sprintStepInterval
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: floorSFX.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: terrainSFX.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'floorSFX.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: bc9ad3491121a4644b1c6a9ba88f9f35, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'floorSFX.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 17ddab69e7a8a4ad5bba8265d42467c6, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'floorSFX.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: d01ee89bda350467c81e5cb3de6f34be, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'floorSFX.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 45c8d4b8014484d7ca687b17711d51dd, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'terrainSFX.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8300000, guid: eb7cbec38419b46bebb8fea81862c516, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'terrainSFX.Array.data[1]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 58095b302eddd4800bd13046ed95ce01, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'terrainSFX.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 9509d11b9a74947f19b05b932f99add0, type: 3}
-    - target: {fileID: 5343475780188079556, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
-      propertyPath: 'terrainSFX.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 1bd58f4dc81ab40779fd49c0efcbe336, type: 3}
     - target: {fileID: 8333583239881714959, guid: 7fb227fa7a1964523ac4bb321135ec35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
