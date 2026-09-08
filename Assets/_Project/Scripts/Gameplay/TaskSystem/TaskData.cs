@@ -18,6 +18,10 @@ namespace Master.Scripts.TaskSystem
         public TaskPrerequisite prerequisite;
         public TaskRequirements requirements;
 
+        [Header("Lifecycle")]
+        [Tooltip("If true, this task will automatically start as Active upon level load (or when its prerequisites are met), without requiring an initial NPC interaction.")]
+        public bool startsActive;
+
         [Header("Player Initial Transform (Optional)")]
         [Tooltip("If true, positions the player at this location when starting/spawning for this task.")]
         public bool setPlayerInitialTransform;

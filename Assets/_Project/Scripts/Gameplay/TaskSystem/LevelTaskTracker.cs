@@ -109,11 +109,19 @@ namespace Master.Scripts.SaveSystem
                             // Restore active state
                             mgr.StartTask();
                         }
+                        else if (mgr.task.startsActive && !mgr.HasUnmetPrerequisite())
+                        {
+                            // Automatically start active on level load
+                            mgr.StartTask();
+                        }
                     }
                 }
                 
                 // Synchronous instantiation to hide spikes behind the black loading screen
             }
+
+            // Auto-start any chained tasks configured with startsActive
+            CheckPendingAutoStartTasks();
 
             //Debug.Log($"LevelTaskTracker: Spawned {spawnedGivers.Count} task(s) for '{sceneId}'.");
 
@@ -183,6 +191,29 @@ namespace Master.Scripts.SaveSystem
 
             // ALWAYS notify the UI that it's completed, even if we just restored it from a save!
             onTaskCompletedEvent?.Invoke(taskId);
+
+            // Check if completing this task unlocks any chained tasks marked startsActive
+            CheckPendingAutoStartTasks();
+        }
+
+        /// <summary>
+        /// Activates any spawned tasks whose TaskData has startsActive enabled and whose prerequisites are met.
+        /// </summary>
+        public void CheckPendingAutoStartTasks()
+        {
+            bool anyStarted;
+            do
+            {
+                anyStarted = false;
+                foreach (var mgr in spawnedGivers)
+                {
+                    if (mgr != null && mgr.task != null && mgr.status == TaskStatus.Inactive && mgr.task.startsActive && !mgr.HasUnmetPrerequisite())
+                    {
+                        mgr.StartTask();
+                        anyStarted = true;
+                    }
+                }
+            } while (anyStarted);
         }
 
         /// <summary>
