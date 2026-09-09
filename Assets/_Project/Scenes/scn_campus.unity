@@ -49830,7 +49830,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &845136940
 RectTransform:
   m_ObjectHideFlags: 0
@@ -57330,8 +57330,8 @@ MonoBehaviour:
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   defaultLevelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   cutsceneSceneName: scn_cutscene
-  editorOverrideSequence: {fileID: 11400000, guid: 12ebe137ff55f4ff4b1f4e82d6a842f1, type: 2}
-  editorOverrideLevel: {fileID: 11400000, guid: d6000000000000000000000000000000, type: 2}
+  editorOverrideSequence: {fileID: 11400000, guid: bdae24b0efe08455ab1bcf1d9f68dde5, type: 2}
+  editorOverrideLevel: {fileID: 11400000, guid: 879b4557cc47b4a7e88813c8eb137453, type: 2}
   currentLevelData: {fileID: 0}
 --- !u!114 &986174011
 MonoBehaviour:
