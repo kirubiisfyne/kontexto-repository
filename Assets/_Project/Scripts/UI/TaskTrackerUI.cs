@@ -57,7 +57,15 @@ namespace Master.Scripts.UI
         
         private int activeUncompletedCount = 0;
         private bool isPanelVisible = false;
+        private bool isInitialized = false;
         private Coroutine notificationCoroutine;
+
+        private IEnumerator Start()
+        {
+            // Wait until the end of the first frame so all scene loading and task restoration completes
+            yield return new WaitForEndOfFrame();
+            isInitialized = true;
+        }
 
         private void Awake()
         {
@@ -71,7 +79,18 @@ namespace Master.Scripts.UI
                 playerController = FindFirstObjectByType<PlayerController>();
             }
 
-            if (notificationRoot != null && notificationAnimator == null)
+            // Auto-resolve notification references if only one was assigned
+            if (notificationRoot == null && notificationAnimator != null)
+            {
+                notificationRoot = notificationAnimator.gameObject;
+            }
+            else if (notificationAnimator == null && notificationRoot != null)
+            {
+                notificationAnimator = notificationRoot.GetComponent<Animator>();
+            }
+
+            // Ensure the notification panel starts disabled by default on scene load
+            if (notificationRoot != null)
             {
                 notificationRoot.SetActive(false);
             }
@@ -99,6 +118,11 @@ namespace Master.Scripts.UI
 
         public void AddTask(HostTaskManager mgr)
         {
+            AddTask(mgr, isInitialized);
+        }
+
+        public void AddTask(HostTaskManager mgr, bool showNotification)
+        {
             if (mgr == null || mgr.task == null || string.IsNullOrEmpty(mgr.task.taskId)) return;
 
             if (activeTaskItems.ContainsKey(mgr.task.taskId)) return;
@@ -120,7 +144,11 @@ namespace Master.Scripts.UI
             activeUncompletedCount++;
             UpdateBadge();
 
-            TriggerNotification(mgr.task.taskName);
+            // Only show the banner if requested and not during scene load initialization
+            if (showNotification)
+            {
+                TriggerNotification(mgr.task.taskName);
+            }
         }
 
         public void ReturnToPool(string taskId)
@@ -167,23 +195,30 @@ namespace Master.Scripts.UI
 
         private IEnumerator NotificationRoutine()
         {
+            // 1. Enable the notification GameObject before playing the transition-in animation
             if (notificationRoot != null)
             {
                 notificationRoot.SetActive(true);
             }
 
+            // 2. Trigger transition-in animation
             if (notificationAnimator != null)
             {
                 notificationAnimator.SetBool(notificationVisibleBool, true);
             }
 
+            // 3. Wait on screen for the specified duration
             yield return new WaitForSeconds(notificationDuration);
 
+            // 4. Trigger transition-out animation and wait for it to complete
             if (notificationAnimator != null)
             {
                 notificationAnimator.SetBool(notificationVisibleBool, false);
+                yield return new WaitForSeconds(0.5f);
             }
-            else if (notificationRoot != null)
+
+            // 5. Disable the GameObject again to keep it hidden
+            if (notificationRoot != null)
             {
                 notificationRoot.SetActive(false);
             }
