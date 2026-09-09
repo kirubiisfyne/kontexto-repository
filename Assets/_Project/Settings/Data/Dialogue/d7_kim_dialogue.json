@@ -4,7 +4,7 @@
       "name": "Staffer_Opening",
       "lines": [
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "This is it, Chief. The Master Zine is printed and ready. The fate of The Paragon rests on what's inside this folder."
         },
         {
@@ -12,7 +12,7 @@
           "text": "After all the editing, formatting, and late nights... it all comes down to this. I'm taking this straight to Mr. Reyes in the Admin Office."
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Good luck, Kiko! Don't let him intimidate you—our layout is solid and follows every rule!"
         }
       ]
@@ -21,7 +21,7 @@
       "name": "Staffer_Waiting",
       "lines": [
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Hurry over to the Admin Office before the morning submission window closes!"
         }
       ]
@@ -31,7 +31,7 @@
     "name": "Staffer_Idle",
     "lines": [
       {
-        "speaker": "Kim",
+        "speaker": "Leila",
         "text": "Go make us proud at the Admin Office!"
       }
     ]

@@ -1,15 +1,15 @@
 {
   "conversationMap": [
     {
-      "name": "Leila_Intro",
+      "name": "Kim_Intro",
       "lines": [
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Uhh... hello?"
         },
         {
           "speaker": "Kiko",
-          "text": "Hi Leila! Sorry to bother you."
+          "text": "Hi Kim! Sorry to bother you."
         },
         {
           "speaker": "Kiko",
@@ -20,19 +20,19 @@
           "text": "I'm trying to fix a letter for Mrs. Santos."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Oh! Let me check my student council binder.."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Oh no! It's not here…"
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "I must have forgotten it in one of the corridor terraces!"
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Can you perhaps.. Uh... get it for me?"
         },
         {
@@ -42,86 +42,86 @@
       ]
     },
     {
-      "name": "Leila_Waiting",
+      "name": "Kim_Waiting",
       "lines": [
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Have you found it?"
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "I was just getting some air as I remember..."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "But uhh… I'm not so sure now..."
         }
       ]
     },
     {
-      "name": "Leila_Handover",
+      "name": "Kim_Handover",
       "lines": [
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Aha! Here it is. Thank you so so much…"
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Now let me find the code.."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "It's uhh… listed under code 'MGT-2004-FIN'."
         },
         {
           "speaker": "Kiko",
-          "text": "MGT-2004-FIN.. Got it. Thanks, Leila!"
+          "text": "MGT-2004-FIN.. Got it. Thanks, Kim!"
         },
         {
           "speaker": "Kiko",
           "text": "This is exactly what I needed to make this letter ironclad."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Good luck with that letter!"
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Word around the office is that Mr. Reyes is tightening the purse strings..."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "...for all student organizations this year."
         }
       ]
     },
     {
-      "name": "Leila_Finished",
+      "name": "Kim_Finished",
       "lines": [
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Good luck with that letter!"
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "Word around the office is that Mr. Reyes is tightening the purse strings..."
         },
         {
-          "speaker": "Leila",
+          "speaker": "Kim",
           "text": "...for all student organizations this year."
         }
       ]
     }
   ],
   "idleDialogue": {
-    "name": "Leila_Idle",
+    "name": "Kim_Idle",
     "lines": [
       {
-        "speaker": "Leila",
+        "speaker": "Kim",
         "text": "Hope Mrs. Santos accepts the letter!"
       },
       {
-        "speaker": "Leila",
+        "speaker": "Kim",
         "text": "Let me know if you need any more student council records."
       }
     ]

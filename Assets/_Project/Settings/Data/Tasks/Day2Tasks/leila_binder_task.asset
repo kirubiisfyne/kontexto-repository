@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
   taskId: d2_findLeilaBinder
   taskName: Obtain Student Council Tracking Code
-  description: Speak with Leila in the classroom and retrieve her missing binder
+  description: Speak with Kim in the classroom and retrieve her missing binder
     from the terrace to get the memo tracking code.
   prerequisite:
     task: {fileID: 11400000, guid: 7eeea0b738d2a48f095c66850968595c, type: 2}
@@ -23,7 +23,7 @@ MonoBehaviour:
     needsSequentialOrder: 1
     objectives:
     - key: leila_binder
-      notificationDisplayName: Find Leila's Binder on Terrace
+      notificationDisplayName: Find Kim's Binder on Terrace
       requiredAmount: 1
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
