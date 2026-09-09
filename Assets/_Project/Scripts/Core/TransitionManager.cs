@@ -7,6 +7,16 @@ namespace Master.Scripts
     {
         public static TransitionManager Instance { get; private set; }
 
+        public static event System.Action<bool> OnTransitionStateChanged;
+        public static bool IsTransitioning { get; private set; } = false;
+
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStaticState()
+        {
+            IsTransitioning = false;
+            OnTransitionStateChanged = null;
+        }
+
         [Header("References")] 
         [Tooltip("The GameObject handling the visual transition.")]
         public GameObject transitionGameObject;
@@ -25,13 +35,20 @@ namespace Master.Scripts
         [Tooltip("Disables the GameObject after the Fade-Out completes.")]
         public bool disableAfterTransitionOut = false;
         
+        private Coroutine sceneLoadFadeInCoroutine;
+
         private void Awake()
         {
             Instance = this;
             FindTransitionObject();
         }
 
-        private IEnumerator Start()
+        private void Start()
+        {
+            sceneLoadFadeInCoroutine = StartCoroutine(SceneLoadFadeInRoutine());
+        }
+
+        private IEnumerator SceneLoadFadeInRoutine()
         {
             FindTransitionObject();
 
@@ -43,6 +60,8 @@ namespace Master.Scripts
 
             if (animator != null)
             {
+                NotifyTransitionState(true);
+
                 // Force animator to ignore paused time so the fade-in never gets stuck
                 animator.updateMode = AnimatorUpdateMode.UnscaledTime;
 
@@ -67,6 +86,10 @@ namespace Master.Scripts
                     transitionGameObject.SetActive(false);
                 }
             }
+
+            // Transition in finished: re-enable inputs
+            NotifyTransitionState(false);
+            sceneLoadFadeInCoroutine = null;
         }
 
         public void FindTransitionObject()
@@ -93,6 +116,16 @@ namespace Master.Scripts
 
         public IEnumerator PlayTransitionAndWait(string triggerName)
         {
+            // Stop any ongoing scene-load fade-in so it doesn't conflict or prematurely disable transitionGameObject
+            if (sceneLoadFadeInCoroutine != null)
+            {
+                StopCoroutine(sceneLoadFadeInCoroutine);
+                sceneLoadFadeInCoroutine = null;
+            }
+
+            // Transition out starting: lock inputs
+            NotifyTransitionState(true);
+
             if (transitionGameObject != null && !transitionGameObject.activeSelf)
             {
                 transitionGameObject.SetActive(true);
@@ -107,18 +140,26 @@ namespace Master.Scripts
                 
                 animator.SetTrigger(triggerName);
 
-                while (animator.GetCurrentAnimatorStateInfo(0).fullPathHash == currentStateHash && !animator.IsInTransition(0))
+                float safetyTimeout = 2.5f;
+                float timer = 0f;
+
+                while (animator.GetCurrentAnimatorStateInfo(0).fullPathHash == currentStateHash && !animator.IsInTransition(0) && timer < safetyTimeout)
                 {
+                    timer += Time.unscaledDeltaTime;
                     yield return null;
                 }
 
-                while (animator.IsInTransition(0))
+                timer = 0f;
+                while (animator.IsInTransition(0) && timer < safetyTimeout)
                 {
+                    timer += Time.unscaledDeltaTime;
                     yield return null;
                 }
 
-                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+                timer = 0f;
+                while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f && timer < safetyTimeout)
                 {
+                    timer += Time.unscaledDeltaTime;
                     yield return null; 
                 }
 
@@ -130,6 +171,26 @@ namespace Master.Scripts
                 if (disableAfterTransitionOut && transitionGameObject != null)
                 {
                     transitionGameObject.SetActive(false);
+                }
+            }
+        }
+
+        private static void NotifyTransitionState(bool transitioning)
+        {
+            IsTransitioning = transitioning;
+
+            if (OnTransitionStateChanged == null) return;
+
+            var invocationList = OnTransitionStateChanged.GetInvocationList();
+            foreach (var handler in invocationList)
+            {
+                try
+                {
+                    ((System.Action<bool>)handler)(transitioning);
+                }
+                catch (System.Exception)
+                {
+                    // Ignore dead object references from unloaded scenes
                 }
             }
         }

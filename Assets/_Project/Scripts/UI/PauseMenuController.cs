@@ -16,6 +16,29 @@ public class PauseMenuController : MonoBehaviour
     private Coroutine resumeCoroutine;
     private Coroutine pauseCoroutine;
 
+    private void Awake()
+    {
+        TransitionManager.OnTransitionStateChanged += HandleTransitionState;
+    }
+
+    private void OnDestroy()
+    {
+        TransitionManager.OnTransitionStateChanged -= HandleTransitionState;
+    }
+
+    private void Start()
+    {
+        if (TransitionManager.IsTransitioning)
+        {
+            this.enabled = false;
+        }
+    }
+
+    private void HandleTransitionState(bool isTransitioning)
+    {
+        this.enabled = !isTransitioning;
+    }
+
     // Update is called once per frame
     void Update()
     {
