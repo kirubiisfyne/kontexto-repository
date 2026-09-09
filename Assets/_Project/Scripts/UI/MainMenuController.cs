@@ -35,14 +35,17 @@ public class MainMenuController : MonoBehaviour
             PlayerData data = SaveManager.Load();
             if (data != null)
             {
-                foreach (var level in data.levels)
+                bool allCompleted = false;
+                if (levelDatabase != null && levelDatabase.Count > 0)
                 {
-                    if (level.isCompleted)
-                    {
-                        betaThankYouPanel.SetActive(true);
-                        break;
-                    }
+                    allCompleted = levelDatabase.AreAllLevelsCompleted(data);
                 }
+                else if (data.levels != null && data.levels.Count > 0)
+                {
+                    allCompleted = data.levels.TrueForAll(l => l.isCompleted);
+                }
+
+                betaThankYouPanel.SetActive(allCompleted);
             }
         }
 
@@ -50,11 +53,26 @@ public class MainMenuController : MonoBehaviour
 
     public void PlayGame()
     {
-        //Debug.Log("Play button clicked! Playing transition...");
-        StartCoroutine(PlayGameRoutine());
+        // If a valid save exists, continue from where the player left off
+        if (SaveManager.HasSave())
+        {
+            ContinueGame();
+        }
+        else
+        {
+            StartNewGame();
+        }
     }
 
-    private IEnumerator PlayGameRoutine()
+    /// <summary>
+    /// Explicitly resets player progress and starts a fresh game from Day 0.
+    /// </summary>
+    public void StartNewGame()
+    {
+        StartCoroutine(StartNewGameRoutine());
+    }
+
+    private IEnumerator StartNewGameRoutine()
     {
         // For a new game, wipe old save data so the next playthrough is fresh
         SaveManager.DeleteSave();
@@ -74,10 +92,6 @@ public class MainMenuController : MonoBehaviour
         if (Master.Scripts.TransitionManager.Instance != null)
         {
             yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
-        }
-        else
-        {
-            //Debug.LogWarning("MainMenu: No TransitionManager found in scene. Skipping transition animation.");
         }
 
         // If level 0 has intro cutscenes, load cutscene scene; otherwise go directly to gameplay
@@ -101,10 +115,31 @@ public class MainMenuController : MonoBehaviour
         // Resolve resume level based on save progress
         PlayerData data = SaveManager.Load();
         LevelSequenceData resumeSequence = null;
+
         if (levelDatabase != null)
         {
-            resumeSequence = levelDatabase.GetFirstIncompleteLevel(data);
-            if (GameManager.Instance != null)
+            // 1. Try resolving sequence from save data's currentSequence
+            if (!string.IsNullOrEmpty(data.currentSequence))
+            {
+                resumeSequence = levelDatabase.GetSequence(data.currentSequence);
+            }
+            // 2. Try resolving from currentScene
+            if (resumeSequence == null && !string.IsNullOrEmpty(data.currentScene))
+            {
+                resumeSequence = levelDatabase.GetLevelById(data.currentScene);
+            }
+            // 3. Fallback to first incomplete level
+            if (resumeSequence == null)
+            {
+                resumeSequence = levelDatabase.GetFirstIncompleteLevel(data);
+            }
+            // 4. Final fallback to starting level
+            if (resumeSequence == null && levelDatabase.Count > 0)
+            {
+                resumeSequence = levelDatabase.GetLevelByIndex(0);
+            }
+
+            if (GameManager.Instance != null && resumeSequence != null)
             {
                 GameManager.Instance.SetLevel(resumeSequence, CutsceneMode.Intro);
             }
@@ -115,13 +150,16 @@ public class MainMenuController : MonoBehaviour
             yield return Master.Scripts.TransitionManager.Instance.PlayTransitionAndWait("transition");
         }
 
-        // If player already has a mid-day saved position, resume in gameplay scene directly
-        if (data != null && data.HasSavedPosition())
+        // Determine whether to play intro cutscene or resume directly in gameplay
+        bool shouldPlayIntro = false;
+        if (resumeSequence != null && resumeSequence.HasIntro)
         {
-            SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
+            bool introWatched = data != null && data.IsIntroWatched(resumeSequence.SceneId);
+            // Play intro cutscene only if intro has NOT been watched yet and player has no mid-game saved position
+            shouldPlayIntro = !introWatched && !(data != null && data.HasSavedPosition());
         }
-        // Otherwise, if this day has an Intro cutscene, play it first
-        else if (resumeSequence != null && resumeSequence.HasIntro)
+
+        if (shouldPlayIntro)
         {
             SceneManager.LoadScene(cutsceneSceneName, LoadSceneMode.Single);
         }

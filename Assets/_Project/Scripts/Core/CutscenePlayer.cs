@@ -246,6 +246,16 @@ namespace Master.Scripts
 
             if (activeMode == CutsceneMode.Intro)
             {
+                // Record that this intro cutscene was watched
+                PlayerData playerData = SaveManager.Load();
+                if (activeSequence != null && activeSequence.levelData != null)
+                {
+                    playerData.currentSequence = activeSequence.name;
+                    playerData.currentScene = activeSequence.levelData.sceneId;
+                    playerData.SetIntroWatched(activeSequence.levelData.sceneId, true, activeSequence.name);
+                    SaveManager.Save(playerData);
+                }
+
                 // Finished Intro -> Load Gameplay scene
                 SceneManager.LoadScene(gameplaySceneName, LoadSceneMode.Single);
             }
@@ -264,6 +274,14 @@ namespace Master.Scripts
                 return;
             }
 
+            // Mark active level as completed in save data
+            PlayerData playerData = SaveManager.Load();
+            if (activeSequence != null && activeSequence.levelData != null)
+            {
+                var currentLp = playerData.GetOrCreateLevel(activeSequence.levelData.sceneId, activeSequence.name);
+                currentLp.isCompleted = true;
+            }
+
             var nextSequence = GameManager.Instance.levelDatabase.GetNextLevel(activeSequence);
 
             if (nextSequence != null)
@@ -271,14 +289,16 @@ namespace Master.Scripts
                 // Prepare next level
                 GameManager.Instance.SetLevel(nextSequence, CutsceneMode.Intro);
 
-                // Reset player position in save data so they spawn at the new day's spawn anchor
-                PlayerData playerData = SaveManager.Load();
-                if (playerData != null && nextSequence.levelData != null)
+                // Prepare save data for next sequence
+                if (nextSequence.levelData != null)
                 {
+                    playerData.currentSequence = nextSequence.name;
                     playerData.currentScene = nextSequence.levelData.sceneId;
-                    playerData.playerPosition = null;
-                    SaveManager.Save(playerData);
+                    playerData.ClearPlayerTransform();
+                    var nextLp = playerData.GetOrCreateLevel(nextSequence.levelData.sceneId, nextSequence.name);
+                    nextLp.introWatched = false;
                 }
+                SaveManager.Save(playerData);
 
                 if (nextSequence.HasIntro)
                 {
@@ -293,6 +313,7 @@ namespace Master.Scripts
             }
             else
             {
+                SaveManager.Save(playerData);
                 Debug.Log("<color=gold>[CutscenePlayer]</color> All levels completed! Returning to Main Menu.");
                 SceneManager.LoadScene(mainMenuSceneName, LoadSceneMode.Single);
             }
