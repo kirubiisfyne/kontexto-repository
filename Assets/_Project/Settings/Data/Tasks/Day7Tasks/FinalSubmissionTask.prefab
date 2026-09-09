@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 1686631820409891282}
   - component: {fileID: 990442955445606791}
   - component: {fileID: 492476473975828943}
+  - component: {fileID: 2270785899555120279}
   m_Layer: 7
   m_Name: mrReyes
   m_TagString: Untagged
@@ -369,8 +370,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1236487857978169587}
   - {fileID: 4862641860924177917}
+  - {fileID: 1236487857978169587}
   m_Father: {fileID: 8134020228248001025}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!136 &395259773604744877
@@ -592,6 +593,20 @@ MonoBehaviour:
   NPCLookAt: 0
   NPCCamera: {fileID: 4648645729877090809}
   playerController: {fileID: 0}
+--- !u!114 &2270785899555120279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7410306676994578681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bcd589118d2048b18ea51eac49a9340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.NPC.NPCAnimationManager
+  standbyClip: {fileID: 7400000, guid: c1bc778d56d627a4a93d07475c319660, type: 2}
+  animator: {fileID: 1557049025573267335}
 --- !u!1 &8355752106466064506
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,6 +861,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ac5c0cf0d23264a94b82dd664bb541, type: 3}
+--- !u!95 &1557049025573267335 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: b2ac5c0cf0d23264a94b82dd664bb541, type: 3}
+  m_PrefabInstance: {fileID: 4967798589601946134}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4862641860924177917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b2ac5c0cf0d23264a94b82dd664bb541, type: 3}
