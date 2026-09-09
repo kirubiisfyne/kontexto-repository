@@ -55,6 +55,32 @@ namespace Master.Scripts.RoomSystem
                 }
             }
         }
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            RemoveStaticFlagsFromDoors();
+        }
+
+        [ContextMenu("Fix Door Static Flags")]
+        public void RemoveStaticFlagsFromDoors()
+        {
+            if (doors == null) return;
+            foreach (var door in doors)
+            {
+                if (door != null && door.doorTransform != null)
+                {
+                    var flags = UnityEditor.GameObjectUtility.GetStaticEditorFlags(door.doorTransform.gameObject);
+                    var disallowed = UnityEditor.StaticEditorFlags.BatchingStatic | UnityEditor.StaticEditorFlags.OccluderStatic;
+                    if ((flags & disallowed) != 0)
+                    {
+                        UnityEditor.GameObjectUtility.SetStaticEditorFlags(door.doorTransform.gameObject, flags & ~disallowed);
+                        UnityEditor.EditorUtility.SetDirty(door.doorTransform.gameObject);
+                    }
+                }
+            }
+        }
+#endif
     }
 
     [System.Serializable]

@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using Master.Scripts;
@@ -287,3 +288,4 @@ namespace Master.Scripts.Editor
         }
     }
 }
+#endif
