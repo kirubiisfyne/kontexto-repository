@@ -79,8 +79,31 @@ namespace Master.Scripts
 
             foreach (var hit in hitColliders)
             {
-                if (hit.GetComponent<IInteractable>() != null)
+                var interactables = hit.GetComponentsInChildren<IInteractable>();
+                if (interactables.Length > 0)
                 {
+                    // If an interactable is an NPC whose dialogue is on cooldown, ignore it
+                    bool allDialogueOnCooldown = true;
+                    foreach (var inter in interactables)
+                    {
+                        if (inter is Master.Scripts.DialogueSystem.DialogueManager dm)
+                        {
+                            if (!dm.IsOnCooldown)
+                            {
+                                allDialogueOnCooldown = false;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            // Other non-dialogue interactables (doors, items) remain interactable
+                            allDialogueOnCooldown = false;
+                            break;
+                        }
+                    }
+
+                    if (allDialogueOnCooldown) continue;
+
                     float distance = Vector3.Distance(transform.position, hit.transform.position);
                     if (distance < closestDistance)
                     {
