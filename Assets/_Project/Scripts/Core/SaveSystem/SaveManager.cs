@@ -14,6 +14,27 @@ namespace Master.Scripts.SaveSystem
             Path.Combine(Application.persistentDataPath, SAVE_FILENAME);
 
         /// <summary>
+        /// Checks if a valid player save file exists on disk with recorded progress.
+        /// </summary>
+        public static bool HasSave()
+        {
+            if (!File.Exists(SavePath)) return false;
+            try
+            {
+                string json = File.ReadAllText(SavePath);
+                if (string.IsNullOrWhiteSpace(json)) return false;
+                var data = JsonUtility.FromJson<PlayerData>(json);
+                return data != null && (!string.IsNullOrEmpty(data.currentScene) || 
+                                        !string.IsNullOrEmpty(data.currentSequence) || 
+                                        (data.levels != null && data.levels.Count > 0));
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
         /// Loads PlayerData from disk. Returns a fresh instance if no save exists.
         /// </summary>
         public static PlayerData Load()

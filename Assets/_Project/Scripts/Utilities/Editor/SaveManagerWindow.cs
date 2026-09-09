@@ -62,7 +62,8 @@ namespace Master.Scripts.Editor
 
             scrollPos = EditorGUILayout.BeginScrollView(scrollPos, "box");
 
-            GUILayout.Label($"Last Active Scene: {currentData.currentScene}", EditorStyles.boldLabel);
+            GUILayout.Label($"Last Active Sequence: {currentData.currentSequence ?? "(none)"}", EditorStyles.boldLabel);
+            GUILayout.Label($"Last Active Scene: {currentData.currentScene ?? "(none)"}", EditorStyles.boldLabel);
             
             if (currentData.HasSavedPosition())
             {
@@ -89,8 +90,17 @@ namespace Master.Scripts.Editor
                     EditorGUILayout.BeginVertical("helpbox");
                     
                     EditorGUILayout.BeginHorizontal();
-                    GUILayout.Label($"Scene: {level.sceneId}", EditorStyles.boldLabel);
+                    string levelTitle = !string.IsNullOrEmpty(level.sequenceName) 
+                        ? $"{level.sequenceName} ({level.sceneId})" 
+                        : level.sceneId;
+                    GUILayout.Label($"Level: {levelTitle}", EditorStyles.boldLabel);
                     GUILayout.FlexibleSpace();
+                    if (level.introWatched)
+                    {
+                        GUI.contentColor = Color.cyan;
+                        GUILayout.Label("[INTRO WATCHED]");
+                        GUI.contentColor = Color.white;
+                    }
                     if (level.isCompleted)
                     {
                         GUI.contentColor = Color.green;

@@ -96,10 +96,22 @@ namespace Master.Scripts.SaveSystem
             // 2. Resolve from Save Data and Database
             if (levelDatabase != null)
             {
-                var seq = levelDatabase.GetFirstIncompleteLevel(playerData);
-                if (seq != null && seq.levelData != null)
+                // Try from currentSequence or currentScene in save data
+                if (!string.IsNullOrEmpty(playerData.currentSequence))
                 {
-                    return seq.levelData;
+                    var seq = levelDatabase.GetSequence(playerData.currentSequence);
+                    if (seq != null && seq.levelData != null) return seq.levelData;
+                }
+                if (!string.IsNullOrEmpty(playerData.currentScene))
+                {
+                    var seq = levelDatabase.GetLevelById(playerData.currentScene);
+                    if (seq != null && seq.levelData != null) return seq.levelData;
+                }
+
+                var firstIncomplete = levelDatabase.GetFirstIncompleteLevel(playerData);
+                if (firstIncomplete != null && firstIncomplete.levelData != null)
+                {
+                    return firstIncomplete.levelData;
                 }
             }
 
@@ -115,11 +127,17 @@ namespace Master.Scripts.SaveSystem
             currentLevelData = data;
             sceneId = data.sceneId;
 
+            LevelSequenceData currentSeq = levelDatabase != null ? levelDatabase.GetSequenceForLevelData(data) : null;
+
             // Keep GameManager synchronized
             if (GameManager.Instance != null)
             {
                 GameManager.Instance.currentPlayerData = playerData;
                 GameManager.Instance.currentLevelData = data;
+                if (currentSeq != null)
+                {
+                    GameManager.Instance.currentLevelSequence = currentSeq;
+                }
                 if (levelDatabase != null)
                 {
                     GameManager.Instance.currentLevel = levelDatabase.GetLevelIndex(data);
@@ -134,6 +152,18 @@ namespace Master.Scripts.SaveSystem
 
             // 3. Apply room active/inactive states
             ApplyRoomStates();
+
+            // 4. Mark intro as watched for this day since we are in active gameplay
+            if (currentSeq != null)
+            {
+                playerData.currentSequence = currentSeq.name;
+                playerData.SetIntroWatched(sceneId, true, currentSeq.name);
+            }
+            else
+            {
+                playerData.SetIntroWatched(sceneId, true);
+            }
+            SaveGame();
         }
 
         /// <summary>
@@ -205,6 +235,14 @@ namespace Master.Scripts.SaveSystem
         {
             CapturePlayerTransform();
             playerData.currentScene = sceneId;
+            if (levelDatabase != null && currentLevelData != null)
+            {
+                var seq = levelDatabase.GetSequenceForLevelData(currentLevelData);
+                if (seq != null)
+                {
+                    playerData.currentSequence = seq.name;
+                }
+            }
             SaveManager.Save(playerData);
         }
 

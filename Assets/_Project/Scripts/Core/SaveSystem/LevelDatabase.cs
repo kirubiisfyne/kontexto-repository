@@ -20,11 +20,16 @@ namespace Master.Scripts.SaveSystem
             return levels[index];
         }
 
-        public LevelSequenceData GetLevelById(string sceneId)
+        public LevelSequenceData GetLevelById(string identifier)
         {
-            if (levels == null || string.IsNullOrEmpty(sceneId)) return null;
-            return levels.Find(l => l != null && l.levelData != null && l.levelData.sceneId == sceneId);
+            if (levels == null || string.IsNullOrEmpty(identifier)) return null;
+            return levels.Find(l => l != null && (
+                string.Equals(l.name, identifier, System.StringComparison.OrdinalIgnoreCase) ||
+                (l.levelData != null && string.Equals(l.levelData.sceneId, identifier, System.StringComparison.OrdinalIgnoreCase))
+            ));
         }
+
+        public LevelSequenceData GetSequence(string identifier) => GetLevelById(identifier);
 
         public int GetLevelIndex(LevelSequenceData sequence)
         {
@@ -79,6 +84,25 @@ namespace Master.Scripts.SaveSystem
             }
 
             return levels[levels.Count - 1];
+        }
+
+        /// <summary>
+        /// Returns true if every level sequence in the database has been completed in PlayerData.
+        /// </summary>
+        public bool AreAllLevelsCompleted(PlayerData playerData)
+        {
+            if (levels == null || levels.Count == 0 || playerData == null) return false;
+
+            foreach (var sequence in levels)
+            {
+                if (sequence == null || sequence.levelData == null) continue;
+                if (!playerData.IsLevelCompleted(sequence.levelData.sceneId))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

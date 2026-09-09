@@ -177,6 +177,7 @@ namespace Master.Scripts.Editor
             EditorGUILayout.LabelField("Current Scene", EditorStyles.miniBoldLabel);
             string currentScene = loader.ActiveLevelData != null ? loader.ActiveLevelData.sceneId : "(no LevelData active)";
             EditorGUILayout.LabelField("  Active Level ID:", currentScene);
+            EditorGUILayout.LabelField("  Save → Continue Sequence:", cachedData.currentSequence ?? "(not set)");
             EditorGUILayout.LabelField("  Save → Continue Scene:", cachedData.currentScene ?? "(not set)");
 
             EditorGUILayout.Space(8);
@@ -234,7 +235,8 @@ namespace Master.Scripts.Editor
 
             // Header row
             EditorGUILayout.BeginHorizontal();
-            string label = highlight ? $"► {level.sceneId}" : level.sceneId;
+            string title = !string.IsNullOrEmpty(level.sequenceName) ? $"{level.sequenceName} ({level.sceneId})" : level.sceneId;
+            string label = highlight ? $"► {title}" : title;
             EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
 
             // Three-way status: Completed > Ready for Completion > In Progress
