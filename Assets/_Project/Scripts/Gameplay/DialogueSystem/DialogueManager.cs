@@ -45,6 +45,13 @@ namespace Master.Scripts.DialogueSystem
         public Conversation idleConversation;
         private int overrideFrame = -1;
 
+        [Header("Cooldown Settings")]
+        [Tooltip("Seconds after a conversation finishes before this NPC can be spoken to again. Prevents looping when spamming F.")]
+        public float dialogueCooldown = 0.5f;
+        private float cooldownEndTime = 0f;
+
+        public bool IsOnCooldown => Time.unscaledTime < cooldownEndTime;
+
         private void Awake()
         {
             if (dialogueJson != null)
@@ -70,6 +77,8 @@ namespace Master.Scripts.DialogueSystem
 
         public void UseIdleDialogue()
         {
+            if (IsOnCooldown) return;
+
             overrideFrame = Time.frameCount;
             LastInteracted = this;
 
@@ -89,6 +98,7 @@ namespace Master.Scripts.DialogueSystem
         public void Interact()
         {
             if (overrideFrame == Time.frameCount) return;
+            if (IsOnCooldown) return;
 
             LastInteracted = this;
 
@@ -209,6 +219,7 @@ namespace Master.Scripts.DialogueSystem
         private void EndDialogue()
         {
             isTalking = false;
+            cooldownEndTime = Time.unscaledTime + dialogueCooldown;
             DialogueUIManager.Instance.Hide();
             
             // Broadcast the end of this conversation session
