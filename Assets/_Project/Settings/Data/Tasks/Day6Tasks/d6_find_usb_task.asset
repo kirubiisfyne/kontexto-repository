@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Project::Master.Scripts.TaskSystem.TaskData
   taskId: d6_find_usb_task
   taskName: Search Upper Library for Enzo's Backup USB.
-  description: Kim is panicking at the Admin entrance. Go to the Upper Library, retrieve
+  description: Leila is panicking at the Admin entrance. Go to the Upper Library, retrieve
     the USB from the AP Style Guide 2018 in the reference stacks, and report back
-    to Kim.
+    to Leila.
   prerequisite:
     task: {fileID: 0}
     requiredStatus: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     objectives:
     - key: library_usb
       notificationDisplayName: Find Enzo's backup USB in the Upper Library and report
-        back to Kim.
+        back to Leila.
       requiredAmount: 1
   startsActive: 1
   setPlayerInitialTransform: 0

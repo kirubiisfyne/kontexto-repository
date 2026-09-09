@@ -252,7 +252,7 @@ Maya/Kiko must look for **Enzo**. They locate Enzo in the **library**.
   > "They call it an ‘administrative review'. I’ve drafted a formal Letter of Request to the School Director, Mr. Reyes, demanding the release of our allocation. But right now, it’s a walls-of-text mess. If it doesn't look strictly professional and legally binding, he will throw it in the trash."  
   >  
   > **Mrs. Santos**:  
-  > "Also, it's missing the official Student Council tracking code. Go find Leila in the classroom—she manages the budget logs. Get that code from her first so we can finalize the request."  
+  > "Also, it's missing the official Student Council tracking code. Go find Kim in the classroom—she manages the budget logs. Get that code from her first so we can finalize the request."  
   >  
   > **Maya/Kiko**:  
   > "An official letter to the big boss? Step two on the path of least resistance is looking incredibly intimidating. I guess it's time to put my typing skills to the test."
@@ -264,41 +264,41 @@ Maya/Kiko must look for **Enzo**. They locate Enzo in the **library**.
 ### Main Task
 - [ ] **NEW OBJECTIVE:** Format the Formal Budget Request Letter.
 
-Maya/Kiko notices a blank space in the body of the letter. Mrs. Santos forgot the exact reference tracking number. Maya/Kiko must navigate to the Classroom to find Leila, the Student Council Treasurer.
+Maya/Kiko notices a blank space in the body of the letter. Mrs. Santos forgot the exact reference tracking number. Maya/Kiko must navigate to the Classroom to find Kim, the Student Council Treasurer.
 
 > **Maya/Kiko**:  
-> "Ah, there's a missing tracking code here. Mrs. Santos left a note: 'Insert Memo ID here.' I remember Leila handles the student council budget logs. She might have the tracking number in her bag. Off to the classroom."
+> "Ah, there's a missing tracking code here. Mrs. Santos left a note: 'Insert Memo ID here.' I remember Kim handles the student council budget logs. She might have the tracking number in her bag. Off to the classroom."
 
 ---
 
 *INT. CLASSROOM*  
-* **Interaction 2:** Leila (Classmate NPC)
+* **Interaction 2:** Kim (Classmate NPC)
 
   * **Inactive:**
-    > **Leila**: "Uhh... hello?"  
+    > **Kim**: "Uhh... hello?"  
     >  
-    > **Maya/Kiko**: "Hi Leila! Sorry to bother you, do you happen to have the official tracking number for the school publication’s frozen operational fund? I'm trying to fix a letter for Mrs. Santos."  
+    > **Maya/Kiko**: "Hi Kim! Sorry to bother you, do you happen to have the official tracking number for the school publication’s frozen operational fund? I'm trying to fix a letter for Mrs. Santos."  
     >  
-    > **Leila**: "Oh! Let me check my student council binder.. Oh no! It’s not here… I must have forgotten it in one of the corridor terraces! Can you perhaps.. Uh... get it for me?"  
+    > **Kim**: "Oh! Let me check my student council binder.. Oh no! It’s not here… I must have forgotten it in one of the corridor terraces! Can you perhaps.. Uh... get it for me?"  
     >  
     > **Maya/Kiko**: "Seriously??... Ughh. Fine.. All for that code."
 
   * **Active:**
-    > **Leila**: "Have you found it? I was just getting some air as I remember, but uhh… I'm not so sure now..."
+    > **Kim**: "Have you found it? I was just getting some air as I remember, but uhh… I'm not so sure now..."
 
 ### Subtask
-- [ ] Search the halls and terrace for Leila’s binder.
-- [ ] Retrieve tracking code from Leila.
+- [ ] Search the halls and terrace for Kim’s binder.
+- [ ] Retrieve tracking code from Kim.
 
 * **Found Binder:**
-  > **Leila**:  
+  > **Kim**:  
   > "Aha! Here it is. Thank you so so much… Now let me find the code.. It's uhh… listed under code '**MGT-2004-FIN**'."
 
 * **Completed:**
   > **Maya/Kiko**:  
-  > "MGT-2004-FIN.. Got it. Thanks, Leila! This is exactly what I needed to make this letter ironclad."  
+  > "MGT-2004-FIN.. Got it. Thanks, Kim! This is exactly what I needed to make this letter ironclad."  
   >  
-  > **Leila**:  
+  > **Kim**:  
   > "Good luck with that letter! Word around the office is that Mr. Reyes is tightening the purse strings for all student organizations this year."
 
 ---
@@ -463,11 +463,11 @@ Enzo dropped a receipt; the digital scan in the office drive is cut off and inco
 
 ## Game Level 4
 
-* **Interaction 1:** Junior Staffer  
+* **Interaction 1:** Junior Staffer (Leila)  
   > **Maya/Kiko**:  
   > "The transcript mentions a receipt for gasoline, but the scan in the office drive is totally cut off. It’s completely useless like this."  
   >  
-  > **Junior Staffer**:  
+  > **Junior Staffer (Leila)**:  
   > "Hey! I just came from the Admin building. Mr. Reyes is inspecting the campus grounds with the C.A.T. officers! But listen… Enzo sent a frantic text right before his phone died. He said he dropped the physical receipt while running away from the administration office earlier!"  
   >  
   > **Maya/Kiko**:  
@@ -651,7 +651,7 @@ Maya/Kiko has separated clean files (News, Feature, Editorial) and must merge th
 
 The screen is tinted red as a countdown clock pulses. The office is a disaster zone. Outside, thunder rolls. Maya/Kiko looks exhausted with dark circles under their eyes.
 
-> **Junior Staffer NPC**:  
+> **Junior Staffer (Leila)**:  
 > "We’re missing the Master Cover! Without Enzo’s original design, the NSPC judges won’t even open the file!"  
 >  
 > **Maya/Kiko**:  
@@ -665,12 +665,12 @@ The screen is tinted red as a countdown clock pulses. The office is a disaster z
 - [ ] **NEW OBJECTIVE:** Search the office for Enzo's hidden USB drive.
 
 * **Inactive:**
-  > **Junior Staffer**: "Still no drive… this is getting tiring…"  
+  > **Junior Staffer (Leila)**: "Still no drive… this is getting tiring…"  
   >  
   > **Maya/Kiko** *(tossing paper)*: "It’s not under the printer... and it’s not in the drawer with the spare toner!"
 
 * **Active:**
-  > **Junior Staffer NPC**: "Check the coffee station! Enzo used to hide his snacks in the empty 'Style Guide' boxes!"
+  > **Junior Staffer (Leila)**: "Check the coffee station! Enzo used to hide his snacks in the empty 'Style Guide' boxes!"
 
 ### Subtask
 - [ ] Interact with the dusty box labeled *AP Style 2018*.
@@ -678,7 +678,7 @@ The screen is tinted red as a countdown clock pulses. The office is a disaster z
 * **Completed:**
   > **Maya/Kiko**: "Found it! It was taped to the inside of the lid. This is it—the Master Cover Page."  
   >  
-  > **Junior Staffer NPC**: "The clock is ticking, Maya. You have to merge all 20 pages and apply every rule in the book. If one heading is off, we’re done."  
+  > **Junior Staffer (Leila)**: "The clock is ticking, Maya. You have to merge all 20 pages and apply every rule in the book. If one heading is off, we’re done."  
   >  
   > **Maya/Kiko**: "I’ve got the files. I’ve got the skills. Let’s finish this."
 
@@ -698,7 +698,7 @@ The screen is tinted red as a countdown clock pulses. The office is a disaster z
 
 ### Cutscene
 
-> **Junior Staffer NPC**:  
+> **Junior Staffer (Leila)**:  
 > "The morning submission window opens in exactly eight hours. Are you really going to face Mr. Reyes alone?"  
 >  
 > **Maya/Kiko** *(slinging portfolio strap over shoulder)*:  
@@ -724,7 +724,7 @@ The rain has stopped, replaced by a quiet morning fog. In the Paragon office, th
 ### Main Task
 - [ ] **FINAL OBJECTIVE:** Carry the Master Zine to the Admin Office and submit it to Mr. Reyes.
 
-> **Junior Staffer NPC**:  
+> **Junior Staffer (Leila)**:  
 > "This is it, Chief. The Master Zine is complete. The fate of *The Paragon* rests on what is inside that folder."  
 >  
 > **Maya/Kiko**:  

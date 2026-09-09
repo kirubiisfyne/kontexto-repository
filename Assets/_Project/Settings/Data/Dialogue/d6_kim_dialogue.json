@@ -1,10 +1,10 @@
 {
   "conversationMap": [
     {
-      "name": "Kim_Admin_Entrance_Intro",
+      "name": "Leila_Admin_Entrance_Intro",
       "lines": [
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Kiko! There you are! We have a complete disaster on our hands!"
         },
         {
@@ -12,11 +12,11 @@
           "text": "What happened? Is the portfolio missing?"
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "The Master Cover page is gone! Without Enzo's design, the NSPC judges won't even open our portfolio!"
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "We tore the entire publication office apart searching for it. It's a complete mess—if Mrs. Santos sees it, we're finished!"
         },
         {
@@ -24,11 +24,11 @@
           "text": "Did Enzo leave a physical backup anywhere else?"
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Yes! He mentioned storing a backup USB drive inside the old 'AP Style Guide 2018' in the Upper Library reference section!"
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Please, head over to the Library, find the drive, and meet me back here!"
         },
         {
@@ -38,27 +38,27 @@
       ]
     },
     {
-      "name": "Kim_Waiting",
+      "name": "Leila_Waiting",
       "lines": [
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "I'm keeping watch outside the Admin office! Head upstairs to the Library and check the AP Style Guide!"
         }
       ]
     },
     {
-      "name": "Kim_Finished",
+      "name": "Leila_Finished",
       "lines": [
         {
           "speaker": "Kiko",
-          "text": "Kim! I found Enzo's backup USB in the library reference shelf!"
+          "text": "Leila! I found Enzo's backup USB in the library reference shelf!"
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Thank goodness! Now you need to format and finalize the Master Portfolio on the computer."
         },
         {
-          "speaker": "Kim",
+          "speaker": "Leila",
           "text": "Mrs. Santos is inside the publication office right now. Go ask her for permission to use the workstation!"
         },
         {
@@ -69,10 +69,10 @@
     }
   ],
   "idleDialogue": {
-    "name": "Kim_Idle",
+    "name": "Leila_Idle",
     "lines": [
       {
-        "speaker": "Kim",
+        "speaker": "Leila",
         "text": "Go to the publication office and talk to Mrs. Santos so you can use the workstation!"
       }
     ]

@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 929583280255954955}
   - component: {fileID: 2600787388323224829}
   - component: {fileID: 1861382774657876700}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CatNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   - component: {fileID: 3388769316982888014}
   - component: {fileID: 9197700409174006993}
   - component: {fileID: 8234604588815317342}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ParagonNPC
   m_TagString: Untagged
   m_Icon: {fileID: 0}

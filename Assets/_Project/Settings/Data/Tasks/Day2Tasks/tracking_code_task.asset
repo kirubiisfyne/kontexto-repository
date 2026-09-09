@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: tracking_code_task
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.TaskData
   taskId: d2_trackingCode
-  taskName: Get the Tracking Code from Leila
+  taskName: Get the Tracking Code from Kim
   description: 
   prerequisite:
     task: {fileID: 0}
