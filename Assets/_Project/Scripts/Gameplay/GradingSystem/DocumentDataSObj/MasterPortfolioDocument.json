@@ -59,13 +59,13 @@
       "targetTextSnippet": "THE PARAGON: 2026 NSPC SPECIAL EDITION",
       "requiredSize": 18,
       "requireBold": true,
-      "requiredAlignment": 4
+      "requiredAlignment": 1
     },
     {
       "targetTextSnippet": "Official Campus Journal of Likha High School | Final Submission Portfolio",
       "requiredSize": 12,
       "requireItalic": true,
-      "requiredAlignment": 4
+      "requiredAlignment": 1
     },
     {
       "targetTextSnippet": "INVESTIGATIVE REPORT: CAMPUS TRANSPARENCY & INTEGRITY",
