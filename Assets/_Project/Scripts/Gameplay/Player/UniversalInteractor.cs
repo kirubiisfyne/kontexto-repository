@@ -20,6 +20,34 @@ namespace Master.Scripts
         private GameObject currentClosestInteractable = null;
         private bool isNearInteractable = false;
 
+        private void Awake()
+        {
+            TransitionManager.OnTransitionStateChanged += HandleTransitionState;
+        }
+
+        private void OnDestroy()
+        {
+            TransitionManager.OnTransitionStateChanged -= HandleTransitionState;
+        }
+
+        private void Start()
+        {
+            if (TransitionManager.IsTransitioning)
+            {
+                this.enabled = false;
+            }
+        }
+
+        private void HandleTransitionState(bool isTransitioning)
+        {
+            this.enabled = !isTransitioning;
+            if (isTransitioning && isNearInteractable)
+            {
+                isNearInteractable = false;
+                OnInteractableProximityChanged?.Invoke(false);
+            }
+        }
+
         private void Update()
         {
             // Prevent interaction if a dialogue is currently active

@@ -58,6 +58,8 @@ namespace Master.Scripts
             if (nextButton != null) nextButton.onClick.AddListener(AdvanceShot);
             if (skipButton != null) skipButton.onClick.AddListener(SkipCutscene);
 
+            TransitionManager.OnTransitionStateChanged += HandleTransitionState;
+
             if (subtitleManager == null)
             {
                 subtitleManager = FindObjectOfType<CutsceneSubtitleManager>();
@@ -104,9 +106,17 @@ namespace Master.Scripts
             SpawnCurrentShot();
         }
 
+        private void HandleTransitionState(bool transitioning)
+        {
+            if (!transitioning)
+            {
+                lastAdvanceTime = Time.unscaledTime;
+            }
+        }
+
         private void Update()
         {
-            if (isTransitioning || Time.unscaledTime < lastAdvanceTime + inputCooldown) return;
+            if (isTransitioning || TransitionManager.IsTransitioning || Time.unscaledTime < lastAdvanceTime + inputCooldown) return;
 
             if (Input.GetKeyDown(primaryAdvanceKey) ||
                 Input.GetKeyDown(secondaryAdvanceKey) ||
@@ -194,7 +204,7 @@ namespace Master.Scripts
 
         public void AdvanceShot()
         {
-            if (isTransitioning || Time.unscaledTime < lastAdvanceTime + inputCooldown) return;
+            if (isTransitioning || TransitionManager.IsTransitioning || Time.unscaledTime < lastAdvanceTime + inputCooldown) return;
 
             // 1. If subtitle text is still typing, finish typing first
             if (subtitleManager != null && subtitleManager.IsTyping)
@@ -230,7 +240,7 @@ namespace Master.Scripts
 
         public void SkipCutscene()
         {
-            if (isTransitioning) return;
+            if (isTransitioning || TransitionManager.IsTransitioning) return;
             if (subtitleManager != null) subtitleManager.HideDialogue();
             StartCoroutine(CompleteCutsceneRoutine());
         }
@@ -323,6 +333,8 @@ namespace Master.Scripts
         {
             if (nextButton != null) nextButton.onClick.RemoveListener(AdvanceShot);
             if (skipButton != null) skipButton.onClick.RemoveListener(SkipCutscene);
+
+            TransitionManager.OnTransitionStateChanged -= HandleTransitionState;
         }
     }
 }

@@ -37,6 +37,12 @@ namespace Master.Scripts
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+            TransitionManager.OnTransitionStateChanged += HandleTransitionState;
+        }
+
+        private void OnDestroy()
+        {
+            TransitionManager.OnTransitionStateChanged -= HandleTransitionState;
         }
 
         private void Start()
@@ -52,6 +58,16 @@ namespace Master.Scripts
             // Hide and lock the cursor on start
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            if (TransitionManager.IsTransitioning)
+            {
+                SetCinematicWait(true);
+            }
+        }
+
+        private void HandleTransitionState(bool isTransitioning)
+        {
+            SetCinematicWait(isTransitioning);
         }
 
         public void SetInputActive(bool active)
