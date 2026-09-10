@@ -25,7 +25,11 @@
         },
         {
           "speaker": "Angel",
-          "text": "The old Student Council Constitution Handbook is in the library archives. Can you find it and bring it to me?"
+          "text": "The old Student Council Constitution Handbook is in the library archives."
+        },
+        {
+          "speaker": "Angel",
+          "text": "Can you find it and bring it to me?"
         },
         {
           "speaker": "Kiko",
@@ -38,7 +42,11 @@
       "lines": [
         {
           "speaker": "Angel",
-          "text": "The library archives have so many records... good luck finding the handbook!"
+          "text": "The library archives have so many records..."
+        },
+        {
+          "speaker": "Angel",
+          "text": "Good luck finding the handbook!"
         }
       ]
     },
@@ -51,15 +59,27 @@
         },
         {
           "speaker": "Angel",
-          "text": "Perfect! 'Article IV, Section 2: Student funds shall not be diverted without bilateral consent.' Exactly what we need!"
+          "text": "Perfect! 'Article IV, Section 2: Student funds shall not be diverted without bilateral consent.'"
         },
         {
           "speaker": "Angel",
-          "text": "Here is the raw list of demands. But watch out—Mr. Reyes requires strict list formatting on official petitions!"
+          "text": "Exactly what we need!"
+        },
+        {
+          "speaker": "Angel",
+          "text": "Here is the raw list of demands."
+        },
+        {
+          "speaker": "Angel",
+          "text": "But watch out—Mr. Reyes requires strict list formatting on official petitions!"
         },
         {
           "speaker": "Kiko",
-          "text": "Got it. Time to head back to Mr. Reyes for the guidelines memo and format the editorial."
+          "text": "Got it."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Time to head back to Mr. Reyes for the guidelines memo and format the editorial."
         }
       ]
     }

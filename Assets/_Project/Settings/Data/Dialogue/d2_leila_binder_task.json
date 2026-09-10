@@ -37,7 +37,11 @@
         },
         {
           "speaker": "Kiko",
-          "text": "<color=#707070><i>Seriously??... Ughh. Fine.. All for that code.</i></color>"
+          "text": "<color=#707070><i>Seriously??...</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>Ughh. Fine.. All for that code.</color=#707070></i>"
         }
       ]
     },

@@ -5,7 +5,11 @@
       "lines": [
         {
           "speaker": "CAT Officer",
-          "text": "EXCUSE ME! PASSING THROUGH! MAKE WAY FOR THE COLORS! CHIN UP! BACK STRAIGHT!"
+          "text": "EXCUSE ME!"
+        },
+        {
+          "speaker": "CAT Officer",
+          "text": "PASSING THROUGH! MAKE WAY FOR THE COLORS! CHIN UP! BACK STRAIGHT!"
         },
         {
           "speaker": "Kiko",

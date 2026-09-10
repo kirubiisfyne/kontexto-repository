@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ld_Day0
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.LevelData
   sceneId: scn_day0
-  playerSpawnAnchorPrefab: {fileID: 0}
+  playerSpawnAnchorPrefab: {fileID: 7530641719458999810, guid: 219f442ede9aa4b81b2f4571ebdd3f63, type: 3}
   taskEntries:
   - prefab: {fileID: 1614792950865806898, guid: 6c090f888eedb74458e393203d95edd1, type: 3}
     spawnPosition: {x: 0, y: 0, z: 0}

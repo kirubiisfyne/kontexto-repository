@@ -1,7 +1,7 @@
 {
   "conversationMap": [
     {
-      "name": "Junior_Staffer_Intro",
+      "name": "Leila_Intro",
       "lines": [
         {
           "speaker": "Kiko",
@@ -12,19 +12,19 @@
           "text": "It's completely useless like this."
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Hey! I just came from the Admin building."
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Mr. Reyes is inspecting the campus grounds with the C.A.T. officers!"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "But listen... Enzo sent a frantic text right before his phone died."
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "He said he dropped the physical receipt while running away from the administration office earlier!"
         },
         {
@@ -36,15 +36,15 @@
           "text": "Did he say where?"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "He just typed 'Bleachers... basketball court... left it near—' and then his phone went offline!"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "The C.A.T. drill just ended out there, so the area is crawling with cadets."
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "If the guard or a school officer finds it first, we lose our only proof!"
         },
         {
@@ -58,49 +58,49 @@
       ]
     },
     {
-      "name": "Junior_Staffer_Waiting",
+      "name": "Leila_Waiting",
       "lines": [
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Did you check the bleachers near the basketball court yet?"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Search carefully!"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Enzo said he dropped the physical receipt somewhere around there."
         }
       ]
     },
     {
-      "name": "Junior_Staffer_Finished",
+      "name": "Leila_Finished",
       "lines": [
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Awesome!"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "You managed to get the physical receipt back from Jules!"
         },
         {
-          "speaker": "Junior Staffer",
+          "speaker": "Leila",
           "text": "Show it to Mrs. Santos right away so we can finalize the evidence board."
         }
       ]
     }
   ],
   "idleDialogue": {
-    "name": "Junior_Staffer_Idle",
+    "name": "Leila_Idle",
     "lines": [
       {
-        "speaker": "Junior Staffer",
+        "speaker": "Leila",
         "text": "Enzo's phone went offline right after he texted us about the receipt!"
       },
       {
-        "speaker": "Junior Staffer",
+        "speaker": "Leila",
         "text": "We need to find that physical copy before school officers clean up the bleachers."
       }
     ]
