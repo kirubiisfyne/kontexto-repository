@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 7814655017494158666}
   - component: {fileID: 2885379051634980263}
   - component: {fileID: 5185700702112703439}
+  - component: {fileID: 4054475769545507277}
   m_Layer: 5
   m_Name: TransitionManager
   m_TagString: Untagged
@@ -153,7 +154,7 @@ MonoBehaviour:
   animator: {fileID: 5374743136851739295}
   gracePeriodIn: 0.25
   gracePeriodOut: 0.25
-  disableAfterTransitionIn: 1
+  disableAfterTransitionIn: 0
   disableAfterTransitionOut: 0
 --- !u!223 &5185700702112703439
 Canvas:
@@ -178,6 +179,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &4054475769545507277
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2775676250010044340}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &3626056857813876813
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,15 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "The draft letter is missing the official Student Council tracking code. Go find Kim in the classroom—she manages the budget logs."
+          "text": "The draft letter is missing the official Student Council tracking code."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Go find Kim in the classroom—"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "She manages the budget logs."
         },
         {
           "speaker": "Mrs. Santos",

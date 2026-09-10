@@ -25,7 +25,11 @@
         },
         {
           "speaker": "Enzo",
-          "text": "Good enough. We need encoders. Just write your name legibly. Don't be late. And don't use Comic Sans on the form."
+          "text": "Good enough. We need encoders. Just write your name legibly."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "And don't use Comic Sans on the form."
         },
         {
           "speaker": "Kiko",
