@@ -120,6 +120,9 @@ namespace Master.Scripts.UI
             {
                 if (mgr == null || mgr.task == null || mgr.task.requirements == null) continue;
 
+                // Closers delegate progress tracking to the Giver; only inspect authoritative Giver/Both managers
+                if (mgr.hostType == HostType.Closer) continue;
+
                 if (mgr.status == TaskStatus.Active || mgr.status == TaskStatus.ReadyToComplete)
                 {
                     var objectives = mgr.task.requirements.objectives;
