@@ -27,7 +27,9 @@ MonoBehaviour:
       notificationDisplayName: Format and print the Master Portfolio on the Publication
         Office computer.
       requiredAmount: 1
+      targetRoomId: publication_office
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 4900000, guid: d6000000000000000000000000000002, type: 3}
+  targetRoomId: publication_office

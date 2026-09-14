@@ -56,6 +56,10 @@
         {
           "speaker": "Mrs. Santos",
           "text": "Now bring this copy directly to Mr. Reyes in the Admin Office for final sign-off."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Understood, Ma'am!"
         }
       ]
     }
@@ -65,7 +69,7 @@
     "lines": [
       {
         "speaker": "Mrs. Santos",
-        "text": "Be meticulous with the formatting. Mr. Reyes will reject anything less than perfect."
+        "text": "Don't keep Mr. Reyes waiting. Bring the editorial manuscript to him at the Admin Office."
       }
     ]
   }

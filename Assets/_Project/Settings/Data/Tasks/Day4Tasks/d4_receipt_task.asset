@@ -25,14 +25,19 @@ MonoBehaviour:
     - key: talk_jules
       notificationDisplayName: Travel to the Basketball Court and talk to Jules.
       requiredAmount: 1
+      targetRoomId: basketball_court
     - key: buy_canteen_water
       notificationDisplayName: Buy an ice-cold bottle of water from the canteen.
       requiredAmount: 1
+      targetRoomId: canteen
     - key: deliver_water
       notificationDisplayName: Deliver the cold water to Jules at the Basketball
         Court.
       requiredAmount: 1
+      targetRoomId: basketball_court
+  startsActive: 0
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
+  targetRoomId: 

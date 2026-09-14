@@ -33,5 +33,9 @@ namespace Master.Scripts.TaskSystem
         [Header("Document Data (Optional)")]
         [Tooltip("If this task requires editing a document, assign its JSON file here.")]
         public TextAsset documentData;
+
+        [Header("Map / Location (Optional)")]
+        [Tooltip("The roomId where this task or its objective primarily takes place (e.g. 'canteen', 'upper_library', 'multipurpose_hall').")]
+        public string targetRoomId;
     }
 }

@@ -24,7 +24,9 @@ MonoBehaviour:
     - key: format_staff_profile
       notificationDisplayName: Pass Assesment
       requiredAmount: 1
+      targetRoomId: publication_office
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 4900000, guid: f6b1b23ccedd74b8088408fdce693295, type: 3}
+  targetRoomId: publication_office
