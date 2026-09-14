@@ -25,10 +25,12 @@ MonoBehaviour:
       notificationDisplayName: Check the whistleblower story on the publication office
         computer.
       requiredAmount: 1
+      targetRoomId: publication_office
     - key: talk_janitor
       notificationDisplayName: Talk to the Janitor in the canteen to shine light
         to the story.
       requiredAmount: 1
+      targetRoomId: canteen
   startsActive: 0
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}

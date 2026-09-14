@@ -34,6 +34,9 @@ namespace Master.Scripts.TaskSystem
         public string notificationDisplayName;
 
         public int requiredAmount;
+
+        [Tooltip("The roomId on the map where this specific objective takes place (e.g., 'canteen', 'upper_library').")]
+        public string targetRoomId;
     }
 
     /// <summary>

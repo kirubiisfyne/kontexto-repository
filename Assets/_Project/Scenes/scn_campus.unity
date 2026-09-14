@@ -2415,6 +2415,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1360202586}
   - {fileID: 402108815}
   - {fileID: 590987254}
   - {fileID: 1531486670}
@@ -58192,8 +58193,8 @@ MonoBehaviour:
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   defaultLevelData: {fileID: 11400000, guid: 4a02d69671be0419d8e76ebd6b492afb, type: 2}
   cutsceneSceneName: scn_cutscene
-  editorOverrideSequence: {fileID: 11400000, guid: d651c6aa53bbe4da3bf5e0db504e92ea, type: 2}
-  editorOverrideLevel: {fileID: 11400000, guid: b6e18d8c3751c447bb28150239df5233, type: 2}
+  editorOverrideSequence: {fileID: 0}
+  editorOverrideLevel: {fileID: 0}
   currentLevelData: {fileID: 0}
 --- !u!114 &986174011
 MonoBehaviour:
@@ -82146,6 +82147,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5179988996057832045, guid: 58cc95225dbb44e3b9a110645b76adc3, type: 3}
   m_PrefabInstance: {fileID: 1359223296}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1360202585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1360202586}
+  m_Layer: 5
+  m_Name: Anchor_Courtyard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1360202586
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360202585}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 35169845}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -43, y: 75}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1361907031
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -104642,7 +104678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e7b145c54da4ac4be1f516ec7bf743, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Project::Master.Scripts.UI.MapObjectiveBridge
-  mapPage: {fileID: 0}
+  mapPage: {fileID: 1720581069}
 --- !u!114 &1720581069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104658,14 +104694,15 @@ MonoBehaviour:
   playerPin: {fileID: 1919482650}
   objectivePin: {fileID: 473966964}
   outsideRoomAlpha: 0.35
+  defaultOutdoorAnchor: {fileID: 1360202586}
   roomAnchors:
   - roomId: canteen
     pinAnchor: {fileID: 402108815}
   - roomId: admin_office
     pinAnchor: {fileID: 590987254}
-  - roomId: lower_classrooms
+  - roomId: lower_classroom
     pinAnchor: {fileID: 1531486670}
-  - roomId: upper_classrooms
+  - roomId: upper_classroom
     pinAnchor: {fileID: 138651452}
   - roomId: upper_library
     pinAnchor: {fileID: 2096697453}
@@ -117803,7 +117840,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -259.49, y: -13.599976}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 61, y: 68}
   m_Pivot: {x: 0.5, y: 0.3}
 --- !u!114 &1919482651
@@ -196113,6 +196150,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5419530950061323937}
   - component: {fileID: 5419530950061323938}
+  - component: {fileID: 5419530950061323940}
+  - component: {fileID: 5419530950061323939}
   m_Layer: 0
   m_Name: LowerMain
   m_TagString: Untagged
@@ -276956,6 +276995,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8998451554894293108}
   - component: {fileID: 8998451554894293109}
+  - component: {fileID: 8998451554894293111}
+  - component: {fileID: 8998451554894293110}
   m_Layer: 0
   m_Name: LowerClassrooms
   m_TagString: Untagged
@@ -350276,6 +350317,40 @@ MonoBehaviour:
   roomId: multipurpose_hall
   propsContainer: {fileID: 1108726490}
   doors: []
+--- !u!114 &5419530950061323939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628208656195019925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92473265ecec44604b533547d49338c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.RoomSystem.MapLocationTrigger
+  roomId: multipurpose_hall
+--- !u!65 &5419530950061323940
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1628208656195019925}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 15, y: 4, z: 21}
+  m_Center: {x: 20, y: 2, z: -24}
 --- !u!64 &5419839607921319413
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -413334,6 +413409,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6472107196073325219}
   - component: {fileID: 7020101383563911531}
+  - component: {fileID: 7020101383563911533}
+  - component: {fileID: 7020101383563911532}
   m_Layer: 0
   m_Name: UpperLibrary
   m_TagString: Untagged
@@ -413360,6 +413437,40 @@ MonoBehaviour:
     openEulerAngles: {x: 0, y: 60, z: 0}
   - doorTransform: {fileID: 5266781009461641646}
     openEulerAngles: {x: 0, y: 300, z: 0}
+--- !u!114 &7020101383563911532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020101383563911530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92473265ecec44604b533547d49338c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.RoomSystem.MapLocationTrigger
+  roomId: upper_library
+--- !u!65 &7020101383563911533
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7020101383563911530}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8, y: 4, z: 25}
+  m_Center: {x: 4, y: 6, z: -17}
 --- !u!1 &7020295788165610475
 GameObject:
   m_ObjectHideFlags: 0
@@ -490458,6 +490569,40 @@ MonoBehaviour:
     openEulerAngles: {x: 0, y: 370, z: 0}
   - doorTransform: {fileID: 4758545471739197466}
     openEulerAngles: {x: 0, y: -2, z: 0}
+--- !u!114 &8998451554894293110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574802199315829976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92473265ecec44604b533547d49338c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.RoomSystem.MapLocationTrigger
+  roomId: lower_classroom
+--- !u!65 &8998451554894293111
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3574802199315829976}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8, y: 4, z: 24}
+  m_Center: {x: 36, y: 2, z: -17}
 --- !u!4 &8998484588238262083
 Transform:
   m_ObjectHideFlags: 0
