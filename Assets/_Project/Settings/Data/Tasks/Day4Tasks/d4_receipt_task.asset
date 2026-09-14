@@ -35,8 +35,9 @@ MonoBehaviour:
         Court.
       requiredAmount: 1
       targetRoomId: basketball_court
+  startsActive: 0
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
-  targetRoomId: basketball_court
+  targetRoomId: 

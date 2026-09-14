@@ -36,4 +36,4 @@ MonoBehaviour:
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
-  targetRoomId: canteen
+  targetRoomId: 

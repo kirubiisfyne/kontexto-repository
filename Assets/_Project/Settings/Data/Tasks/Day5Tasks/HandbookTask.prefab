@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6490004659165023149}
   - component: {fileID: 348636466715304846}
   - component: {fileID: 2419799617550322002}
-  - component: {fileID: 5118396071075591463}
+  - component: {fileID: 3982043304458417828}
   - component: {fileID: 3743558804211247568}
   m_Layer: 7
   m_Name: angel
@@ -193,7 +193,19 @@ MonoBehaviour:
           m_CallState: 2
     onCompleted:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 3982043304458417828}
+          m_TargetAssemblyTypeName: Master.Scripts.TaskSystem.KeyItemInstance, Project
+          m_MethodName: ForceInteract
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     onPrerequisiteNotMet:
       m_PersistentCalls:
         m_Calls:
@@ -210,20 +222,20 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
---- !u!114 &5118396071075591463
+--- !u!114 &3982043304458417828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 81986307891849408}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0bb1a384f71e492fbf78937df07cc459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Project::Master.Scripts.TaskSystem.KeyItemInstance
-  itemKey: return_handbook
-  targetGiver: {fileID: 2419799617550322002}
+  itemKey: get_student_demands
+  targetGiver: {fileID: 0}
   destroyOnInteract: 0
   updateLocalIndex: 0
   waitSettings:

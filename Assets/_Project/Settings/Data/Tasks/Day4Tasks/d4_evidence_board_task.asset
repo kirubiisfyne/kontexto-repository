@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Project::Master.Scripts.TaskSystem.TaskData
   taskId: d4_evidence_board_task
   taskName: Fix the testimony & receipt layout on the publication computer.
-  description: Format the testimony and gasoline purchase receipt proof on the publication computer.
+  description: Format the testimony and gasoline purchase receipt proof on the publication
+    computer.
   prerequisite:
     task: {fileID: 11400000, guid: d4000000000000000000000000000001, type: 2}
     requiredStatus: 3
@@ -22,11 +23,13 @@ MonoBehaviour:
     needsSequentialOrder: 1
     objectives:
     - key: fix_evidence_receipt_story
-      notificationDisplayName: Fix the testimony & receipt layout on the publication office computer.
+      notificationDisplayName: Fix the testimony & receipt layout on the publication
+        office computer.
       requiredAmount: 1
       targetRoomId: publication_office
+  startsActive: 0
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 4900000, guid: d4000000000000000000000000000002, type: 3}
-  targetRoomId: publication_office
+  targetRoomId: 

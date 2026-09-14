@@ -17,8 +17,8 @@ MonoBehaviour:
   description: Meet Angel in the Classroom, retrieve the Student Council Handbook
     from Library Archives, and finalize demands.
   prerequisite:
-    task: {fileID: 0}
-    requiredStatus: 0
+    task: {fileID: 11400000, guid: d5000000000000000000000000000003, type: 2}
+    requiredStatus: 1
   requirements:
     needsSequentialOrder: 1
     objectives:
@@ -32,4 +32,4 @@ MonoBehaviour:
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
-  targetRoomId: upper_library
+  targetRoomId: 
