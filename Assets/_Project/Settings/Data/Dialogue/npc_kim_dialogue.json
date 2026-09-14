@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Kim",
+      "lines": [
+        {
+          "speaker": "Kim",
+          "text": "Hey."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Hey, Kim. What are you up to?"
+        },
+        {
+          "speaker": "Kim",
+          "text": "Waiting for someone. They're late. Again."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "How late?"
+        },
+        {
+          "speaker": "Kim",
+          "text": "Fifteen minutes."
+        },
+        {
+          "speaker": "Kim",
+          "text": "At this point, I'm just here out of spite."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "You could just text them."
+        },
+        {
+          "speaker": "Kim",
+          "text": "I could. But I want to see their face when they show up."
+        }
+      ]
+    }
+  ]
+}

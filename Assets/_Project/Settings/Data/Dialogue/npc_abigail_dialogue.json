@@ -1,0 +1,53 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Abigail",
+      "lines": [
+        {
+          "speaker": "Abigail",
+          "text": "One, two, three—"
+        },
+        {
+          "speaker": "Abigail",
+          "text": "Oh! Hey, Kiko! Didn't see you there."
+        },
+        {
+          "speaker": "Abigail",
+          "text": "Sorry, I'm counting steps in my head."
+        },
+        {
+          "speaker": "Abigail",
+          "text": "Indayog has a performance coming up for the school fair."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "You're rehearsing… right here?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "In the middle of everything?"
+        },
+        {
+          "speaker": "Abigail",
+          "text": "A real dancer can rehearse anywhere!"
+        },
+        {
+          "speaker": "Abigail",
+          "text": "If I can nail the routine without bumping into anyone, I can do it on any stage."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "That's one way to train, I guess."
+        },
+        {
+          "speaker": "Abigail",
+          "text": "The stage crew keeps moving our schedule around."
+        },
+        {
+          "speaker": "Abigail",
+          "text": "So I just practice wherever I happen to be."
+        }
+      ]
+    }
+  ]
+}

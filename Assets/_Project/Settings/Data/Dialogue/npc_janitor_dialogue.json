@@ -1,0 +1,37 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Janitor",
+      "lines": [
+        {
+          "speaker": "Janitor",
+          "text": "..."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Uh, good afternoon, manong."
+        },
+        {
+          "speaker": "Janitor",
+          "text": "Mm."
+        },
+        {
+          "speaker": "Janitor",
+          "text": "You kids always running around making a mess."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Sorry..."
+        },
+        {
+          "speaker": "Janitor",
+          "text": "Don't apologize. Just watch where you step."
+        },
+        {
+          "speaker": "Janitor",
+          "text": "Wet floor."
+        }
+      ]
+    }
+  ]
+}

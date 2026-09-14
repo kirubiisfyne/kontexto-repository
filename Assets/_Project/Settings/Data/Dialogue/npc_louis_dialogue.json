@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Louis",
+      "lines": [
+        {
+          "speaker": "Louis",
+          "text": "Huh—?! I'm awake."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Were you just… sleeping? Standing up?"
+        },
+        {
+          "speaker": "Louis",
+          "text": "Power nap. Totally intentional."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Your eyes were closed for like ten seconds."
+        },
+        {
+          "speaker": "Louis",
+          "text": "That's all you need. Ten seconds and you're recharged."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I don't think that's how sleep works."
+        },
+        {
+          "speaker": "Louis",
+          "text": "Works for me."
+        },
+        {
+          "speaker": "Louis",
+          "text": "Don't tell anyone though. I have a reputation."
+        }
+      ]
+    }
+  ]
+}

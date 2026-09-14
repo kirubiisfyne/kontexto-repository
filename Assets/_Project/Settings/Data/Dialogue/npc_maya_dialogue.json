@@ -1,0 +1,49 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Maya",
+      "lines": [
+        {
+          "speaker": "Maya",
+          "text": "Oh— hi!"
+        },
+        {
+          "speaker": "Maya",
+          "text": "Sorry, I was spacing out."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "N-no, you're fine! I mean— it's fine."
+        },
+        {
+          "speaker": "Maya",
+          "text": "I was just thinking about what to draw next."
+        },
+        {
+          "speaker": "Maya",
+          "text": "I've been doodling on the back of my notebook all day."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Can I see?"
+        },
+        {
+          "speaker": "Maya",
+          "text": "Hmm… maybe next time."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'll hold you to that."
+        },
+        {
+          "speaker": "Maya",
+          "text": "Heh. Deal."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>*Don't turn red. Don't turn red. Don't turn red.*</i></color>"
+        }
+      ]
+    }
+  ]
+}
