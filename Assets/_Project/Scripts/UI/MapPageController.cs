@@ -31,6 +31,10 @@ namespace Master.Scripts.UI
         [Range(0f, 1f)]
         [SerializeField] private float outsideRoomAlpha = 0.35f;
 
+        [Header("Default Outdoor Spawn")]
+        [Tooltip("Optional preset anchor where the player pin appears when spawned in the open (e.g., Campus Entrance or Courtyard).")]
+        [SerializeField] private RectTransform defaultOutdoorAnchor;
+
         [Header("Room Anchors")]
         [SerializeField] private List<RoomMapAnchor> roomAnchors = new List<RoomMapAnchor>();
 
@@ -39,6 +43,9 @@ namespace Master.Scripts.UI
         private string lastKnownRoomId;
         private bool isInsideRoom = false;
         private string currentObjectiveRoomId;
+        private bool wasVisibleLastFrame = false;
+
+        public event Action OnMapOpened;
 
         private void Awake()
         {
@@ -48,10 +55,18 @@ namespace Master.Scripts.UI
             UpdateObjectivePinVisual();
         }
 
-        private void OnEnable()
+        private void Update()
         {
-            UpdatePlayerPinVisual();
-            UpdateObjectivePinVisual();
+            // Detect when MapPage is scaled up / opened by the notebook animator
+            bool isCurrentlyVisible = transform.localScale.x > 0.1f;
+            if (isCurrentlyVisible && !wasVisibleLastFrame)
+            {
+                // Map was just opened: notify bridge to re-check player position & objectives
+                OnMapOpened?.Invoke();
+                UpdatePlayerPinVisual();
+                UpdateObjectivePinVisual();
+            }
+            wasVisibleLastFrame = isCurrentlyVisible;
         }
 
         private void EnsureCanvasGroup()
@@ -78,9 +93,6 @@ namespace Master.Scripts.UI
             }
         }
 
-        /// <summary>
-        /// Player entered a room: snap pin to the room anchor and set full opacity.
-        /// </summary>
         public void SetPlayerLocation(string roomId)
         {
             lastKnownRoomId = roomId;
@@ -88,9 +100,6 @@ namespace Master.Scripts.UI
             UpdatePlayerPinVisual();
         }
 
-        /// <summary>
-        /// Player exited a room: keep pin at last known room but lower opacity.
-        /// </summary>
         public void SetPlayerOutsideRoom()
         {
             isInsideRoom = false;
@@ -109,32 +118,73 @@ namespace Master.Scripts.UI
             if (objectivePin != null) objectivePin.gameObject.SetActive(false);
         }
 
+        private bool TryGetAnchor(string roomId, out RectTransform anchor)
+        {
+            anchor = null;
+            if (string.IsNullOrEmpty(roomId)) return false;
+
+            if (anchorLookup.Count == 0) BuildAnchorLookup();
+
+            if (anchorLookup.TryGetValue(roomId, out anchor)) return true;
+
+            foreach (var kvp in anchorLookup)
+            {
+                if (string.Equals(kvp.Key, roomId, StringComparison.OrdinalIgnoreCase))
+                {
+                    anchor = kvp.Value;
+                    return true;
+                }
+
+                if (string.Equals(kvp.Key.TrimEnd('s'), roomId.TrimEnd('s'), StringComparison.OrdinalIgnoreCase))
+                {
+                    anchor = kvp.Value;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private Vector3 GetLocalPositionInMapPage(RectTransform target)
+        {
+            Vector3 localPos = target.localPosition;
+            Transform curr = target.parent;
+            while (curr != null && curr != transform)
+            {
+                localPos += curr.localPosition;
+                curr = curr.parent;
+            }
+            return localPos;
+        }
+
         private void UpdatePlayerPinVisual()
         {
             if (playerPin == null) return;
             EnsureCanvasGroup();
 
-            if (anchorLookup.Count == 0) BuildAnchorLookup();
-
-            if (!string.IsNullOrEmpty(lastKnownRoomId) && anchorLookup.TryGetValue(lastKnownRoomId, out var anchor))
+            // 1. Player is in or has visited a room
+            if (!string.IsNullOrEmpty(lastKnownRoomId) && TryGetAnchor(lastKnownRoomId, out var anchor))
             {
                 playerPin.gameObject.SetActive(true);
-
-                // Use localPosition to avoid 0-scale division when notebook page is collapsed
-                if (playerPin.parent == anchor.parent)
-                {
-                    playerPin.localPosition = anchor.localPosition;
-                }
-                else
-                {
-                    playerPin.position = anchor.position;
-                }
+                playerPin.localPosition = GetLocalPositionInMapPage(anchor);
 
                 if (playerPinCanvasGroup != null)
                 {
                     playerPinCanvasGroup.alpha = isInsideRoom ? 1.0f : outsideRoomAlpha;
                 }
             }
+            // 2. Player spawned in the open with no prior room, but a preset outdoor anchor exists
+            else if (defaultOutdoorAnchor != null)
+            {
+                playerPin.gameObject.SetActive(true);
+                playerPin.localPosition = GetLocalPositionInMapPage(defaultOutdoorAnchor);
+
+                if (playerPinCanvasGroup != null)
+                {
+                    playerPinCanvasGroup.alpha = outsideRoomAlpha; // Dimmed to signal they are outdoors
+                }
+            }
+            // 3. Fallback: keep hidden
             else
             {
                 playerPin.gameObject.SetActive(false);
@@ -145,21 +195,10 @@ namespace Master.Scripts.UI
         {
             if (objectivePin == null) return;
 
-            if (anchorLookup.Count == 0) BuildAnchorLookup();
-
-            if (!string.IsNullOrEmpty(currentObjectiveRoomId) && anchorLookup.TryGetValue(currentObjectiveRoomId, out var anchor))
+            if (!string.IsNullOrEmpty(currentObjectiveRoomId) && TryGetAnchor(currentObjectiveRoomId, out var anchor))
             {
                 objectivePin.gameObject.SetActive(true);
-
-                // Use localPosition to avoid 0-scale division when notebook page is collapsed
-                if (objectivePin.parent == anchor.parent)
-                {
-                    objectivePin.localPosition = anchor.localPosition;
-                }
-                else
-                {
-                    objectivePin.position = anchor.position;
-                }
+                objectivePin.localPosition = GetLocalPositionInMapPage(anchor);
             }
             else
             {

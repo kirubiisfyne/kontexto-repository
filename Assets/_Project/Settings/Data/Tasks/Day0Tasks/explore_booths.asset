@@ -24,13 +24,17 @@ MonoBehaviour:
     - key: dancer_npc
       notificationDisplayName: Talk to an Indayog member
       requiredAmount: 1
+      targetRoomId: multipurpose_hall
     - key: cat_officer
       notificationDisplayName: Talk to a CAT officer
       requiredAmount: 1
+      targetRoomId: multipurpose_hall
     - key: paragon
       notificationDisplayName: Talk to a Paragon member
       requiredAmount: 1
+      targetRoomId: multipurpose_hall
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
+  targetRoomId: multipurpose_hall

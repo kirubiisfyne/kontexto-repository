@@ -24,10 +24,14 @@ MonoBehaviour:
     - key: paper_stack
       notificationDisplayName: Picked-Up Paper Stack
       requiredAmount: 1
+      targetRoomId: upper_library
     - key: print_paper
       notificationDisplayName: Printed Paper Stack
       requiredAmount: 1
+      targetRoomId: upper_library
+  startsActive: 0
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
+  targetRoomId: publication_office

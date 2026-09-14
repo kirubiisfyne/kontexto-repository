@@ -22,7 +22,6 @@ namespace Master.Scripts.UI
 
         private IEnumerator Start()
         {
-            // Wait for level loader to position player and initialize scene
             yield return new WaitForEndOfFrame();
             DetectInitialPlayerRoom();
             RefreshActiveObjective();
@@ -32,19 +31,39 @@ namespace Master.Scripts.UI
         {
             MapLocationTrigger.OnPlayerEnteredRoom += HandlePlayerEnteredRoom;
             MapLocationTrigger.OnPlayerExitedRoom += HandlePlayerExitedRoom;
-            HostTaskManager.OnTaskStartedGlobal += HandleTaskStarted;
+            HostTaskManager.OnTaskStartedGlobal += HandleTaskEvent;
+            HostTaskManager.OnProgressReportedGlobal += HandleProgressEvent;
+
+            if (mapPage == null)
+            {
+                mapPage = FindFirstObjectByType<MapPageController>(FindObjectsInactive.Include);
+            }
+
+            if (mapPage != null)
+            {
+                mapPage.OnMapOpened += HandleMapOpened;
+            }
         }
 
         private void OnDisable()
         {
             MapLocationTrigger.OnPlayerEnteredRoom -= HandlePlayerEnteredRoom;
             MapLocationTrigger.OnPlayerExitedRoom -= HandlePlayerExitedRoom;
-            HostTaskManager.OnTaskStartedGlobal -= HandleTaskStarted;
+            HostTaskManager.OnTaskStartedGlobal -= HandleTaskEvent;
+            HostTaskManager.OnProgressReportedGlobal -= HandleProgressEvent;
+
+            if (mapPage != null)
+            {
+                mapPage.OnMapOpened -= HandleMapOpened;
+            }
         }
 
-        /// <summary>
-        /// Checks on level load which room the player initially spawned inside.
-        /// </summary>
+        private void HandleMapOpened()
+        {
+            DetectInitialPlayerRoom();
+            RefreshActiveObjective();
+        }
+
         public void DetectInitialPlayerRoom()
         {
             var player = FindFirstObjectByType<PlayerController>();
@@ -60,7 +79,6 @@ namespace Master.Scripts.UI
                 }
             }
 
-            // Player spawned outside any room trigger
             mapPage.SetPlayerOutsideRoom();
         }
 
@@ -80,11 +98,19 @@ namespace Master.Scripts.UI
             }
         }
 
-        private void HandleTaskStarted(string uniqueId, string displayName, float maxProgress)
+        private void HandleTaskEvent(string uniqueId, string displayName, float maxProgress)
         {
             RefreshActiveObjective();
         }
 
+        private void HandleProgressEvent(string uniqueId, string displayName, float currentProgress, float maxProgress)
+        {
+            RefreshActiveObjective();
+        }
+
+        /// <summary>
+        /// Finds the currently active task and points the pin to its active objective's room.
+        /// </summary>
         public void RefreshActiveObjective()
         {
             if (mapPage == null) return;
@@ -92,18 +118,34 @@ namespace Master.Scripts.UI
             var allManagers = FindObjectsByType<HostTaskManager>(FindObjectsSortMode.None);
             foreach (var mgr in allManagers)
             {
-                if (mgr != null && mgr.status == TaskStatus.Active && mgr.task != null)
+                if (mgr == null || mgr.task == null || mgr.task.requirements == null) continue;
+
+                if (mgr.status == TaskStatus.Active || mgr.status == TaskStatus.ReadyToComplete)
                 {
+                    var objectives = mgr.task.requirements.objectives;
+                    if (objectives != null && objectives.Count > 0)
+                    {
+                        // 1. Find the first uncompleted objective
+                        for (int i = 0; i < objectives.Count; i++)
+                        {
+                            int progress = (mgr.currentProgress != null && i < mgr.currentProgress.Count) ? mgr.currentProgress[i] : 0;
+                            if (progress < objectives[i].requiredAmount)
+                            {
+                                // Point to this specific objective's room!
+                                if (!string.IsNullOrEmpty(objectives[i].targetRoomId))
+                                {
+                                    mapPage.SetObjectiveLocation(objectives[i].targetRoomId);
+                                    return;
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    // 2. Fallback to task-level targetRoomId (if objective-level is left empty)
                     if (!string.IsNullOrEmpty(mgr.task.targetRoomId))
                     {
                         mapPage.SetObjectiveLocation(mgr.task.targetRoomId);
-                        return;
-                    }
-
-                    var room = mgr.GetComponentInParent<RoomController>();
-                    if (room != null && !string.IsNullOrEmpty(room.roomId))
-                    {
-                        mapPage.SetObjectiveLocation(room.roomId);
                         return;
                     }
                 }

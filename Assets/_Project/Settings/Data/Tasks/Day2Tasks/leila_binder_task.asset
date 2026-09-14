@@ -25,7 +25,9 @@ MonoBehaviour:
     - key: leila_binder
       notificationDisplayName: Find Kim's Binder on Terrace
       requiredAmount: 1
+      targetRoomId: lower_classroom
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 0}
+  targetRoomId: lower_classroom
