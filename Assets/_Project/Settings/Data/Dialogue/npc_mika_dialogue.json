@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Mika",
+      "lines": [
+        {
+          "speaker": "Mika",
+          "text": "Oh. It's you."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Uh… hi, Mika."
+        },
+        {
+          "speaker": "Mika",
+          "text": "Did you need something?"
+        },
+        {
+          "speaker": "Mika",
+          "text": "Or are you just standing there for fun?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I was just passing by—"
+        },
+        {
+          "speaker": "Mika",
+          "text": "Then keep passing."
+        },
+        {
+          "speaker": "Mika",
+          "text": "I'm busy. Some of us actually have things to do."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>*Noted. Don't talk to Mika.*</i></color>"
+        }
+      ]
+    }
+  ]
+}

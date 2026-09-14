@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Kalbo",
+      "lines": [
+        {
+          "speaker": "Kalbo",
+          "text": "Yo, Kiko. You lift?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Do I look like I lift?"
+        },
+        {
+          "speaker": "Kalbo",
+          "text": "Fair enough."
+        },
+        {
+          "speaker": "Kalbo",
+          "text": "I arm-wrestled three guys during lunch earlier."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "How'd that go?"
+        },
+        {
+          "speaker": "Kalbo",
+          "text": "Won all three."
+        },
+        {
+          "speaker": "Kalbo",
+          "text": "Nobody wants to challenge me anymore though."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Lonely at the top, huh."
+        }
+      ]
+    }
+  ]
+}

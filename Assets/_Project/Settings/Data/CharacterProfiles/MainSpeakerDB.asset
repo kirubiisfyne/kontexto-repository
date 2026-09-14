@@ -47,3 +47,5 @@ MonoBehaviour:
     portraitSprite: {fileID: 21300000, guid: ff7a7a49e3bf6a5429fb618480abd752, type: 3}
   - characterName: Louis
     portraitSprite: {fileID: 21300000, guid: 65fc306be6161a140a156e0b2e33cf0f, type: 3}
+  - characterName: Maya
+    portraitSprite: {fileID: 21300000, guid: 956cde8532e2da3468241c434ca5c2dc, type: 3}

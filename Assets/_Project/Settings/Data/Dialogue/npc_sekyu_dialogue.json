@@ -1,0 +1,33 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Sekyu",
+      "lines": [
+        {
+          "speaker": "Kiko",
+          "text": "Good afternoon, manong guard."
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "..."
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "ID."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "It's right here, see?"
+        },
+        {
+          "speaker": "Sekyu",
+          "text": "Mm. Keep it visible."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "<color=#707070><i>*Friendly as always.*</i></color>"
+        }
+      ]
+    }
+  ]
+}

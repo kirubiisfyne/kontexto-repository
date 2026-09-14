@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Angel",
+      "lines": [
+        {
+          "speaker": "Angel",
+          "text": "Oh, hi Kiko!"
+        },
+        {
+          "speaker": "Angel",
+          "text": "Have you eaten yet? The canteen line gets crazy after fourth period."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I'll survive. I brought baon."
+        },
+        {
+          "speaker": "Angel",
+          "text": "Good. You need energy."
+        },
+        {
+          "speaker": "Angel",
+          "text": "Things have been so hectic lately. I barely have time to breathe."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "You always look busy."
+        },
+        {
+          "speaker": "Angel",
+          "text": "That's because I always am."
+        },
+        {
+          "speaker": "Angel",
+          "text": "Anyway, don't let me hold you up. Take care of yourself, okay?"
+        }
+      ]
+    }
+  ]
+}

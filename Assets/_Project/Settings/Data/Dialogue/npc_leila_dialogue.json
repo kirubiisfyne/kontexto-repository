@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Leila",
+      "lines": [
+        {
+          "speaker": "Leila",
+          "text": "Kiko! Perfect timing."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Why do I feel like you're about to ask me for something?"
+        },
+        {
+          "speaker": "Leila",
+          "text": "Relax! I was just going to say hi."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Really?"
+        },
+        {
+          "speaker": "Leila",
+          "text": "...Okay, fine. I was also going to ask if you've seen my pen."
+        },
+        {
+          "speaker": "Leila",
+          "text": "The blue one. It's my lucky pen."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I haven't. Sorry."
+        },
+        {
+          "speaker": "Leila",
+          "text": "Ugh. Third one this month."
+        }
+      ]
+    }
+  ]
+}

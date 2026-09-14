@@ -1,0 +1,49 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Joshua",
+      "lines": [
+        {
+          "speaker": "Joshua",
+          "text": "Hmm..."
+        },
+        {
+          "speaker": "Joshua",
+          "text": "Oh— sorry, I didn't notice you."
+        },
+        {
+          "speaker": "Joshua",
+          "text": "I was trying to solve this problem in my head."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "What kind of problem?"
+        },
+        {
+          "speaker": "Joshua",
+          "text": "It's from last week's quiz."
+        },
+        {
+          "speaker": "Joshua",
+          "text": "I got it right, but I feel like I got it right for the wrong reason."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "...You passed and you're still stressed about it?"
+        },
+        {
+          "speaker": "Joshua",
+          "text": "A correct answer you don't fully understand is just a lucky guess wearing a disguise."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I wish I had your problems."
+        },
+        {
+          "speaker": "Joshua",
+          "text": "Trust me, it keeps you up at night."
+        }
+      ]
+    }
+  ]
+}

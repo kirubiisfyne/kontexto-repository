@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-744647131756047139
+--- !u!1102 &-5470987268247935637
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: anim_npcBoyIdle
+  m_Name: anim_npcLouisIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -58,8 +58,8 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: -744647131756047139}
-    m_Position: {x: 341.79932, y: 195.40141, z: 0}
+    m_State: {fileID: -5470987268247935637}
+    m_Position: {x: 346.6667, y: 234.00002, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -69,4 +69,4 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: -744647131756047139}
+  m_DefaultState: {fileID: -5470987268247935637}
