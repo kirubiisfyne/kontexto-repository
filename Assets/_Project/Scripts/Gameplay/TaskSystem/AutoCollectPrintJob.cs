@@ -37,6 +37,20 @@ namespace Master.Scripts
                         }
                     }
 
+                    // If targetGiver is a Closer, resolve the actual Giver/Both manager
+                    if (foundGiver != null && foundGiver.hostType == HostType.Closer)
+                    {
+                        var allManagers = FindObjectsByType<HostTaskManager>(FindObjectsSortMode.None);
+                        foreach (var manager in allManagers)
+                        {
+                            if (manager.task == foundGiver.task && (manager.hostType == HostType.Giver || manager.hostType == HostType.Both))
+                            {
+                                foundGiver = manager;
+                                break;
+                            }
+                        }
+                    }
+
                     // If the scene reloaded, the task was likely reset to Inactive because the SaveSystem only tracks 'Completed' tasks.
                     // We must forcefully resume it to Active before reporting progress!
                     if (foundGiver != null && foundGiver.status == TaskStatus.Inactive)

@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 5456853511370340001}
   - component: {fileID: 1295417377832840837}
   - component: {fileID: 9162267322603450285}
+  - component: {fileID: 2419799617550322105}
   m_Layer: 7
   m_Name: Adviser
   m_TagString: Untagged
@@ -234,7 +235,52 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
-  indexEvents: []
+  indexEvents:
+  - name: CompleteReview
+    index: 2
+    onStart:
+      m_PersistentCalls:
+        m_Calls: []
+    onEnd:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2419799617550322105}
+          m_TargetAssemblyTypeName: Master.Scripts.TaskSystem.KeyItemInstance, Assembly-CSharp
+          m_MethodName: ForceInteract
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &2419799617550322105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717432686849659750}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bb1a384f71e492fbf78937df07cc459, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.KeyItemInstance
+  itemKey: review_with_adviser
+  targetGiver: {fileID: 1295417377832840837}
+  destroyOnInteract: 0
+  updateLocalIndex: 0
+  waitSettings:
+    waitDuration: 0
+    waitText: 
+    onWaitStarted:
+      m_PersistentCalls:
+        m_Calls: []
+  onAcceptedReport:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1295417377832840837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -798,7 +844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.TaskSystem.KeyItemInstance
   itemKey: format_editorial_computer
-  targetGiver: {fileID: 7712617053172346322}
+  targetGiver: {fileID: 1295417377832840837}
   destroyOnInteract: 0
   updateLocalIndex: 0
   waitSettings:
