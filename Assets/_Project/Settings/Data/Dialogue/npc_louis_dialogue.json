@@ -5,35 +5,31 @@
       "lines": [
         {
           "speaker": "Louis",
-          "text": "Huh—?! I'm awake."
+          "text": "<color=#707070><i>*Sighs loudly.*</i></color>"
         },
         {
           "speaker": "Kiko",
-          "text": "Were you just… sleeping? Standing up?"
+          "text": "Uh... are you okay?"
         },
         {
           "speaker": "Louis",
-          "text": "Power nap. Totally intentional."
+          "text": "I'm contemplating the absolute futility of our existence in this institution."
         },
         {
           "speaker": "Kiko",
-          "text": "Your eyes were closed for like ten seconds."
+          "text": "Oh. Okay."
         },
         {
           "speaker": "Louis",
-          "text": "That's all you need. Ten seconds and you're recharged."
+          "text": "But of course, the masses wouldn't understand the sheer depth of my melancholy."
         },
         {
           "speaker": "Kiko",
-          "text": "I don't think that's how sleep works."
+          "text": "I literally just asked if you were okay."
         },
         {
           "speaker": "Louis",
-          "text": "Works for me."
-        },
-        {
-          "speaker": "Louis",
-          "text": "Don't tell anyone though. I have a reputation."
+          "text": "Please step aside. You're ruining my aura."
         }
       ]
     }
