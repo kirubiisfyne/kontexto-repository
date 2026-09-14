@@ -17,8 +17,8 @@ MonoBehaviour:
   description: Format the official editorial using bullets and numbered lists on
     the publication computer.
   prerequisite:
-    task: {fileID: 0}
-    requiredStatus: 0
+    task: {fileID: 11400000, guid: d5000000000000000000000000000001, type: 2}
+    requiredStatus: 3
   requirements:
     needsSequentialOrder: 1
     objectives:
@@ -27,7 +27,11 @@ MonoBehaviour:
         the Publication Office computer.
       requiredAmount: 1
       targetRoomId: publication_office
-  startsActive: 0
+    - key: review_with_adviser
+      notificationDisplayName: Have Mrs. Santos review the editorial in the Publication Office.
+      requiredAmount: 1
+      targetRoomId: publication_office
+  startsActive: 1
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
