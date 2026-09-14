@@ -17,16 +17,27 @@ MonoBehaviour:
   description: Format the official editorial using bullets and numbered lists on
     the publication computer.
   prerequisite:
-    task: {fileID: 11400000, guid: d5000000000000000000000000000001, type: 2}
-    requiredStatus: 3
+    task: {fileID: 0}
+    requiredStatus: 0
   requirements:
     needsSequentialOrder: 1
     objectives:
+    - key: get_student_demands
+      notificationDisplayName: Get Student Demands from Angel in the Lower Classroom.
+      requiredAmount: 1
+      targetRoomId: lower_classroom
     - key: format_editorial_computer
       notificationDisplayName: Format the Editorial using Bullets & Numbering on
         the Publication Office computer.
       requiredAmount: 1
+      targetRoomId: publication_office
+    - key: review_with_adviser
+      notificationDisplayName: Have Mrs. Santos review the editorial in the Publication Office.
+      requiredAmount: 1
+      targetRoomId: publication_office
+  startsActive: 0
   setPlayerInitialTransform: 0
   playerInitialPosition: {x: 0, y: 0, z: 0}
   playerInitialRotation: {x: 0, y: 0, z: 0}
   documentData: {fileID: 4900000, guid: d5000000000000000000000000000002, type: 3}
+  targetRoomId: 
