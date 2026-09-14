@@ -58,6 +58,21 @@ namespace Master.Scripts
                         //Debug.Log("AutoCollectPrintJob: Force-resuming task state to Active before collection.");
                         foundGiver.StartTask();
                     }
+
+                    // If the task enforces sequential order, restore any objectives preceding this itemKey
+                    // to full, since scene reloads wipe in-progress task objective counters.
+                    if (foundGiver != null && foundGiver.task != null && foundGiver.task.requirements != null && foundGiver.task.requirements.needsSequentialOrder)
+                    {
+                        var objectives = foundGiver.task.requirements.objectives;
+                        for (int i = 0; i < objectives.Count; i++)
+                        {
+                            if (objectives[i].key == keyItem.itemKey) break;
+                            if (foundGiver.currentProgress != null && i < foundGiver.currentProgress.Count)
+                            {
+                                foundGiver.currentProgress[i] = objectives[i].requiredAmount;
+                            }
+                        }
+                    }
                     
                     //Debug.Log("AutoCollectPrintJob: Automatically collecting KeyItem based on GameManager success flag.");
                     keyItem.enabled = true; // Force enable so it doesn't return early
