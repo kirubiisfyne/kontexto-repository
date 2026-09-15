@@ -19,5 +19,26 @@ MonoBehaviour:
     spawnPosition: {x: 0, y: 0, z: 0}
     spawnRotation: {x: 0, y: 0, z: 0}
     usePrefabTransform: 1
+  fillerNpcEntries:
+  - prefab: {fileID: 3544090215776964544, guid: e412723ea6ef48c45addc273aecbc6e9, type: 3}
+    spawnPosition: {x: -4.3997803, y: 0, z: -11.464722}
+    spawnRotation: {x: 0, y: 342.25046, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 9019575271284899441, guid: 3e42c0f1119b87247bebc9daea99904e, type: 3}
+    spawnPosition: {x: 12.874847, y: 0, z: -15.93222}
+    spawnRotation: {x: 0, y: 356.91824, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6842874260883744215, guid: 9d790a04f6bf6ab46a01a5cdec93d92c, type: 3}
+    spawnPosition: {x: 1.7268516, y: 4.1, z: -0.4800389}
+    spawnRotation: {x: 0, y: 153.56473, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 9019575271284899441, guid: 3e42c0f1119b87247bebc9daea99904e, type: 3}
+    spawnPosition: {x: -2.8347485, y: 4.1, z: 3.9057448}
+    spawnRotation: {x: 0, y: 133.1808, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 3466282112781554863, guid: dfc36633c8755ef429d8cb6c40be6e2a, type: 3}
+    spawnPosition: {x: 5.343495, y: 4.1, z: 5.8131247}
+    spawnRotation: {x: 0, y: 212.69177, z: 0}
+    usePrefabTransform: 0
   activeRoomIds:
   - multipurpose_hall

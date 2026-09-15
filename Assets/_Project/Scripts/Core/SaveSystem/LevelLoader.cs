@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Master.Scripts.RoomSystem;
@@ -35,6 +36,9 @@ namespace Master.Scripts.SaveSystem
         [Header("Runtime State")]
         [SerializeField] private LevelData currentLevelData;
         public LevelData ActiveLevelData => currentLevelData;
+
+        [SerializeField] private List<GameObject> spawnedFillerNPCs = new List<GameObject>();
+        public IReadOnlyList<GameObject> SpawnedFillerNPCs => spawnedFillerNPCs;
 
         private PlayerData playerData;
         private string sceneId;
@@ -150,7 +154,10 @@ namespace Master.Scripts.SaveSystem
             // 2. Initialize Task Tracker (spawns prefabs, auto-starts active tasks, and restores state)
             taskTracker.Initialize(currentLevelData, playerData, SaveGame);
 
-            // 3. Apply room active/inactive states
+            // 3. Spawn Filler NPCs
+            SpawnFillerNPCs();
+
+            // 4. Apply room active/inactive states
             ApplyRoomStates();
 
             // 4. Mark intro as watched for this day since we are in active gameplay
@@ -310,8 +317,49 @@ namespace Master.Scripts.SaveSystem
             }
         }
 
+        private void SpawnFillerNPCs()
+        {
+            ClearFillerNPCs();
+
+            if (currentLevelData == null || currentLevelData.fillerNpcEntries == null) return;
+
+            foreach (var entry in currentLevelData.fillerNpcEntries)
+            {
+                if (entry == null || entry.prefab == null) continue;
+
+                GameObject npcInstance;
+                if (entry.usePrefabTransform)
+                {
+                    npcInstance = Instantiate(entry.prefab);
+                }
+                else
+                {
+                    npcInstance = Instantiate(
+                        entry.prefab,
+                        entry.spawnPosition,
+                        Quaternion.Euler(entry.spawnRotation)
+                    );
+                }
+
+                spawnedFillerNPCs.Add(npcInstance);
+            }
+        }
+
+        private void ClearFillerNPCs()
+        {
+            for (int i = spawnedFillerNPCs.Count - 1; i >= 0; i--)
+            {
+                if (spawnedFillerNPCs[i] != null)
+                {
+                    Destroy(spawnedFillerNPCs[i]);
+                }
+            }
+            spawnedFillerNPCs.Clear();
+        }
+
         private void OnDestroy()
         {
+            ClearFillerNPCs();
             if (Current == this) Current = null;
         }
     }

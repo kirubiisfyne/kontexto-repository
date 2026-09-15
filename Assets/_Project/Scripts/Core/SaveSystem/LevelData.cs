@@ -21,6 +21,10 @@ namespace Master.Scripts.SaveSystem
         [Header("Task Prefabs")]
         public List<TaskSpawnEntry> taskEntries = new List<TaskSpawnEntry>();
 
+        [Header("Filler NPCs")]
+        [Tooltip("List of filler/ambient NPC prefabs to instantiate for this level.")]
+        public List<NPCSpawnEntry> fillerNpcEntries = new List<NPCSpawnEntry>();
+
         [Header("Active Rooms")]
         [Tooltip("List of room IDs that should be enabled and accessible in this level.")]
         public List<string> activeRoomIds = new List<string>();
@@ -36,6 +40,22 @@ namespace Master.Scripts.SaveSystem
         public Vector3 spawnPosition;
 
         [Tooltip("World rotation (euler angles) to apply to the prefab.")]
+        public Vector3 spawnRotation;
+
+        [Tooltip("If true, ignores the above position/rotation and uses the prefab's saved transform.")]
+        public bool usePrefabTransform;
+    }
+
+    [System.Serializable]
+    public class NPCSpawnEntry
+    {
+        [Tooltip("The NPC prefab to instantiate.")]
+        public GameObject prefab;
+
+        [Tooltip("World position to place the NPC.")]
+        public Vector3 spawnPosition;
+
+        [Tooltip("World rotation (euler angles) to apply to the NPC.")]
         public Vector3 spawnRotation;
 
         [Tooltip("If true, ignores the above position/rotation and uses the prefab's saved transform.")]
