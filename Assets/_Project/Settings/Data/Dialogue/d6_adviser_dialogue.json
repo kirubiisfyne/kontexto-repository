@@ -17,15 +17,31 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Remember: this portfolio represents everything you've learned. Fonts, emphasis, alignment, spacing, and lists must all be flawless."
+          "text": "Remember, Kiko: this portfolio represents everything I've taught you. Every tool has a job."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Once you're done printing, bring it to my desk for final review."
+          "text": "Center your big 18pt bold title. Italicize the subtitle so it looks clean and official."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Add Space Before on bold section headings so topics don't bleed together."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Bullets for your investigation points, and numbered steps for our action plan."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "When your formatting is sharp and disciplined, nobody can brush off your reporting. That's how we win NSPC."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Get it printed and bring it straight to my desk."
         },
         {
           "speaker": "Kiko",
-          "text": "Yes, Ma'am. I'll make sure it exceeds every standard."
+          "text": "Yes, Ma'am! I won't let The Paragon down."
         }
       ]
     },
@@ -34,11 +50,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Use the office computer to compile and format all sections of the Master Portfolio."
+          "text": "Assemble that Master Portfolio on the office computer. Clean fonts, proper spacing, and the right lists."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Let me know when the print job is ready for review."
+          "text": "Let me know the second it's printed."
         }
       ]
     },

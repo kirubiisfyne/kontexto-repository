@@ -24,8 +24,24 @@
           "text": "Get that code from her first so we can finalize the request."
         },
         {
+          "speaker": "Mrs. Santos",
+          "text": "And listen closely when you format that letter: styling matters."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Bold is loud. It tells the eye, 'Look here first!' That's why the Subject line gets Bold—so Director Reyes can't pretend he didn't see our urgent request."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Italics are quiet and classy. Use Italics for official names like 'The Paragon' and that tracking code."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "It looks professional without screaming in the reader's face."
+        },
+        {
           "speaker": "Kiko",
-          "text": "<color=#707070><i>Right on it, Ma'am. Let's find Kim.</i></color>"
+          "text": "<color=#707070><i>Bold to grab attention, italics for formal names. Got it! Let's find Kim.</i></color>"
         }
       ]
     },
@@ -34,11 +50,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Make sure that letter is properly formatted with the tracking code."
+          "text": "Find Kim, get that tracking code, and format the letter. Bold the urgent subject, and italicize the official names. Don't make silly mistakes."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "We can't afford any mistakes."
+          "text": "We need this budget approved. Don't let bad formatting give them an excuse to ignore us."
         }
       ]
     },

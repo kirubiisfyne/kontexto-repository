@@ -34,6 +34,22 @@
         {
           "speaker": "Mrs. Santos",
           "text": "The whistleblower file should be there."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Right now, that interview transcript is raw and messy."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Center and bold the title at the top so it looks like an official record, not random class notes."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Keep the text left-aligned, but bold every interviewer question."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "If questions and answers look the same, readers get confused. Bold makes the questions pop so anyone can tell who's talking at a glance."
         }
       ]
     },
@@ -42,11 +58,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Check the flash drive on the Office Computer."
+          "text": "Check that flash drive on the computer. Center the title, and bold the questions so the interview is easy to read."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "We need to know what's in that whistleblower file before Mr. Reyes comes back."
+          "text": "We need this evidence crystal clear before Mr. Reyes comes back."
         }
       ]
     },

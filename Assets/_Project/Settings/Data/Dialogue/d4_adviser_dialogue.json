@@ -29,15 +29,19 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Make sure to apply 1.5 line spacing and proper paragraph spacing after each section."
+          "text": "Center and bold the title, but here's the real test: watch your paragraph spacing."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "If Mr. Reyes sees a wall of unspaced text, he won't read it."
+          "text": "Don't just hit Enter a bunch of times like an amateur. Put Space After on the testimony and the receipt, and Space Before on our conclusion."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Make him see the story."
+          "text": "Spacing gives each piece of evidence room to breathe. If you cram it all into one giant wall of text, Reyes will just skip it."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Make the truth easy to read. Make him see the story."
         }
       ]
     },
@@ -46,11 +50,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Have you finished spacing the testimony and fuel receipt on the computer yet?"
+          "text": "Are you done spacing out that evidence on the computer yet?"
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "We need this evidence board layout optimized immediately."
+          "text": "Space After on the proofs, Space Before on the conclusion. Don't let our evidence turn into a cluttered mess."
         }
       ]
     },
