@@ -9,11 +9,23 @@
         },
         {
           "speaker": "Kiko",
-          "text": "Yes, Ma'am. Numbered lists for student demands and bullet points for supporting arguments."
+          "text": "Yes, Ma'am. He said to use numbered lists for demands and bullets for arguments."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Good. Head over to the Office Computer and format the editorial draft accordingly."
+          "text": "Good. Now understand why we use both."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Use a Numbered List for the student demands—1, 2, 3. Numbers show priority and order, and they force the admin to answer each demand one by one."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Use Bullet Points for our supporting evidence. Bullets are for ideas of equal importance where the order doesn't matter."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Head to the computer and format that draft. Let me review it before we hand it to Reyes."
         },
         {
           "speaker": "Mrs. Santos",
@@ -26,11 +38,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Have you finished formatting the demands and evidence on the computer yet?"
+          "text": "Keep formatting that draft on the computer."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Make sure every demand is numbered and every supporting point is bulleted."
+          "text": "Numbers for the demands so they're held accountable, bullets for the evidence. Let's make our case airtight."
         }
       ]
     },

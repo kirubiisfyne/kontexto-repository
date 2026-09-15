@@ -49,15 +49,23 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "I want your Name in a professional standard."
+          "text": "Formatting isn't just about looking pretty. It's how you guide the reader's eyes."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "I want your Bio in Times New Roman."
+          "text": "Put your Header and Name in 18pt Arial. It's clean and bold—people can read it from across the room."
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "And for goodness sake, use proper sizing."
+          "text": "Keep your role and department at 14pt Arial so they don't fight with your name."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "And use 12pt Times New Roman for your bio. Those little feet on the letters help tired eyes read long sentences without getting lost."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Don't mix random fonts like a messy poster. Every choice has a reason."
         }
       ]
     },
@@ -66,7 +74,7 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "That's your station. Don't make me use the red pen on your first attempt. Go."
+          "text": "That's your desk over there. Big Arial for headers, Times New Roman for your bio. Don't make me pull out my red pen on your first day. Go."
         }
       ]
     },
