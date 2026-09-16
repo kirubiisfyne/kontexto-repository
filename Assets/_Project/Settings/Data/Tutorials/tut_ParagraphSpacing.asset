@@ -21,12 +21,48 @@ MonoBehaviour:
     useExplicitArea: 1
     area:
       serializedVersion: 2
-      x: 474
+      x: 552
       y: 105
-      width: 76
+      width: 72
       height: 38
-    message: These add space above and below a paragraph. A little breathing room
-      goes a long way toward making a long document easy to read.
+    message: Paragraph Spacing adds space above and below your paragraph. Use it
+      to give your document some breathing room and make it easier to read.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Before Spacing
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 552
+      y: 105
+      width: 36
+      height: 38
+    message: Before Spacing adds space before your paragraph. Use it to separate
+      your paragraph from the content above it.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: After Spacing
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 588
+      y: 105
+      width: 36
+      height: 38
+    message: After Spacing adds space after your paragraph. Use it to separate your
+      paragraph from the content below it.
     overridePadding: 1
     padding: 2
     placement: 0

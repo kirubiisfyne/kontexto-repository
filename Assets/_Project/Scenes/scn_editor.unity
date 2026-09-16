@@ -505,7 +505,7 @@ MonoBehaviour:
   instructionEmailElement: EmailRoot
   startDelay: 0.35
   playOnlyOnce: 1
-  replayForTesting: 0
+  replayForTesting: 1
   logStepGeometry: 0
 --- !u!1 &644775986
 GameObject:
