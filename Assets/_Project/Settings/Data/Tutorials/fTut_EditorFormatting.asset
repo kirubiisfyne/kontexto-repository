@@ -1,0 +1,311 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e46b68e20b4c478b195e68fd5ab729, type: 3}
+  m_Name: fTut_EditorFormatting
+  m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialSequence
+  seenFlagKey: 
+  steps:
+  - label: Font Face
+    targets:
+    - Fonts
+    - Size
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 53
+      y: 105
+      width: 169
+      height: 38
+    message: Font Picker lets you change your text design. Use Serif fonts like Times
+      New Roman for print and Sans-serif fonts like Arial for digital.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Font Size
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 221
+      y: 105
+      width: 60
+      height: 38
+    message: 'Font Size establishes a clear visual hierarchy using points (pt). It
+      controls how large or small your text appears. '
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Text Emphasis
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 282
+      y: 105
+      width: 73
+      height: 38
+    message: "Text Emphasis highlights important words and guides the reader\u2019s
+      attention. Use it sparingly to keep text clear."
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Bold
+    targets:
+    - Bold
+    - Italic
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 282
+      y: 105
+      width: 36
+      height: 38
+    message: Bold makes text thicker and darker. It is used to emphasize important
+      words, key concepts, and headings.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Italic
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 318
+      y: 105
+      width: 36
+      height: 38
+    message: Italic text slants to the right and is used for titles of major works,
+      foreign terms, or subtle emphasis on specific words.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Alignment
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 364
+      y: 105
+      width: 108
+      height: 38
+    message: 'Text alignment determines how your paragraphs line up against the margins
+      of your document. '
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Left Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 364
+      y: 105
+      width: 36
+      height: 38
+    message: Left-aligned text has a straight left edge and a ragged right edge.
+      It is standard for academic writing.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Center Alignment
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 400
+      y: 105
+      width: 36
+      height: 38
+    message: Center-aligned text places words in the middle of the page. It is mainly
+      used for titles, cover pages, and section headers.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Right Alignment
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 436
+      y: 105
+      width: 36
+      height: 38
+    message: Right-aligned text has a straight right edge. It is mainly used for
+      dates, page numbers, and addresses.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Lists
+    targets:
+    - Bullet
+    - Numbering
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 476
+      y: 105
+      width: 73
+      height: 38
+    message: List formatting controls the alignment and categorization of information.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Bulleted List
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 476
+      y: 105
+      width: 36
+      height: 38
+    message: Bulleted List uses bullets for items of equal importance.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Numbered List
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 512
+      y: 105
+      width: 36
+      height: 38
+    message: Numbered List uses numbers for steps or sequences.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Paragraph Spacing
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 552
+      y: 105
+      width: 72
+      height: 38
+    message: Paragraph Spacing manages the vertical space between paragraphs, keeping
+      your document clear and easy to read.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Before Spacing
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 552
+      y: 105
+      width: 36
+      height: 38
+    message: Before Spacing adds space before a paragraph.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: After Spacing
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 588
+      y: 105
+      width: 36
+      height: 38
+    message: After Spacing adds space after a paragraph.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Text Style
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 633
+      y: 105
+      width: 134
+      height: 38
+    message: Text Style controls how your text is formatted and organized, such as
+      headings, subheadings, and body text.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  moveDuration: 0.35
+  fadeInDuration: 0.4
+  dimColor: {r: 0, g: 0, b: 0, a: 0.65}
+  defaultPadding: 8
+  showRing: 1
+  ringColor: {r: 1, g: 1, b: 1, a: 1}
+  ringWidth: 2
+  pennyGap: 16
+  blockInputOutsideHighlight: 0
+  allowSkip: 1
+  skipLabel: Skip Tutorial

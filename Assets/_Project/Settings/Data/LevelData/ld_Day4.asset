@@ -26,3 +26,4 @@ MonoBehaviour:
   activeRoomIds:
   - publication_office
   - canteen
+  editorTutorial: {fileID: 11400000, guid: 831b8018ad5846faa015d8bab560fed9, type: 2}

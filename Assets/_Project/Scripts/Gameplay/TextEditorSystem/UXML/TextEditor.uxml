@@ -1,10 +1,10 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/TextEditorStyle.uss?fileID=7433441132597879392&amp;guid=dab8fefc2ae48434d981cd9b73428717&amp;type=3#TextEditorStyle"/>
-    <Style src="project://database/Assets/Master/Scripts/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3#DocumentStyle"/>
-    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; align-self: center; height: 632px;">
+    <Style src="project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/TextEditorStyle.uss?fileID=7433441132597879392&amp;guid=dab8fefc2ae48434d981cd9b73428717&amp;type=3#TextEditorStyle"/>
+    <Style src="project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/DocumentStyle.uss?fileID=7433441132597879392&amp;guid=76977b889b7d94f01be40acd0ef9a9cc&amp;type=3#DocumentStyle"/>
+    <ui:VisualElement name="Root" enabled="true" class="editor-root" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Art/UI/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;); -unity-text-align: upper-left; font-size: 14px; align-self: center; height: 632px;">
         <ui:VisualElement name="Header" class="editor-toolbar" style="flex-grow: 0; padding-top: 4px; padding-left: 8px; padding-right: 4px; padding-bottom: 4px; border-top-width: 2px; background-color: rgb(40, 133, 180); height: 64px;">
             <ui:VisualElement name="WindowName" style="flex-grow: 1; flex-direction: row;">
-                <ui:Image name="Logo" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;); height: 23px; width: 22px; -unity-background-image-tint-color: rgb(255, 255, 255);"/>
+                <ui:Image name="Logo" style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;); height: 23px; width: 22px; -unity-background-image-tint-color: rgb(255, 255, 255);"/>
                 <ui:Label text="TEXT_EDITOR" name="Name" class="text-reset" style="margin-right: 4px; margin-left: 4px; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
             </ui:VisualElement>
             <ui:VisualElement name="NavigationKeys" class="editor-header__nav">
@@ -29,22 +29,22 @@
                 <ui:DropdownField label="" choices="Calibri,Arial,Times New Roman,Courier New, Comic Sans" index="0" name="Fonts" enabled="true" tooltip="Fonts" class="editor-dropdown editor-dropdown--font" style="width: 163px; margin-left: 2px; margin-right: 2px;"/>
                 <ui:DropdownField label="" choices="10,12,14,18,24" index="1" name="Size" enabled="true" tooltip="Font Size" class="editor-dropdown editor-dropdown--size" style="margin-left: 2px; margin-right: 2px;"/>
                 <ui:Toggle name="Bold" class="editor-btn editor-btn--tool editor-toggle editor-button" style="align-content: center;">
-                    <ui:Image name="Toggle-Icon" tooltip="Bold" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/BoldIcon.svg?fileID=7388822144124034973&amp;guid=fb686b05f58a146d4944c3ad629d0b8f&amp;type=3#BoldIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
+                    <ui:Image name="Toggle-Icon" tooltip="Bold" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/BoldIcon.svg?fileID=7388822144124034973&amp;guid=fb686b05f58a146d4944c3ad629d0b8f&amp;type=3#BoldIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
                 </ui:Toggle>
                 <ui:Toggle name="Italic" class="editor-btn editor-btn--tool editor-toggle editor-button" style="align-content: center;">
-                    <ui:Image name="Toggle-Icon" tooltip="Italic" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/ItalicIcon.svg?fileID=7388822144124034973&amp;guid=56968f394a5894258a45339cb4022942&amp;type=3#ItalicIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
+                    <ui:Image name="Toggle-Icon" tooltip="Italic" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/ItalicIcon.svg?fileID=7388822144124034973&amp;guid=56968f394a5894258a45339cb4022942&amp;type=3#ItalicIcon&quot;); -unity-background-scale-mode: scale-to-fit; background-size: 11px 12px;"/>
                 </ui:Toggle>
                 <ui:Label text="Font" name="FontLabel" class="editor-ribbon__label" style="flex-shrink: 1;"/>
             </ui:VisualElement>
             <ui:VisualElement name="ParagraphSection" class="editor-ribbon__section editor-ribbon__section--styles" style="flex-direction: row; align-items: center; width: 272px; height: 64px;">
                 <ui:VisualElement name="Alignment" style="flex-grow: 0; flex-direction: row; margin-left: 2px; margin-right: 2px; margin-top: 2px; margin-bottom: 2px; align-self: flex-start;">
-                    <ui:Button text="" name="Left" double-click-selects-word="false" tooltip="Left-Align" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/LeftAlignIcon.svg?fileID=7388822144124034973&amp;guid=f60d60ba10ff14a5da68911d6982f0f8&amp;type=3#LeftAlignIcon&quot;);"/>
-                    <ui:Button text="" name="Center" tooltip="Center" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/CenterIcon.svg?fileID=7388822144124034973&amp;guid=41c8e3b01b28849b49b90a3509e0b7a5&amp;type=3#CenterIcon&quot;);"/>
-                    <ui:Button text="" name="Right" tooltip="Right-Align" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/Right%20AlignIcon.svg?fileID=7388822144124034973&amp;guid=048523fb86fea4d7ebdac9102f2546e5&amp;type=3#Right AlignIcon&quot;);"/>
+                    <ui:Button text="" name="Left" double-click-selects-word="false" tooltip="Left-Align" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/LeftAlignIcon.svg?fileID=7388822144124034973&amp;guid=f60d60ba10ff14a5da68911d6982f0f8&amp;type=3#LeftAlignIcon&quot;);"/>
+                    <ui:Button text="" name="Center" tooltip="Center" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/CenterIcon.svg?fileID=7388822144124034973&amp;guid=41c8e3b01b28849b49b90a3509e0b7a5&amp;type=3#CenterIcon&quot;);"/>
+                    <ui:Button text="" name="Right" tooltip="Right-Align" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/Right%20AlignIcon.svg?fileID=7388822144124034973&amp;guid=048523fb86fea4d7ebdac9102f2546e5&amp;type=3#Right AlignIcon&quot;);"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="List" style="flex-grow: 0; flex-direction: row; margin-top: 2px; margin-bottom: 2px; margin-left: 2px; margin-right: 2px; align-self: flex-start;">
-                    <ui:Button text="" name="Bullet" tooltip="Bullet-Point" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/BulletIcon-2.svg?fileID=7388822144124034973&amp;guid=275c0abe2b70647ccbf5848b5f04baf8&amp;type=3#BulletIcon-2&quot;);"/>
-                    <ui:Button text="" name="Numbering" tooltip="Numbering" class="editor-button" style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/NumberingIcon-2.svg?fileID=7388822144124034973&amp;guid=2edd390d493cf4a2cafede25ca81ae6e&amp;type=3#NumberingIcon-2&quot;); background-size: 12px 14px;"/>
+                    <ui:Button text="" name="Bullet" tooltip="Bullet-Point" class="editor-button ribbon-icon" style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/BulletIcon-2.svg?fileID=7388822144124034973&amp;guid=275c0abe2b70647ccbf5848b5f04baf8&amp;type=3#BulletIcon-2&quot;);"/>
+                    <ui:Button text="" name="Numbering" tooltip="Numbering" class="editor-button" style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/NumberingIcon-2.svg?fileID=7388822144124034973&amp;guid=2edd390d493cf4a2cafede25ca81ae6e&amp;type=3#NumberingIcon-2&quot;); background-size: 12px 14px;"/>
                 </ui:VisualElement>
                 <ui:VisualElement name="Spacing" style="flex-grow: 0; flex-direction: row; margin-left: 2px; margin-top: 2px; margin-bottom: 2px; margin-right: 2px; align-self: flex-start;">
                     <ui:Toggle label="" name="SpaceBefore" class="editor-toggle" style="background-size: 16px 12px;"/>
@@ -66,7 +66,7 @@
             <ui:Label text="Page 1 of 1" name="Page" class="editor-footer__text text-reset"/>
         </ui:VisualElement>
     </ui:VisualElement>
-    <ui:VisualElement name="EmailRoot" class="email-panel" style="flex-grow: 1; position: absolute; display: flex; -unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);">
+    <ui:VisualElement name="EmailRoot" class="email-panel" style="flex-grow: 1; position: absolute; display: none; -unity-font-definition: url(&quot;project://database/Assets/_Project/Art/UI/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);">
         <ui:VisualElement name="EmailHeader" style="flex-grow: 0; height: 32px; border-bottom-width: 2px; border-left-width: 0; border-top-width: 0; border-right-width: 0; background-color: rgb(40, 133, 180); border-left-color: rgb(44, 62, 80); border-right-color: rgb(44, 62, 80); border-top-color: rgb(44, 62, 80); border-bottom-color: rgb(44, 62, 80); justify-content: space-between; padding-left: 4px; padding-right: 2px; flex-direction: row; align-items: center;">
             <ui:Label text="ELECTRONIC_MAIL_(E-MAIL)" name="EmailName" class="text-reset" style="margin-right: 4px; margin-left: 4px; font-size: 12px; -unity-text-align: middle-left; -unity-font-style: bold;"/>
             <ui:VisualElement name="NavigationKeys" class="editor-header__nav">
@@ -85,29 +85,38 @@
         </ui:VisualElement>
         <ui:ScrollView name="EmailContent" style="flex-grow: 1; padding-left: 32px; padding-right: 32px; padding-top: 32px; padding-bottom: 32px;">
             <ui:VisualElement name="EmailDocument" class="email-panel" style="flex-grow: 1; border-left-color: rgb(185, 185, 185); border-right-color: rgb(185, 185, 185); border-top-color: rgb(185, 185, 185); border-bottom-color: rgb(185, 185, 185); min-height: 220px;">
-                <ui:Label text="" name="EmailTextBox" style="flex-grow: 1; font-size: 14px; -unity-text-align: upper-left; -unity-font-style: normal; white-space: normal; -unity-font-definition: url(&quot;project://database/Assets/Master/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);"/>
+                <ui:Label text="" name="EmailTextBox" style="flex-grow: 1; font-size: 14px; -unity-text-align: upper-left; -unity-font-style: normal; white-space: normal; -unity-font-definition: url(&quot;project://database/Assets/_Project/Art/UI/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);"/>
             </ui:VisualElement>
         </ui:ScrollView>
-    </ui:VisualElement>
-    <ui:VisualElement name="PennyRoot">
-        <ui:Label text="" name="PennyBubbleText">
-            <ui:Button text="Got it!" name="PennyClose"/>
-        </ui:Label>
-        <ui:VisualElement name="PennyGraphic"/>
     </ui:VisualElement>
     <ui:VisualElement name="TaskbarRoot" class="taskbar-panel" style="background-color: rgb(150, 150, 150); padding-left: 0; padding-right: 0; bottom: 0; right: 0; left: 0;">
         <ui:Button name="TaskbarButton_Start" text="" icon-image="" class="taskbar-button">
             <ui:Label text="START" style="padding-right: 2px; padding-left: 2px; margin-right: 0; margin-top: 2px; width: 34px; overflow: hidden; font-size: 8px; -unity-text-align: middle-center; -unity-font-style: bold; text-overflow: ellipsis; margin-left: 0;"/>
-            <ui:Image name="Image" style="flex-grow: 0; width: 15px; height: 14px; margin-left: 2px; margin-right: 4px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/DesktopIcon.svg?fileID=7388822144124034973&amp;guid=b3d9fa4207a2946e89ed6da6f9b632bd&amp;type=3#DesktopIcon&quot;);"/>
+            <ui:Image name="Image" style="flex-grow: 0; width: 15px; height: 14px; margin-left: 2px; margin-right: 4px; background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/DesktopIcon.svg?fileID=7388822144124034973&amp;guid=b3d9fa4207a2946e89ed6da6f9b632bd&amp;type=3#DesktopIcon&quot;);"/>
         </ui:Button>
         <ui:VisualElement name="ToolDivider" style="width: 2px; height: 24px; background-color: rgb(150, 150, 150); margin-left: 6px; margin-right: 6px; border-left-width: 2px; border-right-width: 2px; border-left-color: rgb(128, 128, 128); border-right-color: rgb(185, 185, 185); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);"/>
         <ui:Button name="TaskbarButton_Editor" text="" icon-image="" class="taskbar-button">
             <ui:Label text="TEXT_EDITOR" style="padding-right: 2px; padding-left: 2px; margin-right: 0; margin-top: 2px; width: 64px; overflow: hidden; font-size: 8px; -unity-text-align: middle-left; -unity-font-style: bold; text-overflow: ellipsis; margin-left: 0;"/>
-            <ui:Image style="flex-grow: 1; width: 13px; height: 14px; margin-left: 4px; margin-right: 4px; background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;);"/>
+            <ui:Image style="flex-grow: 1; width: 13px; height: 14px; margin-left: 4px; margin-right: 4px; background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/TextEditorLogo.svg?fileID=7388822144124034973&amp;guid=c50eb3f216045408099202dd4bd5330c&amp;type=3#TextEditorLogo&quot;);"/>
         </ui:Button>
         <ui:Button name="TaskbarButton_Email" text="" class="taskbar-button">
             <ui:Label text="E-MAIL" style="padding-right: 2px; padding-left: 2px; margin-right: 0; margin-top: 2px; width: 64px; overflow: hidden; font-size: 8px; -unity-text-align: middle-left; -unity-font-style: bold; text-overflow: ellipsis; margin-left: 0;"/>
-            <ui:Image style="background-image: url(&quot;project://database/Assets/Master/Scripts/TextEditorSystem/USS/Icons/EmailIcon.svg?fileID=7388822144124034973&amp;guid=db0f36f4f7f85440e9f73374ef8e2314&amp;type=3#EmailIcon&quot;); flex-grow: 1; width: 14px; height: 13px; margin-left: 4px; margin-right: 4px;"/>
+            <ui:Image style="background-image: url(&quot;project://database/Assets/_Project/Scripts/Gameplay/TextEditorSystem/USS/Icons/EmailIcon.svg?fileID=7388822144124034973&amp;guid=db0f36f4f7f85440e9f73374ef8e2314&amp;type=3#EmailIcon&quot;); flex-grow: 1; width: 14px; height: 13px; margin-left: 4px; margin-right: 4px;"/>
         </ui:Button>
+    </ui:VisualElement>
+    <ui:VisualElement name="TutorialRoot" class="tutorial-root" style="-unity-font-definition: url(&quot;project://database/Assets/_Project/Art/UI/Fonts/PixeloidSans.ttf?fileID=12800000&amp;guid=d1b87e1ab6bfe4900a28613db31ad1ac&amp;type=3#PixeloidSans&quot;);">
+        <ui:VisualElement name="TutorialDimTop" class="tutorial-dim"/>
+        <ui:VisualElement name="TutorialDimBottom" class="tutorial-dim"/>
+        <ui:VisualElement name="TutorialDimLeft" class="tutorial-dim"/>
+        <ui:VisualElement name="TutorialDimRight" class="tutorial-dim"/>
+        <ui:VisualElement name="TutorialMask" class="tutorial-mask"/>
+        <ui:VisualElement name="TutorialBlocker" class="tutorial-blocker"/>
+        <ui:Button name="TutorialSkip" text="Skip Tutorial" class="tutorial-skip" style="width: 110px; height: 28px; -unity-text-align: middle-center;"/>
+    </ui:VisualElement>
+    <ui:VisualElement name="PennyRoot" style="bottom: 121px; right: 56px;">
+        <ui:Label text="" name="PennyBubbleText" style="width: 202px; height: 119px; -unity-text-align: upper-left; justify-content: flex-end; flex-direction: column; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 28px;">
+            <ui:Button text="Got it!" name="PennyClose"/>
+        </ui:Label>
+        <ui:VisualElement name="PennyGraphic"/>
     </ui:VisualElement>
 </ui:UXML>
