@@ -21,12 +21,49 @@ MonoBehaviour:
     useExplicitArea: 1
     area:
       serializedVersion: 2
-      x: 550
+      x: 476
       y: 105
-      width: 76
+      width: 73
       height: 38
-    message: Bullets and numbers turn lines into a list. Use bullets when the order
-      doesn't matter, and numbers when it does, like in a set of steps.
+    message: "List helps you organize related items into a clear and easy-to-follow
+      format. Use built-in list formatting so you don\u2019t have to type numbers
+      or spaces manually."
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Bulleted List
+    targets:
+    - Bullet
+    - Numbering
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 476
+      y: 105
+      width: 36
+      height: 38
+    message: Bulleted List uses bullets to organize your items when their order does
+      not matter.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Numbered List
+    targets:
+    - Bullet
+    - Numbering
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 512
+      y: 105
+      width: 36
+      height: 38
+    message: Numbered List uses numbers to organize your items when their order or
+      sequence matters.
     overridePadding: 1
     padding: 2
     placement: 0
