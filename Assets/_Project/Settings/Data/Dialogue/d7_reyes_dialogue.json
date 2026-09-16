@@ -35,7 +35,11 @@
         },
         {
           "speaker": "Kiko",
-          "text": "See for yourself, Sir. Every margin is aligned, the typographic hierarchy is strictly enforced, and the reporting is accurate."
+          "text": "See for yourself, Sir. Every margin is aligned."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "The typographic hierarchy is strictly enforced, and the reporting is accurate."
         },
         {
           "speaker": "Mr. Reyes",
@@ -55,7 +59,11 @@
         },
         {
           "speaker": "Mr. Reyes",
-          "text": "The layout... it's immaculate. You didn't just write stories; you gave them the discipline and structure they deserved."
+          "text": "The layout... it's immaculate. You didn't just write stories."
+        },
+        {
+          "speaker": "Mr.Reyes",
+          "text": " you gave them the discipline and structure they deserved."
         },
         {
           "speaker": "Mr. Reyes",

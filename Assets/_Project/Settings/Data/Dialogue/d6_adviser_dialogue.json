@@ -9,7 +9,11 @@
         },
         {
           "speaker": "Kiko",
-          "text": "Almost, Ma'am! We've retrieved all master assets. May I use the office computer to apply the final formatting touches?"
+          "text": "Almost, Ma'am! We've retrieved all master assets."
+        },
+        {
+          "speaker": "kiko",
+          "text": "May I use the office computer to apply the final formatting touches?"
         },
         {
           "speaker": "Mrs. Santos",
@@ -33,7 +37,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "When your formatting is sharp and disciplined, nobody can brush off your reporting. That's how we win NSPC."
+          "text": "When your formatting is sharp and disciplined, nobody can brush off your reporting."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": " That's how we win NSPC."
         },
         {
           "speaker": "Mrs. Santos",

@@ -29,7 +29,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Bold is loud. It tells the eye, 'Look here first!' That's why the Subject line gets Bold—so Director Reyes can't pretend he didn't see our urgent request."
+          "text": "Bold is loud. It tells the eye, 'Look here first!'"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "That's why the Subject line gets Bold—so Director Reyes can't pretend he didn't see our urgent request."
         },
         {
           "speaker": "Mrs. Santos",
@@ -50,7 +54,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Find Kim, get that tracking code, and format the letter. Bold the urgent subject, and italicize the official names. Don't make silly mistakes."
+          "text": "Find Kim, get that tracking code, and format the letter. Bold the urgent subject,"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "and italicize the official names. Don't make silly mistakes."
         },
         {
           "speaker": "Mrs. Santos",
@@ -71,7 +79,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Exquisite. The bold subject line gives it immediate urgency, and the designations look authoritative."
+          "text": "Exquisite. The bold subject line gives it immediate urgency,"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": " and the designations look authoritative."
         },
         {
           "speaker": "Mrs. Santos",

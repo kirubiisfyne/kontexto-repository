@@ -21,7 +21,11 @@
         },
         {
           "speaker": "Angel",
-          "text": "I want to give them to you, Kiko, but if we don't cite the exact school charter article, Mr. Reyes will dismiss it."
+          "text": "I want to give them to you, Kiko."
+        },
+        {
+          "speaker": "Angel",
+          "text": "but if we don't cite the exact school charter article, Mr. Reyes will dismiss it."
         },
         {
           "speaker": "Angel",
@@ -71,7 +75,11 @@
         },
         {
           "speaker": "Angel",
-          "text": "Bring this to Mrs. Santos at the Publication Office to format and review the editorial before taking it to Reyes!"
+          "text": "Bring this to Mrs. Santos at the Publication Office to format and review the editorial."
+        },
+        {
+          "speaker": "Angel",
+          "text": " and of course, before taking it to Reyes!"
         },
         {
           "speaker": "Kiko",

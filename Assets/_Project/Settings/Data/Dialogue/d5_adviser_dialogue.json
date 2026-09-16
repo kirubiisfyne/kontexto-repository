@@ -17,7 +17,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Use a Numbered List for the student demands—1, 2, 3. Numbers show priority and order, and they force the admin to answer each demand one by one."
+          "text": "Use a Numbered List for the student demands—1, 2, 3. Numbers show priority and order, and-"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "they force the admin to answer each demand one by one."
         },
         {
           "speaker": "Mrs. Santos",
@@ -42,7 +46,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Numbers for the demands so they're held accountable, bullets for the evidence. Let's make our case airtight."
+          "text": "Numbers for the demands so they're held accountable, bullets for the evidence."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Let's make our case airtight."
         }
       ]
     },

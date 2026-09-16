@@ -53,7 +53,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "Put your Header and Name in 18pt Arial. It's clean and bold—people can read it from across the room."
+          "text": "Put your Header and Name in 18pt Arial."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "It's clean and bold—people can read it from across the room."
         },
         {
           "speaker": "Mrs. Santos",
@@ -61,7 +65,27 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "And use 12pt Times New Roman for your bio. Those little feet on the letters help tired eyes read long sentences without getting lost."
+          "text": "And use 12pt Times New Roman for your bio."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "See these little 'feet' on the letters?"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "That’s a Serif font..."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "like Times New Roman, which helps guide tired eyes across long printed sentences."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Sans-serif fonts, like Arial, have no feet—'sans'."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "literally means 'without'—giving them a clean look that is perfect for digital viewing.."
         },
         {
           "speaker": "Mrs. Santos",
@@ -74,7 +98,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "That's your desk over there. Big Arial for headers, Times New Roman for your bio. Don't make me pull out my red pen on your first day. Go."
+          "text": "That's your desk over there. Big Arial for headers, Times New Roman for your bio."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Don't make me pull out my red pen on your first day. Go."
         }
       ]
     },

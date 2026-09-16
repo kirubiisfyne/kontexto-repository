@@ -49,7 +49,11 @@
         },
         {
           "speaker": "Mrs. Santos",
-          "text": "If questions and answers look the same, readers get confused. Bold makes the questions pop so anyone can tell who's talking at a glance."
+          "text": "If questions and answers look the same, readers get confused."
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "Bold makes the questions pop so anyone can tell who's talking at a glance."
         }
       ]
     },
@@ -58,7 +62,11 @@
       "lines": [
         {
           "speaker": "Mrs. Santos",
-          "text": "Check that flash drive on the computer. Center the title, and bold the questions so the interview is easy to read."
+          "text": "Check that flash drive on the computer. Center the title, and"
+        },
+        {
+          "speaker": "Mrs. Santos",
+          "text": "bold the questions so the interview is easy to read."
         },
         {
           "speaker": "Mrs. Santos",

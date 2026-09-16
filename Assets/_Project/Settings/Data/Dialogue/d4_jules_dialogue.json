@@ -30,7 +30,11 @@
         },
         {
           "speaker": "Jules",
-          "text": "But look, I'm stuck out here on guard duty for my C.A.T. squad, and I am absolutely melting in this heat."
+          "text": "But look, I'm stuck out here on guard duty for my C.A.T. squad."
+        },
+        {
+          "speaker": "Jules",
+          "text": "I am absolutely melting in this heat."
         },
         {
           "speaker": "Jules",
@@ -38,7 +42,7 @@
         },
         {
           "speaker": "Jules",
-          "text": "Go grab me an ice-cold bottle of water from the canteen."
+          "text": "Go grab me an ice-cold cup of water from the canteen."
         },
         {
           "speaker": "Jules",
@@ -59,7 +63,7 @@
         },
         {
           "speaker": "Jules",
-          "text": "I'll pay you back, I promise... It's just 15 pesos."
+          "text": "I'll pay you back, I promise... It's just 1 peso."
         }
       ]
     },
