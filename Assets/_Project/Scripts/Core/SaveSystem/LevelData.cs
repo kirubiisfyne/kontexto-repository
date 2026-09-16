@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Master.Scripts.TextEditorSystem;
 using UnityEngine;
 
 namespace Master.Scripts.SaveSystem
@@ -24,6 +25,11 @@ namespace Master.Scripts.SaveSystem
         [Header("Active Rooms")]
         [Tooltip("List of room IDs that should be enabled and accessible in this level.")]
         public List<string> activeRoomIds = new List<string>();
+
+        [Header("Tutorial (Optional)")]
+        [Tooltip("The editor lesson taught on this day, for example fonts and sizes. Leave it empty on days " +
+                 "that teach nothing new; the editor then falls back to its own default sequence.")]
+        public EditorTutorialSequence editorTutorial;
     }
 
     [System.Serializable]

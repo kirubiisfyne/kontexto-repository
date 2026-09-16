@@ -19,6 +19,7 @@ public class PennyAssistantController : MonoBehaviour
     public string idleMessage = "If you're finished formatting, you can press Print in the toolbar!";
 
     private bool _isIdle = false;
+    private bool _idleSuppressed = false;
 
     private VisualElement _root;
     private Label _bubbleText;
@@ -26,6 +27,12 @@ public class PennyAssistantController : MonoBehaviour
     private Coroutine _animCoroutine;
     private Coroutine _fadeCoroutine;
     private Coroutine _idleCoroutine;
+
+    /// <summary>Penny's root element, so other systems can measure and position her.</summary>
+    public VisualElement Root => _root;
+
+    /// <summary>True while her bubble is at least partly visible.</summary>
+    public bool IsShowing => _root != null && _root.resolvedStyle.opacity > 0.01f;
 
     private void Start()
     {
@@ -63,6 +70,8 @@ public class PennyAssistantController : MonoBehaviour
 
     private void StartIdleTimer()
     {
+        if (_idleSuppressed) return;
+
         if (_idleCoroutine != null) StopCoroutine(_idleCoroutine);
         _isIdle = false;
         _idleCoroutine = StartCoroutine(IdleTimerRoutine());
@@ -93,7 +102,7 @@ public class PennyAssistantController : MonoBehaviour
             _animCoroutine = StartCoroutine(AnimateSprite());
     }
 
-    private void HideFeedback()
+    public void HideFeedback()
     {
         if (_root == null) return;
         
@@ -110,6 +119,66 @@ public class PennyAssistantController : MonoBehaviour
         }
 
         StartIdleTimer();
+    }
+
+    /// <summary>
+    /// Sets the bubble text without fading her in, so a caller can wait for the bubble to resize,
+    /// position her, and only then call <see cref="ShowFeedback"/>.
+    /// </summary>
+    public void SetMessage(string message)
+    {
+        if (_bubbleText == null) return;
+        _bubbleText.text = message;
+    }
+
+    /// <summary>
+    /// Pins Penny to an absolute position in panel space, overriding her docked USS anchors.
+    /// Call <see cref="ClearAnchor"/> to hand her back to USS.
+    /// </summary>
+    public void SetAnchor(Vector2 position)
+    {
+        if (_root == null) return;
+
+        // .penny-center also applies a translate, which would offset the anchored position.
+        _root.RemoveFromClassList("penny-center");
+
+        _root.style.left = position.x;
+        _root.style.top = position.y;
+
+        // Auto, not Null: left+right (or top+bottom) both being set would stretch her to fit.
+        _root.style.right = StyleKeyword.Auto;
+        _root.style.bottom = StyleKeyword.Auto;
+    }
+
+    /// <summary>Hands Penny back to her docked USS position.</summary>
+    public void ClearAnchor()
+    {
+        if (_root == null) return;
+
+        _root.style.left = StyleKeyword.Null;
+        _root.style.top = StyleKeyword.Null;
+        _root.style.right = StyleKeyword.Null;
+        _root.style.bottom = StyleKeyword.Null;
+    }
+
+    /// <summary>
+    /// Stops Penny from showing her idle message. A scripted sequence turns this on while it owns
+    /// the bubble so the idle nag cannot overwrite a scripted line; turning it off restarts the countdown.
+    /// </summary>
+    public void SetIdleSuppressed(bool suppressed)
+    {
+        _idleSuppressed = suppressed;
+        _isIdle = false;
+
+        if (_idleCoroutine != null)
+        {
+            StopCoroutine(_idleCoroutine);
+            _idleCoroutine = null;
+        }
+
+        // Starting a coroutine on a component that is being disabled throws, and the tutorial calls
+        // this from its OnDisable. Penny's own OnEnable restarts the countdown once we are live again.
+        if (!suppressed && isActiveAndEnabled) StartIdleTimer();
     }
 
     private IEnumerator FadeRoutine(float targetOpacity)
@@ -145,6 +214,10 @@ public class PennyAssistantController : MonoBehaviour
 
     private void ResetIdleTimer(EventBase evt)
     {
+        // A scripted sequence owns the bubble while the idle nag is suppressed, and the player's
+        // clicks during that sequence must not restart the countdown under it.
+        if (_idleSuppressed) return;
+
         if (_isIdle)
         {
             _isIdle = false;
