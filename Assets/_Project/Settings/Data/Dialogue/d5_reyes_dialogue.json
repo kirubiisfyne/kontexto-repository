@@ -34,7 +34,11 @@
       "lines": [
         {
           "speaker": "Mr. Reyes",
-          "text": "Do not return until your editorial strictly follows the formatting guidelines and is reviewed by your adviser."
+          "text": "Do not return until your editorial strictly follows the formatting guidelines."
+        },
+        {
+          "speaker": "Mr. Reyes",
+          "text": "I want this reviewed by Miss Santos as well."
         }
       ]
     },
