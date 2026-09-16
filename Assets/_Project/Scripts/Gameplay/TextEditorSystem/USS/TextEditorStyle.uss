@@ -345,3 +345,64 @@
 .taskbar-button {
     margin-right: 4px;
 }
+
+/* ---- Editor tutorial overlay ------------------------------------------------------------------
+   A full-screen dim with a rectangular hole. The dim is four sibling panels rather than one
+   element with oversized borders: a bordered element is still picked over its border area, which
+   would make the hole un-clickable, and the hole has to stay live so the player can try the tool
+   being explained. All geometry is written from EditorTutorialController.
+
+   TutorialRoot and TutorialMask are ignored so that clicks fall through the hole to the tool
+   underneath; only the dim panels become pickable, and only while the tour is running. */
+
+.tutorial-root {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    picking-mode: ignore;
+}
+
+.tutorial-dim {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.65);
+    picking-mode: ignore;
+}
+
+.tutorial-mask {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0);
+    border-width: 2px;
+    border-color: rgb(255, 255, 255);
+    picking-mode: ignore;
+}
+
+/* Covers the hole too, for steps whose tool must not be clicked mid-tour (e.g. Print). */
+.tutorial-blocker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: none;
+    picking-mode: ignore;
+}
+
+.tutorial-skip {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 12px;
+    color: rgb(0, 0, 0);
+    background-color: rgb(185, 185, 185);
+    border-width: 2px;
+    border-color: rgb(44, 62, 80);
+    -unity-text-align: middle-center;
+}
+
+.tutorial-skip:hover {
+    background-color: rgb(212, 212, 212);
+}

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e46b68e20b4c478b195e68fd5ab729, type: 3}
+  m_Name: tut_allCompetency
+  m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialSequence
+  seenFlagKey: key_all
+  steps:
+  - label: All Tools
+    targets:
+    - All
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 53
+      y: 105
+      width: 714
+      height: 38
+    message: All you have leared this week all comes down to this! Good luck!
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  moveDuration: 0.35
+  fadeInDuration: 0.4
+  dimColor: {r: 0, g: 0, b: 0, a: 0.65}
+  defaultPadding: 8
+  showRing: 1
+  ringColor: {r: 1, g: 1, b: 1, a: 1}
+  ringWidth: 2
+  pennyGap: 16
+  blockInputOutsideHighlight: 1
+  allowSkip: 1
+  skipLabel: Skip Tutorial
