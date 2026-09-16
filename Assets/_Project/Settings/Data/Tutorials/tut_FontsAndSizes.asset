@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialSequence
   seenFlagKey: key_font_size
   steps:
-  - label: Fonts
+  - label: Font Face
     targets:
     - Fonts
     - Size
@@ -23,10 +23,28 @@ MonoBehaviour:
       serializedVersion: 2
       x: 53
       y: 105
-      width: 230
+      width: 169
       height: 38
-    message: This is the font picker. A document reads as one piece when the whole
-      thing shares a single font, so pick one here and leave it alone.
+    message: Font Picker lets you change your text design. Use Serif fonts like Times
+      New Roman for print and Sans-serif fonts like Arial for digital.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Font Size
+    targets:
+    - Fonts
+    - Size
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 221
+      y: 105
+      width: 60
+      height: 38
+    message: Font Size controls how large or small your text appears. Use an appropriate
+      size to keep your document clear and easy to read.
     overridePadding: 1
     padding: 2
     placement: 0

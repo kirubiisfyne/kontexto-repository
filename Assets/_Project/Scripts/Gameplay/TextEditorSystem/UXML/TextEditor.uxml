@@ -113,11 +113,10 @@
         <ui:VisualElement name="TutorialBlocker" class="tutorial-blocker"/>
         <ui:Button name="TutorialSkip" text="Skip Tutorial" class="tutorial-skip" style="width: 110px; height: 28px; -unity-text-align: middle-center;"/>
     </ui:VisualElement>
-    <ui:VisualElement name="PennyRoot">
-        <ui:Label text="" name="PennyBubbleText">
+    <ui:VisualElement name="PennyRoot" style="bottom: 121px; right: 56px;">
+        <ui:Label text="" name="PennyBubbleText" style="width: 202px; height: 119px; -unity-text-align: upper-left; justify-content: flex-end; flex-direction: column; padding-left: 16px; padding-right: 16px; padding-top: 12px; padding-bottom: 28px;">
             <ui:Button text="Got it!" name="PennyClose"/>
         </ui:Label>
         <ui:VisualElement name="PennyGraphic"/>
     </ui:VisualElement>
-    <ui:VisualElement style="flex-grow: 1; position: absolute; height: 38px; width: 714px; top: 105px; left: 53px;"/>
 </ui:UXML>
