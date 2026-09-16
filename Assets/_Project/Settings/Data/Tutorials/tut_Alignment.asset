@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e46b68e20b4c478b195e68fd5ab729, type: 3}
+  m_Name: tut_Alignment
+  m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialSequence
+  seenFlagKey: key_alignment
+  steps:
+  - label: Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 364
+      y: 105
+      width: 108
+      height: 38
+    message: Alignment sets where your paragraph sits on the page. Use left, center,
+      or right alignment to position your text.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Left Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 364
+      y: 105
+      width: 36
+      height: 38
+    message: Left Alignment keeps your text lined up along the left side. It is the
+      usual choice for body text.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Center Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 400
+      y: 105
+      width: 36
+      height: 38
+    message: Center Alignment places your text in the middle of the page. Use it
+      for titles and headings.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Right Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 436
+      y: 105
+      width: 36
+      height: 38
+    message: Right Alignment keeps your text lined up along the right side. Use it
+      for dates, page numbers, or addresses.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  moveDuration: 0.35
+  fadeInDuration: 0.4
+  dimColor: {r: 0, g: 0, b: 0, a: 0.65}
+  defaultPadding: 8
+  showRing: 1
+  ringColor: {r: 1, g: 1, b: 1, a: 1}
+  ringWidth: 2
+  pennyGap: 16
+  blockInputOutsideHighlight: 1
+  allowSkip: 1
+  skipLabel: Skip Tutorial

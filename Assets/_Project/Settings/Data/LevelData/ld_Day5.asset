@@ -28,3 +28,4 @@ MonoBehaviour:
   - admin_office
   - lower_classroom
   - upper_library
+  editorTutorial: {fileID: 11400000, guid: c24cff944ba1409787d45ffc8cc247b4, type: 2}

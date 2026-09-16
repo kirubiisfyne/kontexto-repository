@@ -434,6 +434,9 @@ PrefabInstance:
       addedObject: {fileID: 591986850}
     - targetCorrespondingSourceObject: {fileID: 2151721442624843441, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 591986851}
+    - targetCorrespondingSourceObject: {fileID: 2151721442624843441, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: b2eb0ea9dfdaa40a38c95adf77df4435, type: 3}
 --- !u!1 &591986845 stripped
@@ -482,6 +485,28 @@ MonoBehaviour:
   fadeDuration: 0.5
   idleTimeThreshold: 10
   idleMessage: If you're finished formatting, you can press Print in the toolbar!
+--- !u!114 &591986851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591986845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a555705a6534d98b62fc9afbcddac50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialController
+  uiDocument: {fileID: 591986848}
+  pennyAssistant: {fileID: 591986850}
+  sequence: {fileID: 11400000, guid: 45bccc9ee4b847eda7c345bb757b4c79, type: 2}
+  trigger: 0
+  editorWindowElement: Root
+  instructionEmailElement: EmailRoot
+  startDelay: 0.35
+  playOnlyOnce: 1
+  replayForTesting: 1
+  logStepGeometry: 0
 --- !u!1 &644775986
 GameObject:
   m_ObjectHideFlags: 19
