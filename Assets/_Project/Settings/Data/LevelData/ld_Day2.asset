@@ -22,3 +22,4 @@ MonoBehaviour:
   activeRoomIds:
   - publication_office
   - lower_classroom
+  editorTutorial: {fileID: 11400000, guid: 873f115116064ca2b10611bd9d9b1551, type: 2}

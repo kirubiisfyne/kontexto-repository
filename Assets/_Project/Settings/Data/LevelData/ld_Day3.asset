@@ -23,3 +23,4 @@ MonoBehaviour:
   - publication_office
   - admin_office
   - canteen
+  editorTutorial: {fileID: 11400000, guid: 5af1bb28dd384ff3ba1ac376a50c2b59, type: 2}
