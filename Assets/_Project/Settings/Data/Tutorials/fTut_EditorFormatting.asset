@@ -1,0 +1,119 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20e46b68e20b4c478b195e68fd5ab729, type: 3}
+  m_Name: fTut_EditorFormatting
+  m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialSequence
+  seenFlagKey: 
+  steps:
+  - label: Fonts & Size
+    targets:
+    - Fonts
+    - Size
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 53
+      y: 105
+      width: 230
+      height: 38
+    message: This is the font picker. A document reads as one piece when the whole
+      thing shares a single font, so pick one here and leave it alone.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Bold & Italic
+    targets:
+    - Bold
+    - Italic
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 280
+      y: 105
+      width: 76
+      height: 38
+    message: Bold and italic are for emphasis. Bold makes a word jump out, and italic
+      is for titles or borrowed words. Use them sparingly, or nothing stands out
+      at all!
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 362
+      y: 105
+      width: 112
+      height: 38
+    message: These set where your paragraph sits on the page. Left is the usual choice
+      for body text, center suits titles, and right is handy for dates and signatures.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Lists
+    targets:
+    - Bullet
+    - Numbering
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 550
+      y: 105
+      width: 76
+      height: 38
+    message: Bullets and numbers turn lines into a list. Use bullets when the order
+      doesn't matter, and numbers when it does, like in a set of steps.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Paragraph Spacing
+    targets:
+    - SpaceBefore
+    - SpaceAfter
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 474
+      y: 105
+      width: 76
+      height: 38
+    message: These add space above and below a paragraph. A little breathing room
+      goes a long way toward making a long document easy to read.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  moveDuration: 0.35
+  fadeInDuration: 0.4
+  dimColor: {r: 0, g: 0, b: 0, a: 0.65}
+  defaultPadding: 8
+  showRing: 1
+  ringColor: {r: 1, g: 1, b: 1, a: 1}
+  ringWidth: 2
+  pennyGap: 16
+  blockInputOutsideHighlight: 1
+  allowSkip: 1
+  skipLabel: Skip Tutorial

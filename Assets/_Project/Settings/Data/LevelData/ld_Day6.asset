@@ -27,3 +27,4 @@ MonoBehaviour:
   - admin_office
   - upper_library
   - publication_office
+  editorTutorial: {fileID: 11400000, guid: 753938bb962dc436ea9d4d4b75968b65, type: 2}
