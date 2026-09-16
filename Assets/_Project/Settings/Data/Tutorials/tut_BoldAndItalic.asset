@@ -14,20 +14,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: Project::Master.Scripts.TextEditorSystem.EditorTutorialSequence
   seenFlagKey: key_bold_italic
   steps:
-  - label: Bold & Italic
+  - label: Text Emphasis
     targets:
     - Bold
     - Italic
     useExplicitArea: 1
     area:
       serializedVersion: 2
-      x: 280
+      x: 282
       y: 105
-      width: 76
+      width: 73
       height: 38
-    message: Bold and italic are for emphasis. Bold makes a word jump out, and italic
-      is for titles or borrowed words. Use them sparingly, or nothing stands out
-      at all!
+    message: Text Emphasis highlights important words using Bold and Italic. Use
+      them sparingly, or nothing stands out at all!
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Bold
+    targets:
+    - Bold
+    - Italic
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 282
+      y: 105
+      width: 36
+      height: 38
+    message: Bold makes text thicker and darker. It is used to make important words
+      or information stand out.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Italic
+    targets:
+    - Bold
+    - Italic
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 318
+      y: 105
+      width: 36
+      height: 38
+    message: Italic slants text to the right. It is commonly used for titles, foreign
+      or borrowed words, and subtle emphasis.
     overridePadding: 1
     padding: 2
     placement: 0

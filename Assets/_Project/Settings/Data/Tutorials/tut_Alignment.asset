@@ -22,12 +22,69 @@ MonoBehaviour:
     useExplicitArea: 1
     area:
       serializedVersion: 2
-      x: 362
+      x: 364
       y: 105
-      width: 112
+      width: 108
       height: 38
-    message: These set where your paragraph sits on the page. Left is the usual choice
-      for body text, center suits titles, and right is handy for dates and signatures.
+    message: Alignment sets where your paragraph sits on the page. Use left, center,
+      or right alignment to position your text.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Left Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 364
+      y: 105
+      width: 36
+      height: 38
+    message: Left Alignment keeps your text lined up along the left side. It is the
+      usual choice for body text.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Center Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 400
+      y: 105
+      width: 36
+      height: 38
+    message: Center Alignment places your text in the middle of the page. Use it
+      for titles and headings.
+    overridePadding: 1
+    padding: 2
+    placement: 0
+    pennyOffset: {x: 0, y: 0}
+    holeIsClickThrough: 1
+  - label: Right Alignment
+    targets:
+    - Left
+    - Center
+    - Right
+    useExplicitArea: 1
+    area:
+      serializedVersion: 2
+      x: 436
+      y: 105
+      width: 36
+      height: 38
+    message: Right Alignment keeps your text lined up along the right side. Use it
+      for dates, page numbers, or addresses.
     overridePadding: 1
     padding: 2
     placement: 0
