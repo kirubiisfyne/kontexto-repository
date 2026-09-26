@@ -1,10 +1,9 @@
-using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Master.Scripts
 {
-    // A simple struct to map names to AudioClips in the Unity Inspector
     [Serializable]
     public struct Sound
     {
@@ -15,6 +14,14 @@ namespace Master.Scripts
     public class AudioManager : MonoBehaviour
     {
         public static AudioManager Instance { get; private set; }
+
+        public const string MasterParam = "MasterVolume";
+        public const string BgmParam = "BGMVolume";
+        public const string SfxParam = "SFXVolume";
+
+        public const string PrefMaster = "kontexto.audio.master";
+        public const string PrefBgm = "kontexto.audio.bgm";
+        public const string PrefSfx = "kontexto.audio.sfx";
 
         [Header("Audio Sources")]
         [Tooltip("Audio source dedicated to background music.")]
@@ -34,7 +41,6 @@ namespace Master.Scripts
 
         private void Awake()
         {
-            // Singleton pattern to ensure only one AudioManager exists across all scenes
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -44,56 +50,101 @@ namespace Master.Scripts
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            ApplySavedMixerVolumes();
+            InitializeMixerVolumes();
         }
 
-        private void Start()
+        #region Mixer Volume Control & Persistence
+
+        public AudioMixer ResolveMixer()
         {
-            ApplySavedMixerVolumes();
+            if (mainMixer != null) return mainMixer;
+            if (bgmSource != null && bgmSource.outputAudioMixerGroup != null)
+                return bgmSource.outputAudioMixerGroup.audioMixer;
+            if (sfxSource != null && sfxSource.outputAudioMixerGroup != null)
+                return sfxSource.outputAudioMixerGroup.audioMixer;
+            return null;
         }
 
-        /// <summary>
-        /// Applies saved player volume preferences to the AudioMixer immediately on game startup.
-        /// </summary>
-        public void ApplySavedMixerVolumes()
+        private void InitializeMixerVolumes()
         {
-            AudioMixer mixer = mainMixer;
-            if (mixer == null)
-            {
-                if (bgmSource != null && bgmSource.outputAudioMixerGroup != null)
-                {
-                    mixer = bgmSource.outputAudioMixerGroup.audioMixer;
-                }
-                else if (sfxSource != null && sfxSource.outputAudioMixerGroup != null)
-                {
-                    mixer = sfxSource.outputAudioMixerGroup.audioMixer;
-                }
-            }
+            var mixer = ResolveMixer();
+            if (mixer == null) return;
 
+            // Only apply PlayerPrefs overrides if player previously changed them.
+            // Otherwise, keep the mixer's designed snapshot default levels.
+            if (PlayerPrefs.HasKey(PrefMaster))
+                SetMixerVolume(MasterParam, PlayerPrefs.GetFloat(PrefMaster));
+            if (PlayerPrefs.HasKey(PrefBgm))
+                SetMixerVolume(BgmParam, PlayerPrefs.GetFloat(PrefBgm));
+            if (PlayerPrefs.HasKey(PrefSfx))
+                SetMixerVolume(SfxParam, PlayerPrefs.GetFloat(PrefSfx));
+        }
+
+        public void SetMasterVolume(float linear)
+        {
+            SetAndPersistVolume(MasterParam, PrefMaster, linear);
+        }
+
+        public void SetBGMVolume(float linear)
+        {
+            SetAndPersistVolume(BgmParam, PrefBgm, linear);
+        }
+
+        public void SetSFXVolume(float linear)
+        {
+            SetAndPersistVolume(SfxParam, PrefSfx, linear);
+        }
+
+        private void SetAndPersistVolume(string paramName, string prefKey, float linear)
+        {
+            linear = Mathf.Clamp(linear, 0.0001f, 1f);
+            SetMixerVolume(paramName, linear);
+            PlayerPrefs.SetFloat(prefKey, linear);
+            PlayerPrefs.Save();
+        }
+
+        private void SetMixerVolume(string paramName, float linear)
+        {
+            var mixer = ResolveMixer();
             if (mixer != null)
             {
-                VolumeController.ApplySavedVolumes(mixer);
+                mixer.SetFloat(paramName, Mathf.Log10(Mathf.Clamp(linear, 0.0001f, 1f)) * 20f);
             }
         }
 
-        /// <summary>
-        /// Plays a sound effect by its mapped string name. (This version works perfectly in Unity UI Button events!)
-        /// </summary>
-        /// <param name="name">The string name of the SFX mapped in the Inspector.</param>
+        public float GetMasterVolume() => GetChannelVolume(MasterParam, PrefMaster);
+        public float GetBGMVolume() => GetChannelVolume(BgmParam, PrefBgm);
+        public float GetSFXVolume() => GetChannelVolume(SfxParam, PrefSfx);
+
+        private float GetChannelVolume(string paramName, string prefKey)
+        {
+            if (PlayerPrefs.HasKey(prefKey))
+            {
+                return Mathf.Clamp(PlayerPrefs.GetFloat(prefKey), 0.0001f, 1f);
+            }
+
+            var mixer = ResolveMixer();
+            if (mixer != null && mixer.GetFloat(paramName, out float db))
+            {
+                return Mathf.Clamp(Mathf.Pow(10f, db / 20f), 0.0001f, 1f);
+            }
+
+            return 0.8f;
+        }
+
+        #endregion
+
+        #region Sound & Music Playback
+
         public void PlaySFX(string name)
         {
-            // Call the main function with no pitch shifting
             PlaySFX(name, false, 1f, 1f);
         }
 
-        /// <summary>
-        /// Plays a sound effect with optional pitch shifting. (Call this version from your C# scripts!)
-        /// </summary>
         public void PlaySFX(string name, bool randomPitch, float minPitch = 0.85f, float maxPitch = 1.15f, float volumeScale = 1f)
         {
             AudioClip clipToPlay = null;
 
-            // Search our library for the sound by name
             foreach (Sound s in sfxSounds)
             {
                 if (s.name == name)
@@ -103,29 +154,12 @@ namespace Master.Scripts
                 }
             }
 
-            if (clipToPlay == null)
-            {
-                //Debug.LogWarning($"[AudioManager] SFX '{name}' not found in the library!");
-                return;
-            }
+            if (clipToPlay == null) return;
 
-            // Apply random pitch shifting if requested
-            if (randomPitch)
-            {
-                sfxSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-            }
-            else
-            {
-                sfxSource.pitch = 1f; // Always reset back to normal if no shift is requested
-            }
-
-            // PlayOneShot allows overlapping sounds on the same AudioSource
+            sfxSource.pitch = randomPitch ? UnityEngine.Random.Range(minPitch, maxPitch) : 1f;
             sfxSource.PlayOneShot(clipToPlay, volumeScale);
         }
 
-        /// <summary>
-        /// Plays background music by its mapped string name.
-        /// </summary>
         public void PlayBGM(string name)
         {
             AudioClip clipToPlay = null;
@@ -139,34 +173,25 @@ namespace Master.Scripts
                 }
             }
 
-            if (clipToPlay == null)
-            {
-                //Debug.LogWarning($"[AudioManager] BGM '{name}' not found in the library!");
-                return;
-            }
+            if (clipToPlay == null) return;
 
             PlayBGM(clipToPlay);
         }
 
-        /// <summary>
-        /// Plays background music directly from an AudioClip.
-        /// </summary>
         public void PlayBGM(AudioClip bgmClip)
         {
-            // Don't restart the song if it's already the active track
-            if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return; 
+            if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
 
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
             bgmSource.Play();
         }
 
-        /// <summary>
-        /// Stops the current background music.
-        /// </summary>
         public void StopBGM()
         {
             bgmSource.Stop();
         }
+
+        #endregion
     }
 }
