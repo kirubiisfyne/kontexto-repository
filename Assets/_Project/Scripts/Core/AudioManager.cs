@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace Master.Scripts
 {
@@ -51,6 +53,35 @@ namespace Master.Scripts
             DontDestroyOnLoad(gameObject);
 
             InitializeMixerVolumes();
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+        }
+
+        private void OnDestroy()
+        {
+            if (Instance == this)
+            {
+                SceneManager.sceneLoaded -= HandleSceneLoaded;
+            }
+        }
+
+        private void Start()
+        {
+            // Unity AudioMixer applies its snapshot after Awake.
+            // Re-apply across the first frame to guarantee saved volumes stick.
+            StartCoroutine(DelayedInitializeMixerVolumes());
+        }
+
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            StartCoroutine(DelayedInitializeMixerVolumes());
+        }
+
+        private IEnumerator DelayedInitializeMixerVolumes()
+        {
+            yield return null;
+            InitializeMixerVolumes();
+            yield return new WaitForEndOfFrame();
+            InitializeMixerVolumes();
         }
 
         #region Mixer Volume Control & Persistence
@@ -65,7 +96,7 @@ namespace Master.Scripts
             return null;
         }
 
-        private void InitializeMixerVolumes()
+        public void InitializeMixerVolumes()
         {
             var mixer = ResolveMixer();
             if (mixer == null) return;
@@ -97,7 +128,7 @@ namespace Master.Scripts
 
         private void SetAndPersistVolume(string paramName, string prefKey, float linear)
         {
-            linear = Mathf.Clamp(linear, 0.0001f, 1f);
+            linear = Mathf.Clamp01(linear);
             SetMixerVolume(paramName, linear);
             PlayerPrefs.SetFloat(prefKey, linear);
             PlayerPrefs.Save();
@@ -108,7 +139,9 @@ namespace Master.Scripts
             var mixer = ResolveMixer();
             if (mixer != null)
             {
-                mixer.SetFloat(paramName, Mathf.Log10(Mathf.Clamp(linear, 0.0001f, 1f)) * 20f);
+                // When slider is at 0 (or near-zero), explicitly set to -80dB to mute
+                float db = linear <= 0.001f ? -80f : Mathf.Log10(linear) * 20f;
+                mixer.SetFloat(paramName, db);
             }
         }
 
@@ -120,13 +153,14 @@ namespace Master.Scripts
         {
             if (PlayerPrefs.HasKey(prefKey))
             {
-                return Mathf.Clamp(PlayerPrefs.GetFloat(prefKey), 0.0001f, 1f);
+                return Mathf.Clamp01(PlayerPrefs.GetFloat(prefKey));
             }
 
             var mixer = ResolveMixer();
             if (mixer != null && mixer.GetFloat(paramName, out float db))
             {
-                return Mathf.Clamp(Mathf.Pow(10f, db / 20f), 0.0001f, 1f);
+                if (db <= -79.9f) return 0f;
+                return Mathf.Clamp01(Mathf.Pow(10f, db / 20f));
             }
 
             return 0.8f;
@@ -181,6 +215,9 @@ namespace Master.Scripts
         public void PlayBGM(AudioClip bgmClip)
         {
             if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
+
+            // Ensure mixer channel volumes are initialized before starting playback
+            InitializeMixerVolumes();
 
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;

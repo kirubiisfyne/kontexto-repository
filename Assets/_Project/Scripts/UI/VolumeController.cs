@@ -39,7 +39,7 @@ namespace Master.Scripts
         private void SetupSlider(Slider slider, UnityEngine.Events.UnityAction<float> onValueChanged)
         {
             if (slider == null) return;
-            slider.minValue = 0.0001f;
+            slider.minValue = 0f;
             slider.maxValue = 1f;
             slider.onValueChanged.AddListener(onValueChanged);
         }
