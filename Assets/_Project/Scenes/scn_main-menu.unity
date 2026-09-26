@@ -225368,11 +225368,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Thank you for playing the <b>Kontexto</b> Beta!\n\nKeep an eye out for
-    the official release coming soon!\n\nIn the meantime, the ravcynolkir team would
-    love to get your feedback. We humbly ask if you could take a few moments to fill
-    out the Google Form attached to this email. \n\nYour insights truly mean the
-    world to us and will help us make the game the best it can be!"
+  m_text: "<b>Congratulations!</b>\n\nYou have completed <b>Kontexto</b>!\n\nFrom a rookie facing the locked gates of Likha High to leading <i>The Paragon</i> to 1st Place at the National Schools Press Conference, your dedication to truth and craft made history.\n\n<b>Developed by ravcynolkir</b>\nThank you for playing!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6e91323bf1134068abea42477845dc1, type: 2}
   m_sharedMaterial: {fileID: -6413621970138813598, guid: b6e91323bf1134068abea42477845dc1, type: 2}

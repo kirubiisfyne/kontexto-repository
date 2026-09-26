@@ -31,3 +31,4 @@ MonoBehaviour:
   - publication_office
   - upper_library
   editorTutorial: {fileID: 11400000, guid: e4ca9b49f87d4dcc9de54a05262d36b0, type: 2}
+  bgmTrackName: GoldenGleam

@@ -12,6 +12,10 @@ public class PauseMenuController : MonoBehaviour
     [SerializeField] private Animator PauseMenuAnimator;
     [SerializeField] private float transitionDuration;
     
+
+    [Header("Options Subpanel")]
+    [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private Master.Scripts.UI.OptionController optionController;
     //privates
     private Coroutine resumeCoroutine;
     private Coroutine pauseCoroutine;
@@ -44,6 +48,12 @@ public class PauseMenuController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (IsOptionsOpen())
+            {
+                CloseOptions();
+                return;
+            }
+
             if (GameIsPaused)
             {
                 Resume();
@@ -52,6 +62,36 @@ public class PauseMenuController : MonoBehaviour
             {
                 Pause();
             }
+        }
+    }
+
+    public bool IsOptionsOpen()
+    {
+        if (optionsPanel != null && optionsPanel.activeInHierarchy) return true;
+        return false;
+    }
+
+    public void OpenOptions()
+    {
+        if (optionController != null)
+        {
+            optionController.SetOptionVisible(true);
+        }
+        else if (optionsPanel != null)
+        {
+            optionsPanel.SetActive(true);
+        }
+    }
+
+    public void CloseOptions()
+    {
+        if (optionController != null)
+        {
+            optionController.SetOptionVisible(false);
+        }
+        else if (optionsPanel != null)
+        {
+            optionsPanel.SetActive(false);
         }
     }
 
@@ -67,6 +107,7 @@ public class PauseMenuController : MonoBehaviour
 
     private IEnumerator ResumeCoroutine()
     {
+        CloseOptions();
         Time.timeScale = 1f;
         
         yield return new WaitForSecondsRealtime(transitionDuration);
@@ -111,6 +152,7 @@ public class PauseMenuController : MonoBehaviour
         }
 
         // 2. Hide the pause menu immediately for a cleaner fade-out
+        CloseOptions();
         PauseMenuUI.SetActive(false);
 
         // 3. We intentionally leave Time.timeScale at 0f so the game stays frozen during the fade out.
@@ -136,6 +178,7 @@ public class PauseMenuController : MonoBehaviour
         }
 
         // 2. Hide the pause menu immediately for a cleaner fade-out
+        CloseOptions();
         PauseMenuUI.SetActive(false);
 
         // 3. Play the transition and WAIT for it to finish

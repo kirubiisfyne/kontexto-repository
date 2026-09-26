@@ -30,6 +30,10 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("The editor lesson taught on this day, for example fonts and sizes. Leave it empty on days " +
                  "that teach nothing new; the editor then falls back to its own default sequence.")]
         public EditorTutorialSequence editorTutorial;
+
+        [Header("Audio Configuration (Optional)")]
+        [Tooltip("Optional background music track name to play during this level (e.g. 'GoldenGleam', 'GentleBreeze'). Defaults to 'GoldenGleam'.")]
+        public string bgmTrackName;
     }
 
     [System.Serializable]

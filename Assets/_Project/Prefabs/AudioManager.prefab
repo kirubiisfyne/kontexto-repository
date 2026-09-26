@@ -62,6 +62,12 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ad94ea65a407c44d9a7c28cdae1eff46, type: 3}
   - name: StepTerrain
     clip: {fileID: 8300000, guid: 4b069f1d5a48d42128c79a7124db68ab, type: 3}
+  - name: Paper
+    clip: {fileID: 8300000, guid: 39f5cebb41e9f45c6b08560dfdf2f428, type: 3}
+  - name: Printer
+    clip: {fileID: 8300000, guid: 69ccf644e805947e080f401925f12d04, type: 3}
+  - name: PouringWater
+    clip: {fileID: 8300000, guid: 9288286fdfbc4ef46831c705051fe97e, type: 3}
 --- !u!82 &1024358968331778187
 AudioSource:
   m_ObjectHideFlags: 0

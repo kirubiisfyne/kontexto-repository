@@ -19,8 +19,12 @@ Submit your work to your Adviser and receive **dynamic, real-time grading feedba
 
 ### ⌨️ Controls
 * **Movement:** WASD / Arrow Keys
-* **Interact/Talk:** E (or Left Click)
+* **Sprint / Run:** Left Shift
+* **Jump:** Space
+* **Interact / Talk:** E or F
+* **Notebook (To-Do & Campus Map):** Tab
+* **Pause Menu:** Escape
 * **Navigate UI/Editor:** Mouse & Keyboard
 
 ### 🛠️ Development Status
-*Kontexto* is currently in [Alpha / Beta / Active Development]. We are actively working on adding more tasks, expanding the campus, and introducing new characters. We would love to hear your feedback in the comments!
+*Kontexto* is prepared for official release. All 8 narrative days, text-editing challenges, grading mechanics, and campus exploration systems are fully implemented.

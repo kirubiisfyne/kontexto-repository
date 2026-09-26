@@ -30,6 +30,17 @@ namespace Master.Scripts.DialogueSystem
         [SerializeField] private SpeakerDatabase speakerDatabase;
         [SerializeField] private UnityEngine.UI.Image speakerProfileImage;
 
+
+        [Header("Audio Settings")]
+        [Tooltip("Optional speech blip audio clip played as letters appear.")]
+        [SerializeField] private AudioClip typingAudioClip;
+        [Tooltip("AudioSource used for speech blip. If unassigned, one will be fetched or created.")]
+        [SerializeField] private AudioSource typingAudioSource;
+        [Range(1, 5)] [SerializeField] private int blipCharacterFrequency = 2;
+        [SerializeField] private bool randomPitch = true;
+        [Range(0.8f, 1.2f)] [SerializeField] private float minPitch = 0.95f;
+        [Range(0.8f, 1.2f)] [SerializeField] private float maxPitch = 1.05f;
+        [Range(0f, 1f)] [SerializeField] private float blipVolume = 0.25f;
         public bool IsTyping { get; private set; }
         
         private string currentFullText;
@@ -48,6 +59,16 @@ namespace Master.Scripts.DialogueSystem
             if (speakerNameText != null) speakerNameText.raycastTarget = false;
             if (dialogueText != null) dialogueText.raycastTarget = false;
             if (speakerProfileImage != null) speakerProfileImage.raycastTarget = false;
+
+            if (typingAudioSource == null)
+            {
+                typingAudioSource = GetComponent<AudioSource>();
+                if (typingAudioSource == null)
+                {
+                    typingAudioSource = gameObject.AddComponent<AudioSource>();
+                    typingAudioSource.playOnAwake = false;
+                }
+            }
         }
 
         public void Show()
@@ -144,9 +165,17 @@ namespace Master.Scripts.DialogueSystem
             // Cache WaitForSeconds to prevent generating garbage every character loop
             WaitForSeconds wait = new WaitForSeconds(waitTime);
             
+            int visibleCount = 0;
             foreach (char letter in sentence)
             {
                 dialogueText.maxVisibleCharacters++;
+                visibleCount++;
+
+                if (!char.IsWhiteSpace(letter) && visibleCount % blipCharacterFrequency == 0)
+                {
+                    PlayTypingBlip();
+                }
+
                 yield return wait;
             }
             
@@ -161,6 +190,19 @@ namespace Master.Scripts.DialogueSystem
             if (typingCoroutine != null) StopCoroutine(typingCoroutine);
             dialogueText.maxVisibleCharacters = currentFullText.Length;
             IsTyping = false;
+        }
+
+        private void PlayTypingBlip()
+        {
+            if (typingAudioClip != null && typingAudioSource != null)
+            {
+                typingAudioSource.pitch = randomPitch ? UnityEngine.Random.Range(minPitch, maxPitch) : 1f;
+                typingAudioSource.PlayOneShot(typingAudioClip, blipVolume);
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX("UIPop0", randomPitch, minPitch, maxPitch, blipVolume);
+            }
         }
     }
 }

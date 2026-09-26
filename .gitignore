@@ -111,3 +111,7 @@ Assets/nTools.meta
 
 # Ignore Profiler Captures (huge file size)
 /[Pp]rofilerCaptures/
+
+# OS generated files
+.DS_Store
+._*

@@ -1,3 +1,4 @@
+using UnityEngine.Serialization;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; 
@@ -18,7 +19,8 @@ public class MainMenuController : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject menuButtonsPanel;
     [SerializeField] private GameObject optionsPanel;
-    [SerializeField] private GameObject betaThankYouPanel;
+    [FormerlySerializedAs("betaThankYouPanel")]
+    [SerializeField] private GameObject gameCompletePanel;
 
     private void Start()
     {
@@ -29,9 +31,9 @@ public class MainMenuController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (betaThankYouPanel != null)
+        if (gameCompletePanel != null)
         {
-            betaThankYouPanel.SetActive(false);
+            gameCompletePanel.SetActive(false);
             PlayerData data = SaveManager.Load();
             if (data != null)
             {
@@ -45,7 +47,7 @@ public class MainMenuController : MonoBehaviour
                     allCompleted = data.levels.TrueForAll(l => l.isCompleted);
                 }
 
-                betaThankYouPanel.SetActive(allCompleted);
+                gameCompletePanel.SetActive(allCompleted);
             }
         }
 
@@ -181,6 +183,14 @@ public class MainMenuController : MonoBehaviour
     {
         optionsPanel.SetActive(false);      // Hide options panel
         menuButtonsPanel.SetActive(true);   // Show main buttons
+    }
+
+    public void CloseGameCompletePanel()
+    {
+        if (gameCompletePanel != null)
+        {
+            gameCompletePanel.SetActive(false);
+        }
     }
 
     /// <summary>
