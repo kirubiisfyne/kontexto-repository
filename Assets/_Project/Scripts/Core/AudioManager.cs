@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace Master.Scripts
 {
@@ -50,12 +51,33 @@ namespace Master.Scripts
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            // Synchronous hardware-level property assignment on frame 0.
-            // Bypasses all mixer snapshot race conditions without any coroutines or frame waits.
+            // Initial synchronous pass
             ApplyAllVolumesDirectly();
         }
 
-        #region Direct Component Volume Control & Persistence
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
+        }
+
+        private void Start()
+        {
+            // Standard Unity lifecycle: Start() runs after scene and AudioMixer snapshot have loaded.
+            // Re-apply without any coroutines or frame waits to guarantee saved volumes stick.
+            ApplyAllVolumesDirectly();
+        }
+
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            ApplyAllVolumesDirectly();
+        }
+
+        #region Volume Control & Persistence
 
         public AudioMixer ResolveMixer()
         {
@@ -69,6 +91,8 @@ namespace Master.Scripts
 
         /// <summary>
         /// Synchronously applies volume settings to AudioListener, AudioSources, and AudioMixer.
+        /// Avoids double-attenuation: component volumes act as instant hardware mute gates (0 or 1),
+        /// while AudioMixer manages the exact decibel curve.
         /// </summary>
         public void ApplyAllVolumesDirectly()
         {
@@ -76,20 +100,20 @@ namespace Master.Scripts
             float bgm = GetBGMVolume();
             float sfx = GetSFXVolume();
 
-            // 1. Direct hardware-level gain control (synchronous, immune to mixer snapshots)
-            AudioListener.volume = master <= 0.001f ? 0f : master;
+            // 1. Hardware-level mute gates (0 if muted, 1 if active)
+            AudioListener.volume = master <= 0.001f ? 0f : 1f;
 
             if (bgmSource != null)
             {
-                bgmSource.volume = bgm <= 0.001f ? 0f : bgm;
+                bgmSource.volume = bgm <= 0.001f ? 0f : 1f;
             }
 
             if (sfxSource != null)
             {
-                sfxSource.volume = sfx <= 0.001f ? 0f : sfx;
+                sfxSource.volume = sfx <= 0.001f ? 0f : 1f;
             }
 
-            // 2. Also keep mixer exposed parameters in sync
+            // 2. AudioMixer manages the smooth decibel attenuation curve
             SetMixerVolume(MasterParam, master);
             SetMixerVolume(BgmParam, bgm);
             SetMixerVolume(SfxParam, sfx);
@@ -98,7 +122,7 @@ namespace Master.Scripts
         public void SetMasterVolume(float linear)
         {
             linear = Mathf.Clamp01(linear);
-            AudioListener.volume = linear <= 0.001f ? 0f : linear;
+            AudioListener.volume = linear <= 0.001f ? 0f : 1f;
             SetMixerVolume(MasterParam, linear);
 
             PlayerPrefs.SetFloat(PrefMaster, linear);
@@ -110,7 +134,7 @@ namespace Master.Scripts
             linear = Mathf.Clamp01(linear);
             if (bgmSource != null)
             {
-                bgmSource.volume = linear <= 0.001f ? 0f : linear;
+                bgmSource.volume = linear <= 0.001f ? 0f : 1f;
             }
             SetMixerVolume(BgmParam, linear);
 
@@ -123,7 +147,7 @@ namespace Master.Scripts
             linear = Mathf.Clamp01(linear);
             if (sfxSource != null)
             {
-                sfxSource.volume = linear <= 0.001f ? 0f : linear;
+                sfxSource.volume = linear <= 0.001f ? 0f : 1f;
             }
             SetMixerVolume(SfxParam, linear);
 
@@ -136,6 +160,7 @@ namespace Master.Scripts
             var mixer = ResolveMixer();
             if (mixer != null)
             {
+                // When slider is at 0 (or near-zero), explicitly set to -80dB to mute
                 float db = linear <= 0.001f ? -80f : Mathf.Log10(linear) * 20f;
                 mixer.SetFloat(paramName, db);
             }
@@ -176,6 +201,8 @@ namespace Master.Scripts
             float currentSFX = GetSFXVolume();
             if (currentSFX <= 0.001f || AudioListener.volume <= 0.001f) return;
 
+            SetMixerVolume(SfxParam, currentSFX);
+
             AudioClip clipToPlay = null;
 
             foreach (Sound s in sfxSounds)
@@ -215,9 +242,10 @@ namespace Master.Scripts
         {
             if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
 
-            // Apply direct component volume synchronously before starting playback
+            // Apply volumes immediately before starting playback
             float bgm = GetBGMVolume();
-            bgmSource.volume = bgm <= 0.001f ? 0f : bgm;
+            bgmSource.volume = bgm <= 0.001f ? 0f : 1f;
+            SetMixerVolume(BgmParam, bgm);
 
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
