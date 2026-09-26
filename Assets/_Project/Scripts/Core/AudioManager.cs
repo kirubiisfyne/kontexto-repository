@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.SceneManagement;
 
 namespace Master.Scripts
 {
@@ -52,39 +50,12 @@ namespace Master.Scripts
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            InitializeMixerVolumes();
-            SceneManager.sceneLoaded += HandleSceneLoaded;
+            // Synchronous hardware-level property assignment on frame 0.
+            // Bypasses all mixer snapshot race conditions without any coroutines or frame waits.
+            ApplyAllVolumesDirectly();
         }
 
-        private void OnDestroy()
-        {
-            if (Instance == this)
-            {
-                SceneManager.sceneLoaded -= HandleSceneLoaded;
-            }
-        }
-
-        private void Start()
-        {
-            // Unity AudioMixer applies its snapshot after Awake.
-            // Re-apply across the first frame to guarantee saved volumes stick.
-            StartCoroutine(DelayedInitializeMixerVolumes());
-        }
-
-        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            StartCoroutine(DelayedInitializeMixerVolumes());
-        }
-
-        private IEnumerator DelayedInitializeMixerVolumes()
-        {
-            yield return null;
-            InitializeMixerVolumes();
-            yield return new WaitForEndOfFrame();
-            InitializeMixerVolumes();
-        }
-
-        #region Mixer Volume Control & Persistence
+        #region Direct Component Volume Control & Persistence
 
         public AudioMixer ResolveMixer()
         {
@@ -96,41 +67,67 @@ namespace Master.Scripts
             return null;
         }
 
-        public void InitializeMixerVolumes()
+        /// <summary>
+        /// Synchronously applies volume settings to AudioListener, AudioSources, and AudioMixer.
+        /// </summary>
+        public void ApplyAllVolumesDirectly()
         {
-            var mixer = ResolveMixer();
-            if (mixer == null) return;
+            float master = GetMasterVolume();
+            float bgm = GetBGMVolume();
+            float sfx = GetSFXVolume();
 
-            // Only apply PlayerPrefs overrides if player previously changed them.
-            // Otherwise, keep the mixer's designed snapshot default levels.
-            if (PlayerPrefs.HasKey(PrefMaster))
-                SetMixerVolume(MasterParam, PlayerPrefs.GetFloat(PrefMaster));
-            if (PlayerPrefs.HasKey(PrefBgm))
-                SetMixerVolume(BgmParam, PlayerPrefs.GetFloat(PrefBgm));
-            if (PlayerPrefs.HasKey(PrefSfx))
-                SetMixerVolume(SfxParam, PlayerPrefs.GetFloat(PrefSfx));
+            // 1. Direct hardware-level gain control (synchronous, immune to mixer snapshots)
+            AudioListener.volume = master <= 0.001f ? 0f : master;
+
+            if (bgmSource != null)
+            {
+                bgmSource.volume = bgm <= 0.001f ? 0f : bgm;
+            }
+
+            if (sfxSource != null)
+            {
+                sfxSource.volume = sfx <= 0.001f ? 0f : sfx;
+            }
+
+            // 2. Also keep mixer exposed parameters in sync
+            SetMixerVolume(MasterParam, master);
+            SetMixerVolume(BgmParam, bgm);
+            SetMixerVolume(SfxParam, sfx);
         }
 
         public void SetMasterVolume(float linear)
         {
-            SetAndPersistVolume(MasterParam, PrefMaster, linear);
+            linear = Mathf.Clamp01(linear);
+            AudioListener.volume = linear <= 0.001f ? 0f : linear;
+            SetMixerVolume(MasterParam, linear);
+
+            PlayerPrefs.SetFloat(PrefMaster, linear);
+            PlayerPrefs.Save();
         }
 
         public void SetBGMVolume(float linear)
         {
-            SetAndPersistVolume(BgmParam, PrefBgm, linear);
+            linear = Mathf.Clamp01(linear);
+            if (bgmSource != null)
+            {
+                bgmSource.volume = linear <= 0.001f ? 0f : linear;
+            }
+            SetMixerVolume(BgmParam, linear);
+
+            PlayerPrefs.SetFloat(PrefBgm, linear);
+            PlayerPrefs.Save();
         }
 
         public void SetSFXVolume(float linear)
         {
-            SetAndPersistVolume(SfxParam, PrefSfx, linear);
-        }
-
-        private void SetAndPersistVolume(string paramName, string prefKey, float linear)
-        {
             linear = Mathf.Clamp01(linear);
-            SetMixerVolume(paramName, linear);
-            PlayerPrefs.SetFloat(prefKey, linear);
+            if (sfxSource != null)
+            {
+                sfxSource.volume = linear <= 0.001f ? 0f : linear;
+            }
+            SetMixerVolume(SfxParam, linear);
+
+            PlayerPrefs.SetFloat(PrefSfx, linear);
             PlayerPrefs.Save();
         }
 
@@ -139,7 +136,6 @@ namespace Master.Scripts
             var mixer = ResolveMixer();
             if (mixer != null)
             {
-                // When slider is at 0 (or near-zero), explicitly set to -80dB to mute
                 float db = linear <= 0.001f ? -80f : Mathf.Log10(linear) * 20f;
                 mixer.SetFloat(paramName, db);
             }
@@ -163,7 +159,7 @@ namespace Master.Scripts
                 return Mathf.Clamp01(Mathf.Pow(10f, db / 20f));
             }
 
-            return 0.8f;
+            return 1f;
         }
 
         #endregion
@@ -177,6 +173,9 @@ namespace Master.Scripts
 
         public void PlaySFX(string name, bool randomPitch, float minPitch = 0.85f, float maxPitch = 1.15f, float volumeScale = 1f)
         {
+            float currentSFX = GetSFXVolume();
+            if (currentSFX <= 0.001f || AudioListener.volume <= 0.001f) return;
+
             AudioClip clipToPlay = null;
 
             foreach (Sound s in sfxSounds)
@@ -216,8 +215,9 @@ namespace Master.Scripts
         {
             if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
 
-            // Ensure mixer channel volumes are initialized before starting playback
-            InitializeMixerVolumes();
+            // Apply direct component volume synchronously before starting playback
+            float bgm = GetBGMVolume();
+            bgmSource.volume = bgm <= 0.001f ? 0f : bgm;
 
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
