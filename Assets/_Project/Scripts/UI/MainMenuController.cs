@@ -22,6 +22,9 @@ public class MainMenuController : MonoBehaviour
     [FormerlySerializedAs("betaThankYouPanel")]
     [SerializeField] private GameObject gameCompletePanel;
 
+    [Header("Audio Configuration")]
+    [Tooltip("Background music track name to play in the Main Menu.")]
+    [SerializeField] private string mainMenuBgmTrack = "GoldenGleam";
     private void Start()
     {
         // Reset time scale to 1 when the menu finishes loading (in case we arrived from a paused game)
@@ -51,6 +54,11 @@ public class MainMenuController : MonoBehaviour
             }
         }
 
+        // Ensure the main menu BGM is playing
+        if (AudioManager.Instance != null && !string.IsNullOrEmpty(mainMenuBgmTrack))
+        {
+            AudioManager.Instance.PlayBGM(mainMenuBgmTrack);
+        }
     }
 
     public void PlayGame()

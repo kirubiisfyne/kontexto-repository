@@ -27,9 +27,15 @@ namespace Master.Scripts
         [Tooltip("Seconds to wait as a solid black screen BEFORE fading in when a scene loads.")]
         public float gracePeriodIn = 1f;
         [Tooltip("Seconds to wait as a solid black screen AFTER fading out before loading the next scene.")]
-        public float gracePeriodOut = 1f;
+         public float gracePeriodOut = 1f;
+ 
+        [Header("Audio Transitions")]
+        [Tooltip("Whether to fade BGM volume to 0 during transition out and restore it on transition in.")]
+        public bool fadeBgmOnTransition = true;
+        [Tooltip("Fallback duration for BGM fade if visual animation length cannot be resolved.")]
+        public float defaultBgmFadeDuration = 0.8f;
 
-        [Header("Performance")]
+         [Header("Performance")]
         [Tooltip("Disables the GameObject after the Fade-In completes so it doesn't waste performance during gameplay.")]
         public bool disableAfterTransitionIn = true;
         [Tooltip("Disables the GameObject after the Fade-Out completes.")]
@@ -73,13 +79,19 @@ namespace Master.Scripts
                     animator.speed = 1f; // Let it play
                 }
 
-                // Wait one frame to ensure the Animator has fully transitioned into its default state
-                yield return null;
+                 yield return null;
+ 
+                 // Wait for the Fade-In animation to completely finish based on its clip length
+                 float transitionLength = animator.GetCurrentAnimatorStateInfo(0).length;
+                if (transitionLength <= 0.05f) transitionLength = defaultBgmFadeDuration;
 
-                // Wait for the Fade-In animation to completely finish based on its clip length
-                float transitionLength = animator.GetCurrentAnimatorStateInfo(0).length;
-                yield return new WaitForSecondsRealtime(transitionLength);
+                if (fadeBgmOnTransition && AudioManager.Instance != null)
+                {
+                    StartCoroutine(AudioManager.Instance.FadeBGMIn(transitionLength));
+                }
 
+                 yield return new WaitForSecondsRealtime(transitionLength);
+ 
                 // Disable it during gameplay to save performance!
                 if (disableAfterTransitionIn && transitionGameObject != null)
                 {
@@ -137,12 +149,18 @@ namespace Master.Scripts
                 animator.updateMode = AnimatorUpdateMode.UnscaledTime;
 
                 int currentStateHash = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
-                
-                animator.SetTrigger(triggerName);
-
+                 animator.SetTrigger(triggerName);
+ 
+                if (fadeBgmOnTransition && AudioManager.Instance != null)
+                {
+                    float fadeOutTime = defaultBgmFadeDuration;
+                    var state = animator.GetCurrentAnimatorStateInfo(0);
+                    if (state.length > 0.05f) fadeOutTime = state.length;
+                    fadeOutTime += Mathf.Max(0f, gracePeriodOut);
+                    StartCoroutine(AudioManager.Instance.FadeBGMOut(fadeOutTime));
+                }
                 float safetyTimeout = 2.5f;
                 float timer = 0f;
-
                 while (animator.GetCurrentAnimatorStateInfo(0).fullPathHash == currentStateHash && !animator.IsInTransition(0) && timer < safetyTimeout)
                 {
                     timer += Time.unscaledDeltaTime;

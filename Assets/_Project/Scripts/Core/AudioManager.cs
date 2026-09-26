@@ -1,8 +1,8 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
-
 namespace Master.Scripts
 {
     [Serializable]
@@ -39,6 +39,9 @@ namespace Master.Scripts
         public Sound[] bgmSounds;
         [Tooltip("Map names to sound effect clips here.")]
         public Sound[] sfxSounds;
+
+        private Coroutine bgmFadeCoroutine;
+        private float bgmTransitionScale = 1f;
 
         private void Awake()
         {
@@ -103,9 +106,10 @@ namespace Master.Scripts
             // 1. Hardware-level mute gates (0 if muted, 1 if active)
             AudioListener.volume = master <= 0.001f ? 0f : 1f;
 
+            float effectiveBgm = bgm * bgmTransitionScale;
             if (bgmSource != null)
             {
-                bgmSource.volume = bgm <= 0.001f ? 0f : 1f;
+                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
             }
 
             if (sfxSource != null)
@@ -115,7 +119,7 @@ namespace Master.Scripts
 
             // 2. AudioMixer manages the smooth decibel attenuation curve
             SetMixerVolume(MasterParam, master);
-            SetMixerVolume(BgmParam, bgm);
+            SetMixerVolume(BgmParam, effectiveBgm);
             SetMixerVolume(SfxParam, sfx);
         }
 
@@ -132,11 +136,12 @@ namespace Master.Scripts
         public void SetBGMVolume(float linear)
         {
             linear = Mathf.Clamp01(linear);
+            float effectiveBgm = linear * bgmTransitionScale;
             if (bgmSource != null)
             {
-                bgmSource.volume = linear <= 0.001f ? 0f : 1f;
+                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
             }
-            SetMixerVolume(BgmParam, linear);
+            SetMixerVolume(BgmParam, effectiveBgm);
 
             PlayerPrefs.SetFloat(PrefBgm, linear);
             PlayerPrefs.Save();
@@ -240,12 +245,12 @@ namespace Master.Scripts
 
         public void PlayBGM(AudioClip bgmClip)
         {
+            if (bgmSource == null) return;
             if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
 
-            // Apply volumes immediately before starting playback
-            float bgm = GetBGMVolume();
-            bgmSource.volume = bgm <= 0.001f ? 0f : 1f;
-            SetMixerVolume(BgmParam, bgm);
+            float effectiveBgm = GetBGMVolume() * bgmTransitionScale;
+            bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+            SetMixerVolume(BgmParam, effectiveBgm);
 
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
@@ -254,7 +259,81 @@ namespace Master.Scripts
 
         public void StopBGM()
         {
-            bgmSource.Stop();
+            if (bgmFadeCoroutine != null)
+            {
+                StopCoroutine(bgmFadeCoroutine);
+                bgmFadeCoroutine = null;
+            }
+            if (bgmSource != null)
+            {
+                bgmSource.Stop();
+            }
+        }
+
+        /// <summary>
+        /// Smoothly fades BGM out to 0 volume over duration.
+        /// </summary>
+        public IEnumerator FadeBGMOut(float duration)
+        {
+            if (bgmFadeCoroutine != null)
+            {
+                StopCoroutine(bgmFadeCoroutine);
+            }
+            bgmFadeCoroutine = StartCoroutine(FadeBGMRoutine(0f, duration));
+            yield return bgmFadeCoroutine;
+        }
+
+        /// <summary>
+        /// Smoothly fades BGM in from 0 volume back to the user's configured volume over duration.
+        /// </summary>
+        public IEnumerator FadeBGMIn(float duration)
+        {
+            if (bgmFadeCoroutine != null)
+            {
+                StopCoroutine(bgmFadeCoroutine);
+            }
+            bgmFadeCoroutine = StartCoroutine(FadeBGMRoutine(1f, duration));
+            yield return bgmFadeCoroutine;
+        }
+
+        /// <summary>
+        /// Smoothly interpolates the BGM volume scale between 0 and 1 using unscaled time.
+        /// </summary>
+        private IEnumerator FadeBGMRoutine(float targetScale, float duration)
+        {
+            float startScale = bgmTransitionScale;
+            float elapsed = 0f;
+
+            if (duration <= 0.001f)
+            {
+                bgmTransitionScale = targetScale;
+                ApplyBgmTransitionScale();
+                bgmFadeCoroutine = null;
+                yield break;
+            }
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                bgmTransitionScale = Mathf.Lerp(startScale, targetScale, t);
+                ApplyBgmTransitionScale();
+                yield return null;
+            }
+
+            bgmTransitionScale = targetScale;
+            ApplyBgmTransitionScale();
+            bgmFadeCoroutine = null;
+        }
+
+        private void ApplyBgmTransitionScale()
+        {
+            float effectiveBgm = GetBGMVolume() * bgmTransitionScale;
+            if (bgmSource != null)
+            {
+                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+            }
+            SetMixerVolume(BgmParam, effectiveBgm);
         }
 
         #endregion
