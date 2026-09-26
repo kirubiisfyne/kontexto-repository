@@ -15,9 +15,7 @@ namespace Master.Scripts
         public LayerMask interactableLayer = ~0;
 
         [Header("Keybindings")]
-        [SerializeField] private KeyCode primaryInteractKey = KeyCode.F;
-        [SerializeField] private KeyCode secondaryInteractKey = KeyCode.E;
-
+        [SerializeField] private KeyCode interactKey = KeyCode.F;
         // --- NEW: Event to broadcast when we are near or far from an interactable
         public static event Action<bool> OnInteractableProximityChanged;
         
@@ -68,8 +66,8 @@ namespace Master.Scripts
             // 1. Constantly check for the closest interactable in range
             CheckForInteractablesInRange();
 
-            // 2. Interact if we press primary or secondary interact key and have something in range
-            if ((Input.GetKeyDown(primaryInteractKey) || Input.GetKeyDown(secondaryInteractKey)) && currentClosestInteractable != null)
+            // 2. Interact if we press F and have something in range
+            if (Input.GetKeyDown(interactKey) && currentClosestInteractable != null)
             {
                 InteractWithCurrent();
             }

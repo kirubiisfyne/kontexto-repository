@@ -21,7 +21,7 @@ Submit your work to your Adviser and receive **dynamic, real-time grading feedba
 * **Movement:** WASD / Arrow Keys
 * **Sprint / Run:** Left Shift
 * **Jump:** Space
-* **Interact / Talk:** E or F
+* **Interact / Talk:** F
 * **Notebook (To-Do & Campus Map):** Tab
 * **Pause Menu:** Escape
 * **Navigate UI/Editor:** Mouse & Keyboard

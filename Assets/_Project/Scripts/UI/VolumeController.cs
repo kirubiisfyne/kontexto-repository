@@ -29,89 +29,91 @@ namespace Master.Scripts
             if (bgmSlider) { bgmSlider.minValue = 0.0001f; bgmSlider.maxValue = 1f; }
             if (sfxSlider) { sfxSlider.minValue = 0.0001f; sfxSlider.maxValue = 1f; }
 
-            // 2. Load saved volume preferences or initialize defaults (0.8 = ~-2dB)
-            float masterVal = PlayerPrefs.GetFloat(PrefMaster, 0.8f);
-            float bgmVal = PlayerPrefs.GetFloat(PrefBgm, 0.8f);
-            float sfxVal = PlayerPrefs.GetFloat(PrefSfx, 0.8f);
+            // 2. Be faithful to the AudioMixer defaults:
+            // If the player has saved a custom preference, apply it.
+            // Otherwise, read the mixer's default snapshot levels directly so the UI matches the actual sounds.
+            float masterVal = GetOrLoadSliderValue("MasterVolume", PrefMaster);
+            float bgmVal = GetOrLoadSliderValue("BGMVolume", PrefBgm);
+            float sfxVal = GetOrLoadSliderValue("SFXVolume", PrefSfx);
 
-            SetMasterVolumeInternal(masterVal, false);
-            SetBGMVolumeInternal(bgmVal, false);
-            SetSFXVolumeInternal(sfxVal, false);
-
+            // Sync sliders visually to the resolved values
             if (masterSlider) masterSlider.SetValueWithoutNotify(masterVal);
             if (bgmSlider) bgmSlider.SetValueWithoutNotify(bgmVal);
             if (sfxSlider) sfxSlider.SetValueWithoutNotify(sfxVal);
 
-            // 3. Add listeners to the sliders so they automatically update when dragged
+            // 3. Add listeners to the sliders so they update the mixer and save to PlayerPrefs when dragged
             if (masterSlider) masterSlider.onValueChanged.AddListener(SetMasterVolume);
             if (bgmSlider) bgmSlider.onValueChanged.AddListener(SetBGMVolume);
             if (sfxSlider) sfxSlider.onValueChanged.AddListener(SetSFXVolume);
         }
 
+        private float GetOrLoadSliderValue(string paramName, string prefKey)
+        {
+            if (PlayerPrefs.HasKey(prefKey))
+            {
+                float savedVal = Mathf.Clamp(PlayerPrefs.GetFloat(prefKey), 0.0001f, 1f);
+                mainMixer.SetFloat(paramName, Mathf.Log10(savedVal) * 20f);
+                return savedVal;
+            }
+
+            // Read the mixer snapshot's default dB and convert to linear 0..1
+            if (mainMixer.GetFloat(paramName, out float currentDB))
+            {
+                return Mathf.Clamp(Mathf.Pow(10f, currentDB / 20f), 0.0001f, 1f);
+            }
+
+            return 0.8f;
+        }
+
         public void SetMasterVolume(float sliderValue)
         {
-            SetMasterVolumeInternal(sliderValue, true);
+            SetVolumeInternal("MasterVolume", PrefMaster, sliderValue);
         }
 
         public void SetBGMVolume(float sliderValue)
         {
-            SetBGMVolumeInternal(sliderValue, true);
+            SetVolumeInternal("BGMVolume", PrefBgm, sliderValue);
         }
 
         public void SetSFXVolume(float sliderValue)
         {
-            SetSFXVolumeInternal(sliderValue, true);
+            SetVolumeInternal("SFXVolume", PrefSfx, sliderValue);
         }
 
-        private void SetMasterVolumeInternal(float sliderValue, bool save)
+        private void SetVolumeInternal(string paramName, string prefKey, float sliderValue)
         {
             if (mainMixer == null) return;
             sliderValue = Mathf.Clamp(sliderValue, 0.0001f, 1f);
-            mainMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20f);
-            if (save)
-            {
-                PlayerPrefs.SetFloat(PrefMaster, sliderValue);
-                PlayerPrefs.Save();
-            }
-        }
-
-        private void SetBGMVolumeInternal(float sliderValue, bool save)
-        {
-            if (mainMixer == null) return;
-            sliderValue = Mathf.Clamp(sliderValue, 0.0001f, 1f);
-            mainMixer.SetFloat("BGMVolume", Mathf.Log10(sliderValue) * 20f);
-            if (save)
-            {
-                PlayerPrefs.SetFloat(PrefBgm, sliderValue);
-                PlayerPrefs.Save();
-            }
-        }
-
-        private void SetSFXVolumeInternal(float sliderValue, bool save)
-        {
-            if (mainMixer == null) return;
-            sliderValue = Mathf.Clamp(sliderValue, 0.0001f, 1f);
-            mainMixer.SetFloat("SFXVolume", Mathf.Log10(sliderValue) * 20f);
-            if (save)
-            {
-                PlayerPrefs.SetFloat(PrefSfx, sliderValue);
-                PlayerPrefs.Save();
-            }
+            mainMixer.SetFloat(paramName, Mathf.Log10(sliderValue) * 20f);
+            PlayerPrefs.SetFloat(prefKey, sliderValue);
+            PlayerPrefs.Save();
         }
 
         /// <summary>
-        /// Utility method to apply saved volumes directly to an AudioMixer on startup.
+        /// Applies saved player volume preferences to the mixer on boot if they exist.
+        /// If no saved preference exists, preserves the mixer's designed snapshot levels.
         /// </summary>
         public static void ApplySavedVolumes(AudioMixer mixer)
         {
             if (mixer == null) return;
-            float master = PlayerPrefs.GetFloat(PrefMaster, 0.8f);
-            float bgm = PlayerPrefs.GetFloat(PrefBgm, 0.8f);
-            float sfx = PlayerPrefs.GetFloat(PrefSfx, 0.8f);
 
-            mixer.SetFloat("MasterVolume", Mathf.Log10(Mathf.Clamp(master, 0.0001f, 1f)) * 20f);
-            mixer.SetFloat("BGMVolume", Mathf.Log10(Mathf.Clamp(bgm, 0.0001f, 1f)) * 20f);
-            mixer.SetFloat("SFXVolume", Mathf.Log10(Mathf.Clamp(sfx, 0.0001f, 1f)) * 20f);
+            if (PlayerPrefs.HasKey(PrefMaster))
+            {
+                float master = Mathf.Clamp(PlayerPrefs.GetFloat(PrefMaster), 0.0001f, 1f);
+                mixer.SetFloat("MasterVolume", Mathf.Log10(master) * 20f);
+            }
+
+            if (PlayerPrefs.HasKey(PrefBgm))
+            {
+                float bgm = Mathf.Clamp(PlayerPrefs.GetFloat(PrefBgm), 0.0001f, 1f);
+                mixer.SetFloat("BGMVolume", Mathf.Log10(bgm) * 20f);
+            }
+
+            if (PlayerPrefs.HasKey(PrefSfx))
+            {
+                float sfx = Mathf.Clamp(PlayerPrefs.GetFloat(PrefSfx), 0.0001f, 1f);
+                mixer.SetFloat("SFXVolume", Mathf.Log10(sfx) * 20f);
+            }
         }
     }
 }

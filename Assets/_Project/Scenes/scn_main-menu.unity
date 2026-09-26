@@ -65876,7 +65876,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -168653,7 +168653,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -170876,7 +170876,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.7
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -214835,6 +214835,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 586dec379b5e103428d49ac17dadb4fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.UI.DisplayController
+  resolutionDropdown: {fileID: 0}
+  windowModeDropdown: {fileID: 0}
 --- !u!1001 &988221165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -225368,7 +225370,22 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "<b>Congratulations!</b>\n\nYou have completed <b>Kontexto</b>!\n\nFrom a rookie facing the locked gates of Likha High to leading <i>The Paragon</i> to 1st Place at the National Schools Press Conference, your dedication to truth and craft made history.\n\n<b>Developed by ravcynolkir</b>\nThank you for playing!"
+  m_text: '<b>Congratulations!</b>
+
+
+    You have completed <b>Kontexto</b>!
+
+
+    From
+    a rookie facing the locked gates of Likha High to leading <i>The Paragon</i>
+    to 1st Place at the National Schools Press Conference, your dedication to truth
+    and craft made history.
+
+
+    <b>Developed by ravcynolkir</b>
+
+    Thank you
+    for playing!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b6e91323bf1134068abea42477845dc1, type: 2}
   m_sharedMaterial: {fileID: -6413621970138813598, guid: b6e91323bf1134068abea42477845dc1, type: 2}
@@ -423734,7 +423751,7 @@ MonoBehaviour:
   levelDatabase: {fileID: 11400000, guid: e8a1c0d3b00000000000000000000002, type: 2}
   menuButtonsPanel: {fileID: 1766691561}
   optionsPanel: {fileID: 819625684}
-  betaThankYouPanel: {fileID: 555651281}
+  gameCompletePanel: {fileID: 555651281}
 --- !u!4 &1958550780
 Transform:
   m_ObjectHideFlags: 0
