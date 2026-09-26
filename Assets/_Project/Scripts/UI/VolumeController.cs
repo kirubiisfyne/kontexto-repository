@@ -19,45 +19,65 @@ namespace Master.Scripts
         public Slider bgmSlider;
         public Slider sfxSlider;
 
+        private bool isInitialized = false;
+
+        private void Awake()
+        {
+            InitializeSliders();
+        }
+
         private void Start()
         {
-            if (mainMixer == null) return;
+            SyncSlidersWithMixer();
+        }
 
-            // 1. Force the sliders to go from 0.0001 to 1 instead of 0 to 1
-            // We do this because log10(0) is a math error (negative infinity)
+        private void OnEnable()
+        {
+            SyncSlidersWithMixer();
+        }
+
+        private void InitializeSliders()
+        {
+            if (isInitialized) return;
+
+            // Force the sliders to go from 0.0001 to 1 instead of 0 to 1 (prevents log10(0) negative infinity error)
             if (masterSlider) { masterSlider.minValue = 0.0001f; masterSlider.maxValue = 1f; }
             if (bgmSlider) { bgmSlider.minValue = 0.0001f; bgmSlider.maxValue = 1f; }
             if (sfxSlider) { sfxSlider.minValue = 0.0001f; sfxSlider.maxValue = 1f; }
 
-            // 2. Be faithful to the AudioMixer defaults:
-            // If the player has saved a custom preference, apply it.
-            // Otherwise, read the mixer's default snapshot levels directly so the UI matches the actual sounds.
-            float masterVal = GetOrLoadSliderValue("MasterVolume", PrefMaster);
-            float bgmVal = GetOrLoadSliderValue("BGMVolume", PrefBgm);
-            float sfxVal = GetOrLoadSliderValue("SFXVolume", PrefSfx);
-
-            // Sync sliders visually to the resolved values
-            if (masterSlider) masterSlider.SetValueWithoutNotify(masterVal);
-            if (bgmSlider) bgmSlider.SetValueWithoutNotify(bgmVal);
-            if (sfxSlider) sfxSlider.SetValueWithoutNotify(sfxVal);
-
-            // 3. Add listeners to the sliders so they update the mixer and save to PlayerPrefs when dragged
+            // Add listeners to update mixer and persist to PlayerPrefs when dragged
             if (masterSlider) masterSlider.onValueChanged.AddListener(SetMasterVolume);
             if (bgmSlider) bgmSlider.onValueChanged.AddListener(SetBGMVolume);
             if (sfxSlider) sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+
+            isInitialized = true;
         }
 
-        private float GetOrLoadSliderValue(string paramName, string prefKey)
+        public void SyncSlidersWithMixer()
         {
+            if (mainMixer == null) return;
+            InitializeSliders();
+
+            // Read the current state directly so opening the tab never mutates audio or causes a volume pop
+            float masterVal = GetCurrentSliderValue("MasterVolume", PrefMaster);
+            float bgmVal = GetCurrentSliderValue("BGMVolume", PrefBgm);
+            float sfxVal = GetCurrentSliderValue("SFXVolume", PrefSfx);
+
+            if (masterSlider) masterSlider.SetValueWithoutNotify(masterVal);
+            if (bgmSlider) bgmSlider.SetValueWithoutNotify(bgmVal);
+            if (sfxSlider) sfxSlider.SetValueWithoutNotify(sfxVal);
+        }
+
+        private float GetCurrentSliderValue(string paramName, string prefKey)
+        {
+            // If the player saved a preference, display it
             if (PlayerPrefs.HasKey(prefKey))
             {
-                float savedVal = Mathf.Clamp(PlayerPrefs.GetFloat(prefKey), 0.0001f, 1f);
-                mainMixer.SetFloat(paramName, Mathf.Log10(savedVal) * 20f);
-                return savedVal;
+                return Mathf.Clamp(PlayerPrefs.GetFloat(prefKey), 0.0001f, 1f);
             }
 
-            // Read the mixer snapshot's default dB and convert to linear 0..1
-            if (mainMixer.GetFloat(paramName, out float currentDB))
+            // Otherwise faithful to mixer snapshot default
+            if (mainMixer != null && mainMixer.GetFloat(paramName, out float currentDB))
             {
                 return Mathf.Clamp(Mathf.Pow(10f, currentDB / 20f), 0.0001f, 1f);
             }

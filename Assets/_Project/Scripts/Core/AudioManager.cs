@@ -1,3 +1,4 @@
+using UnityEngine.Audio;
 using System;
 using UnityEngine;
 
@@ -21,6 +22,10 @@ namespace Master.Scripts
         [Tooltip("Audio source dedicated to sound effects.")]
         public AudioSource sfxSource;
 
+        [Header("Audio Mixer")]
+        [Tooltip("The main AudioMixer asset controlling game audio channels.")]
+        public AudioMixer mainMixer;
+
         [Header("Audio Libraries")]
         [Tooltip("Map names to background music clips here.")]
         public Sound[] bgmSounds;
@@ -38,6 +43,37 @@ namespace Master.Scripts
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            ApplySavedMixerVolumes();
+        }
+
+        private void Start()
+        {
+            ApplySavedMixerVolumes();
+        }
+
+        /// <summary>
+        /// Applies saved player volume preferences to the AudioMixer immediately on game startup.
+        /// </summary>
+        public void ApplySavedMixerVolumes()
+        {
+            AudioMixer mixer = mainMixer;
+            if (mixer == null)
+            {
+                if (bgmSource != null && bgmSource.outputAudioMixerGroup != null)
+                {
+                    mixer = bgmSource.outputAudioMixerGroup.audioMixer;
+                }
+                else if (sfxSource != null && sfxSource.outputAudioMixerGroup != null)
+                {
+                    mixer = sfxSource.outputAudioMixerGroup.audioMixer;
+                }
+            }
+
+            if (mixer != null)
+            {
+                VolumeController.ApplySavedVolumes(mixer);
+            }
         }
 
         /// <summary>
