@@ -1,3 +1,4 @@
+using UnityEngine.Serialization;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI; 
@@ -18,8 +19,12 @@ public class MainMenuController : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject menuButtonsPanel;
     [SerializeField] private GameObject optionsPanel;
-    [SerializeField] private GameObject betaThankYouPanel;
+    [FormerlySerializedAs("betaThankYouPanel")]
+    [SerializeField] private GameObject gameCompletePanel;
 
+    [Header("Audio Configuration")]
+    [Tooltip("Background music track name to play in the Main Menu.")]
+    [SerializeField] private string mainMenuBgmTrack = "GoldenGleam";
     private void Start()
     {
         // Reset time scale to 1 when the menu finishes loading (in case we arrived from a paused game)
@@ -29,9 +34,9 @@ public class MainMenuController : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        if (betaThankYouPanel != null)
+        if (gameCompletePanel != null)
         {
-            betaThankYouPanel.SetActive(false);
+            gameCompletePanel.SetActive(false);
             PlayerData data = SaveManager.Load();
             if (data != null)
             {
@@ -45,10 +50,15 @@ public class MainMenuController : MonoBehaviour
                     allCompleted = data.levels.TrueForAll(l => l.isCompleted);
                 }
 
-                betaThankYouPanel.SetActive(allCompleted);
+                gameCompletePanel.SetActive(allCompleted);
             }
         }
 
+        // Ensure the main menu BGM is playing
+        if (AudioManager.Instance != null && !string.IsNullOrEmpty(mainMenuBgmTrack))
+        {
+            AudioManager.Instance.PlayBGM(mainMenuBgmTrack);
+        }
     }
 
     public void PlayGame()
@@ -181,6 +191,14 @@ public class MainMenuController : MonoBehaviour
     {
         optionsPanel.SetActive(false);      // Hide options panel
         menuButtonsPanel.SetActive(true);   // Show main buttons
+    }
+
+    public void CloseGameCompletePanel()
+    {
+        if (gameCompletePanel != null)
+        {
+            gameCompletePanel.SetActive(false);
+        }
     }
 
     /// <summary>

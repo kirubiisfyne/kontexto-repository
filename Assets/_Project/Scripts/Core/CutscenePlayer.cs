@@ -96,6 +96,10 @@ namespace Master.Scripts
                 subtitleManager.SetSubtitleJson(activeSequence.cutsceneDialogueJson);
             }
 
+            if (activeSequence != null && !string.IsNullOrEmpty(activeSequence.cutsceneBgmName) && AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlayBGM(activeSequence.cutsceneBgmName);
+            }
             if (activeShots.Count == 0)
             {
                 Debug.Log($"[CutscenePlayer] No {activeMode} shots found for sequence {(activeSequence != null ? activeSequence.name : "None")}. Proceeding...");

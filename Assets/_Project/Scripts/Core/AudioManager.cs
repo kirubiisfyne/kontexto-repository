@@ -1,9 +1,10 @@
 using System;
+using System.Collections;
 using UnityEngine;
-
+using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 namespace Master.Scripts
 {
-    // A simple struct to map names to AudioClips in the Unity Inspector
     [Serializable]
     public struct Sound
     {
@@ -15,11 +16,23 @@ namespace Master.Scripts
     {
         public static AudioManager Instance { get; private set; }
 
+        public const string MasterParam = "MasterVolume";
+        public const string BgmParam = "BGMVolume";
+        public const string SfxParam = "SFXVolume";
+
+        public const string PrefMaster = "kontexto.audio.master";
+        public const string PrefBgm = "kontexto.audio.bgm";
+        public const string PrefSfx = "kontexto.audio.sfx";
+
         [Header("Audio Sources")]
         [Tooltip("Audio source dedicated to background music.")]
         public AudioSource bgmSource;
         [Tooltip("Audio source dedicated to sound effects.")]
         public AudioSource sfxSource;
+
+        [Header("Audio Mixer")]
+        [Tooltip("The main AudioMixer asset controlling game audio channels.")]
+        public AudioMixer mainMixer;
 
         [Header("Audio Libraries")]
         [Tooltip("Map names to background music clips here.")]
@@ -27,9 +40,11 @@ namespace Master.Scripts
         [Tooltip("Map names to sound effect clips here.")]
         public Sound[] sfxSounds;
 
+        private Coroutine bgmFadeCoroutine;
+        private float bgmTransitionScale = 1f;
+
         private void Awake()
         {
-            // Singleton pattern to ensure only one AudioManager exists across all scenes
             if (Instance != null && Instance != this)
             {
                 Destroy(gameObject);
@@ -38,26 +53,163 @@ namespace Master.Scripts
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Initial synchronous pass
+            ApplyAllVolumesDirectly();
+        }
+
+        private void OnEnable()
+        {
+            SceneManager.sceneLoaded += HandleSceneLoaded;
+        }
+
+        private void OnDisable()
+        {
+            SceneManager.sceneLoaded -= HandleSceneLoaded;
+        }
+
+        private void Start()
+        {
+            // Standard Unity lifecycle: Start() runs after scene and AudioMixer snapshot have loaded.
+            // Re-apply without any coroutines or frame waits to guarantee saved volumes stick.
+            ApplyAllVolumesDirectly();
+        }
+
+        private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
+        {
+            ApplyAllVolumesDirectly();
+        }
+
+        #region Volume Control & Persistence
+
+        public AudioMixer ResolveMixer()
+        {
+            if (mainMixer != null) return mainMixer;
+            if (bgmSource != null && bgmSource.outputAudioMixerGroup != null)
+                return bgmSource.outputAudioMixerGroup.audioMixer;
+            if (sfxSource != null && sfxSource.outputAudioMixerGroup != null)
+                return sfxSource.outputAudioMixerGroup.audioMixer;
+            return null;
         }
 
         /// <summary>
-        /// Plays a sound effect by its mapped string name. (This version works perfectly in Unity UI Button events!)
+        /// Synchronously applies volume settings to AudioListener, AudioSources, and AudioMixer.
+        /// Avoids double-attenuation: component volumes act as instant hardware mute gates (0 or 1),
+        /// while AudioMixer manages the exact decibel curve.
         /// </summary>
-        /// <param name="name">The string name of the SFX mapped in the Inspector.</param>
+        public void ApplyAllVolumesDirectly()
+        {
+            float master = GetMasterVolume();
+            float bgm = GetBGMVolume();
+            float sfx = GetSFXVolume();
+
+            // 1. Hardware-level mute gates (0 if muted, 1 if active)
+            AudioListener.volume = master <= 0.001f ? 0f : 1f;
+
+            float effectiveBgm = bgm * bgmTransitionScale;
+            if (bgmSource != null)
+            {
+                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+            }
+
+            if (sfxSource != null)
+            {
+                sfxSource.volume = sfx <= 0.001f ? 0f : 1f;
+            }
+
+            // 2. AudioMixer manages the smooth decibel attenuation curve
+            SetMixerVolume(MasterParam, master);
+            SetMixerVolume(BgmParam, effectiveBgm);
+            SetMixerVolume(SfxParam, sfx);
+        }
+
+        public void SetMasterVolume(float linear)
+        {
+            linear = Mathf.Clamp01(linear);
+            AudioListener.volume = linear <= 0.001f ? 0f : 1f;
+            SetMixerVolume(MasterParam, linear);
+
+            PlayerPrefs.SetFloat(PrefMaster, linear);
+            PlayerPrefs.Save();
+        }
+
+        public void SetBGMVolume(float linear)
+        {
+            linear = Mathf.Clamp01(linear);
+            float effectiveBgm = linear * bgmTransitionScale;
+            if (bgmSource != null)
+            {
+                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+            }
+            SetMixerVolume(BgmParam, effectiveBgm);
+
+            PlayerPrefs.SetFloat(PrefBgm, linear);
+            PlayerPrefs.Save();
+        }
+
+        public void SetSFXVolume(float linear)
+        {
+            linear = Mathf.Clamp01(linear);
+            if (sfxSource != null)
+            {
+                sfxSource.volume = linear <= 0.001f ? 0f : 1f;
+            }
+            SetMixerVolume(SfxParam, linear);
+
+            PlayerPrefs.SetFloat(PrefSfx, linear);
+            PlayerPrefs.Save();
+        }
+
+        private void SetMixerVolume(string paramName, float linear)
+        {
+            var mixer = ResolveMixer();
+            if (mixer != null)
+            {
+                // When slider is at 0 (or near-zero), explicitly set to -80dB to mute
+                float db = linear <= 0.001f ? -80f : Mathf.Log10(linear) * 20f;
+                mixer.SetFloat(paramName, db);
+            }
+        }
+
+        public float GetMasterVolume() => GetChannelVolume(MasterParam, PrefMaster);
+        public float GetBGMVolume() => GetChannelVolume(BgmParam, PrefBgm);
+        public float GetSFXVolume() => GetChannelVolume(SfxParam, PrefSfx);
+
+        private float GetChannelVolume(string paramName, string prefKey)
+        {
+            if (PlayerPrefs.HasKey(prefKey))
+            {
+                return Mathf.Clamp01(PlayerPrefs.GetFloat(prefKey));
+            }
+
+            var mixer = ResolveMixer();
+            if (mixer != null && mixer.GetFloat(paramName, out float db))
+            {
+                if (db <= -79.9f) return 0f;
+                return Mathf.Clamp01(Mathf.Pow(10f, db / 20f));
+            }
+
+            return 1f;
+        }
+
+        #endregion
+
+        #region Sound & Music Playback
+
         public void PlaySFX(string name)
         {
-            // Call the main function with no pitch shifting
             PlaySFX(name, false, 1f, 1f);
         }
 
-        /// <summary>
-        /// Plays a sound effect with optional pitch shifting. (Call this version from your C# scripts!)
-        /// </summary>
         public void PlaySFX(string name, bool randomPitch, float minPitch = 0.85f, float maxPitch = 1.15f, float volumeScale = 1f)
         {
+            float currentSFX = GetSFXVolume();
+            if (currentSFX <= 0.001f || AudioListener.volume <= 0.001f) return;
+
+            SetMixerVolume(SfxParam, currentSFX);
+
             AudioClip clipToPlay = null;
 
-            // Search our library for the sound by name
             foreach (Sound s in sfxSounds)
             {
                 if (s.name == name)
@@ -67,29 +219,12 @@ namespace Master.Scripts
                 }
             }
 
-            if (clipToPlay == null)
-            {
-                //Debug.LogWarning($"[AudioManager] SFX '{name}' not found in the library!");
-                return;
-            }
+            if (clipToPlay == null) return;
 
-            // Apply random pitch shifting if requested
-            if (randomPitch)
-            {
-                sfxSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
-            }
-            else
-            {
-                sfxSource.pitch = 1f; // Always reset back to normal if no shift is requested
-            }
-
-            // PlayOneShot allows overlapping sounds on the same AudioSource
+            sfxSource.pitch = randomPitch ? UnityEngine.Random.Range(minPitch, maxPitch) : 1f;
             sfxSource.PlayOneShot(clipToPlay, volumeScale);
         }
 
-        /// <summary>
-        /// Plays background music by its mapped string name.
-        /// </summary>
         public void PlayBGM(string name)
         {
             AudioClip clipToPlay = null;
@@ -103,34 +238,104 @@ namespace Master.Scripts
                 }
             }
 
-            if (clipToPlay == null)
-            {
-                //Debug.LogWarning($"[AudioManager] BGM '{name}' not found in the library!");
-                return;
-            }
+            if (clipToPlay == null) return;
 
             PlayBGM(clipToPlay);
         }
 
-        /// <summary>
-        /// Plays background music directly from an AudioClip.
-        /// </summary>
         public void PlayBGM(AudioClip bgmClip)
         {
-            // Don't restart the song if it's already the active track
-            if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return; 
+            if (bgmSource == null) return;
+            if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
+
+            float effectiveBgm = GetBGMVolume() * bgmTransitionScale;
+            bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+            SetMixerVolume(BgmParam, effectiveBgm);
 
             bgmSource.clip = bgmClip;
             bgmSource.loop = true;
             bgmSource.Play();
         }
 
-        /// <summary>
-        /// Stops the current background music.
-        /// </summary>
         public void StopBGM()
         {
-            bgmSource.Stop();
+            if (bgmFadeCoroutine != null)
+            {
+                StopCoroutine(bgmFadeCoroutine);
+                bgmFadeCoroutine = null;
+            }
+            if (bgmSource != null)
+            {
+                bgmSource.Stop();
+            }
         }
+
+        /// <summary>
+        /// Smoothly fades BGM out to 0 volume over duration.
+        /// </summary>
+        public IEnumerator FadeBGMOut(float duration)
+        {
+            if (bgmFadeCoroutine != null)
+            {
+                StopCoroutine(bgmFadeCoroutine);
+            }
+            bgmFadeCoroutine = StartCoroutine(FadeBGMRoutine(0f, duration));
+            yield return bgmFadeCoroutine;
+        }
+
+        /// <summary>
+        /// Smoothly fades BGM in from 0 volume back to the user's configured volume over duration.
+        /// </summary>
+        public IEnumerator FadeBGMIn(float duration)
+        {
+            if (bgmFadeCoroutine != null)
+            {
+                StopCoroutine(bgmFadeCoroutine);
+            }
+            bgmFadeCoroutine = StartCoroutine(FadeBGMRoutine(1f, duration));
+            yield return bgmFadeCoroutine;
+        }
+
+        /// <summary>
+        /// Smoothly interpolates the BGM volume scale between 0 and 1 using unscaled time.
+        /// </summary>
+        private IEnumerator FadeBGMRoutine(float targetScale, float duration)
+        {
+            float startScale = bgmTransitionScale;
+            float elapsed = 0f;
+
+            if (duration <= 0.001f)
+            {
+                bgmTransitionScale = targetScale;
+                ApplyBgmTransitionScale();
+                bgmFadeCoroutine = null;
+                yield break;
+            }
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                bgmTransitionScale = Mathf.Lerp(startScale, targetScale, t);
+                ApplyBgmTransitionScale();
+                yield return null;
+            }
+
+            bgmTransitionScale = targetScale;
+            ApplyBgmTransitionScale();
+            bgmFadeCoroutine = null;
+        }
+
+        private void ApplyBgmTransitionScale()
+        {
+            float effectiveBgm = GetBGMVolume() * bgmTransitionScale;
+            if (bgmSource != null)
+            {
+                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+            }
+            SetMixerVolume(BgmParam, effectiveBgm);
+        }
+
+        #endregion
     }
 }

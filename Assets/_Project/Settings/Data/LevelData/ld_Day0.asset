@@ -21,3 +21,4 @@ MonoBehaviour:
     usePrefabTransform: 1
   activeRoomIds:
   - multipurpose_hall
+  bgmTrackName: GentleBreeze

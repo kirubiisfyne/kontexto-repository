@@ -14,6 +14,8 @@ namespace Master.Scripts
         public float interactRange = 3f;
         public LayerMask interactableLayer = ~0;
 
+        [Header("Keybindings")]
+        [SerializeField] private KeyCode interactKey = KeyCode.F;
         // --- NEW: Event to broadcast when we are near or far from an interactable
         public static event Action<bool> OnInteractableProximityChanged;
         
@@ -65,7 +67,7 @@ namespace Master.Scripts
             CheckForInteractablesInRange();
 
             // 2. Interact if we press F and have something in range
-            if (Input.GetKeyDown(KeyCode.F) && currentClosestInteractable != null)
+            if (Input.GetKeyDown(interactKey) && currentClosestInteractable != null)
             {
                 InteractWithCurrent();
             }

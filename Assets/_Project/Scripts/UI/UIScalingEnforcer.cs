@@ -22,7 +22,7 @@ namespace Master.Scripts.UI
         [SerializeField] private float matchWidthOrHeight = 0.5f;
 
         [Tooltip("If true, logs every Canvas it corrects (disable in release builds).")]
-        [SerializeField] private bool enableLogging = true;
+        [SerializeField] private bool enableLogging = false;
 
         private void Awake()
         {

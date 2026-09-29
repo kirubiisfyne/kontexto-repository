@@ -153,6 +153,13 @@ namespace Master.Scripts.SaveSystem
             // 3. Apply room active/inactive states
             ApplyRoomStates();
 
+            // 3b. Synchronize Level BGM
+            if (AudioManager.Instance != null && currentLevelData != null)
+            {
+                string track = !string.IsNullOrEmpty(currentLevelData.bgmTrackName) ? currentLevelData.bgmTrackName : "GoldenGleam";
+                AudioManager.Instance.PlayBGM(track);
+            }
+
             // 4. Mark intro as watched for this day since we are in active gameplay
             if (currentSeq != null)
             {

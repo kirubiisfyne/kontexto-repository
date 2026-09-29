@@ -25,6 +25,10 @@ namespace Master.Scripts.SaveSystem
         [Tooltip("Optional cutscene dialogue JSON asset for this day/level containing intro and outro dialogue.")]
         public TextAsset cutsceneDialogueJson;
 
+        [Header("Audio Configuration (Optional)")]
+        [Tooltip("Optional background music track name for cutscenes (e.g. 'GoldenGleam', 'GentleBreeze').")]
+        public string cutsceneBgmName;
+
         public string SceneId => levelData != null ? levelData.sceneId : string.Empty;
         public bool HasIntro => introCutscenePrefabs != null && introCutscenePrefabs.Count > 0;
         public bool HasOutro => outroCutscenePrefabs != null && outroCutscenePrefabs.Count > 0;
