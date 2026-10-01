@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 2544991538378474173}
   - component: {fileID: 4140811871087857786}
   - component: {fileID: 2275704564461141275}
+  - component: {fileID: 9195000000000000001}
+  - component: {fileID: 9195000000000000002}
   m_Layer: 7
   m_Name: NPC_Abigail
   m_TagString: Untagged
@@ -56,10 +58,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.35
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!114 &2544991538378474173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,6 +143,7 @@ MonoBehaviour:
   NPCLookAt: 1
   NPCCamera: {fileID: 3120373641597337183}
   playerController: {fileID: 0}
+  roamingAgent: {fileID: 9195000000000000002}
 --- !u!1 &5779900181292431844
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,7 +175,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7743908468350380503}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 12, y: 180, z: 0}
 --- !u!114 &3120373641597337183
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,3 +437,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 541dc52be9fe8634ebb1520641433660, type: 3}
   m_PrefabInstance: {fileID: 1164580756858644353}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &9195000000000000001
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950162060788873858}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.35
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.8
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &9195000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2950162060788873858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9e35d68556d4f72813eb866e5fce75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.NPC.NPCRoamingAgent
+  currentState: 0
+  anchorPosition: {x: 0, y: 0, z: 0}
+  useCurrentPositionAsAnchor: 1
+  leashRadius: 8
+  sampleMaxDistance: 4
+  maxSampleAttempts: 10
+  minIdleDuration: 2
+  maxIdleDuration: 5
+  arrivalDistance: 0.5
+  wanderTimeout: 12
+  walkSpeed: 1.5
+  angularSpeed: 120
+  acceleration: 8
+  animator: {fileID: 0}
+  speedParameterName: Speed
+  speedDampTime: 0.15
+  focusTurnDuration: 0.5
+  focusTarget: {fileID: 0}
