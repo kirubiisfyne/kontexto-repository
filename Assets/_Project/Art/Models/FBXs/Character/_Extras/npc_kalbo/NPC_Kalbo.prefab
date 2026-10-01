@@ -172,7 +172,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6080680302942418486}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 12, y: 180, z: 0}
 --- !u!114 &2720259072659118794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,3 +434,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f9cf0c21f44a2644da9b405a15da9037, type: 3}
   m_PrefabInstance: {fileID: 5467759292039419949}
   m_PrefabAsset: {fileID: 0}
+--- !u!195 &9195000000000000001
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802521877646548545}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.35
+  m_Speed: 1.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0.5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.8
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &9195000000000000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802521877646548545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9e35d68556d4f72813eb866e5fce75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.NPC.NPCRoamingAgent
+  currentState: 0
+  anchorPosition: {x: 0, y: 0, z: 0}
+  useCurrentPositionAsAnchor: 1
+  leashRadius: 8
+  sampleMaxDistance: 4
+  maxSampleAttempts: 10
+  minIdleDuration: 2
+  maxIdleDuration: 5
+  arrivalDistance: 0.5
+  wanderTimeout: 12
+  walkSpeed: 1.5
+  angularSpeed: 120
+  acceleration: 8
+  animator: {fileID: 0}
+  speedParameterName: Speed
+  speedDampTime: 0.15
+  focusTurnDuration: 0.5
+  focusTarget: {fileID: 0}
