@@ -113,6 +113,10 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_PositionOffset.uniform
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_PositionOffset.space
     value: 0
     objectReference: {fileID: 0}
@@ -157,36 +161,40 @@ Preset:
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
+    propertyPath: m_RotationOffset.uniform
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
     propertyPath: m_RotationOffset.space
     value: 0
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.setup
-    value: 0
+    value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.min.x
-    value: 0.1
+    value: 0.01
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.min.y
-    value: 0.1
+    value: 0.01
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.min.z
-    value: 0.1
+    value: 0.01
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.max.x
-    value: 1
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.max.y
-    value: 1
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.max.z
-    value: 1
+    value: 0.5
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.randomX
@@ -198,6 +206,10 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_ScaleOffset.randomZ
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_ScaleOffset.uniform
     value: 1
     objectReference: {fileID: 0}
   - target: {fileID: 0}
@@ -214,7 +226,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: m_Seed
-    value: 712567796
+    value: -1690187117
     objectReference: {fileID: 0}
   m_ExcludedProperties: []
   m_CoupledType:
