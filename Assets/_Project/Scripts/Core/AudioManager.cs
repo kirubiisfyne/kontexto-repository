@@ -11,6 +11,11 @@ namespace Master.Scripts
         public string name;
         public AudioClip clip;
     }
+    public enum AudioChannel
+    {
+        BGM,
+        SFX
+    }
 
     public class AudioManager : MonoBehaviour
     {
@@ -89,6 +94,65 @@ namespace Master.Scripts
                 return bgmSource.outputAudioMixerGroup.audioMixer;
             if (sfxSource != null && sfxSource.outputAudioMixerGroup != null)
                 return sfxSource.outputAudioMixerGroup.audioMixer;
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the AudioMixerGroup corresponding to the specified channel (BGM or SFX).
+        /// </summary>
+        public AudioMixerGroup GetChannelGroup(AudioChannel channel)
+        {
+            if (channel == AudioChannel.BGM && bgmSource != null && bgmSource.outputAudioMixerGroup != null)
+                return bgmSource.outputAudioMixerGroup;
+            if (channel == AudioChannel.SFX && sfxSource != null && sfxSource.outputAudioMixerGroup != null)
+                return sfxSource.outputAudioMixerGroup;
+
+            var mixer = ResolveMixer();
+            if (mixer != null)
+            {
+                var groups = mixer.FindMatchingGroups(channel.ToString());
+                if (groups != null && groups.Length > 0) return groups[0];
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Attempts to find a registered sound clip by name across BGM and SFX libraries.
+        /// </summary>
+        public AudioClip FindClip(string soundName, AudioChannel channel = AudioChannel.BGM)
+        {
+            if (string.IsNullOrEmpty(soundName)) return null;
+
+            if (channel == AudioChannel.BGM && bgmSounds != null)
+            {
+                foreach (var s in bgmSounds)
+                {
+                    if (s.name == soundName) return s.clip;
+                }
+            }
+            else if (channel == AudioChannel.SFX && sfxSounds != null)
+            {
+                foreach (var s in sfxSounds)
+                {
+                    if (s.name == soundName) return s.clip;
+                }
+            }
+
+            if (bgmSounds != null)
+            {
+                foreach (var s in bgmSounds)
+                {
+                    if (s.name == soundName) return s.clip;
+                }
+            }
+            if (sfxSounds != null)
+            {
+                foreach (var s in sfxSounds)
+                {
+                    if (s.name == soundName) return s.clip;
+                }
+            }
+
             return null;
         }
 

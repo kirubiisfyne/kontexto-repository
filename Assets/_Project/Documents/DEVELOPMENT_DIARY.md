@@ -284,3 +284,18 @@ The connection between tasks and narrative is now visible and configurable in th
 ### Persistence & Level Loading
 Task completion, level completion, and player position are all tracked via local JSON at `Application.persistentDataPath`. On scene load, `LevelLoader` spawns all task prefabs, fast-forwards completed ones through the full status chain, and restores the player's last saved position — ensuring both NPC dialogue state and player placement are correct on every load.
 
+
+---
+
+## 26. Milestone: Spatial Ambient Audio Volume
+
+*   **Decision**: Decoupled `SpatialAmbientVolume` with dynamic AudioMixer routing via `AudioManager`.
+    *   *Why*: In keeping with Constitution Principle I (Pure & Isolated Architecture) and AGENTS.md Audio Standards, the component manages its own 3D AudioSource emitter at randomized coordinates within the parent volume (`BoxCollider`, `SphereCollider`, or fallback bounds), but routes its mixer output group through `AudioManager.Instance.GetChannelGroup(AudioChannel.BGM/SFX)`. This ensures ambient music and atmospheric cues obey Master, BGM, and SFX volume sliders, mute gates, and unscaled pause handling without hard coupling. If `AudioManager.Instance` is absent (such as in an isolated testing scene), the component falls back safely to direct AudioSource settings without null reference exceptions.
+*   **Decision**: Local collider space random sampling.
+    *   *Why*: Sampling randomly within local collider coordinates (`box.size` and `box.center` or `sphere.radius` and `sphere.center`) and transforming through `transform.TransformPoint()` correctly preserves parent rotation, translation, and non-uniform scaling across irregular room and campus geometry.
+*   **Decision**: Dual-source clip resolution (Local Inspector pool + global AudioManager registry).
+    *   *Why*: Gives designers the freedom to assign localized one-off audio clips directly in the Inspector or query globally registered sounds from `AudioManager.sfxSounds` or `AudioManager.bgmSounds` by name without duplicating asset references.
+*   **Decision**: Reusable child emitter GameObject with allocation-free repositioning.
+    *   *Why*: Instead of spawning and destroying temporary GameObjects for every ambient interval (which introduces GC overhead), a child emitter GameObject is repositioned at the sampled coordinates prior to playing each sound.
+*   **Decision**: Inspector-First parameterless control and Scene View visualizer.
+    *   *Why*: Per Constitution Principle II, parameterless methods (`StartAmbience()`, `StopAmbience()`, `TriggerRandomAmbient()`, `PauseAmbience()`, `ResumeAmbience()`) are exposed for clean UnityEvent wiring with `RoomController` or cutscenes. `OnDrawGizmosSelected` renders the volume bounds and last sampled emission position in Scene View for visual feedback.
