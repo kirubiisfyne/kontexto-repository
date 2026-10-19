@@ -32,10 +32,14 @@ namespace Master.Scripts.DialogueSystem
 
 
         [Header("Audio Settings")]
+        [Tooltip("If enabled, plays a speech blip audio clip as letters appear.")]
+        [SerializeField] private bool enableTypingBlip = false;
         [Tooltip("Optional speech blip audio clip played as letters appear.")]
         [SerializeField] private AudioClip typingAudioClip;
         [Tooltip("AudioSource used for speech blip. If unassigned, one will be fetched or created.")]
         [SerializeField] private AudioSource typingAudioSource;
+        [Tooltip("Dedicated AudioSource used for dialogue voice grunts. If unassigned, one will be created.")]
+        [SerializeField] private AudioSource voiceAudioSource;
         [Range(1, 5)] [SerializeField] private int blipCharacterFrequency = 2;
         [SerializeField] private bool randomPitch = true;
         [Range(0.8f, 1.2f)] [SerializeField] private float minPitch = 0.95f;
@@ -57,7 +61,8 @@ namespace Master.Scripts.DialogueSystem
         [Range(0.8f, 1.2f)] [SerializeField] private float minVoicePitch = 0.95f;
         [Range(0.8f, 1.2f)] [SerializeField] private float maxVoicePitch = 1.05f;
         [Range(0f, 1f)] [SerializeField] private float voiceVolume = 0.8f;
-
+        [Tooltip("If true, vocal grunts only play on dialogue start and when the active speaker changes between lines.")]
+        [SerializeField] private bool voiceOnSpeakerChangeOnly = true;
         public bool IsTyping { get; private set; }
         
         private string currentFullText;
@@ -87,17 +92,43 @@ namespace Master.Scripts.DialogueSystem
                 }
             }
 
+            if (voiceAudioSource == null)
+            {
+                AudioSource[] sources = GetComponents<AudioSource>();
+                if (sources.Length > 1 && sources[0] == typingAudioSource)
+                {
+                    voiceAudioSource = sources[1];
+                }
+                else
+                {
+                    voiceAudioSource = gameObject.AddComponent<AudioSource>();
+                }
+                voiceAudioSource.playOnAwake = false;
+            }
+
             if (typingAudioSource != null && AudioManager.Instance != null && typingAudioSource.outputAudioMixerGroup == null)
             {
                 typingAudioSource.outputAudioMixerGroup = AudioManager.Instance.GetChannelGroup(AudioChannel.SFX);
+            }
+
+            if (voiceAudioSource != null && AudioManager.Instance != null && voiceAudioSource.outputAudioMixerGroup == null)
+            {
+                voiceAudioSource.outputAudioMixerGroup = AudioManager.Instance.GetChannelGroup(AudioChannel.SFX);
             }
         }
 
         private void Start()
         {
-            if (typingAudioSource != null && typingAudioSource.outputAudioMixerGroup == null && AudioManager.Instance != null)
+            if (AudioManager.Instance != null)
             {
-                typingAudioSource.outputAudioMixerGroup = AudioManager.Instance.GetChannelGroup(AudioChannel.SFX);
+                if (typingAudioSource != null && typingAudioSource.outputAudioMixerGroup == null)
+                {
+                    typingAudioSource.outputAudioMixerGroup = AudioManager.Instance.GetChannelGroup(AudioChannel.SFX);
+                }
+                if (voiceAudioSource != null && voiceAudioSource.outputAudioMixerGroup == null)
+                {
+                    voiceAudioSource.outputAudioMixerGroup = AudioManager.Instance.GetChannelGroup(AudioChannel.SFX);
+                }
             }
         }
 
@@ -119,6 +150,11 @@ namespace Master.Scripts.DialogueSystem
 
         public void Hide()
         {
+            if (voiceAudioSource != null && voiceAudioSource.isPlaying)
+            {
+                voiceAudioSource.Stop();
+            }
+
             PlayCloseSFX();
 
             if (gameObject.activeInHierarchy)
@@ -148,12 +184,13 @@ namespace Master.Scripts.DialogueSystem
         /// </summary>
         public void UpdateDialogueView(DialogueLine line)
         {
+            string previousSpeaker = currentSpeaker;
             currentSpeaker = line != null ? line.speaker : null;
 
             bool isAdvancing = dialoguePanel.activeSelf && hideCoroutine == null;
             if (isAdvancing)
             {
-                PlayNextLineSFX(currentSpeaker);
+                PlayNextLineSFX(currentSpeaker, previousSpeaker);
             }
             else
             {
@@ -214,11 +251,10 @@ namespace Master.Scripts.DialogueSystem
                 dialogueText.maxVisibleCharacters++;
                 visibleCount++;
 
-                if (!char.IsWhiteSpace(letter) && visibleCount % blipCharacterFrequency == 0)
+                if (enableTypingBlip && !char.IsWhiteSpace(letter) && visibleCount % blipCharacterFrequency == 0)
                 {
                     PlayTypingBlip();
                 }
-
                 yield return wait;
             }
             
@@ -237,14 +273,12 @@ namespace Master.Scripts.DialogueSystem
         }
         private void PlayTypingBlip()
         {
+            if (!enableTypingBlip) return;
+
             if (typingAudioClip != null && typingAudioSource != null)
             {
                 typingAudioSource.pitch = randomPitch ? UnityEngine.Random.Range(minPitch, maxPitch) : 1f;
                 typingAudioSource.PlayOneShot(typingAudioClip, blipVolume);
-            }
-            else if (AudioManager.Instance != null)
-            {
-                AudioManager.Instance.PlaySFX("UIPop0", randomPitch, minPitch, maxPitch, blipVolume);
             }
         }
 
@@ -260,12 +294,13 @@ namespace Master.Scripts.DialogueSystem
         {
             pitchMultiplier = 1f;
 
-            // 1. Direct NPC override on DialogueManager
-            if (DialogueManager.LastInteracted != null && DialogueManager.LastInteracted.NpcVoiceClip != null)
+            bool isPlayer = string.Equals(speakerName, "Kiko", System.StringComparison.OrdinalIgnoreCase);
+
+            // 1. Direct NPC override on DialogueManager (only for NPC speakers, never for the player)
+            if (!isPlayer && DialogueManager.LastInteracted != null && DialogueManager.LastInteracted.NpcVoiceClip != null)
             {
                 return DialogueManager.LastInteracted.NpcVoiceClip;
             }
-
             // 2. Speaker profile / GruntSet in SpeakerDatabase
             if (!string.IsNullOrEmpty(speakerName) && speakerDatabase != null)
             {
@@ -291,15 +326,38 @@ namespace Master.Scripts.DialogueSystem
 
         /// <summary>
         /// Plays the speaker's vocal SFX ("hmm, ahh!" voice grunt) or default dialogue voice cue.
+        /// Stops any currently playing voice grunt on the dedicated voice source to prevent overlap.
         /// </summary>
         public void PlayVoiceSFX(string speakerName = null)
         {
             AudioClip clip = ResolveVoiceClip(speakerName, out float pitchMultiplier);
-            PlayDialogueSound(clip, pitchMultiplier);
+            if (clip == null) return;
+
+            float minP = minVoicePitch * pitchMultiplier;
+            float maxP = maxVoicePitch * pitchMultiplier;
+            float finalPitch = randomVoicePitch ? UnityEngine.Random.Range(minP, maxP) : pitchMultiplier;
+
+            if (voiceAudioSource != null)
+            {
+                voiceAudioSource.Stop();
+                voiceAudioSource.pitch = finalPitch;
+                voiceAudioSource.clip = clip;
+                voiceAudioSource.volume = voiceVolume;
+                voiceAudioSource.Play();
+            }
+            else if (AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX(clip, randomVoicePitch, minP, maxP, voiceVolume);
+            }
+            else if (typingAudioSource != null)
+            {
+                typingAudioSource.pitch = finalPitch;
+                typingAudioSource.PlayOneShot(clip, voiceVolume);
+            }
         }
 
         /// <summary>
-        /// Plays skip SFX when skipping typewriter text, falling back to the speaker voice cue if unassigned.
+        /// Plays skip SFX when skipping typewriter text. If unassigned, stays silent to prevent redundant grunts.
         /// </summary>
         public void PlaySkipSFX(string speakerName = null)
         {
@@ -307,16 +365,13 @@ namespace Master.Scripts.DialogueSystem
             {
                 PlayDialogueSound(skipSFX, 1f);
             }
-            else
-            {
-                PlayVoiceSFX(speakerName);
-            }
         }
 
         /// <summary>
-        /// Plays progression SFX when advancing to the next dialogue line, falling back to the speaker voice cue if unassigned.
+        /// Plays progression SFX when advancing to the next dialogue line.
+        /// If unassigned, optionally plays the vocal cue if the speaker changed.
         /// </summary>
-        public void PlayNextLineSFX(string speakerName = null)
+        public void PlayNextLineSFX(string speakerName = null, string previousSpeakerName = null)
         {
             if (nextLineSFX != null)
             {
@@ -324,10 +379,13 @@ namespace Master.Scripts.DialogueSystem
             }
             else
             {
-                PlayVoiceSFX(speakerName);
+                bool speakerChanged = !string.Equals(speakerName, previousSpeakerName, System.StringComparison.OrdinalIgnoreCase);
+                if (!voiceOnSpeakerChangeOnly || speakerChanged)
+                {
+                    PlayVoiceSFX(speakerName);
+                }
             }
         }
-
         /// <summary>
         /// Plays optional SFX when the dialogue panel closes.
         /// </summary>

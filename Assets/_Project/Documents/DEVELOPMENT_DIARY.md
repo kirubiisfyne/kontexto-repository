@@ -312,3 +312,18 @@ Task completion, level completion, and player position are all tracked via local
     *   *Why*: Kontexto Audio Standards mandate routing all game audio through `AudioManager` and the main AudioMixer channels (`MasterVolume`, `BGMVolume`, `SFXVolume`). Extending `AudioManager` with a `PlaySFX(AudioClip clip, ...)` overload allows direct AudioClip references to play through `AudioManager.sfxSource` with the SFX AudioMixer group and user volume settings, without needing strings or registry mapping for localized clips.
 *   **Decision**: Automatic discrimination between dialogue initiation, typewriter skipping, and line progression.
     *   *Why*: Solves requirements cleanly without redundant polling or keycode listeners. In `DialogueUIManager.UpdateDialogueView`, the component checks whether the dialogue panel is already active: if closed, it plays the initial vocal cue; if active, it plays the next-line progression cue. In `FinishTyping`, skipping the typewriter text triggers the skip vocal cue immediately. Rapid mashing of the interact key is smoothed with random pitch variation and allocation-free one-shot playback.
+
+---
+
+## 28. Milestone: Dialogue Vocal Overlap Fix & Typewriter Audio Polish
+
+*   **Decision**: Dedicated Monophonic `voiceAudioSource` with Instant Cutoff (`Stop()` before `Play()`).
+    *   *Why*: Routing vocal grunts through `AudioManager.PlaySFX()` used `sfxSource.PlayOneShot()`, which never cuts off playing audio. When players advanced between speakers within fractions of a second, the previous speaker's grunt continued playing alongside the new speaker's grunt. `DialogueUIManager` now manages a dedicated `voiceAudioSource` that explicitly stops any active vocal audio before playing a new cue, guaranteeing that two character voices can never play concurrently.
+*   **Decision**: Decouple Typewriter Skipping from Vocal Grunt Fallback.
+    *   *Why*: `PlaySkipSFX()` previously fell back to `PlayVoiceSFX()`, causing characters to grunt twice per sentence (once when the line started, and again on typewriter skip). Skipping typewriter text now only plays a dedicated UI sound if assigned in `skipSFX`, leaving vocal cues untouched.
+*   **Decision**: Speaker Turn Discrimination (`voiceOnSpeakerChangeOnly`).
+    *   *Why*: Grunts now only fire when a conversation opens and when the active speaker changes between lines (e.g. Kiko $\rightarrow$ NPC or NPC $\rightarrow$ Kiko), eliminating machine-gun grunts during multi-line monologues while preserving natural conversation pacing.
+*   **Decision**: Player Voice Isolation in `ResolveVoiceClip`.
+    *   *Why*: Guarded `LastInteracted.NpcVoiceClip` so NPC voice overrides only apply to lines spoken by the NPC, preventing local overrides from hijacking player Kiko's voice lines.
+*   **Decision**: Remove Hardcoded Typewriter Pop Sound Fallback (`enableTypingBlip`).
+    *   *Why*: `PlayTypingBlip()` fell back to playing `AudioManager.PlaySFX("UIPop0")` on every other character during typewriter reveal even when `typingAudioClip` was unassigned. Replaced the fallback with an opt-in `enableTypingBlip` serialized toggle (default `false`), muting the rapid pop sounds while preserving designer configurability.
