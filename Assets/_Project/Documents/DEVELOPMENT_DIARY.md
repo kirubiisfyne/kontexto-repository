@@ -299,3 +299,16 @@ Task completion, level completion, and player position are all tracked via local
     *   *Why*: Instead of spawning and destroying temporary GameObjects for every ambient interval (which introduces GC overhead), a child emitter GameObject is repositioned at the sampled coordinates prior to playing each sound.
 *   **Decision**: Inspector-First parameterless control and Scene View visualizer.
     *   *Why*: Per Constitution Principle II, parameterless methods (`StartAmbience()`, `StopAmbience()`, `TriggerRandomAmbient()`, `PauseAmbience()`, `ResumeAmbience()`) are exposed for clean UnityEvent wiring with `RoomController` or cutscenes. `OnDrawGizmosSelected` renders the volume bounds and last sampled emission position in Scene View for visual feedback.
+
+---
+
+## 27. Milestone: NPC Dialogue Vocal Audio & Feedback SFX
+
+*   **Decision**: Simplified Male/Female Voice Architecture via `GruntSet` ScriptableObjects.
+    *   *Why*: With only two primary voice sets (Male and Female), assigning individual audio clip arrays to every single speaker profile created unnecessary data duplication across dozens of characters. By introducing the `GruntSet` ScriptableObject (`GruntSet_Male.asset`, `GruntSet_Female.asset`), audio clips are organized into reusable gendered pools attached directly to `SpeakerDatabase.maleGruntSet` and `SpeakerDatabase.femaleGruntSet`. In `SpeakerProfile`, designers simply select `Gender: Male` or `Female` (or optionally override with a custom `GruntSet` or pitch multiplier).
+*   **Decision**: Multi-tier vocal cue resolution hierarchy (NPC override -> Character Profile custom GruntSet -> Gendered GruntSet on SpeakerDatabase -> DialogueUIManager default -> silent fallback).
+    *   *Why*: Provides maximum designer flexibility: local NPC overrides (`DialogueManager.npcVoiceClip`), database gender defaults (`maleGruntSet`/`femaleGruntSet`), or UI fallback (`defaultVoiceSFX`/`defaultGruntSet`), with zero `NullReferenceException` risks when audio clips are unassigned.
+*   **Decision**: Unified audio routing through `AudioManager` with direct `AudioClip` playback overload.
+    *   *Why*: Kontexto Audio Standards mandate routing all game audio through `AudioManager` and the main AudioMixer channels (`MasterVolume`, `BGMVolume`, `SFXVolume`). Extending `AudioManager` with a `PlaySFX(AudioClip clip, ...)` overload allows direct AudioClip references to play through `AudioManager.sfxSource` with the SFX AudioMixer group and user volume settings, without needing strings or registry mapping for localized clips.
+*   **Decision**: Automatic discrimination between dialogue initiation, typewriter skipping, and line progression.
+    *   *Why*: Solves requirements cleanly without redundant polling or keycode listeners. In `DialogueUIManager.UpdateDialogueView`, the component checks whether the dialogue panel is already active: if closed, it plays the initial vocal cue; if active, it plays the next-line progression cue. In `FinishTyping`, skipping the typewriter text triggers the skip vocal cue immediately. Rapid mashing of the interact key is smoothed with random pitch variation and allocation-free one-shot playback.

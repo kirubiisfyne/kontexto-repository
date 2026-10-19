@@ -4,10 +4,9 @@
 
 **Created**: 2026-10-16
 
-**Status**: Draft
+**Status**: Completed
 
-**Input**: User description: "When triggering a dialogue to the NPC it plays an audio, and when skipping or next lining."
-
+**Input**: User description: "triggering a dialogue with an npc plays a 'hmm, ahh!' sfx, which also will play when skipping or next linning." (Original: "When triggering a dialogue to the NPC it plays an audio, and when skipping or next lining.")
 ## User Scenarios & Testing *(mandatory)*
 
 ### User Story 1 - Dialogue Initiation Audio Cue (Priority: P1)

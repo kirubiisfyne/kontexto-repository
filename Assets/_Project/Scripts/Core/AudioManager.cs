@@ -289,6 +289,24 @@ namespace Master.Scripts
             sfxSource.PlayOneShot(clipToPlay, volumeScale);
         }
 
+        public void PlaySFX(AudioClip clip)
+        {
+            PlaySFX(clip, false, 1f, 1f);
+        }
+
+        public void PlaySFX(AudioClip clip, bool randomPitch, float minPitch = 0.85f, float maxPitch = 1.15f, float volumeScale = 1f)
+        {
+            if (clip == null || sfxSource == null) return;
+
+            float currentSFX = GetSFXVolume();
+            if (currentSFX <= 0.001f || AudioListener.volume <= 0.001f) return;
+
+            SetMixerVolume(SfxParam, currentSFX);
+
+            sfxSource.pitch = randomPitch ? UnityEngine.Random.Range(minPitch, maxPitch) : 1f;
+            sfxSource.PlayOneShot(clip, volumeScale);
+        }
+
         public void PlayBGM(string name)
         {
             AudioClip clipToPlay = null;

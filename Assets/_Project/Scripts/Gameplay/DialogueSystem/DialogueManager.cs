@@ -52,6 +52,12 @@ namespace Master.Scripts.DialogueSystem
 
         public bool IsOnCooldown => Time.unscaledTime < cooldownEndTime;
 
+        [Header("Audio Settings")]
+        [Tooltip("Optional override voice clip for this NPC (e.g. unique 'hmm, ahh!' vocal cue). Takes precedence over SpeakerDatabase.")]
+        [SerializeField] private AudioClip npcVoiceClip;
+
+        public AudioClip NpcVoiceClip => npcVoiceClip;
+
         private void Awake()
         {
             if (dialogueJson != null)
