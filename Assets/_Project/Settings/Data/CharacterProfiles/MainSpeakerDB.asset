@@ -19,7 +19,7 @@ MonoBehaviour:
     portraitSprite: {fileID: 21300000, guid: 428e68cb836794ddbb10e28ac5679401, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3
   - characterName: Enzo
     portraitSprite: {fileID: 21300000, guid: 3533c228b556a4dafa8acf945f4e50ad, type: 3}
     gender: 1
@@ -29,74 +29,74 @@ MonoBehaviour:
     portraitSprite: {fileID: 21300000, guid: 8cebf78f44f9c44b7b730ddee952085e, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 0.8
   - characterName: Mrs. Santos
     portraitSprite: {fileID: 21300000, guid: 638bb890eea784651b5adb22c92a5bfe, type: 3}
     gender: 2
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 0.9
   - characterName: Leila
     portraitSprite: {fileID: 21300000, guid: f13b0774f272941cd9ee2a03f996c609, type: 3}
     gender: 2
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.5
   - characterName: Janitor
     portraitSprite: {fileID: 21300000, guid: 41a8235fcea1a452c8b82023582b141f, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 0.8
   - characterName: Kim
     portraitSprite: {fileID: 21300000, guid: f26980fe79e9247e0bb001d61722e4da, type: 3}
     gender: 2
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.5
   - characterName: Jules
     portraitSprite: {fileID: 21300000, guid: ce4150fc24766455e848ca6e6e8fe257, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3
   - characterName: Mr. Reyes
     portraitSprite: {fileID: 21300000, guid: 6f5028bdce21313468cc5ed7d0838fd7, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 0.8
   - characterName: Angel
     portraitSprite: {fileID: 21300000, guid: 340d9db7991291248a56828518a4d7fe, type: 3}
     gender: 2
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.5
   - characterName: Abigail
     portraitSprite: {fileID: 21300000, guid: a8ca4bc99d767e449af5fe54e900a6e7, type: 3}
     gender: 2
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.5
   - characterName: CAT Officer
     portraitSprite: {fileID: 21300000, guid: ce4150fc24766455e848ca6e6e8fe257, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3
   - characterName: Kalbo
     portraitSprite: {fileID: 21300000, guid: bfc4061753a80aa478c0a96214fad5bc, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3
   - characterName: John
     portraitSprite: {fileID: 21300000, guid: 23dafec8df5cdf74f96755f9120f85b6, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3
   - characterName: Joshua
     portraitSprite: {fileID: 21300000, guid: 4c5f73bcb516f764dabfdf7e3db4130b, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3
   - characterName: Mika
     portraitSprite: {fileID: 21300000, guid: ff7a7a49e3bf6a5429fb618480abd752, type: 3}
     gender: 2
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.5
   - characterName: Louis
     portraitSprite: {fileID: 21300000, guid: 65fc306be6161a140a156e0b2e33cf0f, type: 3}
     gender: 1
     gruntSet: {fileID: 0}
-    voicePitch: 1
+    voicePitch: 1.3

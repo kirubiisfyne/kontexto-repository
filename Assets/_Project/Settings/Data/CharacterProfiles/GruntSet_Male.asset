@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: GruntSet_Male
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.GruntSet
   setName: Male
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 90c71fd3c35214e9e887ada3b2e35aa5, type: 3}
+  - {fileID: 8300000, guid: d87354b7c4eb14c04bae9bc5e85dbc7f, type: 3}
+  - {fileID: 8300000, guid: 43a6841c30bb3484182ea089e0f87ef9, type: 3}
   basePitch: 1

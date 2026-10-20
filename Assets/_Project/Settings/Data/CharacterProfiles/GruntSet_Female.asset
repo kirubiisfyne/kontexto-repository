@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: GruntSet_Female
   m_EditorClassIdentifier: Assembly-CSharp::Master.Scripts.DialogueSystem.GruntSet
   setName: Female
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 1a0ed52ad89bc47039a717e015c84632, type: 3}
+  - {fileID: 8300000, guid: 1fff9c3e556e74ad68ccbbbb4583ed09, type: 3}
+  - {fileID: 8300000, guid: 7d8fb08ed347642cb9f646fcbb4cb1d7, type: 3}
+  - {fileID: 8300000, guid: 0eb41d90fc31443998d3ca72049393ca, type: 3}
   basePitch: 1
