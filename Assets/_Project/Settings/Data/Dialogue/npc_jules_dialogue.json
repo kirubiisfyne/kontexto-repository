@@ -1,0 +1,41 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Jules",
+      "lines": [
+        {
+          "speaker": "Jules",
+          "text": "Ugh."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "What's wrong?"
+        },
+        {
+          "speaker": "Jules",
+          "text": "Nothing. Just tired."
+        },
+        {
+          "speaker": "Jules",
+          "text": "My legs are killing me from all the drills earlier."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "You should sit down."
+        },
+        {
+          "speaker": "Jules",
+          "text": "Can't. If the officer catches me sitting, it's another lap."
+        },
+        {
+          "speaker": "Jules",
+          "text": "So I'm just standing here. Suffering quietly."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "That doesn't look very quiet."
+        }
+      ]
+    }
+  ]
+}

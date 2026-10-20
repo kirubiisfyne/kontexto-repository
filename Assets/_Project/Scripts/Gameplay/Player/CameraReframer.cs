@@ -27,6 +27,10 @@ namespace Master.Scripts
         [Tooltip("The PlayerController to lock during dialogue. Auto-assigned in Awake if left empty.")]
         public PlayerController playerController;
 
+        [Header("Locomotion")]
+        [Tooltip("Optional NPCRoamingAgent on this NPC. Auto-assigned in Awake if left empty.")]
+        public Master.Scripts.NPC.NPCRoamingAgent roamingAgent;
+
         // Runtime coroutine handles — not exposed to the Inspector.
         private Coroutine fadeCoroutine;
         private Coroutine rotateCoroutine;
@@ -54,6 +58,15 @@ namespace Master.Scripts
             {
                 cinemachineBrain = Camera.main.GetComponent<CinemachineBrain>();
             }
+
+            if (roamingAgent == null)
+            {
+                roamingAgent = GetComponent<Master.Scripts.NPC.NPCRoamingAgent>();
+                if (roamingAgent == null)
+                {
+                    roamingAgent = GetComponentInChildren<Master.Scripts.NPC.NPCRoamingAgent>();
+                }
+            }
         }
 
         public void StartNPCFocus()
@@ -64,13 +77,15 @@ namespace Master.Scripts
             }
             playerController?.SetInputActive(false);
 
+            roamingAgent?.StartFocus();
+
             float blendDuration = GetBlendDuration(NPCCamera);
 
             if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
             fadeCoroutine = StartCoroutine(FadePlayerMaterial(0.1f, blendDuration));
 
             if (rotateCoroutine != null) StopCoroutine(rotateCoroutine);
-            if (playerController != null && NPCLookAt)
+            if (playerController != null && NPCLookAt && roamingAgent == null)
                 rotateCoroutine = StartCoroutine(SmoothLookAtPlayer(playerController.transform, blendDuration));
         }
 
@@ -81,6 +96,8 @@ namespace Master.Scripts
                 NPCCamera.Priority = 0;
             }
             playerController?.SetInputActive(true);
+
+            roamingAgent?.EndFocus();
 
             if (rotateCoroutine != null && NPCLookAt)
             {

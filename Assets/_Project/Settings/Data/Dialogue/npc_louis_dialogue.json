@@ -1,0 +1,37 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Louis",
+      "lines": [
+        {
+          "speaker": "Louis",
+          "text": "<color=#707070><i>*Sighs loudly.*</i></color>"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Uh... are you okay?"
+        },
+        {
+          "speaker": "Louis",
+          "text": "I'm contemplating the absolute futility of our existence in this institution."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Oh. Okay."
+        },
+        {
+          "speaker": "Louis",
+          "text": "But of course, the masses wouldn't understand the sheer depth of my melancholy."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "I literally just asked if you were okay."
+        },
+        {
+          "speaker": "Louis",
+          "text": "Please step aside. You're ruining my aura."
+        }
+      ]
+    }
+  ]
+}

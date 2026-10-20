@@ -327,3 +327,20 @@ Task completion, level completion, and player position are all tracked via local
     *   *Why*: Guarded `LastInteracted.NpcVoiceClip` so NPC voice overrides only apply to lines spoken by the NPC, preventing local overrides from hijacking player Kiko's voice lines.
 *   **Decision**: Remove Hardcoded Typewriter Pop Sound Fallback (`enableTypingBlip`).
     *   *Why*: `PlayTypingBlip()` fell back to playing `AudioManager.PlaySFX("UIPop0")` on every other character during typewriter reveal even when `typingAudioClip` was unassigned. Replaced the fallback with an opt-in `enableTypingBlip` serialized toggle (default `false`), muting the rapid pop sounds while preserving designer configurability.
+
+---
+
+## 29. Milestone: Modular, Interruptible NPC Roaming
+**Actions**: Created `NPCRoamingAgent.cs`, custom inspector `NPCRoamingAgentEditor.cs`, updated `CameraReframer.cs` with auto-delegated locomotion focus, and added `Unity.AI.Navigation` package reference to `Project.asmdef`.
+*   **Decision**: Anchor-Leash Model over Waypoint Networks.
+    *   *Why*: Hardcoded patrol paths require bespoke waypoint graphs per room/level that break whenever modular floor or wall geometry changes. With the anchor-leash model, the NPC treats its initial drop point as the center of an invisible territory, randomly sampling valid, complete paths on the baked `NavMeshSurface`. Moving or re-arranging modular architecture requires only re-baking the NavMesh; zero waypoint authoring required.
+*   **Decision**: Clean 3-State Finite State Machine (`Idle -> Wander -> Interacting`).
+    *   *Why*: Keeping state transitions explicit prevents desynchronization between NavMesh pathing, physics velocity, and animation states. Idle staggers movement timing across multiple NPCs, Wander tracks arrival distance and enforces a safety timeout against dynamic obstacle blockages, and Interacting immediately locks agent movement.
+*   **Decision**: Direct Velocity-to-Animator Parameter Blending.
+    *   *Why*: Reads `agent.velocity.magnitude` and passes it to the Animator float parameter (`Speed`), smoothly interpolating between Idle and Walk (and optionally Run) blend tree motions without manual animation state switching. When entering `Interacting`, speed is immediately zeroed to avoid foot-sliding.
+*   **Decision**: Zero-Parameter Public Interrupt Hooks (`StartFocus` / `EndFocus`).
+    *   *Why*: Following the project's "Pure and Isolated" architecture, `StartFocus()` and `EndFocus()` are parameterless methods directly wirable to `UnityEvent` triggers (such as `DialogueEventExtension.globalEvents.onAnyStart` and `onAnyEnd`) in the Unity Inspector without scripting.
+*   **Decision**: Seamless Integration with `CameraReframer`.
+    *   *Why*: NPCs in the project frequently utilize `CameraReframer` for dialogue virtual camera transitions. `CameraReframer` now automatically discovers `NPCRoamingAgent` on the same GameObject or children in `Awake()`, delegating `StartFocus()` and `EndFocus()` automatically so existing dialogue wiring works with zero extra setup.
+*   **Decision**: Custom Inspector with Live Runtime Diagnostics & Test Controls.
+    *   *Why*: Empowers designers to inspect agent speed, state, destination, and leash parameters in real time during Play mode, with one-click test buttons (`Start Focus`, `End Focus`, `Force Wander`, `Reset to Anchor`) directly in the Inspector.

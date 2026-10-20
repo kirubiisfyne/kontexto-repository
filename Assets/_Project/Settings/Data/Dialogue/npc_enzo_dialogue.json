@@ -1,0 +1,33 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_Enzo",
+      "lines": [
+        {
+          "speaker": "Enzo",
+          "text": "What."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "Just saying hi."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Cool. Hi. Bye."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "You're always in a rush."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Because there's always something to do."
+        },
+        {
+          "speaker": "Enzo",
+          "text": "Deadlines don't wait for small talk."
+        }
+      ]
+    }
+  ]
+}

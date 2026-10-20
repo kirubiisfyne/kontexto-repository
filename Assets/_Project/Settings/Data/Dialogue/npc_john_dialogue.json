@@ -1,0 +1,33 @@
+{
+  "conversationMap": [
+    {
+      "name": "NPC_John",
+      "lines": [
+        {
+          "speaker": "John",
+          "text": "Oh, hey Kiko."
+        },
+        {
+          "speaker": "John",
+          "text": "You ever just stand somewhere and forget why you walked over here?"
+        },
+        {
+          "speaker": "Kiko",
+          "text": "...Are you okay?"
+        },
+        {
+          "speaker": "John",
+          "text": "Yeah. I think I was supposed to submit something."
+        },
+        {
+          "speaker": "John",
+          "text": "Eh, if it was important, someone would've yelled at me by now."
+        },
+        {
+          "speaker": "Kiko",
+          "text": "That's… a dangerously relaxed way to live."
+        }
+      ]
+    }
+  ]
+}
