@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4856108809850383084}
   - component: {fileID: 7018525531032748482}
   - component: {fileID: 2133470014386847947}
+  - component: {fileID: -1404467513531650048}
   m_Layer: 0
   m_Name: Sink
   m_TagString: Untagged
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3.800002, y: 1.400001, z: 1.6000012}
   m_Center: {x: -1.9012055, y: 0.6999999, z: 0.7999999}
+--- !u!114 &-1404467513531650048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207083556206110524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

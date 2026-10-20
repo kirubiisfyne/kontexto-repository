@@ -4971,6 +4971,7 @@ GameObject:
   - component: {fileID: 2306470115462757392}
   - component: {fileID: 766973119429398577}
   - component: {fileID: 2915142420478710480}
+  - component: {fileID: 3504651090706106446}
   m_Layer: 0
   m_Name: Tree-Large0
   m_TagString: Untagged
@@ -5082,6 +5083,26 @@ LODGroup:
     renderers:
     - renderer: {fileID: 7826974629545579405}
   m_Enabled: 1
+--- !u!114 &3504651090706106446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5861706810440223698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 0
+  m_AffectedAgents: ffffffff
 --- !u!1 &6699432436080357895
 GameObject:
   m_ObjectHideFlags: 0

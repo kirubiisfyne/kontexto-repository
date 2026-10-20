@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3479303417968522665}
   - component: {fileID: 1881683919587458742}
   - component: {fileID: -7902131147950716849}
+  - component: {fileID: -638322928750342956}
   m_Layer: 0
   m_Name: ChipBag0
   m_TagString: Untagged
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.36731794, y: 0.4342058, z: 0.10488515}
   m_Center: {x: 0.18365894, y: -0.2171029, z: 0.07095341}
+--- !u!114 &-638322928750342956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046768684262487760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

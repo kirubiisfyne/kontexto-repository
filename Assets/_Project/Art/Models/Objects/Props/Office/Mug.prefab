@@ -102,6 +102,7 @@ GameObject:
   - component: {fileID: 936043498672807939}
   - component: {fileID: 2125887272164385657}
   - component: {fileID: 1049155581708076123}
+  - component: {fileID: 2330524306382441085}
   m_Layer: 6
   m_Name: Mug
   m_TagString: Untagged
@@ -205,6 +206,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7984562712728880042, guid: a7ff7e767e5b446bf9cae38bed80874b, type: 3}
+--- !u!114 &2330524306382441085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3083423375513428484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &8761139921752235063
 GameObject:
   m_ObjectHideFlags: 0

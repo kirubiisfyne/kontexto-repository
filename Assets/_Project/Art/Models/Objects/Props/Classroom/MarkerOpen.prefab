@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6770770092129515510}
   - component: {fileID: 8239948462668625188}
   - component: {fileID: 2507933764836674767}
+  - component: {fileID: 1350655500835246655}
   m_Layer: 6
   m_Name: MarkerOpen
   m_TagString: Untagged
@@ -114,3 +115,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2713362804235035446, guid: a7ff7e767e5b446bf9cae38bed80874b, type: 3}
+--- !u!114 &1350655500835246655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611034707354742432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

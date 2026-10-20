@@ -19,6 +19,19 @@ MonoBehaviour:
     spawnPosition: {x: 0, y: 0, z: 0}
     spawnRotation: {x: 0, y: 0, z: 0}
     usePrefabTransform: 1
+  fillerNpcEntries:
+  - prefab: {fileID: 6720884903228199728, guid: c1f633fc75ea4354a9ad83412dc4a28f, type: 3}
+    spawnPosition: {x: -8.609811, y: 0.099999994, z: 7.4973335}
+    spawnRotation: {x: 0, y: 49.419292, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6608521299537738644, guid: 056e0aa455c61451b83167e98a6999d1, type: 3}
+    spawnPosition: {x: 0.26502037, y: 0.1, z: 33.670822}
+    spawnRotation: {x: 0, y: 219.0011, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6902148893349469265, guid: d2106d20180d34e43b335fa9efec18c3, type: 3}
+    spawnPosition: {x: -1.9939303, y: 4.1, z: 38.68378}
+    spawnRotation: {x: 0, y: 283.9068, z: 0}
+    usePrefabTransform: 0
   activeRoomIds:
   - publication_office
   - admin_office

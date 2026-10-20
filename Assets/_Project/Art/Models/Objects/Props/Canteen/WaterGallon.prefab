@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7586959643191481030}
   - component: {fileID: 7890167950465341628}
   - component: {fileID: 5333673267529320759}
+  - component: {fileID: -4459131469582504256}
   m_Layer: 0
   m_Name: WaterGallon
   m_TagString: Untagged
@@ -114,3 +115,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1222113424256055528, guid: 718219d31cad54c56852d116a66078e4, type: 3}
+--- !u!114 &-4459131469582504256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9066636621315842351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5365141740030817925}
   - component: {fileID: 4960839644470166330}
   - component: {fileID: 3749517097894724648}
+  - component: {fileID: 2099648383137706346}
   m_Layer: 0
   m_Name: CoffeeTable
   m_TagString: Untagged
@@ -116,6 +117,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.000001, y: 1, z: 1.5000008}
   m_Center: {x: 1.0000005, y: 0.5, z: -0.7499999}
+--- !u!114 &2099648383137706346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060982428995395233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1001 &2995472469453211378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -124,6 +145,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1634322162052150117}
     m_Modifications:
+    - target: {fileID: 2393295616243270838, guid: 4718eefa8bbbc4d269ba1f94bc45e22b, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393295616243270838, guid: 4718eefa8bbbc4d269ba1f94bc45e22b, type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2393295616243270838, guid: 4718eefa8bbbc4d269ba1f94bc45e22b, type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2995977285507320867, guid: 4718eefa8bbbc4d269ba1f94bc45e22b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.306039
@@ -186,6 +219,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1634322162052150117}
     m_Modifications:
+    - target: {fileID: -6675527890403320931, guid: ded9a22f4e0f440bb9466187de9e684f, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6675527890403320931, guid: ded9a22f4e0f440bb9466187de9e684f, type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6675527890403320931, guid: ded9a22f4e0f440bb9466187de9e684f, type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 16456509230253564, guid: ded9a22f4e0f440bb9466187de9e684f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5560391
@@ -295,6 +340,18 @@ PrefabInstance:
     - target: {fileID: 6811944220231750534, guid: e059f720df9a6c240a60cab0be9c4f7e, type: 3}
       propertyPath: m_Name
       value: Pen1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722641387581516005, guid: e059f720df9a6c240a60cab0be9c4f7e, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722641387581516005, guid: e059f720df9a6c240a60cab0be9c4f7e, type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7722641387581516005, guid: e059f720df9a6c240a60cab0be9c4f7e, type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -20,26 +20,23 @@ MonoBehaviour:
     spawnRotation: {x: 0, y: 0, z: 0}
     usePrefabTransform: 1
   fillerNpcEntries:
-  - prefab: {fileID: 3544090215776964544, guid: e412723ea6ef48c45addc273aecbc6e9, type: 3}
-    spawnPosition: {x: -4.3997803, y: 0, z: -11.464722}
-    spawnRotation: {x: 0, y: 342.25046, z: 0}
+  - prefab: {fileID: 6720884903228199728, guid: c1f633fc75ea4354a9ad83412dc4a28f, type: 3}
+    spawnPosition: {x: 0.7450409, y: 0, z: -14.829239}
+    spawnRotation: {x: 0, y: 111.317406, z: 0}
     usePrefabTransform: 0
-  - prefab: {fileID: 9019575271284899441, guid: 3e42c0f1119b87247bebc9daea99904e, type: 3}
-    spawnPosition: {x: 12.874847, y: 0, z: -15.93222}
-    spawnRotation: {x: 0, y: 356.91824, z: 0}
+  - prefab: {fileID: 3619575441008753888, guid: bb3baf6f00dc6d849b7a31b8189a3d84, type: 3}
+    spawnPosition: {x: 1.4688892, y: 4.1, z: 0.71024966}
+    spawnRotation: {x: 0, y: 87.23239, z: 0}
     usePrefabTransform: 0
-  - prefab: {fileID: 6842874260883744215, guid: 9d790a04f6bf6ab46a01a5cdec93d92c, type: 3}
-    spawnPosition: {x: 1.7268516, y: 4.1, z: -0.4800389}
-    spawnRotation: {x: 0, y: 153.56473, z: 0}
+  - prefab: {fileID: 8527672548245454053, guid: 498f31dd6ddc9ad45b6b9893303c25a5, type: 3}
+    spawnPosition: {x: 9.849445, y: 0.09999998, z: 15.332336}
+    spawnRotation: {x: 0, y: 170.76022, z: 0}
     usePrefabTransform: 0
-  - prefab: {fileID: 9019575271284899441, guid: 3e42c0f1119b87247bebc9daea99904e, type: 3}
-    spawnPosition: {x: -2.8347485, y: 4.1, z: 3.9057448}
-    spawnRotation: {x: 0, y: 133.1808, z: 0}
-    usePrefabTransform: 0
-  - prefab: {fileID: 3466282112781554863, guid: dfc36633c8755ef429d8cb6c40be6e2a, type: 3}
-    spawnPosition: {x: 5.343495, y: 4.1, z: 5.8131247}
-    spawnRotation: {x: 0, y: 212.69177, z: 0}
+  - prefab: {fileID: 6902148893349469265, guid: d2106d20180d34e43b335fa9efec18c3, type: 3}
+    spawnPosition: {x: -8.059635, y: 0.10000001, z: 35.332203}
+    spawnRotation: {x: 0, y: 340.87204, z: 0}
     usePrefabTransform: 0
   activeRoomIds:
   - multipurpose_hall
+  editorTutorial: {fileID: 0}
   bgmTrackName: GentleBreeze

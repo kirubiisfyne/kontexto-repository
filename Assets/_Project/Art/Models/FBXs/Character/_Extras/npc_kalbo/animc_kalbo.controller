@@ -1,5 +1,5 @@
 %YAML 1.1
-__omp_magic("TAG", "!u! tag:unity3d.com,2011:")
+%TAG !u! tag:unity3d.com,2011:
 --- !u!206 &-3939251209390620621
 BlendTree:
   m_ObjectHideFlags: 1

@@ -88,6 +88,8 @@ GameObject:
   - component: {fileID: 1516048536322502863}
   - component: {fileID: 4029473633921318286}
   - component: {fileID: 59085356172388236}
+  - component: {fileID: -5596908182034276195}
+  - component: {fileID: 5751298104333156096}
   m_Layer: 7
   m_Name: NPC_Maya
   m_TagString: Untagged
@@ -155,6 +157,7 @@ MonoBehaviour:
     name: 
     lines: []
   dialogueCooldown: 0.5
+  npcVoiceClip: {fileID: 0}
 --- !u!114 &4029473633921318286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +219,59 @@ MonoBehaviour:
   NPCLookAt: 1
   NPCCamera: {fileID: 4877622805929054572}
   playerController: {fileID: 0}
+  roamingAgent: {fileID: 0}
+--- !u!195 &-5596908182034276195
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720884903228199728}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5751298104333156096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6720884903228199728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c9e35d68556d4f72813eb866e5fce75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Project::Master.Scripts.NPC.NPCRoamingAgent
+  currentState: 0
+  anchorPosition: {x: 0, y: 0, z: 0}
+  useCurrentPositionAsAnchor: 1
+  leashRadius: 8
+  sampleMaxDistance: 4
+  maxSampleAttempts: 10
+  minIdleDuration: 2
+  maxIdleDuration: 6
+  arrivalDistance: 0.5
+  wanderTimeout: 12
+  walkSpeed: 1.5
+  angularSpeed: 120
+  acceleration: 8
+  animator: {fileID: 0}
+  speedParameterName: Speed
+  speedDampTime: 0.15
+  focusTurnDuration: 0.5
+  focusTarget: {fileID: 0}
 --- !u!1001 &5604324783617032387
 PrefabInstance:
   m_ObjectHideFlags: 0

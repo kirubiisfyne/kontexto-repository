@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3158230723072968622}
   - component: {fileID: 8460174760442274545}
   - component: {fileID: -1316429124832429967}
+  - component: {fileID: -8534330286671554838}
   m_Layer: 0
   m_Name: Shades-Pillar
   m_TagString: Untagged
@@ -116,3 +117,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -8126171145099001485, guid: 385f511f78af44f8488cb140f8eae179, type: 3}
+--- !u!114 &-8534330286671554838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3450383060093369821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

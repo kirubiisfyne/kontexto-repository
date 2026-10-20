@@ -68,8 +68,36 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 9034354181191294763, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
       insertIndex: -1
       addedObject: {fileID: 154457301053855092}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6038153611176453099, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3125014415736477570}
   m_SourcePrefab: {fileID: 100100000, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
+--- !u!1 &4817083757775998734 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6038153611176453099, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
+  m_PrefabInstance: {fileID: 1230165014474714341}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-3125014415736477570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4817083757775998734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!4 &7814332299928417230 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9034354181191294763, guid: 8787b19d53bbe4b5b8df78bcec2ed678, type: 3}
@@ -83,6 +111,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7814332299928417230}
     m_Modifications:
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4794045531171550024, guid: 740cfdf7369b03240911342d1937369f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -153,6 +193,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7814332299928417230}
     m_Modifications:
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4794045531171550024, guid: 740cfdf7369b03240911342d1937369f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -223,6 +275,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7814332299928417230}
     m_Modifications:
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_Area
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_OverrideArea
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -1222877761028564291, guid: 740cfdf7369b03240911342d1937369f, type: 3}
+      propertyPath: m_IgnoreFromBuild
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4794045531171550024, guid: 740cfdf7369b03240911342d1937369f, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

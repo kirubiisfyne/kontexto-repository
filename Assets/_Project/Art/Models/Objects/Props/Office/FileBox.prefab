@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 980621365025100492}
   - component: {fileID: 7470920656459763864}
   - component: {fileID: 3700042044162384016}
+  - component: {fileID: -2744302535323955768}
   m_Layer: 0
   m_Name: FileBox
   m_TagString: Untagged
@@ -115,3 +116,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5922920520214210631, guid: fa91c148097c44a8f8796e68292c45c5, type: 3}
+--- !u!114 &-2744302535323955768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6038153611176453099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4808425360036138489}
   - component: {fileID: 7333503896826280974}
   - component: {fileID: 7380628842109168276}
+  - component: {fileID: -6113778102499429694}
   m_Layer: 6
   m_Name: ClassroomTeacherDesk
   m_TagString: Untagged
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.9889612, y: 1.3450333, z: 1.4944812}
   m_Center: {x: -1.4944801, y: 0.6725165, z: -0.7472406}
+--- !u!114 &-6113778102499429694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6743664831002273331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

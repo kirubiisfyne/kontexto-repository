@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5342759184001542553}
   - component: {fileID: 7447117526900621261}
   - component: {fileID: 5180076469269970846}
+  - component: {fileID: 6581854277143828445}
   m_Layer: 0
   m_Name: Megaphone
   m_TagString: Untagged
@@ -115,3 +116,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4105017789198039247, guid: 66bb217bbd6794ce399c2dc5d62c81fb, type: 3}
+--- !u!114 &6581854277143828445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3343237067844061198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

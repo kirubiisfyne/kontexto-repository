@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3432099409320697930}
   - component: {fileID: 338019657794494437}
   - component: {fileID: 6401168634472943253}
+  - component: {fileID: -9109406714719329022}
   m_Layer: 0
   m_Name: DustPan
   m_TagString: Untagged
@@ -115,3 +116,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1668220110825993339, guid: a7ff7e767e5b446bf9cae38bed80874b, type: 3}
+--- !u!114 &-9109406714719329022
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015892462873174614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

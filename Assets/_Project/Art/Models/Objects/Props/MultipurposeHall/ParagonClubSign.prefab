@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5798525835183645692}
   - component: {fileID: 8085785872179782614}
   - component: {fileID: 382011863928748690}
+  - component: {fileID: -9092204434538913531}
   m_Layer: 0
   m_Name: ParagonClubSign
   m_TagString: Untagged
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.8030751, y: 0.15492415, z: 0.09128736}
   m_Center: {x: -0.40153754, y: 0.076276615, z: 0.045643687}
+--- !u!114 &-9092204434538913531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3679521367438281180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

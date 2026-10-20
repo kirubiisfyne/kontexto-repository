@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1188074237996900164}
   - component: {fileID: 3560713696113658387}
   - component: {fileID: 304046995438846520}
+  - component: {fileID: 3686606697987456360}
   m_Layer: 0
   m_Name: Calendar
   m_TagString: Untagged
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.6306963, y: 0.9783055, z: 0.033081543}
   m_Center: {x: 0.31534815, y: -0.48915276, z: 0.016540771}
+--- !u!114 &3686606697987456360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7322186072030452211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3912194709462964724}
   - component: {fileID: 2223017984113665147}
   - component: {fileID: 7612116716951039630}
+  - component: {fileID: -3869366866529834731}
   m_Layer: 0
   m_Name: HallBulletinBoard
   m_TagString: Untagged
@@ -113,3 +114,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.427327, y: 2.3446634, z: 0.077791095}
   m_Center: {x: -2.241169, y: 1.1723317, z: 0.018998563}
+--- !u!114 &-3869366866529834731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8259484696374416852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

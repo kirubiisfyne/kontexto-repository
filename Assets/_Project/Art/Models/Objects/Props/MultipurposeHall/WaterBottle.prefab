@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3864303499927639771}
   - component: {fileID: 7434592806382478837}
   - component: {fileID: 6455117878756925669}
+  - component: {fileID: -7993493617937515383}
   m_Layer: 0
   m_Name: WaterBottle
   m_TagString: Untagged
@@ -114,3 +115,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.14734901, y: 0.42512825, z: 0.12816559}
   m_Center: {x: -0.07586887, y: 0.21256413, z: 0.06326736}
+--- !u!114 &-7993493617937515383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5260260229183818675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3745230469684873604}
   - component: {fileID: 9107255745129435708}
   - component: {fileID: 8164721567622908357}
+  - component: {fileID: 7942576873985661777}
   m_Layer: 0
   m_Name: BalloonCluster
   m_TagString: Untagged
@@ -116,3 +117,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -7079389113966809109, guid: 66bb217bbd6794ce399c2dc5d62c81fb, type: 3}
+--- !u!114 &7942576873985661777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490014758868032635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

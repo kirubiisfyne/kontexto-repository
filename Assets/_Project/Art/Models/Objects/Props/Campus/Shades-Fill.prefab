@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6750634429365020032}
   - component: {fileID: 1349696120846424333}
   - component: {fileID: 2406692536336357454}
+  - component: {fileID: -1402640794209566102}
   m_Layer: 0
   m_Name: Shades-Fill
   m_TagString: Untagged
@@ -114,3 +115,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 6188151075850939076, guid: 385f511f78af44f8488cb140f8eae179, type: 3}
+--- !u!114 &-1402640794209566102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3787066544246369796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

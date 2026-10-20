@@ -254,16 +254,17 @@ namespace Master.Scripts.Editor
                 return true;
             }
 
-            // 3. Tag check
-            try
+            // 3. Tag and Layer check
+            if (col.CompareTag("Untagged") || col.gameObject.layer == 0)
             {
-                if (col.CompareTag("Untagged") || col.CompareTag("Default"))
-                {
-                    return true;
-                }
+                return true;
             }
-            catch { }
 
+            int groundLayer = LayerMask.NameToLayer("Ground");
+            if (groundLayer != -1 && col.gameObject.layer == groundLayer)
+            {
+                return true;
+            }
             return false;
         }
 
@@ -280,13 +281,8 @@ namespace Master.Scripts.Editor
                 if (col == null || col.isTrigger) continue;
                 if (groundCollider != null && col == groundCollider) continue;
 
-                // Check "Obstacle" tag
-                try
-                {
-                    if (col.CompareTag("Obstacle")) return false;
-                }
-                catch { }
-
+                // Check "Obstacle" tag safely without throwing native errors if tag is undefined
+                if (col.gameObject.tag == "Obstacle") return false;
                 // Check "Obstacle" layer
                 if (obstacleLayer != -1 && col.gameObject.layer == obstacleLayer) return false;
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7561364839722785264}
   - component: {fileID: 3381667237852371287}
   - component: {fileID: 3233671272719867423}
+  - component: {fileID: -1559935718260194842}
   m_Layer: 6
   m_Name: BookClosed
   m_TagString: Untagged
@@ -113,3 +114,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.004699996, y: 0.0005000022, z: 0.0061999974}
   m_Center: {x: -0.002349998, y: 0.00025000004, z: 0.0030999987}
+--- !u!114 &-1559935718260194842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3778751046097346743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

@@ -27,6 +27,27 @@ MonoBehaviour:
     spawnPosition: {x: 0, y: 0, z: 0}
     spawnRotation: {x: 0, y: 0, z: 0}
     usePrefabTransform: 1
+  fillerNpcEntries:
+  - prefab: {fileID: 7535062528196927229, guid: 33d7969fbc8116d42851948a073bec4a, type: 3}
+    spawnPosition: {x: 0.39050293, y: 0, z: 17.034607}
+    spawnRotation: {x: 0, y: 58.9035, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6608521299537738644, guid: 056e0aa455c61451b83167e98a6999d1, type: 3}
+    spawnPosition: {x: 11.024937, y: 0.1, z: 14.070981}
+    spawnRotation: {x: 0, y: 34.572685, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 7535062528196927229, guid: 33d7969fbc8116d42851948a073bec4a, type: 3}
+    spawnPosition: {x: 19.66513, y: 0.00000047683716, z: -16.72071}
+    spawnRotation: {x: 0, y: 300.99167, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6608521299537738644, guid: 056e0aa455c61451b83167e98a6999d1, type: 3}
+    spawnPosition: {x: 35.323082, y: 0.24049598, z: 14.292896}
+    spawnRotation: {x: 0, y: 60.109463, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 3619575441008753888, guid: bb3baf6f00dc6d849b7a31b8189a3d84, type: 3}
+    spawnPosition: {x: 9.183735, y: 0.1, z: 32.765278}
+    spawnRotation: {x: 0, y: 95.84844, z: 0}
+    usePrefabTransform: 0
   activeRoomIds:
   - publication_office
   - upper_library

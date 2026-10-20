@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1006273451037192783}
   - component: {fileID: 3341469225291237559}
   - component: {fileID: -8090301109742508050}
+  - component: {fileID: -5487824059718986207}
   m_Layer: 6
   m_Name: BlackboardEraser
   m_TagString: Untagged
@@ -113,3 +114,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.0021000006, y: 0.0007000011, z: 0.0037000007}
   m_Center: {x: -0.0010499998, y: 0.00035000054, z: -0.0018499997}
+--- !u!114 &-5487824059718986207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1147349713227319446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

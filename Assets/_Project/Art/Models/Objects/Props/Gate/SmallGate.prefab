@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3304058473674714565}
   - component: {fileID: 7626794486247981348}
   - component: {fileID: 4638732122630645125}
+  - component: {fileID: 996737713166329574}
   m_Layer: 0
   m_Name: SmallGate
   m_TagString: Untagged
@@ -112,3 +113,23 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.3630342, y: 3.7850506, z: 0.24522017}
   m_Center: {x: 1.1815171, y: 1.8925253, z: -0.11907639}
+--- !u!114 &996737713166329574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4167811471329804491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff

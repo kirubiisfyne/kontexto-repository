@@ -23,6 +23,23 @@ MonoBehaviour:
     spawnPosition: {x: 0, y: 0, z: 0}
     spawnRotation: {x: 0, y: 0, z: 0}
     usePrefabTransform: 0
+  fillerNpcEntries:
+  - prefab: {fileID: 6902148893349469265, guid: d2106d20180d34e43b335fa9efec18c3, type: 3}
+    spawnPosition: {x: 20.34143, y: 0.00000023841858, z: -4.3692017}
+    spawnRotation: {x: 0, y: 353.64948, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6608521299537738644, guid: 056e0aa455c61451b83167e98a6999d1, type: 3}
+    spawnPosition: {x: -9.052582, y: 4.1, z: 36.258324}
+    spawnRotation: {x: 0, y: 234.16702, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 7535062528196927229, guid: 33d7969fbc8116d42851948a073bec4a, type: 3}
+    spawnPosition: {x: -0.67916906, y: 4.1, z: 31.911901}
+    spawnRotation: {x: 0, y: 130.81126, z: 0}
+    usePrefabTransform: 0
+  - prefab: {fileID: 6902148893349469265, guid: d2106d20180d34e43b335fa9efec18c3, type: 3}
+    spawnPosition: {x: -4.588151, y: 0.1, z: 6.2969456}
+    spawnRotation: {x: 0, y: 348.24948, z: 0}
+    usePrefabTransform: 0
   activeRoomIds:
   - admin_office
   - upper_library
