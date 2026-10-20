@@ -11,6 +11,19 @@ namespace Master.Scripts
         public string name;
         public AudioClip clip;
     }
+
+    [Serializable]
+    public struct SceneBgmMapping
+    {
+        [Tooltip("Exact name of the scene (e.g. 'scn_campus', 'scn_publication-office').")]
+        public string sceneName;
+        [Tooltip("Name of the registered BGM sound in bgmSounds.")]
+        public string bgmName;
+        [Tooltip("Crossfade duration in seconds.")]
+        [Range(0f, 5f)]
+        public float crossfadeDuration;
+    }
+
     public enum AudioChannel
     {
         BGM,
@@ -30,8 +43,10 @@ namespace Master.Scripts
         public const string PrefSfx = "kontexto.audio.sfx";
 
         [Header("Audio Sources")]
-        [Tooltip("Audio source dedicated to background music.")]
+        [Tooltip("Primary audio source dedicated to background music.")]
         public AudioSource bgmSource;
+        [Tooltip("Secondary audio source for BGM crossfading (automatically created at runtime if unassigned).")]
+        public AudioSource bgmCrossfadeSource;
         [Tooltip("Audio source dedicated to sound effects.")]
         public AudioSource sfxSource;
 
@@ -45,9 +60,13 @@ namespace Master.Scripts
         [Tooltip("Map names to sound effect clips here.")]
         public Sound[] sfxSounds;
 
-        private Coroutine bgmFadeCoroutine;
-        private float bgmTransitionScale = 1f;
+        [Header("Per-Scene BGM Configuration")]
+        [Tooltip("Default BGM per scene if a SceneBGM override component is absent.")]
+        public SceneBgmMapping[] defaultSceneBgm;
 
+        private AudioSource activeBgmSource;
+        private AudioSource inactiveBgmSource;
+        private Coroutine bgmCrossfadeCoroutine;
         private void Awake()
         {
             if (Instance != null && Instance != this)
@@ -58,6 +77,8 @@ namespace Master.Scripts
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            InitializeBgmSources();
 
             // Initial synchronous pass
             ApplyAllVolumesDirectly();
@@ -78,11 +99,75 @@ namespace Master.Scripts
             // Standard Unity lifecycle: Start() runs after scene and AudioMixer snapshot have loaded.
             // Re-apply without any coroutines or frame waits to guarantee saved volumes stick.
             ApplyAllVolumesDirectly();
+            EvaluateSceneBgm(SceneManager.GetActiveScene().name);
         }
 
         private void HandleSceneLoaded(Scene scene, LoadSceneMode mode)
         {
             ApplyAllVolumesDirectly();
+            EvaluateSceneBgm(scene.name);
+        }
+
+        private void EvaluateSceneBgm(string sceneName)
+        {
+            // 1. If an explicit SceneBGM component exists in the newly loaded scene, let it govern playback
+            #if UNITY_2023_1_OR_NEWER
+            SceneBGM sceneBgm = UnityEngine.Object.FindFirstObjectByType<SceneBGM>();
+            #else
+            SceneBGM sceneBgm = UnityEngine.Object.FindObjectOfType<SceneBGM>();
+            #endif
+            if (sceneBgm != null)
+            {
+                return;
+            }
+
+            // 2. If a LevelLoader exists in the scene (e.g. scn_campus), LevelLoader governs level-specific BGM
+            #if UNITY_2023_1_OR_NEWER
+            if (UnityEngine.Object.FindFirstObjectByType<Master.Scripts.SaveSystem.LevelLoader>() != null)
+            #else
+            if (UnityEngine.Object.FindObjectOfType<Master.Scripts.SaveSystem.LevelLoader>() != null)
+            #endif
+            {
+                return;
+            }
+
+            // 3. Resolve default scene BGM
+            string targetTrack = ResolveDefaultSceneBgm(sceneName, out float duration);
+            if (!string.IsNullOrEmpty(targetTrack))
+            {
+                PlayBGM(targetTrack, duration);
+            }
+        }
+
+        public string ResolveDefaultSceneBgm(string sceneName, out float duration)
+        {
+            duration = 1.0f;
+            if (defaultSceneBgm != null && defaultSceneBgm.Length > 0)
+            {
+                for (int i = 0; i < defaultSceneBgm.Length; i++)
+                {
+                    if (defaultSceneBgm[i].sceneName == sceneName)
+                    {
+                        duration = defaultSceneBgm[i].crossfadeDuration > 0f ? defaultSceneBgm[i].crossfadeDuration : 1.0f;
+                        return defaultSceneBgm[i].bgmName;
+                    }
+                }
+            }
+
+            // Built-in defaults for known game scenes
+            switch (sceneName)
+            {
+                case "scn_main-menu":
+                case "scn_campus":
+                    return "GoldenGleam";
+                case "scn_publication-office":
+                case "scn_classroom0":
+                case "scn_classroom1":
+                case "scn_editor":
+                    return "GentleBreeze";
+                default:
+                    return null; // Inherits previous scene's BGM smoothly
+            }
         }
 
         #region Volume Control & Persistence
@@ -127,14 +212,14 @@ namespace Master.Scripts
             {
                 foreach (var s in bgmSounds)
                 {
-                    if (s.name == soundName) return s.clip;
+                    if (MatchSoundName(s.name, soundName)) return s.clip;
                 }
             }
             else if (channel == AudioChannel.SFX && sfxSounds != null)
             {
                 foreach (var s in sfxSounds)
                 {
-                    if (s.name == soundName) return s.clip;
+                    if (MatchSoundName(s.name, soundName)) return s.clip;
                 }
             }
 
@@ -142,20 +227,28 @@ namespace Master.Scripts
             {
                 foreach (var s in bgmSounds)
                 {
-                    if (s.name == soundName) return s.clip;
+                    if (MatchSoundName(s.name, soundName)) return s.clip;
                 }
             }
             if (sfxSounds != null)
             {
                 foreach (var s in sfxSounds)
                 {
-                    if (s.name == soundName) return s.clip;
+                    if (MatchSoundName(s.name, soundName)) return s.clip;
                 }
             }
 
             return null;
         }
 
+        private static bool MatchSoundName(string a, string b)
+        {
+            if (string.IsNullOrEmpty(a) || string.IsNullOrEmpty(b)) return false;
+            if (string.Equals(a, b, StringComparison.OrdinalIgnoreCase)) return true;
+            string cleanA = a.Replace(" ", "").Replace("_", "").Replace("'", "");
+            string cleanB = b.Replace(" ", "").Replace("_", "").Replace("'", "");
+            return string.Equals(cleanA, cleanB, StringComparison.OrdinalIgnoreCase);
+        }
         /// <summary>
         /// Synchronously applies volume settings to AudioListener, AudioSources, and AudioMixer.
         /// Avoids double-attenuation: component volumes act as instant hardware mute gates (0 or 1),
@@ -170,12 +263,6 @@ namespace Master.Scripts
             // 1. Hardware-level mute gates (0 if muted, 1 if active)
             AudioListener.volume = master <= 0.001f ? 0f : 1f;
 
-            float effectiveBgm = bgm * bgmTransitionScale;
-            if (bgmSource != null)
-            {
-                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
-            }
-
             if (sfxSource != null)
             {
                 sfxSource.volume = sfx <= 0.001f ? 0f : 1f;
@@ -183,7 +270,7 @@ namespace Master.Scripts
 
             // 2. AudioMixer manages the smooth decibel attenuation curve
             SetMixerVolume(MasterParam, master);
-            SetMixerVolume(BgmParam, effectiveBgm);
+            SetMixerVolume(BgmParam, bgm);
             SetMixerVolume(SfxParam, sfx);
         }
 
@@ -200,12 +287,7 @@ namespace Master.Scripts
         public void SetBGMVolume(float linear)
         {
             linear = Mathf.Clamp01(linear);
-            float effectiveBgm = linear * bgmTransitionScale;
-            if (bgmSource != null)
-            {
-                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
-            }
-            SetMixerVolume(BgmParam, effectiveBgm);
+            SetMixerVolume(BgmParam, linear);
 
             PlayerPrefs.SetFloat(PrefBgm, linear);
             PlayerPrefs.Save();
@@ -307,117 +389,310 @@ namespace Master.Scripts
             sfxSource.PlayOneShot(clip, volumeScale);
         }
 
-        public void PlayBGM(string name)
-        {
-            AudioClip clipToPlay = null;
+        public AudioClip CurrentBGMClip => activeBgmSource != null && activeBgmSource.isPlaying ? activeBgmSource.clip : null;
+        public bool IsBGMPlaying => activeBgmSource != null && activeBgmSource.isPlaying;
 
-            foreach (Sound s in bgmSounds)
+        private void InitializeBgmSources()
+        {
+            if (bgmSource == null)
             {
-                if (s.name == name)
+                bgmSource = gameObject.AddComponent<AudioSource>();
+                bgmSource.playOnAwake = false;
+                bgmSource.loop = true;
+            }
+
+            EnsureCrossfadeSource();
+
+            activeBgmSource = bgmSource;
+            inactiveBgmSource = bgmCrossfadeSource;
+
+            if (activeBgmSource.isPlaying)
+            {
+                activeBgmSource.volume = 1f;
+            }
+            if (inactiveBgmSource != null && inactiveBgmSource != activeBgmSource)
+            {
+                inactiveBgmSource.volume = 0f;
+            }
+        }
+
+        private void EnsureCrossfadeSource()
+        {
+            if (bgmSource != null)
+            {
+                bgmSource.spatialBlend = 0f;
+            }
+
+            if (bgmCrossfadeSource == null || bgmCrossfadeSource == bgmSource)
+            {
+                Transform child = transform.Find("BGM_CrossfadeSource");
+                if (child != null)
                 {
-                    clipToPlay = s.clip;
-                    break;
+                    bgmCrossfadeSource = child.GetComponent<AudioSource>();
+                }
+                else
+                {
+                    GameObject crossfadeObj = new GameObject("BGM_CrossfadeSource");
+                    crossfadeObj.transform.SetParent(transform);
+                    bgmCrossfadeSource = crossfadeObj.AddComponent<AudioSource>();
                 }
             }
 
-            if (clipToPlay == null) return;
-
-            PlayBGM(clipToPlay);
-        }
-
-        public void PlayBGM(AudioClip bgmClip)
-        {
-            if (bgmSource == null) return;
-            if (bgmSource.clip == bgmClip && bgmSource.isPlaying) return;
-
-            float effectiveBgm = GetBGMVolume() * bgmTransitionScale;
-            bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
-            SetMixerVolume(BgmParam, effectiveBgm);
-
-            bgmSource.clip = bgmClip;
-            bgmSource.loop = true;
-            bgmSource.Play();
-        }
-
-        public void StopBGM()
-        {
-            if (bgmFadeCoroutine != null)
+            if (bgmCrossfadeSource != null)
             {
-                StopCoroutine(bgmFadeCoroutine);
-                bgmFadeCoroutine = null;
+                bgmCrossfadeSource.playOnAwake = false;
+                bgmCrossfadeSource.loop = true;
+                bgmCrossfadeSource.spatialBlend = 0f;
+                if (bgmCrossfadeSource.outputAudioMixerGroup == null)
+                {
+                    bgmCrossfadeSource.outputAudioMixerGroup = bgmSource != null ? bgmSource.outputAudioMixerGroup : GetChannelGroup(AudioChannel.BGM);
+                }
             }
-            if (bgmSource != null)
+
+            if (activeBgmSource == null || activeBgmSource == bgmCrossfadeSource) activeBgmSource = bgmSource;
+            if (inactiveBgmSource == null || inactiveBgmSource == activeBgmSource) inactiveBgmSource = bgmCrossfadeSource;
+        }
+
+        public void PlayBGM(string name, float crossfadeDuration = 1.0f)
+        {
+            AudioClip clip = FindClip(name, AudioChannel.BGM);
+            if (clip == null)
             {
-                bgmSource.Stop();
+                Debug.LogWarning($"[AudioManager] BGM clip '{name}' not found in registry.");
+                return;
+            }
+            CrossfadeBGM(clip, crossfadeDuration);
+        }
+
+        public void PlayBGM(string name)
+        {
+            PlayBGM(name, 1.0f);
+        }
+
+        public void PlayBGM(AudioClip clip)
+        {
+            CrossfadeBGM(clip, 1.0f);
+        }
+
+        public void CrossfadeBGM(string name, float duration = 1.0f)
+        {
+            PlayBGM(name, duration);
+        }
+
+        public void CrossfadeBGM(AudioClip newClip, float duration = 1.0f)
+        {
+            EnsureCrossfadeSource();
+
+            if (newClip == null)
+            {
+                FadeOutBGM(duration);
+                return;
+            }
+
+            // 1. If active source is already playing this exact clip
+            if (activeBgmSource != null && activeBgmSource.clip == newClip && activeBgmSource.isPlaying)
+            {
+                if (bgmCrossfadeCoroutine != null)
+                {
+                    StopCoroutine(bgmCrossfadeCoroutine);
+                    bgmCrossfadeCoroutine = null;
+                }
+                if (inactiveBgmSource != null && inactiveBgmSource.isPlaying)
+                {
+                    inactiveBgmSource.Stop();
+                    inactiveBgmSource.volume = 0f;
+                }
+                if (activeBgmSource.volume < 1f)
+                {
+                    bgmCrossfadeCoroutine = StartCoroutine(RampVolumeRoutine(activeBgmSource, 1f, 0.3f));
+                }
+                return;
+            }
+
+            // 2. If a crossfade into this exact clip is already in progress, let it continue
+            if (bgmCrossfadeCoroutine != null && inactiveBgmSource != null && inactiveBgmSource.clip == newClip && inactiveBgmSource.isPlaying)
+            {
+                return;
+            }
+
+            // 3. Stop any conflicting in-progress crossfade
+            if (bgmCrossfadeCoroutine != null)
+            {
+                StopCoroutine(bgmCrossfadeCoroutine);
+                bgmCrossfadeCoroutine = null;
+            }
+            if (inactiveBgmSource != null && inactiveBgmSource.isPlaying)
+            {
+                inactiveBgmSource.Stop();
+                inactiveBgmSource.volume = 0f;
+            }
+
+            // 4. Immediate switch or crossfade
+            if (duration <= 0.01f || activeBgmSource == null || !activeBgmSource.isPlaying)
+            {
+                if (activeBgmSource != null && activeBgmSource.isPlaying)
+                {
+                    activeBgmSource.Stop();
+                }
+                if (activeBgmSource == null) activeBgmSource = bgmSource;
+                activeBgmSource.clip = newClip;
+                activeBgmSource.volume = 1f;
+                activeBgmSource.loop = true;
+                activeBgmSource.Play();
+            }
+            else
+            {
+                bgmCrossfadeCoroutine = StartCoroutine(CrossfadeBGMRoutine(newClip, duration));
             }
         }
 
-        /// <summary>
-        /// Smoothly fades BGM out to 0 volume over duration.
-        /// </summary>
-        public IEnumerator FadeBGMOut(float duration)
+        private IEnumerator CrossfadeBGMRoutine(AudioClip newClip, float duration)
         {
-            if (bgmFadeCoroutine != null)
-            {
-                StopCoroutine(bgmFadeCoroutine);
-            }
-            bgmFadeCoroutine = StartCoroutine(FadeBGMRoutine(0f, duration));
-            yield return bgmFadeCoroutine;
-        }
+            inactiveBgmSource.clip = newClip;
+            inactiveBgmSource.loop = true;
+            inactiveBgmSource.volume = 0f;
+            inactiveBgmSource.Play();
 
-        /// <summary>
-        /// Smoothly fades BGM in from 0 volume back to the user's configured volume over duration.
-        /// </summary>
-        public IEnumerator FadeBGMIn(float duration)
-        {
-            if (bgmFadeCoroutine != null)
-            {
-                StopCoroutine(bgmFadeCoroutine);
-            }
-            bgmFadeCoroutine = StartCoroutine(FadeBGMRoutine(1f, duration));
-            yield return bgmFadeCoroutine;
-        }
-
-        /// <summary>
-        /// Smoothly interpolates the BGM volume scale between 0 and 1 using unscaled time.
-        /// </summary>
-        private IEnumerator FadeBGMRoutine(float targetScale, float duration)
-        {
-            float startScale = bgmTransitionScale;
+            float startActiveVolume = activeBgmSource != null && activeBgmSource.isPlaying ? activeBgmSource.volume : 0f;
             float elapsed = 0f;
-
-            if (duration <= 0.001f)
-            {
-                bgmTransitionScale = targetScale;
-                ApplyBgmTransitionScale();
-                bgmFadeCoroutine = null;
-                yield break;
-            }
 
             while (elapsed < duration)
             {
                 elapsed += Time.unscaledDeltaTime;
                 float t = Mathf.Clamp01(elapsed / duration);
-                bgmTransitionScale = Mathf.Lerp(startScale, targetScale, t);
-                ApplyBgmTransitionScale();
+
+                if (activeBgmSource != null && activeBgmSource.isPlaying)
+                {
+                    activeBgmSource.volume = Mathf.Lerp(startActiveVolume, 0f, t);
+                }
+
+                inactiveBgmSource.volume = Mathf.Lerp(0f, 1f, t);
                 yield return null;
             }
 
-            bgmTransitionScale = targetScale;
-            ApplyBgmTransitionScale();
-            bgmFadeCoroutine = null;
-        }
-
-        private void ApplyBgmTransitionScale()
-        {
-            float effectiveBgm = GetBGMVolume() * bgmTransitionScale;
-            if (bgmSource != null)
+            if (activeBgmSource != null && activeBgmSource.isPlaying)
             {
-                bgmSource.volume = effectiveBgm <= 0.001f ? 0f : 1f;
+                activeBgmSource.Stop();
+                activeBgmSource.volume = 0f;
             }
-            SetMixerVolume(BgmParam, effectiveBgm);
+
+            inactiveBgmSource.volume = 1f;
+
+            // Swap active and inactive
+            var temp = activeBgmSource;
+            activeBgmSource = inactiveBgmSource;
+            inactiveBgmSource = temp;
+            bgmSource = activeBgmSource;
+
+            bgmCrossfadeCoroutine = null;
         }
 
+        public void FadeOutBGM(float duration = 1.0f)
+        {
+            EnsureCrossfadeSource();
+            if (activeBgmSource == null || !activeBgmSource.isPlaying) return;
+
+            if (bgmCrossfadeCoroutine != null)
+            {
+                StopCoroutine(bgmCrossfadeCoroutine);
+                bgmCrossfadeCoroutine = null;
+            }
+
+            if (duration <= 0.01f)
+            {
+                activeBgmSource.Stop();
+                activeBgmSource.volume = 0f;
+            }
+            else
+            {
+                bgmCrossfadeCoroutine = StartCoroutine(FadeOutBGMRoutine(duration));
+            }
+        }
+
+        private IEnumerator FadeOutBGMRoutine(float duration)
+        {
+            float startVol = activeBgmSource != null ? activeBgmSource.volume : 0f;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                if (activeBgmSource != null)
+                {
+                    activeBgmSource.volume = Mathf.Lerp(startVol, 0f, t);
+                }
+                yield return null;
+            }
+
+            if (activeBgmSource != null)
+            {
+                activeBgmSource.volume = 0f;
+                activeBgmSource.Stop();
+            }
+            bgmCrossfadeCoroutine = null;
+        }
+
+        public void StopBGM()
+        {
+            if (bgmCrossfadeCoroutine != null)
+            {
+                StopCoroutine(bgmCrossfadeCoroutine);
+                bgmCrossfadeCoroutine = null;
+            }
+            if (activeBgmSource != null)
+            {
+                activeBgmSource.Stop();
+                activeBgmSource.volume = 0f;
+            }
+            if (inactiveBgmSource != null)
+            {
+                inactiveBgmSource.Stop();
+                inactiveBgmSource.volume = 0f;
+            }
+        }
+
+        public IEnumerator FadeBGMOut(float duration)
+        {
+            FadeOutBGM(duration);
+            if (bgmCrossfadeCoroutine != null)
+            {
+                yield return bgmCrossfadeCoroutine;
+            }
+        }
+
+        public IEnumerator FadeBGMIn(float duration)
+        {
+            EnsureCrossfadeSource();
+            if (activeBgmSource != null && activeBgmSource.isPlaying)
+            {
+                if (bgmCrossfadeCoroutine != null)
+                {
+                    StopCoroutine(bgmCrossfadeCoroutine);
+                    bgmCrossfadeCoroutine = null;
+                }
+                bgmCrossfadeCoroutine = StartCoroutine(RampVolumeRoutine(activeBgmSource, 1f, duration));
+                yield return bgmCrossfadeCoroutine;
+            }
+        }
+
+        private IEnumerator RampVolumeRoutine(AudioSource source, float targetVolume, float duration)
+        {
+            if (source == null) yield break;
+            float startVol = source.volume;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                float t = Mathf.Clamp01(elapsed / duration);
+                source.volume = Mathf.Lerp(startVol, targetVolume, t);
+                yield return null;
+            }
+
+            source.volume = targetVolume;
+            bgmCrossfadeCoroutine = null;
+        }
         #endregion
     }
 }

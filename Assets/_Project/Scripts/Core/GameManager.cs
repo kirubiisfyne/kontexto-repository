@@ -56,13 +56,8 @@ namespace Master.Scripts
 
             DontDestroyOnLoad(gameObject);
         }
-
         private void Start()
         {
-            if (AudioManager.Instance != null)
-            {
-                AudioManager.Instance.PlayBGM("GoldenGleam");
-            }
         }
 
         #region Level Progression Helpers

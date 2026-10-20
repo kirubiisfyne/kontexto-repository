@@ -30,8 +30,8 @@ namespace Master.Scripts
          public float gracePeriodOut = 1f;
  
         [Header("Audio Transitions")]
-        [Tooltip("Whether to fade BGM volume to 0 during transition out and restore it on transition in.")]
-        public bool fadeBgmOnTransition = true;
+        [Tooltip("Optional legacy toggle to fade BGM to 0 during visual transition out. Per-scene crossfade in SceneBGM is recommended instead.")]
+        public bool fadeBgmOnTransition = false;
         [Tooltip("Fallback duration for BGM fade if visual animation length cannot be resolved.")]
         public float defaultBgmFadeDuration = 0.8f;
 
@@ -87,7 +87,7 @@ namespace Master.Scripts
 
                 if (fadeBgmOnTransition && AudioManager.Instance != null)
                 {
-                    StartCoroutine(AudioManager.Instance.FadeBGMIn(transitionLength));
+                    AudioManager.Instance.StartCoroutine(AudioManager.Instance.FadeBGMIn(transitionLength));
                 }
 
                  yield return new WaitForSecondsRealtime(transitionLength);
@@ -98,10 +98,13 @@ namespace Master.Scripts
                     transitionGameObject.SetActive(false);
                 }
             }
+            else if (fadeBgmOnTransition && AudioManager.Instance != null)
+            {
+                AudioManager.Instance.StartCoroutine(AudioManager.Instance.FadeBGMIn(defaultBgmFadeDuration));
+            }
 
             // Transition in finished: re-enable inputs
             NotifyTransitionState(false);
-            sceneLoadFadeInCoroutine = null;
         }
 
         public void FindTransitionObject()
@@ -157,7 +160,7 @@ namespace Master.Scripts
                     var state = animator.GetCurrentAnimatorStateInfo(0);
                     if (state.length > 0.05f) fadeOutTime = state.length;
                     fadeOutTime += Mathf.Max(0f, gracePeriodOut);
-                    StartCoroutine(AudioManager.Instance.FadeBGMOut(fadeOutTime));
+                    AudioManager.Instance.StartCoroutine(AudioManager.Instance.FadeBGMOut(fadeOutTime));
                 }
                 float safetyTimeout = 2.5f;
                 float timer = 0f;

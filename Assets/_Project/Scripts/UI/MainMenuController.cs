@@ -54,8 +54,8 @@ public class MainMenuController : MonoBehaviour
             }
         }
 
-        // Ensure the main menu BGM is playing
-        if (AudioManager.Instance != null && !string.IsNullOrEmpty(mainMenuBgmTrack))
+        // If AudioManager is not already playing a configured scene BGM, play fallback main menu track
+        if (AudioManager.Instance != null && !AudioManager.Instance.IsBGMPlaying && !string.IsNullOrEmpty(mainMenuBgmTrack))
         {
             AudioManager.Instance.PlayBGM(mainMenuBgmTrack);
         }
