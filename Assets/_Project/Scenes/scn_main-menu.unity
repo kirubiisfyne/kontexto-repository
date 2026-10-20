@@ -19172,6 +19172,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 706785021861711803, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
+      propertyPath: bgmSounds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 706785021861711803, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
+      propertyPath: bgmSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6d3d98d0eaf6e490782f4df7922761cd, type: 3}
+    - target: {fileID: 706785021861711803, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
+      propertyPath: bgmSounds.Array.data[3].name
+      value: WildflowersByTheRiver
+      objectReference: {fileID: 0}
     - target: {fileID: 1113021556791085594, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -67122,8 +67134,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 305059878}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0000000045690842, y: 0.9945219, z: -0.104528464, w: -0.000000043471935}
-  m_LocalPosition: {x: 0, y: 2.25, z: 1.7}
+  m_LocalRotation: {x: 0.12059044, y: -0.3794095, z: 0.049950194, w: 0.91597563}
+  m_LocalPosition: {x: 33, y: 25, z: -36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

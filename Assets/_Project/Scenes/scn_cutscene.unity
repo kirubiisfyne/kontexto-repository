@@ -174,10 +174,10 @@ PrefabInstance:
     - target: {fileID: 7192847102938471928, guid: b8c4d71092e44f8891ac37105dfa82c3, type: 3}
       propertyPath: bgmClip
       value: 
-      objectReference: {fileID: 8300000, guid: 06cd1b9851f1c4d9d8176457d9eed855, type: 3}
+      objectReference: {fileID: 8300000, guid: 6d3d98d0eaf6e490782f4df7922761cd, type: 3}
     - target: {fileID: 7192847102938471928, guid: b8c4d71092e44f8891ac37105dfa82c3, type: 3}
       propertyPath: bgmSoundName
-      value: WanderersTale
+      value: WildflowersByTheRiver
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
