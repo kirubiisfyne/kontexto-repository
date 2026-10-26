@@ -19172,18 +19172,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 706785021861711803, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
-      propertyPath: bgmSounds.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 706785021861711803, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
-      propertyPath: bgmSounds.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6d3d98d0eaf6e490782f4df7922761cd, type: 3}
-    - target: {fileID: 706785021861711803, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
-      propertyPath: bgmSounds.Array.data[3].name
-      value: WildflowersByTheRiver
-      objectReference: {fileID: 0}
     - target: {fileID: 1113021556791085594, guid: 1ca90313d9424439ab229b6b3f508eb4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -425560,7 +425548,7 @@ MonoBehaviour:
   menuButtonsPanel: {fileID: 1766691561}
   optionsPanel: {fileID: 819625684}
   gameCompletePanel: {fileID: 555651281}
-  mainMenuBgmTrack: GoldenGleam
+  mainMenuBgmTrack: 
 --- !u!4 &1958550780
 Transform:
   m_ObjectHideFlags: 0

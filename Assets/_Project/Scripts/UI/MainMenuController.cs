@@ -1,7 +1,7 @@
 using UnityEngine.Serialization;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Master.Scripts;
 using Master.Scripts.SaveSystem;
@@ -22,9 +22,6 @@ public class MainMenuController : MonoBehaviour
     [FormerlySerializedAs("betaThankYouPanel")]
     [SerializeField] private GameObject gameCompletePanel;
 
-    [Header("Audio Configuration")]
-    [Tooltip("Background music track name to play in the Main Menu.")]
-    [SerializeField] private string mainMenuBgmTrack = "GoldenGleam";
     private void Start()
     {
         // Reset time scale to 1 when the menu finishes loading (in case we arrived from a paused game)
@@ -52,12 +49,6 @@ public class MainMenuController : MonoBehaviour
 
                 gameCompletePanel.SetActive(allCompleted);
             }
-        }
-
-        // If AudioManager is not already playing a configured scene BGM, play fallback main menu track
-        if (AudioManager.Instance != null && !AudioManager.Instance.IsBGMPlaying && !string.IsNullOrEmpty(mainMenuBgmTrack))
-        {
-            AudioManager.Instance.PlayBGM(mainMenuBgmTrack);
         }
     }
 

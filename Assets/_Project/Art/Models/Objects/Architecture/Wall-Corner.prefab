@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6218041060096928386}
   - component: {fileID: 4449993278624196146}
   - component: {fileID: 9165863765687048662}
+  - component: {fileID: -6336411842589021655}
   m_Layer: 6
   m_Name: Wall-Corner
   m_TagString: Untagged
@@ -114,3 +115,23 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 8284567868287558907, guid: c2edfc813dd094a15acba391f6fb6287, type: 3}
+--- !u!114 &-6336411842589021655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 287433147690973245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifier
+  m_SerializedVersion: 0
+  m_OverrideArea: 1
+  m_Area: 1
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 0
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
